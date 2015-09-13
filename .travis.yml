@@ -1,8 +1,7 @@
-language: csharp
-mono:
- - beta
-
-install: curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
-
+language: CSharp
+install:
+  - curl -sSL https://raw.githubusercontent.com/aspnet/Home/master/kvminstall.sh | sh && source ~/.k/kvm/kvm.sh
+  - kvm upgrade
+  - kpm restore --no-cache
 script:
-  cd Tourtlee.BookingSystem/Tourtlee.BookingSystem.UnitTests && dnu restore && dnx test
+  - k -p Tourtlee.BookingSystem.UnitTests test -parallel none

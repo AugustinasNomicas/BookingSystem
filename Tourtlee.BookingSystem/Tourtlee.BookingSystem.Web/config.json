@@ -1,0 +1,10 @@
+﻿{
+  "Mode": "Development",
+  "Database": {
+    "Connection": "Server=.\\SQLEXPRESS;Database=TourtleeBooking;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "DefaultUser": {
+    "Username": "admin",
+    "Password": "Chang3Me!"
+  }
+}

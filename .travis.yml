@@ -4,6 +4,6 @@ install:
   - kvm upgrade
   - kpm restore --no-cache
 script:
-  - pwd
-  - cd Tourtlee.BookingSystem.UnitTests
+  - cd Tourtlee.BookingSystem/Tourtlee.BookingSystem.UnitTests
+  - ls
   - k test -parallel none

@@ -71,12 +71,6 @@ namespace Tourtlee.BookingSystem.Web
             app.UseMvc(MvcRoutes.Configure);
 
             BookingDbContext.InitializeDatabaseAsync(app.ApplicationServices).Wait();
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-            
         }
     }
 }

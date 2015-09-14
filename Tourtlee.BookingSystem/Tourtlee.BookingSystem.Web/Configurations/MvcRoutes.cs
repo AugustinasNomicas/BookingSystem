@@ -13,13 +13,9 @@ namespace Tourtlee.BookingSystem.Web.Configurations
     {
         public static void Configure(IRouteBuilder routes)
         {
-            //routes.MapRoute(name: "apiRoute",
-            //       template: "api/[controller]"
-            //       );
-
-            //routes.MapRoute(name: "areaRoute",
-            //       template: "{area:exists}/{controller}/{action}",
-            //       defaults: new { controller = "Home", action = "Index" });
+            routes.MapRoute(
+            name: "default",
+            template: "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }

@@ -1,1 +1,13 @@
-﻿Hello dude
+﻿<div ng-app="admin" data-framework="typescript">
+    Hello dude
+
+    <div ng-controller="organizationCtrl as ctrl">
+        <div ng-repeat="organization in ctrl.organizations">
+            <div>{{ organization }}</div>
+        </div>
+    </div>
+
+    <script src="~/app/admin/controllers/organizationctrl.js"></script>
+    <script src="~/app/admin/module.js"></script>
+
+</div>

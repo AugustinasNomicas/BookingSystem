@@ -15,5 +15,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <DevelopmentServerPort>52485</DevelopmentServerPort>
   </PropertyGroup>
+  <PropertyGroup>
+    <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
+  </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

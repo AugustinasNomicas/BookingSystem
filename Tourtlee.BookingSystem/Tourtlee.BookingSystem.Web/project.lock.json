@@ -777,6 +777,21 @@
           "lib/dnxcore50/Microsoft.AspNet.Mvc.Razor.Host.dll": {}
         }
       },
+      "Microsoft.AspNet.Mvc.TagHelpers/6.0.0-beta7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Razor": "6.0.0-beta7",
+          "Microsoft.Framework.Caching.Memory": "1.0.0-beta7",
+          "Microsoft.Framework.FileSystemGlobbing": "1.0.0-beta7",
+          "System.Security.Cryptography.Algorithms": "4.0.0-beta-23225"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.Mvc.TagHelpers.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.Mvc.TagHelpers.dll": {}
+        }
+      },
       "Microsoft.AspNet.Mvc.ViewFeatures/6.0.0-beta7": {
         "type": "package",
         "dependencies": {
@@ -1272,6 +1287,22 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.FileSystemGlobbing/1.0.0-beta7": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11-beta-23225",
+          "System.IO.FileSystem": "4.0.1-beta-23225",
+          "System.Linq": "4.0.1-beta-23225",
+          "System.Runtime": "4.0.21-beta-23225",
+          "System.Runtime.Extensions": "4.0.11-beta-23225"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.FileSystemGlobbing.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.FileSystemGlobbing.dll": {}
         }
       },
       "Microsoft.Framework.Globalization.CultureInfoCache/1.0.0-beta7": {
@@ -3582,6 +3613,21 @@
         "repo.json"
       ]
     },
+    "Microsoft.AspNet.Mvc.TagHelpers/6.0.0-beta7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "N0PQJ8w/ywZMKpMuvPCQlwZBPEy8yENbIxeJ2xkWCXDP03JuOQz/sjRCjWb/IekGP45fZqDkxldqJIHZio/lgA==",
+      "files": [
+        "lib/dnx451/Microsoft.AspNet.Mvc.TagHelpers.dll",
+        "lib/dnx451/Microsoft.AspNet.Mvc.TagHelpers.xml",
+        "lib/dnxcore50/Microsoft.AspNet.Mvc.TagHelpers.dll",
+        "lib/dnxcore50/Microsoft.AspNet.Mvc.TagHelpers.xml",
+        "Microsoft.AspNet.Mvc.TagHelpers.6.0.0-beta7.nupkg",
+        "Microsoft.AspNet.Mvc.TagHelpers.6.0.0-beta7.nupkg.sha512",
+        "Microsoft.AspNet.Mvc.TagHelpers.nuspec",
+        "repo.json"
+      ]
+    },
     "Microsoft.AspNet.Mvc.ViewFeatures/6.0.0-beta7": {
       "type": "package",
       "serviceable": true,
@@ -4083,6 +4129,23 @@
         "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta7.nupkg",
         "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta7.nupkg.sha512",
         "Microsoft.Framework.DependencyInjection.Abstractions.nuspec",
+        "repo.json"
+      ]
+    },
+    "Microsoft.Framework.FileSystemGlobbing/1.0.0-beta7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "baFEY66ixvCy7B48sq1mcJtPH4tbEVNo8RndkUISIinxiQwZQegYeyDzwObtHb0+7stS/dyBBLn/8mmvgTg4PA==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.FileSystemGlobbing.dll",
+        "lib/dnx451/Microsoft.Framework.FileSystemGlobbing.xml",
+        "lib/dnxcore50/Microsoft.Framework.FileSystemGlobbing.dll",
+        "lib/dnxcore50/Microsoft.Framework.FileSystemGlobbing.xml",
+        "lib/net45/Microsoft.Framework.FileSystemGlobbing.dll",
+        "lib/net45/Microsoft.Framework.FileSystemGlobbing.xml",
+        "Microsoft.Framework.FileSystemGlobbing.1.0.0-beta7.nupkg",
+        "Microsoft.Framework.FileSystemGlobbing.1.0.0-beta7.nupkg.sha512",
+        "Microsoft.Framework.FileSystemGlobbing.nuspec",
         "repo.json"
       ]
     },
@@ -6096,6 +6159,7 @@
       "Microsoft.AspNet.Server.IIS >= 1.0.0-beta7",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta7",
       "Microsoft.AspNet.Diagnostics >= 1.0.0-beta7",
+      "Microsoft.AspNet.Mvc.TagHelpers >= 6.0.0-beta7",
       "Microsoft.Framework.Configuration >= 1.0.0-beta7",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta7",
       "EntityFramework.SqlServer >= 7.0.0-beta7",

@@ -1,8 +1,12 @@
+/// <reference path="../../../typings/tsd.d.ts" />
+import organizationCtrl = require("admin/controllers/OrganizationCtrl");
 
-module admin {
+export module Admin {
     'use strict';
 
-    var app = angular.module('admin', [])
-        .controller("organizationCtrl", OrganizationCtrl);
+    angular.module('admin', [])
+        .controller("organizationCtrl", organizationCtrl);
 
+
+    angular.bootstrap(document, ['admin']);
 }

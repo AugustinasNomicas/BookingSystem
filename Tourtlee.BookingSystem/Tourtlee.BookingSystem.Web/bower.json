@@ -3,6 +3,7 @@
 	"private": true,
   "dependencies": {
     "angular": "1.4.*",
-    "angular-bootstrap": "*"
+    "angular-bootstrap": "*",
+    "system.js": "*"
   }
 }

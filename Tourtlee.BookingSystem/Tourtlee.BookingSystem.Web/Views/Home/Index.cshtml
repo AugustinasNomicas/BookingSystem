@@ -1,4 +1,18 @@
-﻿<div ng-app="admin" data-framework="typescript">
+﻿<script src="~/lib/system.js/dist/system.js"></script>
+
+<script>
+  // set our baseURL reference path
+  System.config({
+      baseURL: '/app',
+      defaultJSExtensions: true
+
+  });
+
+  System.import('admin/Module.js');
+</script>
+
+
+<div data-framework="typescript">
     Hello dude
 
     <div ng-controller="organizationCtrl as ctrl">
@@ -7,7 +21,12 @@
         </div>
     </div>
 
+    <!--
     <script src="~/app/admin/controllers/organizationctrl.js"></script>
     <script src="~/app/admin/module.js"></script>
+-->
+
+
+
 
 </div>

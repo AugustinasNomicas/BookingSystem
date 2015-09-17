@@ -15,19 +15,8 @@ namespace Tourtlee.BookingSystem.Web.Configurations
         {
             routes.MapRoute(
             name: "default",
-            template: "{controller=Home}/{action=Index}/{id?}");
-
-            //routes.MapRoute(
-            //      name: "DefaultRoute",
-            //      template: "{controller}/",
-            //      defaults: new { controller = "Home", action = "Index"}
-            //  );
-
-            routes.MapRoute(
-                        name: "AdminOverride",
-                        template: "Admin/{*.}",
-                        defaults: new { controller = "Admin", action = "Index" }
-                    );
+            template: "{controller}/{*.}",
+            defaults: new { controller = "Home", action = "Index" });
         }
     }
 }

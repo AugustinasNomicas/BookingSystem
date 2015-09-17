@@ -21,7 +21,7 @@ var States = (function () {
     States.organizations = function () {
         return {
             url: "/Admin/organizations",
-            template: "<h1>organizations</h1>"
+            templateUrl: "/app/admin/views/organizations.html"
         };
     };
     return States;

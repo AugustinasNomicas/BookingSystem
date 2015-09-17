@@ -25,8 +25,8 @@ class States {
 
     private static organizations(): ng.ui.IState {
         return {
-            url: "/Admin/organizations"
-            , template: "<h1>organizations</h1>"
+            url: "/Admin/organizations",
+            templateUrl: "/app/admin/views/organizations.html"
         }
     }
 

@@ -1,32 +1,9 @@
-﻿<script src="~/lib/system.js/dist/system.js"></script>
-
-<script>
-  // set our baseURL reference path
-  System.config({
-      baseURL: '/app',
-      defaultJSExtensions: true
-
-  });
-
-  System.import('admin/Module.js');
-</script>
-
-
-<div data-framework="typescript">
-    Hello dude
-
-    <div ng-controller="organizationCtrl as ctrl">
-        <div ng-repeat="organization in ctrl.organizations">
-            <div>{{ organization }}</div>
-        </div>
-    </div>
-
-    <!--
-    <script src="~/app/admin/controllers/organizationctrl.js"></script>
-    <script src="~/app/admin/module.js"></script>
--->
-
-
-
-
+﻿<div class="jumbotron">
+    <h1>Welcome to BookingSystem</h1>
+    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    <p>To see the difference between static and fixed top navbars, just scroll.</p>
+    <p>
+        @Html.ActionLink("Goto admin page »", "Index", "Admin", new object { },
+new { @class = "btn btn-lg btn-primary" })
+    </p>
 </div>

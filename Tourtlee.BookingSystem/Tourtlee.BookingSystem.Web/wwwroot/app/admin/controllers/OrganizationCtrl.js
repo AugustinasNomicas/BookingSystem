@@ -5,7 +5,6 @@ var OrganizationCtrl = (function () {
         this.organizations = {
             name: "test"
         };
-        alert("test");
     }
     return OrganizationCtrl;
 })();

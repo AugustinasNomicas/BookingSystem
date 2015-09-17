@@ -8,7 +8,6 @@ class OrganizationCtrl {
         this.organizations = {
             name: "test"
         };
-        alert("test");
     }
 }
 

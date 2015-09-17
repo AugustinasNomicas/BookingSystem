@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "1.4.*",
     "angular-bootstrap": "*",
+    "bootstrap-css-only": "*",
     "system.js": "*"
   }
 }

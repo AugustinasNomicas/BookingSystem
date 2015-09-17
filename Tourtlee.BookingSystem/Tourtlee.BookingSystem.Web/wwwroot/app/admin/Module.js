@@ -1,9 +1,10 @@
-/// <reference path="../../../typings/tsd.d.ts" />
-var organizationCtrl = require("admin/controllers/OrganizationCtrl");
+var States = require("admin/states");
 var Admin;
 (function (Admin) {
     'use strict';
-    angular.module('admin', [])
-        .controller("organizationCtrl", organizationCtrl);
+    angular.module('admin', ['ui.router'])
+        .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+        return new States($stateProvider, $urlRouterProvider, $locationProvider);
+    });
     angular.bootstrap(document, ['admin']);
 })(Admin = exports.Admin || (exports.Admin = {}));

@@ -2,10 +2,12 @@
 'use strict';
 var OrganizationCtrl = (function () {
     function OrganizationCtrl() {
-        this.organizations = {
-            name: "test"
-        };
     }
     return OrganizationCtrl;
+})();
+var State = (function () {
+    function State() {
+    }
+    return State;
 })();
 module.exports = OrganizationCtrl;

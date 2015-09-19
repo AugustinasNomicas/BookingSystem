@@ -2,7 +2,6 @@
 
 class vAdminMenu implements angular.IDirective {
     restrict = 'E';
-    //    require = 'ngModel';
     templateUrl = 'app/admin/views/menu.html';
     replace = true;
     private _scope;
@@ -11,7 +10,7 @@ class vAdminMenu implements angular.IDirective {
     }
 
     link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrl: any) => {
-        console.log("hello from menu");
+
     }
 
     static factory(): angular.IDirectiveFactory {

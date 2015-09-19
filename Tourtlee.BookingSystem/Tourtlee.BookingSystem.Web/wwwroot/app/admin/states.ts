@@ -11,16 +11,15 @@ class States {
     }
 
     private init(): void {
-
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/Admin/organizations');
+        this.$urlRouterProvider.otherwise('/Admin/main');
     }
 
     private static defaultState(): ng.ui.IState {
         return {
             url: "/Admin/main",
-            template: "<h1>hello</h1>"
+            templateUrl: "/app/admin/views/main.html"
         }
     }
 

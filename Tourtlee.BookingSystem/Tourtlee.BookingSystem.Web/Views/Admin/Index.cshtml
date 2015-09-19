@@ -1,7 +1,14 @@
 ﻿<script>
-  System.import('admin/Module.js');
+    System.import('admin/module.js');
 </script>
 
-<div data-framework="typescript">
-    <div ui-view/>
+<div class="container-full" data-framework="typescript">
+    <div class="row">
+        <div class="col-sm-2">
+            <v-admin-menu />
+        </div>
+        <div class="col-sm-10">
+            <div ui-view />
+        </div>
+    </div>
 </div>

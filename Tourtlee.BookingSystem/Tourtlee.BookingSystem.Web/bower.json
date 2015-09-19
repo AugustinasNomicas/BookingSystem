@@ -5,6 +5,7 @@
     "angular": "1.4.*",
     "angular-ui-router": "*",
     "angular-bootstrap": "*",
+    "angular-strap": "*",
     "bootstrap-css-only": "*",
     "system.js": "*"
   }

@@ -10,7 +10,7 @@ var States = (function () {
     States.prototype.init = function () {
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/Admin/main');
+        this.$urlRouterProvider.otherwise('/Admin/organizations');
     };
     States.defaultState = function () {
         return {

@@ -4,22 +4,23 @@
 class States {
     constructor(private $stateProvider: ng.ui.IStateProvider,
         private $urlRouterProvider: ng.ui.IUrlRouterProvider,
-        $locationProvider: ng.ILocationProvider) {
+        $locationProvider: angular.ILocationProvider) {
 
         $locationProvider.html5Mode(true);
         this.init();
     }
 
     private init(): void {
+
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/Admin/main');
+        this.$urlRouterProvider.otherwise('/Admin/organizations');
     }
 
     private static defaultState(): ng.ui.IState {
         return {
-            url: "/Admin/main"
-            , template: "<h1>hello</h1>"
+            url: "/Admin/main",
+            template: "<h1>hello</h1>"
         }
     }
 

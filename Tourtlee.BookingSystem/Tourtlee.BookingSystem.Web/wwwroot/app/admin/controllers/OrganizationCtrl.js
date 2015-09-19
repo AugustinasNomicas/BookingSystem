@@ -1,13 +1,15 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 'use strict';
-var OrganizationCtrl = (function () {
-    function OrganizationCtrl() {
+var organizationCtrl = (function () {
+    function organizationCtrl($scope) {
+        this.$scope = $scope;
+        this.test = "organizations controller";
+        $scope.modal = {
+            "title": "Title",
+            "content": "Hello Modal<br />This is a multiline message!"
+        };
     }
-    return OrganizationCtrl;
+    organizationCtrl.$inject = ['$scope'];
+    return organizationCtrl;
 })();
-var State = (function () {
-    function State() {
-    }
-    return State;
-})();
-module.exports = OrganizationCtrl;
+module.exports = organizationCtrl;

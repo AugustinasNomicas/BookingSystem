@@ -1,1 +1,18 @@
-﻿Welcome to organizations
+﻿<div class="row">
+    <div class="col-md-2">
+        <v-admin-menu>admin menu here</v-admin-menu>
+    </div>
+    <div class="col-md-10">
+        <div ng-controller="organizationCtrl as ctrl">
+            Welcome to organizations
+            {{ctrl.test}}
+            <v-Sample>test</v-Sample>
+
+            <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal">
+                Click to toggle modal
+                <br>
+                <small>(using an object)</small>
+            </button>
+        </div>
+    </div>
+</div>

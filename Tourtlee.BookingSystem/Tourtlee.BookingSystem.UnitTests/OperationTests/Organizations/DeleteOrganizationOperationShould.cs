@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Organizations
 {
-    public class DeleteOrganizationOperationShould
+    public class DeleteOrganizationOperationShould : OperationBaseTest
     {
         private readonly IOrganizationRepository _organizationRepository;
 
@@ -32,6 +32,7 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Organizations
             cmd.Operate(organizationToDelete.IdOrganization);
 
             _organizationRepository.Received().Delete(organizationToDelete);
+            _organizationRepository.Received().Save();
         }
     }
 }

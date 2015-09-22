@@ -12,7 +12,7 @@ namespace Tourtlee.BookingSystem.Business
     {
         public static void Configure()
         {
-            Mapper.CreateMap<Organization, OrganizationDto>();
+            Mapper.CreateMap<Organization, OrganizationDto>().ReverseMap();
         }
     }
 }

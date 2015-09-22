@@ -3,6 +3,7 @@ var OrganizationCtrl = require("admin/controllers/organizationCtrl");
 var States = require("admin/states");
 var vSample = require("../shared/directives/vSample");
 var vAdminMenu = require("admin/directives/vAdminMenu");
+var organizationResource = require("admin/resources/organizationsResource");
 var Admin;
 (function (Admin) {
     'use strict';
@@ -13,6 +14,7 @@ var Admin;
     app.directive("vSample", vSample.factory());
     app.directive("vAdminMenu", vAdminMenu.factory());
     app.controller("organizationCtrl", OrganizationCtrl);
+    app.service("organizationsResource", organizationResource);
     app.config(function ($logProvider) {
         $logProvider.debugEnabled(true);
     });

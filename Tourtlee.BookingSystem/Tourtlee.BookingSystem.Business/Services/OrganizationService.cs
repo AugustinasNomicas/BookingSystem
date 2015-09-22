@@ -7,11 +7,9 @@ using Tourtlee.BookingSystem.Core;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {
-    public interface IOrganizationService
+    public interface IOrganizationService : ICrudService<OrganizationDto>
     {
-        void AddOrganization(string name);
-        List<OrganizationDto> GetOrganizationList();
-        void UpdateOrganization(OrganizationDto organization);
+
     }
 
     public class OrganizationService : ServiceBase, IOrganizationService
@@ -22,23 +20,34 @@ namespace Tourtlee.BookingSystem.Business.Services
             _serviceProvider = serviceProvider;
         }
 
-        public void AddOrganization(string name)
+        public void Create(OrganizationDto item)
         {
             var operation = _serviceProvider.GetRequiredService<CreateOrganizationOperation>();
-            operation.Operate(name);
+            operation.Operate(item);
         }
 
-        public List<OrganizationDto> GetOrganizationList()
+        public void Delete(Guid id)
+        {
+            var operation = _serviceProvider.GetRequiredService<DeleteOrganizationOperation>();
+            operation.Operate(id);
+        }
+
+        public OrganizationDto Get(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<OrganizationDto> GetList()
         {
             var operation = _serviceProvider.GetRequiredService<GetOrganizationListOperation>();
             return operation.Operate(null);
+
         }
 
-        public void UpdateOrganization(OrganizationDto organization)
+        public void Update(OrganizationDto item)
         {
             var operation = _serviceProvider.GetRequiredService<UpdateOrganizationOperation>();
-            operation.Operate(organization);
-
+            operation.Operate(item);
         }
     }
 }

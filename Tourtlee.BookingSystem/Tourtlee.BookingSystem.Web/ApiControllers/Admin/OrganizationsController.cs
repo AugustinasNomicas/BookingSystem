@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Dto;
 using Tourtlee.BookingSystem.Business.Services;
-
+using Tourtlee.BookingSystem.Web.Infastructure;
 
 namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
 {
-    [Route("api/[controller]")]
-    public class OrganizationsController : Controller
+    [Route("api/admin/[controller]")]
+    public class OrganizationsController : Controller, ICrudController<OrganizationDto>
     {
         private readonly IOrganizationService _organizationService;
 
@@ -16,10 +17,40 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
             _organizationService = organizationService;
         }
 
-        [HttpGet]
-        public IEnumerable<OrganizationDto> Get()
+        [HttpGet("Show")]
+        public string Show()
         {
-            return _organizationService.GetOrganizationList();
+            return "Example";
+        }
+
+        [HttpGet("{id}")]
+        public OrganizationDto Get(Guid id)
+        {
+            return _organizationService.Get(id);
+        }
+
+        [HttpGet]
+        public IEnumerable<OrganizationDto> GetList()
+        {
+            return _organizationService.GetList();
+        }
+
+        [HttpPost]
+        public void Post([FromBody] OrganizationDto item)
+        {
+            _organizationService.Create(item);
+        }
+
+        [HttpPut]
+        public void Put([FromBody] OrganizationDto item)
+        {
+            _organizationService.Update(item);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(Guid id)
+        {
+            _organizationService.Delete(id);
         }
     }
 }

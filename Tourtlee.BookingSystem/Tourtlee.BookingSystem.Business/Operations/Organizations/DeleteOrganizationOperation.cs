@@ -20,6 +20,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Organizations
         {
             var organization = _organizationRepository.FindBy(o => o.IdOrganization == request).Single();
             _organizationRepository.Delete(organization);
+            _organizationRepository.Save();
         }
     }
 }

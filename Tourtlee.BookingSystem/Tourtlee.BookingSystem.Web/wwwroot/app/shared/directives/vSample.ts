@@ -12,7 +12,7 @@ class vSample implements angular.IDirective {
     }
 
     link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrl: any) => {
-        console.log("hello from sample");
+        console.log("hello from vSample");
     }
 
 

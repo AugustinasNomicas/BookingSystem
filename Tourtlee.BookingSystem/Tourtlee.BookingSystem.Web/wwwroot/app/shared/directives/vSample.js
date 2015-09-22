@@ -8,7 +8,7 @@ var vSample = (function () {
         //    templateUrl = 'directives/sample.html';
         this.replace = true;
         this.link = function (scope, element, attrs, ctrl) {
-            console.log("hello from sample");
+            console.log("hello from vSample");
         };
     }
     vSample.prototype.routeChangeStart = function () {

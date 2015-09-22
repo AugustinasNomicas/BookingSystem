@@ -14,6 +14,8 @@ namespace Tourtlee.BookingSystem.Business
             // Create operations
             services.AddTransient<CreateOrganizationOperation>();
             services.AddTransient<GetOrganizationListOperation>();
+            services.AddTransient<DeleteOrganizationOperation>();
+            services.AddTransient<UpdateOrganizationOperation>();
 
         }
     }

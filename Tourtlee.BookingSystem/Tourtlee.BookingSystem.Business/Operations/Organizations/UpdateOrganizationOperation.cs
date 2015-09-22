@@ -19,6 +19,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Organizations
         {
             var organization = Mapper.Map<Organization>(request);
             _organizationRepository.Update(organization);
+            _organizationRepository.Save();
         }
     }
 }

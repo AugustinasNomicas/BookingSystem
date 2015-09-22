@@ -5,6 +5,8 @@ import States = require("admin/states");
 import vSample = require("../shared/directives/vSample");
 import vAdminMenu = require("admin/directives/vAdminMenu");
 
+import organizationResource = require("admin/resources/organizationsResource");
+
 export module Admin {
     'use strict';
 
@@ -19,6 +21,9 @@ export module Admin {
     app.directive("vAdminMenu", vAdminMenu.factory());
 
     app.controller("organizationCtrl", OrganizationCtrl);
+
+    app.service("organizationsResource", organizationResource);
+
 
     app.config(function ($logProvider) {
         $logProvider.debugEnabled(true);

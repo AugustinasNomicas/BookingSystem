@@ -3,7 +3,11 @@ import OrganizationCtrl = require("admin/controllers/organizationCtrl");
 import States = require("admin/states");
 
 import vSample = require("../shared/directives/vSample");
+import vCrudDirective = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
+
+
 import vAdminMenu = require("admin/directives/vAdminMenu");
+
 
 import OrganizationResource = require("admin/resources/organizationsResource");
 
@@ -18,7 +22,8 @@ export module Admin {
         });
 
     app.directive("vSample", vSample.factory())
-       .directive("vAdminMenu", vAdminMenu.factory());
+        .directive("vAdminMenu", vAdminMenu.factory())
+        .directive("vCrudDirective", vCrudDirective.factory());
 
     app.controller("organizationCtrl", OrganizationCtrl);
 

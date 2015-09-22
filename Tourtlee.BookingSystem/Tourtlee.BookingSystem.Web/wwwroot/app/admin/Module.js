@@ -2,6 +2,7 @@
 var OrganizationCtrl = require("admin/controllers/organizationCtrl");
 var States = require("admin/states");
 var vSample = require("../shared/directives/vSample");
+var vCrudDirective = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 var vAdminMenu = require("admin/directives/vAdminMenu");
 var OrganizationResource = require("admin/resources/organizationsResource");
 var Admin;
@@ -12,7 +13,8 @@ var Admin;
         return new States($stateProvider, $urlRouterProvider, $locationProvider);
     });
     app.directive("vSample", vSample.factory())
-        .directive("vAdminMenu", vAdminMenu.factory());
+        .directive("vAdminMenu", vAdminMenu.factory())
+        .directive("vCrudDirective", vCrudDirective.factory());
     app.controller("organizationCtrl", OrganizationCtrl);
     app.service("organizationsResource", OrganizationResource);
     app.config(function ($logProvider) {

@@ -5,7 +5,7 @@ import States = require("admin/states");
 import vSample = require("../shared/directives/vSample");
 import vAdminMenu = require("admin/directives/vAdminMenu");
 
-import organizationResource = require("admin/resources/organizationsResource");
+import OrganizationResource = require("admin/resources/organizationsResource");
 
 export module Admin {
     'use strict';
@@ -17,12 +17,12 @@ export module Admin {
             return new States($stateProvider, $urlRouterProvider, $locationProvider);
         });
 
-    app.directive("vSample", vSample.factory());
-    app.directive("vAdminMenu", vAdminMenu.factory());
+    app.directive("vSample", vSample.factory())
+       .directive("vAdminMenu", vAdminMenu.factory());
 
     app.controller("organizationCtrl", OrganizationCtrl);
 
-    app.service("organizationsResource", organizationResource);
+    app.service("organizationsResource", OrganizationResource);
 
 
     app.config(function ($logProvider) {

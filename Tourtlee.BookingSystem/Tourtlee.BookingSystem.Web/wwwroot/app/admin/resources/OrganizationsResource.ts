@@ -12,19 +12,19 @@ class organizationsResource {
             return this.$http<void>({ url: `api/admin/${id}`, method: "Delete" });
         };
 
-        public get = (id: string) : angular.IHttpPromise<OrganizationDto> => {
-            return this.$http<OrganizationDto>({ url: `api/admin/organizations/${id}`, method: "Get" });
+        public get = (id: string): angular.IHttpPromise<organizationDto> => {
+            return this.$http<organizationDto>({ url: `api/admin/organizations/${id}`, method: "Get" });
         };
 
-        public getList = () : angular.IHttpPromise<OrganizationDto[]> => {
-            return this.$http<OrganizationDto[]>({ url: `api/admin/organizations`, method: "Get" });
+        public getList = (): angular.IHttpPromise<organizationDto[]> => {
+            return this.$http<organizationDto[]>({ url: `api/admin/organizations`, method: "Get" });
         };
 
-        public post = (item: OrganizationDto) : angular.IHttpPromise<void> => {
+        public post = (item: organizationDto) : angular.IHttpPromise<void> => {
             return this.$http<void>({ url: `api/admin/organizations`, method: "Post", data: {item: item} });
         };
 
-        public put = (updatedItem: OrganizationDto) : angular.IHttpPromise<void> => {
+        public put = (updatedItem: organizationDto) : angular.IHttpPromise<void> => {
             return this.$http<void>({ url: `api/admin/organizations`, method: "Put", data: {updatedItem: updatedItem} });
         }; 
 }

@@ -1,5 +1,5 @@
-var OrganizationDto = (function () {
-    function OrganizationDto() {
+var organizationDto = (function () {
+    function organizationDto() {
     }
-    return OrganizationDto;
+    return organizationDto;
 })();

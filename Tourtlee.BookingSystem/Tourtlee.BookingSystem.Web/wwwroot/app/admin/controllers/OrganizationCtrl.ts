@@ -6,12 +6,13 @@ import OrganizationsResource = require("admin/resources/organizationsResource");
 class organizationCtrl {
     static $inject: string[] = ['$scope', 'organizationsResource'];
 
-    public organizations: OrganizationDto[]
+    public organizations: organizationDto[]
 
     constructor(public $scope: angular.IScope,
         public organizationsResource: OrganizationsResource) {
         var ctrl = this;
-        organizationsResource.getList().then(function (result: angular.IHttpPromiseCallbackArg<OrganizationDto[]>) {
+
+        organizationsResource.getList().then(function (result: angular.IHttpPromiseCallbackArg<organizationDto[]>) {
             ctrl.organizations = result.data;
         });
     }

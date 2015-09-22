@@ -10,7 +10,7 @@ import OrganizationResource = require("admin/resources/organizationsResource");
 export module Admin {
     'use strict';
 
-    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap'])
+    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap', 'ngAnimate', 'toastr'])
         .config(($stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider,
             $locationProvider: angular.ILocationProvider) => {

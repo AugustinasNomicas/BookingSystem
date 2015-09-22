@@ -7,7 +7,7 @@ var OrganizationResource = require("admin/resources/organizationsResource");
 var Admin;
 (function (Admin) {
     'use strict';
-    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap'])
+    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap', 'ngAnimate', 'toastr'])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         return new States($stateProvider, $urlRouterProvider, $locationProvider);
     });

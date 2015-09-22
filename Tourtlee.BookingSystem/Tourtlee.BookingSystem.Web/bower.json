@@ -6,7 +6,9 @@
     "angular-ui-router": "*",
     "angular-bootstrap": "*",
     "angular-strap": "*",
+    "angular-animate": "*",
     "bootstrap-css-only": "*",
-    "system.js": "*"
+    "system.js": "*",
+    "angular-toastr": "*"
   }
 }

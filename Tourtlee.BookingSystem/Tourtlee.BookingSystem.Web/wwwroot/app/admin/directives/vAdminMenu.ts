@@ -2,7 +2,7 @@
 
 class vAdminMenu implements angular.IDirective {
     restrict = 'E';
-    templateUrl = 'app/admin/views/menu.html';
+    templateUrl = 'app/admin/views/_menu.html';
     replace = true;
     private _scope;
 

@@ -3,7 +3,7 @@ var vAdminMenu = (function () {
     function vAdminMenu($location) {
         this.$location = $location;
         this.restrict = 'E';
-        this.templateUrl = 'app/admin/views/menu.html';
+        this.templateUrl = 'app/admin/views/_menu.html';
         this.replace = true;
         this.link = function (scope, element, attrs, ctrl) {
         };

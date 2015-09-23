@@ -16,7 +16,7 @@ class organizationCtrl {
         organizationsResource.getList().then(function (result: angular.IHttpPromiseCallbackArg<organizationDto[]>) {
             ctrl.organizations = result.data;
 
-            toastr.success('Hello world!', 'Toastr fun!');
+            //toastr.success('Hello world!', 'Toastr fun!');
         });
     }
 

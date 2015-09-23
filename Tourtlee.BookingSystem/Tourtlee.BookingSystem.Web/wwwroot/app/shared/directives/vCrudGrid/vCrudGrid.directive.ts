@@ -1,5 +1,8 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 
+import controller = require("shared/directives/vCrudGrid/vcrudgrid.controller");
+
+
 class vCrudDirective implements angular.IDirective {
     //	'A' - only matches attribute name
     //	'E' - only matches element name
@@ -18,7 +21,8 @@ class vCrudDirective implements angular.IDirective {
     // view
     templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
     // controller
-    controller = "crudgridController as itemsCtrl";
+    controller = controller;
+    controllerAs = "itemsCtrl";
 
     static factory(): angular.IDirectiveFactory {
         const directive = () => new vCrudDirective();

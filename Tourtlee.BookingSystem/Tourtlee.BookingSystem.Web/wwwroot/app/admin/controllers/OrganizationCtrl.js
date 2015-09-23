@@ -8,7 +8,7 @@ var organizationCtrl = (function () {
         var ctrl = this;
         organizationsResource.getList().then(function (result) {
             ctrl.organizations = result.data;
-            toastr.success('Hello world!', 'Toastr fun!');
+            //toastr.success('Hello world!', 'Toastr fun!');
         });
     }
     organizationCtrl.$inject = ['$scope', 'organizationsResource', 'toastr'];

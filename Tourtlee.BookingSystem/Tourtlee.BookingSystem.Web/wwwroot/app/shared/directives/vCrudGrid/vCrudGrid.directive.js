@@ -1,4 +1,5 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
+var controller = require("shared/directives/vCrudGrid/vcrudgrid.controller");
 var vCrudDirective = (function () {
     function vCrudDirective() {
         //	'A' - only matches attribute name
@@ -18,7 +19,8 @@ var vCrudDirective = (function () {
         // view
         this.templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
         // controller
-        this.controller = "crudgridController as itemsCtrl";
+        this.controller = controller;
+        this.controllerAs = "itemsCtrl";
     }
     vCrudDirective.factory = function () {
         var directive = function () { return new vCrudDirective(); };

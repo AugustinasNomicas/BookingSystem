@@ -36,15 +36,26 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
         }
 
         [HttpPost]
-        public void Post([FromBody] OrganizationDto item)
+        public OrganizationDto Post([FromBody] OrganizationDto item)
         {
+            if (item == null)
+            {
+                throw new ArgumentException("Invalid Organization");
+            }
+
             _organizationService.Create(item);
+            return item;
         }
 
         [HttpPut]
-        public void Put([FromBody] OrganizationDto item)
+        public OrganizationDto Put([FromBody] OrganizationDto item)
         {
+            if (item.IdOrganization == Guid.Empty)
+            {
+                throw new ArgumentException("Invalid IdOrganization");
+            }
             _organizationService.Update(item);
+            return item;
         }
 
         [HttpDelete("{id}")]

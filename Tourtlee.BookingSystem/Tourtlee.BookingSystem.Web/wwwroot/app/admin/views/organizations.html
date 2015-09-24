@@ -1,9 +1,21 @@
 ﻿<div ng-controller="organizationCtrl as ctrl">
-    <div ng-repeat="organization in ctrl.organizations">
-       {{organization.Name}}
-    </div>
-
-    <div v-Crud-Grid></div>
+    <div v-crud-grid resource="organizationsResource" 
+         id-binding="idOrganization"
+         id-default-value="00000000-0000-0000-0000-000000000000"
+         columns-definition='[
+         {
+            "binding"       :"idOrganization",
+            "type"          :"disabled",
+            "required"      :"true",
+            "hidden"        :"false"
+         },
+         {
+            "binding"       :"Name",
+            "type"          :"text",
+            "header"        :"Organization",
+            "required"      :"true"
+         }]'
+         ></div>
 
     <!--<v-Sample>test</v-Sample>-->
 

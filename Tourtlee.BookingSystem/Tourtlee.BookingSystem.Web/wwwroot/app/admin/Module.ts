@@ -10,13 +10,16 @@ import vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.ed
 
 import vAdminMenu = require("admin/directives/vAdminMenu");
 
+import modalWindowService = require("../shared/services/modalwindowservice");
+import notificationService = require("../shared/services/notificationService");
 
-import OrganizationResource = require("admin/resources/organizationsResource");
+import organizationResource = require("admin/resources/organizationsResource");
+
 
 export module Admin {
     'use strict';
 
-    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap', 'ngAnimate', 'toastr'])
+    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap', 'ngAnimate', 'toastr', 'ui.bootstrap'])
         .config(($stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider,
             $locationProvider: angular.ILocationProvider) => {
@@ -30,11 +33,24 @@ export module Admin {
 
     app.controller("organizationCtrl", OrganizationCtrl);
 
-    app.service("organizationsResource", OrganizationResource);
+    app.service("organizationsResource", organizationResource);
+
+    app.service("modalWindowService", modalWindowService);
+    app.service("notificationService", notificationService);
 
 
     app.config(function ($logProvider) {
         $logProvider.debugEnabled(true);
+    });
+
+    app.config(function (toastrConfig) {
+        angular.extend(toastrConfig, {
+            "showDuration": "100",
+            "hideDuration": "100",
+            "timeOut": "2000",
+            "positionClass": "toast-bottom-right",
+            "extendedTimeOut": "5000",
+        });
     });
 
 

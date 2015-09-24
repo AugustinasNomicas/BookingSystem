@@ -1,6 +1,6 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 
-import controller = require("shared/directives/vCrudGrid/vcrudgrid.controller");
+import vCrudGridController = require("shared/directives/vCrudGrid/vcrudgrid.controller");
 
 
 class vCrudDirective implements angular.IDirective {
@@ -21,8 +21,12 @@ class vCrudDirective implements angular.IDirective {
     // view
     templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
     // controller
-    controller = controller;
+    controller = vCrudGridController;
     controllerAs = "itemsCtrl";
+
+    public link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrl: vCrudGridController) => {
+        ctrl.link(attrs);
+    }
 
     static factory(): angular.IDirectiveFactory {
         const directive = () => new vCrudDirective();

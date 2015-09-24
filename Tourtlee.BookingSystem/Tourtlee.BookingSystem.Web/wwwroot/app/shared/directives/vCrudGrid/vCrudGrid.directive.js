@@ -1,5 +1,5 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-var controller = require("shared/directives/vCrudGrid/vcrudgrid.controller");
+var vCrudGridController = require("shared/directives/vCrudGrid/vcrudgrid.controller");
 var vCrudDirective = (function () {
     function vCrudDirective() {
         //	'A' - only matches attribute name
@@ -19,8 +19,11 @@ var vCrudDirective = (function () {
         // view
         this.templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
         // controller
-        this.controller = controller;
+        this.controller = vCrudGridController;
         this.controllerAs = "itemsCtrl";
+        this.link = function (scope, element, attrs, ctrl) {
+            ctrl.link(attrs);
+        };
     }
     vCrudDirective.factory = function () {
         var directive = function () { return new vCrudDirective(); };

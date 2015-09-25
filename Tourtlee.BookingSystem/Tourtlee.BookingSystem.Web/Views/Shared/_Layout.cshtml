@@ -28,14 +28,14 @@
     <script src="~/lib/angular-strap/dist/angular-strap.tpl.js"></script>
 
     <script src="~/lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    
+
     <link href="~/lib/bootstrap-css-only/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-css-only/css/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/lib/angular-toastr/dist/angular-toastr.css" rel="stylesheet" />
     <link href="~/lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet" />
 
     <link href="~/app/shared/directives/vcrudgrid/vCrudGrid.styles.css" rel="stylesheet" />
-    <link href="~/style/main.css" rel="stylesheet"/>
+    <link href="~/style/main.css" rel="stylesheet" />
 
     <base href="/">
 </head>
@@ -70,6 +70,9 @@
                         <menulink controller-name="Book" action-name="Index" menu-text="Book"></menulink>
                         <menulink controller-name="CheckIn" action-name="Index" menu-text="CheckIn"></menulink>
                         <menulink controller-name="Admin" action-name="Index" menu-text="Admin"></menulink>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <menulink controller-name="Account" action-name="LogOff" menu-text="LogOff"></menulink>
                     </ul>
                 </div>
             </div>

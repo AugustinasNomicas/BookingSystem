@@ -32,6 +32,9 @@ namespace Tourtlee.BookingSystem.Web.TagHelpers
 
             string menuUrl = _UrlHelper.Action(ActionName, ControllerName);
 
+            if(string.IsNullOrEmpty(menuUrl))
+                throw new InvalidOperationException(string.Format("Can not find URL for {0}.{1}", ControllerName, ActionName));
+
             output.TagName = "li";
 
             var a = new TagBuilder("a");

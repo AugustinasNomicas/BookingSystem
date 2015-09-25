@@ -9,6 +9,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.OptionsModel;
 using Tourtlee.BookingSystem.DataAccess.Auth;
 using Tourtlee.BookingSystem.Model;
+using Tourtlee.BookingSystem.Model.Security;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
@@ -35,7 +36,7 @@ namespace Tourtlee.BookingSystem.DataAccess
         private static async Task CreateAdminUser(IServiceProvider serviceProvider)
         {
             var options = serviceProvider.GetRequiredService<IOptions<AuthOptions>>().Options;
-            var userMgr = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userMgr = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleMgr = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if (!await roleMgr.RoleExistsAsync(adminRole))
@@ -46,7 +47,7 @@ namespace Tourtlee.BookingSystem.DataAccess
             var user = await userMgr.FindByNameAsync(options.DefaultUsername);
             if (user == null)
             {
-                user = new IdentityUser { UserName = options.DefaultUsername };
+                user = new ApplicationUser { UserName = options.DefaultUsername };
                 var userCreationResult = await userMgr.CreateAsync(user, options.DefaultPassword);
                 if (userCreationResult.Succeeded)
                 {
@@ -58,7 +59,7 @@ namespace Tourtlee.BookingSystem.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<IdentityUser>().ToTable("Users", SecuritySchameName);
+            builder.Entity<ApplicationUser>().ToTable("Users", SecuritySchameName);
             builder.Entity<IdentityRole>().ToTable("Roles", SecuritySchameName);
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", SecuritySchameName);
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims", SecuritySchameName);

@@ -1,7 +1,9 @@
 ﻿using System;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
@@ -9,6 +11,7 @@ using Microsoft.Framework.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.DataAccess;
 using Tourtlee.BookingSystem.DataAccess.Auth;
+using Tourtlee.BookingSystem.Model.Security;
 using Tourtlee.BookingSystem.Web.Configurations;
 
 namespace Tourtlee.BookingSystem.Web
@@ -34,15 +37,24 @@ namespace Tourtlee.BookingSystem.Web
                 options.DefaultPassword = Configuration.GetSection("DefaultUSer:Password").Value;
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                            .AddEntityFrameworkStores<BookingDbContext>()
                            .AddDefaultTokenProviders();
 
+            services.ConfigureCookieAuthentication(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+            });
+
             services.AddMvc();
+            services.Configure<MvcOptions>(options =>
+            {
+                //options.Filters.Add(new AuthorizeAttribute());
+            });
             
 
             // TODO refactor IoC registration
-            DataAccess.IocRegistrations.RegisterServices(services);
+                        DataAccess.IocRegistrations.RegisterServices(services);
             Business.IocRegistrations.RegisterServices(services);
 
             // TODO refactor Automapper configuration
@@ -69,6 +81,8 @@ namespace Tourtlee.BookingSystem.Web
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvc(MvcRoutes.Configure);
+
+
 
             BookingDbContext.InitializeDatabaseAsync(app.ApplicationServices).Wait();
         }

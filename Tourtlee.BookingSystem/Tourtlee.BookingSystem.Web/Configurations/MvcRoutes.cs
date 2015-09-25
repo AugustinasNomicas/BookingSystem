@@ -11,6 +11,11 @@ namespace Tourtlee.BookingSystem.Web.Configurations
             name: "default",
             template: "{controller}/{*.}",
             defaults: new { controller = "Home", action = "Index" });
+
+            routes.MapRoute(
+            name: "account",
+            template: "Account/{action}/",
+            defaults: new { controller = "Account" });
         }
     }
 }

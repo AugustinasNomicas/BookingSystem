@@ -1,7 +1,13 @@
 {
-  "common":{
+	"notifications":{
+		"updateFailed": "Update failed",
+		"successfullyUpdated": "Successfully updated"
+	},
+ 	"common":{
 	  "title": "Administration",
-	  "deletePrompt": "Are you sure, you want to delete selected item?",
+	  "deleteConfirmContent": "Are you sure you want to remove selected item?",
+	  "deleteConfirmTitle": "Delete confirm",
+	  "filter": "filter...",
 	  "add": "Add",
 	  "cancel": "Cancel",
 	  "edit": "Edit",

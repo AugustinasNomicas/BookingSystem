@@ -1,15 +1,16 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 /// <reference path="../../interfaces/icrudresource.ts" />
-'use strict';
+"use strict";
 var vCrudGridController = (function () {
-    function vCrudGridController($injector, modalWindowService, notificationService) {
+    function vCrudGridController($injector, modalWindowService, notificationService, $translate) {
         var _this = this;
         this.$injector = $injector;
         this.modalWindowService = modalWindowService;
         this.notificationService = notificationService;
+        this.$translate = $translate;
         this.updateModeKeyUp = function (args, item) {
             // if key is enter
-            if (args.keyCode == 13) {
+            if (args.keyCode === 13) {
                 // update
                 _this.updateItem(item);
                 // remove focus
@@ -19,7 +20,7 @@ var vCrudGridController = (function () {
         };
         this.createModeKeyUp = function (args, item) {
             // if key is enter
-            if (args.keyCode == 13) {
+            if (args.keyCode === 13) {
                 // create
                 _this.createItem(item);
                 // remove focus
@@ -43,7 +44,6 @@ var vCrudGridController = (function () {
         this.newItem[this.idBinding] = this.idDefaultValue;
         this.newItem.hasErrors = !this.isValid(this.newItem);
     };
-    ;
     vCrudGridController.prototype.toggleEditMode = function (item) {
         var _this = this;
         item.editMode = !item.editMode;
@@ -58,7 +58,7 @@ var vCrudGridController = (function () {
             // (there should be only one)
             this.allItems.forEach(function (i) {
                 // item is not the item being edited now and it is in edit mode
-                if (item[_this.idBinding] != i[_this.idBinding] && i.editMode) {
+                if (item[_this.idBinding] !== i[_this.idBinding] && i.editMode) {
                     // Save current editing values 
                     _this.updateItem(i);
                 }
@@ -95,19 +95,19 @@ var vCrudGridController = (function () {
             });
         }
     };
-    ;
     vCrudGridController.prototype.deleteItemWithConfirmation = function (item) {
         var _this = this;
-        var title = "Delete confirm";
-        var msg = "Are you sure you want to remove selected item?";
-        this.modalWindowService.show(title, msg, function () { _this.deleteItem(item); }, function () { });
+        this.$translate(["common.deleteConfirmTitle", "common.deleteConfirmContent"]).then(function (t) {
+            var title = t.common.deleteConfirmTitle;
+            var msg = t.common.deleteConfirmContent;
+            _this.modalWindowService.show(title, msg, function () { _this.deleteItem(item); }, function () { });
+        });
     };
-    ;
     vCrudGridController.prototype.clearFilter = function () {
         this.filterText = "";
     };
     vCrudGridController.prototype.setOrderByColumn = function (column) {
-        if (this.orderByColumn == column) {
+        if (this.orderByColumn === column) {
             // change order
             this.orderByReverse = !this.orderByReverse;
         }
@@ -135,7 +135,7 @@ var vCrudGridController = (function () {
             _this.allItems = organizations;
         }).finally(function () {
             _this.loading = false;
-        }).catch(function (r) {
+        }).catch(function () {
             _this.notificationService.error("Failed to get data");
         });
     };
@@ -165,26 +165,24 @@ var vCrudGridController = (function () {
         this.columnsDefinition.forEach(function (column) {
             if (isValid) {
                 // required validation
-                if (column.required == 'true') {
+                if (column.required === "true") {
                     isValid = item[column.binding] != undefined;
                 }
             }
         });
         return isValid;
     };
-    ;
     vCrudGridController.prototype.isDirty = function (item) {
         var serverItem = angular.fromJson(item.serverValues);
         var isDirty = false;
         this.columnsDefinition.forEach(function (column) {
             if (!isDirty &&
-                (item[column.binding] != serverItem[column.binding])) {
+                (item[column.binding] !== serverItem[column.binding])) {
                 isDirty = true;
             }
         });
         return isDirty;
     };
-    ;
     vCrudGridController.prototype.restoreServerValues = function (item) {
         var serverItem = angular.fromJson(item.serverValues);
         this.copyItem(serverItem, item);
@@ -197,7 +195,7 @@ var vCrudGridController = (function () {
             itemTarget[column.binding] = itemSource[column.binding];
         });
     };
-    vCrudGridController.$inject = ['$injector', 'modalWindowService', 'notificationService'];
+    vCrudGridController.$inject = ["$injector", "modalWindowService", "notificationService", "$translate"];
     return vCrudGridController;
 })();
 ;

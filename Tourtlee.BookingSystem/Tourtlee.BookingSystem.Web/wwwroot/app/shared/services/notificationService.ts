@@ -1,21 +1,27 @@
 class notificationService {
-    static $inject: string[] = ['toastr'];
+    static $inject: string[] = ["toastr", "$translate"];
 
-    constructor(private toastr: any) {
+    constructor(private toastr: any, private $translate: any) {
 
     }
 
-    public error(error) {
+    error(error) {
         this.toastr.error(error);
     }
 
-    public errorUpdate(error) {
-        this.toastr.error("Update failed");
-    };
+    errorUpdate(error) {
+        this.$translate(["notifications.updateFailed"]).then((t) => {
+            this.toastr.error(t["notifications.updateFailed"]);
+        });
+        
+    }
 
-    public successUpdate() {
-        this.toastr.success("Successfully updated");
-    };
+    successUpdate() {
+        this.$translate(["notifications.successfullyUpdated"]).then((t) => {
+            this.toastr.success(t["notifications.successfullyUpdated"]);
+        });
+
+    }
 }
 
 

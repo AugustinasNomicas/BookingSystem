@@ -1,23 +1,23 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 /// <reference path="../../interfaces/icrudresource.ts" />
 
-'use strict';
+"use strict";
 
 import organizationsResource = require("../../../admin/resources/organizationsResource");
 import modalWindowService = require("../../services/modalWindowService");
 import notificationService = require("../../services/notificationService");
 
 class vCrudGridController {
-    static $inject: string[] = ['$injector', 'modalWindowService', 'notificationService'];
+    static $inject: string[] = ["$injector", "modalWindowService", "notificationService", "$translate"];
 
-    public columnsDefinition: any[]; // TODO: create type for column definition
-    public allItems: any[];
-    public newItem: any; // item beeing added
-    public loading: boolean; // Indicates if the view is being loaded
-    public addMode: boolean; // Indicates if the view is in add mode
-    public orderByColumn: string;  // The column used for ordering
-    public orderByReverse: boolean;
-    public filterText: string;
+    columnsDefinition: any[]; // TODO: create type for column definition
+    allItems: any[];
+    newItem: any; // item beeing added
+    loading: boolean; // Indicates if the view is being loaded
+    addMode: boolean; // Indicates if the view is in add mode
+    orderByColumn: string;  // The column used for ordering
+    orderByReverse: boolean;
+    filterText: string;
 
     private resource: ICrudResource;
     private idBinding: string;
@@ -25,11 +25,12 @@ class vCrudGridController {
 
     constructor(private $injector: angular.auto.IInjectorService,
         private modalWindowService: modalWindowService,
-        private notificationService: notificationService) {
+        private notificationService: notificationService,
+        private $translate: any) {
 
     }
 
-    public link(attrs: angular.IAttributes) {
+    link(attrs: angular.IAttributes) {
         this.resource = <organizationsResource>this.$injector.get(attrs["resource"]);
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
@@ -37,7 +38,7 @@ class vCrudGridController {
         this.getAllItems();
     }
 
-    public toggleAddMode() {
+    toggleAddMode() {
         this.addMode = !this.addMode;
 
         // Empty new item
@@ -46,9 +47,9 @@ class vCrudGridController {
         // Set a default id or the validation will crash
         this.newItem[this.idBinding] = this.idDefaultValue;
         this.newItem.hasErrors = !this.isValid(this.newItem);
-    };
+    }
 
-    public toggleEditMode(item: any) {
+    toggleEditMode(item: any) {
         item.editMode = !item.editMode;
 
         if (!item.editMode) {
@@ -62,7 +63,7 @@ class vCrudGridController {
             // (there should be only one)
             this.allItems.forEach((i) => {
                 // item is not the item being edited now and it is in edit mode
-                if (item[this.idBinding] != i[this.idBinding] && i.editMode) {
+                if (item[this.idBinding] !== i[this.idBinding] && i.editMode) {
                     // Save current editing values 
                     this.updateItem(i);
                 }
@@ -70,9 +71,9 @@ class vCrudGridController {
         }
     }
 
-    public updateModeKeyUp = (args, item) => {
+    updateModeKeyUp = (args, item) => {
         // if key is enter
-        if (args.keyCode == 13) {
+        if (args.keyCode === 13) {
             // update
             this.updateItem(item);
             // remove focus
@@ -81,9 +82,9 @@ class vCrudGridController {
         }
     };
 
-    public createModeKeyUp = (args, item) => {
+    createModeKeyUp = (args, item) => {
         // if key is enter
-        if (args.keyCode == 13) {
+        if (args.keyCode === 13) {
             // create
             this.createItem(item);
             // remove focus
@@ -92,7 +93,7 @@ class vCrudGridController {
         }
     };
 
-    public updateItem(item) {
+    updateItem(item) {
         if (this.isValid(item)) {
             item.editMode = false;
 
@@ -112,7 +113,7 @@ class vCrudGridController {
     }
 
 
-    public createItem(item) {
+    createItem(item) {
         if (this.isValid(item)) {
             this.resource.post(item).success((createdItem) => {
                 this.allItems.unshift(createdItem);
@@ -122,20 +123,22 @@ class vCrudGridController {
                 this.notificationService.errorUpdate(r);
             });
         }
-    };
+    }
 
-    public deleteItemWithConfirmation(item) {
-        var title = "Delete confirm";
-        var msg = "Are you sure you want to remove selected item?";
-        this.modalWindowService.show(title, msg, () => { this.deleteItem(item); }, () => { });
-    };
+    deleteItemWithConfirmation(item) {
+        this.$translate(["common.deleteConfirmTitle", "common.deleteConfirmContent"]).then((t) => {
+            const title = t.common.deleteConfirmTitle;
+            const msg = t.common.deleteConfirmContent;
+            this.modalWindowService.show(title, msg, () => { this.deleteItem(item); }, () => { });
+        });
+    }
 
-    public clearFilter() {
+    clearFilter() {
         this.filterText = "";
     }
 
-    public setOrderByColumn(column) {
-        if (this.orderByColumn == column) {
+    setOrderByColumn(column) {
+        if (this.orderByColumn === column) {
             // change order
             this.orderByReverse = !this.orderByReverse;
         } else {
@@ -164,7 +167,7 @@ class vCrudGridController {
             this.allItems = organizations;
         }).finally(() => {
             this.loading = false;
-        }).catch(r => {
+        }).catch((): void => {
             this.notificationService.error("Failed to get data");
         });
     }
@@ -195,11 +198,11 @@ class vCrudGridController {
         var isValid = true;
 
         // validate all columns
-        this.columnsDefinition.forEach(function (column) {
+        this.columnsDefinition.forEach(column => {
             if (isValid) {
 
                 // required validation
-                if (column.required == 'true') {
+                if (column.required === "true") {
                     isValid = item[column.binding] != undefined;
                 }
             }
@@ -207,33 +210,33 @@ class vCrudGridController {
         });
 
         return isValid;
-    };
+    }
 
     private isDirty(item) {
         var serverItem = angular.fromJson(item.serverValues);
 
         var isDirty = false;
 
-        this.columnsDefinition.forEach(function (column) {
+        this.columnsDefinition.forEach(column => {
             if (!isDirty && // short circuit if item is dirty
-                (item[column.binding] != serverItem[column.binding])) {
+            (item[column.binding] !== serverItem[column.binding])) {
                 isDirty = true;
             }
         });
 
         return isDirty;
-    };
+    }
 
     private restoreServerValues(item) {
         var serverItem = angular.fromJson(item.serverValues);
         this.copyItem(serverItem, item);
-        this.columnsDefinition.forEach(function (column) {
+        this.columnsDefinition.forEach(column => {
             item[column.binding] = serverItem[column.binding];
         });
     }
 
     private copyItem(itemSource, itemTarget) {
-        this.columnsDefinition.forEach(function (column) {
+        this.columnsDefinition.forEach(column => {
             itemTarget[column.binding] = itemSource[column.binding];
         });
     }

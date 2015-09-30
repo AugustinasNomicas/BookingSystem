@@ -10,8 +10,10 @@ var notificationService = require("../shared/services/notificationService");
 var organizationResource = require("admin/resources/organizationsResource");
 var Admin;
 (function (Admin) {
-    'use strict';
-    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap', 'ngAnimate', 'toastr', 'ui.bootstrap'])
+    "use strict";
+    var moduleName = "admin";
+    var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "ngAnimate", "toastr",
+        "ui.bootstrap", "pascalprecht.translate"])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         return new States($stateProvider, $urlRouterProvider, $locationProvider);
     });
@@ -26,14 +28,23 @@ var Admin;
     app.config(function ($logProvider) {
         $logProvider.debugEnabled(true);
     });
+    app.config(["$translateProvider", function ($translateProvider) {
+            $translateProvider
+                .useStaticFilesLoader({
+                prefix: "api/translations/" + moduleName + "/",
+                suffix: ""
+            })
+                .useSanitizeValueStrategy("escape")
+                .preferredLanguage("en");
+        }]);
     app.config(function (toastrConfig) {
         angular.extend(toastrConfig, {
             "showDuration": "100",
             "hideDuration": "100",
             "timeOut": "2000",
             "positionClass": "toast-bottom-right",
-            "extendedTimeOut": "5000",
+            "extendedTimeOut": "5000"
         });
     });
-    angular.bootstrap(document, ['admin']);
+    angular.bootstrap(document, ["admin"]);
 })(Admin = exports.Admin || (exports.Admin = {}));

@@ -7,6 +7,9 @@
     "angular-bootstrap": "*",
     "angular-strap": "*",
     "angular-animate": "*",
+    "angular-translate": "*",
+    "angular-translate-loader-url": "*",
+    "angular-translate-loader-static-files": "*",
     "bootstrap-css-only": "*",
     "system.js": "*",
     "angular-toastr": "*"

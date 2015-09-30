@@ -4,23 +4,23 @@ var States = (function () {
     function States($stateProvider, $urlRouterProvider, $locationProvider) {
         this.$stateProvider = $stateProvider;
         this.$urlRouterProvider = $urlRouterProvider;
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
         this.init();
     }
     States.prototype.init = function () {
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/Admin/main');
+        this.$urlRouterProvider.otherwise('/');
     };
     States.defaultState = function () {
         return {
-            url: "/Admin/main",
+            url: "/",
             templateUrl: "/app/admin/views/main.html"
         };
     };
     States.organizations = function () {
         return {
-            url: "/Admin/organizations",
+            url: "/organizations",
             templateUrl: "/app/admin/views/organizations.html"
         };
     };

@@ -6,26 +6,26 @@ class States {
         private $urlRouterProvider: ng.ui.IUrlRouterProvider,
         $locationProvider: angular.ILocationProvider) {
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
         this.init();
     }
 
     private init(): void {
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/Admin/main');
+        this.$urlRouterProvider.otherwise('/');
     }
 
     private static defaultState(): ng.ui.IState {
         return {
-            url: "/Admin/main",
+            url: "/",
             templateUrl: "/app/admin/views/main.html"
         }
     }
 
     private static organizations(): ng.ui.IState {
         return {
-            url: "/Admin/organizations",
+            url: "/organizations",
             templateUrl: "/app/admin/views/organizations.html"
         }
     }

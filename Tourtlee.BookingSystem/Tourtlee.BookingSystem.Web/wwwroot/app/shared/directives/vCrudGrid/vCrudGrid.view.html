@@ -9,7 +9,7 @@
                ng-model="itemsCtrl.filterText" 
                ng-model-options="{ debounce: 250 }"
                placeholder="filter...">
-
+            
         <span class="input-group-addon btn btn-default" ng-click="itemsCtrl.clearFilter()" 
               ng-show="itemsCtrl.filterText">
             <i class="glyphicon glyphicon-remove"></i>
@@ -24,8 +24,8 @@
                 <!--Buttons column-->
                 <th class="header column-width-auto text-center">
                     <!--Add + Cancel-->
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-plus" ng-click="itemsCtrl.toggleAddMode()" title="Add" ng-hide="itemsCtrl.addMode"></i>
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-minus" ng-click="itemsCtrl.toggleAddMode()" title="Cancel" ng-show="itemsCtrl.addMode"></i>
+                    <i class="btn btn-lg btn-grid glyphicon glyphicon-plus" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.add' | translate }}" ng-hide="itemsCtrl.addMode"></i>
+                    <i class="btn btn-lg btn-grid glyphicon glyphicon-minus" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.cancel' | translate }}" ng-show="itemsCtrl.addMode"></i>
                 </th>
 
                 <!-- Content headers-->
@@ -55,8 +55,8 @@
                 <!--New item: Buttons column-->
                 <td class="add-item">
                     <!--Create + Cancel-->
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-floppy-disk" ng-click="itemsCtrl.createItem(itemsCtrl.newItem)" title="Create"></i>
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-remove" ng-click="itemsCtrl.toggleAddMode()" title="Cancel"></i>
+                    <i class="btn btn-lg btn-grid glyphicon glyphicon-floppy-disk" ng-click="itemsCtrl.createItem(itemsCtrl.newItem)" title="{{ 'common.add' | translate }}"></i>
+                    <i class="btn btn-lg btn-grid glyphicon glyphicon-remove" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.canel' | translate }}"></i>
                 </td>
 
                 <!-- New item: Content columns-->
@@ -78,14 +78,14 @@
                 <td>
                     <!--Edit + Delete  -->
                     <div ng-show="knownItem.editMode == null || knownItem.editMode == false">
-                        <i class="btn btn-lg btn-grid glyphicon glyphicon-edit" ng-click="itemsCtrl.toggleEditMode(knownItem)" title="Edit"></i>
-                        <i class="btn btn-lg btn-grid glyphicon glyphicon-trash" ng-click="itemsCtrl.deleteItemWithConfirmation(knownItem)" title="Delete"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-edit" ng-click="itemsCtrl.toggleEditMode(knownItem)" title="{{ 'common.edit' | translate }}"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-trash" ng-click="itemsCtrl.deleteItemWithConfirmation(knownItem)" title="{{ 'common.delete' | translate }}"></i>
                     </div>
 
                     <!--Save + Cancel -->
                     <div ng-show="knownItem.editMode">
-                        <i class="btn btn-lg btn-grid glyphicon glyphicon-floppy-disk" ng-click="itemsCtrl.updateItem(knownItem)" title="Save"></i>
-                        <i class="btn btn-lg btn-grid glyphicon glyphicon-remove" ng-click="itemsCtrl.toggleEditMode(knownItem)" title="Cancel"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-floppy-disk" ng-click="itemsCtrl.updateItem(knownItem)" title="{{ 'common.save' | translate }}"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-remove" ng-click="itemsCtrl.toggleEditMode(knownItem)" title="{{ 'common.cancel' | translate }}"></i>
                     </div>
 
                 </td>
@@ -128,6 +128,6 @@
 
     <!--Loading indicator-->
     <div ng-show="itemsCtrl.loading" class="center-block" style="margin-top: 20px">
-        Loading...
+        {{ 'common.loading' | translate }}
     </div>
 </div>

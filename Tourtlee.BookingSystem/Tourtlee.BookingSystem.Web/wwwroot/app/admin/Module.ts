@@ -7,7 +7,6 @@ import vSample = require("../shared/directives/vSample");
 import vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 import vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 
-
 import vAdminMenu = require("admin/directives/vAdminMenu");
 
 import modalWindowService = require("../shared/services/modalwindowservice");
@@ -17,9 +16,11 @@ import organizationResource = require("admin/resources/organizationsResource");
 
 
 export module Admin {
-    'use strict';
+    "use strict";
+    var moduleName = "admin";
 
-    var app = angular.module('admin', ['ui.router', 'mgcrea.ngStrap', 'ngAnimate', 'toastr', 'ui.bootstrap'])
+    var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "ngAnimate", "toastr",
+        "ui.bootstrap", "pascalprecht.translate"])
         .config(($stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider,
             $locationProvider: angular.ILocationProvider) => {
@@ -38,21 +39,30 @@ export module Admin {
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);
 
-
-    app.config(function ($logProvider) {
+    app.config($logProvider => {
         $logProvider.debugEnabled(true);
     });
 
-    app.config(function (toastrConfig) {
+    app.config(["$translateProvider", $translateProvider => {
+        $translateProvider
+            .useStaticFilesLoader({
+                prefix: `api/translations/${moduleName}/`,
+                suffix: ""
+            })
+            .useSanitizeValueStrategy("escape")
+            .preferredLanguage("en");
+    }]);
+
+    app.config(toastrConfig => {
         angular.extend(toastrConfig, {
             "showDuration": "100",
             "hideDuration": "100",
             "timeOut": "2000",
             "positionClass": "toast-bottom-right",
-            "extendedTimeOut": "5000",
+            "extendedTimeOut": "5000"
         });
     });
 
 
-    angular.bootstrap(document, ['admin']);
+    angular.bootstrap(document, ["admin"]);
 }

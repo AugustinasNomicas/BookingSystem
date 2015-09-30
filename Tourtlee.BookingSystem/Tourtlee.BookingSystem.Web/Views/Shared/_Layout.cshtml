@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using System.Threading.Tasks
+@using Microsoft.AspNet.Mvc.Rendering
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -17,17 +20,7 @@
     <title>BookingSystem</title>
 
     <script src="~/lib/system.js/dist/system.js"></script>
-    <script src="~/lib/angular/angular.js"></script>
-    <script src="~/lib/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="~/lib/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="~/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-    <script src="~/lib/angular-animate/angular-animate.js"></script>
-
-    <script src="~/lib/angular-strap/dist/angular-strap.js"></script>
-    <script src="~/lib/angular-strap/dist/angular-strap.tpl.js"></script>
-
-    <script src="~/lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
 
     <link href="~/lib/bootstrap-css-only/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-css-only/css/bootstrap-theme.css" rel="stylesheet" />
@@ -71,9 +64,20 @@
                         <menulink controller-name="CheckIn" action-name="Index" menu-text="CheckIn"></menulink>
                         <menulink controller-name="Admin" action-name="Index" menu-text="Admin"></menulink>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <menulink controller-name="Account" action-name="LogOff" menu-text="LogOff"></menulink>
-                    </ul>
+                    @if (User.IsSignedIn())
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    @Html.ActionLink("Hello " + User.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            </ul>
+                        }
+                    }
                 </div>
             </div>
         </nav>
@@ -81,5 +85,26 @@
             @RenderBody()
         </div>
     </div>
+
+    <script src="~/lib/angular/angular.js"></script>
+
+    <script src="~/lib/angular-translate/angular-translate.js"></script>
+    <script src="~/lib/angular-translate-loader-url/angular-translate-loader-url.js"></script>
+    <script src="~/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+
+
+
+    <script src="~/lib/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="~/lib/angular-bootstrap/ui-bootstrap.js"></script>
+
+    <script src="~/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <script src="~/lib/angular-animate/angular-animate.js"></script>
+
+    <script src="~/lib/angular-strap/dist/angular-strap.js"></script>
+    <script src="~/lib/angular-strap/dist/angular-strap.tpl.js"></script>
+
+    <script src="~/lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
 </body>
 </html>

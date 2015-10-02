@@ -13,6 +13,7 @@ using Tourtlee.BookingSystem.DataAccess;
 using Tourtlee.BookingSystem.DataAccess.Auth;
 using Tourtlee.BookingSystem.Model.Security;
 using Tourtlee.BookingSystem.Web.Configurations;
+using Tourtlee.BookingSystem.Web.Security;
 
 namespace Tourtlee.BookingSystem.Web
 {
@@ -43,7 +44,7 @@ namespace Tourtlee.BookingSystem.Web
 
             services.ConfigureCookieAuthentication(options =>
             {
-                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
             });
 
             services.AddMvc();
@@ -51,10 +52,18 @@ namespace Tourtlee.BookingSystem.Web
             {
                 //options.Filters.Add(new AuthorizeAttribute());
             });
-            
+
+
+            // Configure Auth
+            services.Configure<AuthorizationOptions>(options =>
+            {
+                options.AddPolicy(AppPolicies.AccessAdminArea.ToString(), 
+                    new AuthorizationPolicyBuilder().RequireClaim(AppPolicies.AccessAdminArea.ToString(), "Allowed").Build());
+            });
+
 
             // TODO refactor IoC registration
-                        DataAccess.IocRegistrations.RegisterServices(services);
+            DataAccess.IocRegistrations.RegisterServices(services);
             Business.IocRegistrations.RegisterServices(services);
 
             // TODO refactor Automapper configuration

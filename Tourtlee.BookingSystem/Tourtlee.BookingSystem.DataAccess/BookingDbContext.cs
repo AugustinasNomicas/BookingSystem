@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
 using Microsoft.Framework.OptionsModel;
 using Tourtlee.BookingSystem.DataAccess.Auth;
 using Tourtlee.BookingSystem.Model;
@@ -13,10 +16,10 @@ using Tourtlee.BookingSystem.Model.Security;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
-    public class BookingDbContext :  IdentityDbContext<IdentityUser>
+    public class BookingDbContext :  IdentityDbContext<ApplicationUser>
     {
         private const string SecuritySchameName = "Security";
-        const string adminRole = "admin";
+        const string AdminRole = "Admin";
 
         public DbSet<Organization> Organizations { get; set; }
 
@@ -30,6 +33,9 @@ namespace Tourtlee.BookingSystem.DataAccess
                     await sqlDb.EnsureCreatedAsync();
                     await CreateAdminUser(serviceProvider);
                 }
+
+                var loggerFactory = db.GetService<ILoggerFactory>();
+                loggerFactory.AddProvider(new DbLoggerProvider());
             }
         }
 
@@ -39,9 +45,9 @@ namespace Tourtlee.BookingSystem.DataAccess
             var userMgr = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleMgr = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (!await roleMgr.RoleExistsAsync(adminRole))
+            if (!await roleMgr.RoleExistsAsync(AdminRole))
             {
-                await roleMgr.CreateAsync(new IdentityRole(adminRole));
+                await roleMgr.CreateAsync(new IdentityRole(AdminRole));
             }
 
             var user = await userMgr.FindByNameAsync(options.DefaultUsername);
@@ -51,20 +57,9 @@ namespace Tourtlee.BookingSystem.DataAccess
                 var userCreationResult = await userMgr.CreateAsync(user, options.DefaultPassword);
                 if (userCreationResult.Succeeded)
                 {
-                    await userMgr.AddToRoleAsync(user, adminRole);
+                    await userMgr.AddClaimAsync(user, new Claim("AccessAdminArea", "Allowed"));
                 }
             }
-        }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            builder.Entity<ApplicationUser>().ToTable("Users", SecuritySchameName);
-            builder.Entity<IdentityRole>().ToTable("Roles", SecuritySchameName);
-            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", SecuritySchameName);
-            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims", SecuritySchameName);
-            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", SecuritySchameName);
-            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", SecuritySchameName);
         }
     }
 }

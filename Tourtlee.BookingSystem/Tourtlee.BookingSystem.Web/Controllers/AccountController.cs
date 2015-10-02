@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Tourtlee.BookingSystem.Model.Security;
-using Tourtlee.BookingSystem.Web.ViewModels;
 using System.Security.Claims;
 using Tourtlee.BookingSystem.Web.ViewModels.Account;
 
@@ -71,6 +67,13 @@ namespace Tourtlee.BookingSystem.Web.Controllers
         {
             await SignInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         #region Helpers

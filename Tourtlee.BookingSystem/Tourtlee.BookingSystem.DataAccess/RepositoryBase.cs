@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.Data.Entity;
 
@@ -18,45 +19,45 @@ namespace Tourtlee.BookingSystem.DataAccess
 
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        private readonly BookingDbContext _bookingDbContext;
+        protected readonly BookingDbContext BookingDbContext;
 
         protected RepositoryBase(BookingDbContext bookingDbContext)
         {
-            _bookingDbContext = bookingDbContext;
+            BookingDbContext = bookingDbContext;
         }
 
         public virtual IQueryable<T> GetAll()
         {
 
-            IQueryable<T> query = _bookingDbContext.Set<T>();
+            IQueryable<T> query = BookingDbContext.Set<T>();
             return query;
         }
 
         public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
 
-            IQueryable<T> query = _bookingDbContext.Set<T>().Where(predicate);
+            IQueryable<T> query = BookingDbContext.Set<T>().Where(predicate);
             return query;
         }
 
         public virtual void Create(T entity)
         {
-            _bookingDbContext.Set<T>().Add(entity);
+            BookingDbContext.Set<T>().Add(entity);
         }
 
         public virtual void Delete(T entity)
         {
-            _bookingDbContext.Set<T>().Remove(entity);
+            BookingDbContext.Set<T>().Remove(entity);
         }
 
         public virtual void Update(T entity)
         {
-            _bookingDbContext.Entry(entity).State = EntityState.Modified;
+            BookingDbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Save()
         {
-            _bookingDbContext.SaveChanges();
+            BookingDbContext.SaveChanges();
         }
     }
 }

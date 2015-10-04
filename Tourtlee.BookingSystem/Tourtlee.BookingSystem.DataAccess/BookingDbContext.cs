@@ -16,12 +16,24 @@ using Tourtlee.BookingSystem.Model.Security;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
-    public class BookingDbContext :  IdentityDbContext<ApplicationUser>
+    public class BookingDbContext : IdentityDbContext<ApplicationUser>
     {
         private const string SecuritySchameName = "Security";
         const string AdminRole = "Admin";
+        
 
         public DbSet<Organization> Organizations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            var model = builder.Model;
+
+            builder
+                .Entity<ApplicationUser>().Reference(typeof(Organization), "Organization")
+                .InverseCollection("Users")
+                .ForeignKey("IdOrganization");
+        }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
         {
@@ -31,7 +43,7 @@ namespace Tourtlee.BookingSystem.DataAccess
                 if (sqlDb != null)
                 {
                     await sqlDb.EnsureCreatedAsync();
-                    await CreateAdminUser(serviceProvider);
+                    await CreateAdminUser(db, serviceProvider);
                 }
 
                 var loggerFactory = db.GetService<ILoggerFactory>();
@@ -39,7 +51,7 @@ namespace Tourtlee.BookingSystem.DataAccess
             }
         }
 
-        private static async Task CreateAdminUser(IServiceProvider serviceProvider)
+        private static async Task CreateAdminUser(BookingDbContext db, IServiceProvider serviceProvider)
         {
             var options = serviceProvider.GetRequiredService<IOptions<AuthOptions>>().Options;
             var userMgr = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -53,11 +65,26 @@ namespace Tourtlee.BookingSystem.DataAccess
             var user = await userMgr.FindByNameAsync(options.DefaultUsername);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = options.DefaultUsername };
+
+                var ownerOrganization = new Organization
+                {
+                    Name = "Owner",
+                    IdOrganization = Organization.AdminIdOrganization
+                };
+
+                db.Organizations.Add(ownerOrganization);
+
+                user = new ApplicationUser
+                {
+                    UserName = options.DefaultUsername,
+                    IdOrganization = ownerOrganization.IdOrganization
+                };
+
                 var userCreationResult = await userMgr.CreateAsync(user, options.DefaultPassword);
                 if (userCreationResult.Succeeded)
                 {
                     await userMgr.AddClaimAsync(user, new Claim("AccessAdminArea", "Allowed"));
+                    await db.SaveChangesAsync();
                 }
             }
         }

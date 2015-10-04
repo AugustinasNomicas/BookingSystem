@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using NSubstitute;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
@@ -33,6 +34,21 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Organizations
 
             _organizationRepository.Received().Delete(organizationToDelete);
             _organizationRepository.Received().Save();
+        }
+
+        [Fact]
+        public void ThrowWhenDeletingOwnerOrganization()
+        {
+            var organizationToDelete = new Organization
+            {
+                IdOrganization = new Guid("00000000-0000-0000-0000-000000000001")
+            };
+            _organizationRepository.FindBy(Arg.Any<System.Linq.Expressions.Expression<Func<Organization, bool>>>())
+                .Returns((new List<Organization>() { organizationToDelete }).AsQueryable());
+
+            var cmd = new DeleteOrganizationOperation(_organizationRepository);
+
+            Assert.Throws<ValidationException>(() => cmd.Operate(organizationToDelete.IdOrganization));
         }
     }
 }

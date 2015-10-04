@@ -1,4 +1,5 @@
-﻿using Tourtlee.BookingSystem.Model;
+﻿using System;
+using Tourtlee.BookingSystem.Model;
 
 namespace Tourtlee.BookingSystem.DataAccess.Repositories
 {

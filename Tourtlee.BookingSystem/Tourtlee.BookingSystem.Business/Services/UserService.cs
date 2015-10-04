@@ -2,12 +2,13 @@
 using Microsoft.Framework.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Accounts;
 using Tourtlee.BookingSystem.Business.Operations.Users;
+using System.Collections.Generic;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {
     public interface IUserService
     {
-        UserListDto GetList();
+        IList<UserListItemDto> GetList();
     }
 
     public class UserService : IUserService
@@ -19,7 +20,7 @@ namespace Tourtlee.BookingSystem.Business.Services
             _serviceProvider = serviceProvider;
         }
 
-        public UserListDto GetList()
+        public IList<UserListItemDto> GetList()
         {
             var operation = _serviceProvider.GetRequiredService<GetUserListOperation>();
             return operation.Operate(null);

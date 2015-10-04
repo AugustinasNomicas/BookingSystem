@@ -6,11 +6,11 @@
         </span>
 
         <input class="form-control filter-input" type="text"
-               ng-model="itemsCtrl.filterText" 
+               ng-model="itemsCtrl.filterText"
                ng-model-options="{ debounce: 250 }"
                placeholder="{{ 'common.filter' | translate }}">
-            
-        <span class="input-group-addon btn btn-default" ng-click="itemsCtrl.clearFilter()" 
+
+        <span class="input-group-addon btn btn-default" ng-click="itemsCtrl.clearFilter()"
               ng-show="itemsCtrl.filterText">
             <i class="glyphicon glyphicon-remove"></i>
         </span>
@@ -22,10 +22,10 @@
         <thead>
             <tr>
                 <!--Buttons column-->
-                <th class="header column-width-auto text-center">
+                <th class="header column-width-auto text-center" data-ng-hide="itemsCtrl.readonly">
                     <!--Add + Cancel-->
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-plus" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.add' | translate }}" ng-hide="itemsCtrl.addMode"></i>
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-minus" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.cancel' | translate }}" ng-show="itemsCtrl.addMode"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-plus" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.add' | translate }}" ng-hide="itemsCtrl.addMode"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-minus" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.cancel' | translate }}" ng-show="itemsCtrl.addMode"></i>
                 </th>
 
                 <!-- Content headers-->
@@ -55,8 +55,8 @@
                 <!--New item: Buttons column-->
                 <td class="add-item">
                     <!--Create + Cancel-->
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-floppy-disk" ng-click="itemsCtrl.createItem(itemsCtrl.newItem)" title="{{ 'common.add' | translate }}"></i>
-                    <i class="btn btn-lg btn-grid glyphicon glyphicon-remove" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.canel' | translate }}"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-floppy-disk" ng-click="itemsCtrl.createItem(itemsCtrl.newItem)" title="{{ 'common.add' | translate }}"></i>
+                        <i class="btn btn-lg btn-grid glyphicon glyphicon-remove" ng-click="itemsCtrl.toggleAddMode()" title="{{ 'common.canel' | translate }}"></i>
                 </td>
 
                 <!-- New item: Content columns-->
@@ -75,7 +75,7 @@
             <tr ng-repeat="knownItem in itemsCtrl.allItems | filter:itemsCtrl.filterText">
 
                 <!--Edit/Delete buttons-->
-                <td>
+                <td data-ng-hide="itemsCtrl.readonly">
                     <!--Edit + Delete  -->
                     <div ng-show="knownItem.editMode == null || knownItem.editMode == false">
                         <i class="btn btn-lg btn-grid glyphicon glyphicon-edit" ng-click="itemsCtrl.toggleEditMode(knownItem)" title="{{ 'common.edit' | translate }}"></i>

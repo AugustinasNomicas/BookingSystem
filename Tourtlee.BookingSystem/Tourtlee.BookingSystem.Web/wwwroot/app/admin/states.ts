@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-'use strict';
+"use strict";
 
 class States {
     constructor(private $stateProvider: ng.ui.IStateProvider,
@@ -13,7 +13,8 @@ class States {
     private init(): void {
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/');
+        this.$stateProvider.state("users", States.users());
+        this.$urlRouterProvider.otherwise("/");
     }
 
     private static defaultState(): ng.ui.IState {
@@ -27,6 +28,13 @@ class States {
         return {
             url: "/organizations",
             templateUrl: "/app/admin/views/organizations.html"
+        }
+    }
+
+    private static users(): ng.ui.IState {
+        return {
+            url: "/users",
+            templateUrl: "/app/admin/views/users.html"
         }
     }
 

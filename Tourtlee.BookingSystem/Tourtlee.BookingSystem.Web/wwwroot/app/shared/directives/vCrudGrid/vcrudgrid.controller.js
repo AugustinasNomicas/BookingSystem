@@ -33,6 +33,7 @@ var vCrudGridController = (function () {
         this.resource = this.$injector.get(attrs["resource"]);
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
+        this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
         this.getAllItems();
     };
@@ -46,6 +47,8 @@ var vCrudGridController = (function () {
     };
     vCrudGridController.prototype.toggleEditMode = function (item) {
         var _this = this;
+        if (this.readonly)
+            return;
         item.editMode = !item.editMode;
         if (!item.editMode) {
             // Undo changes
@@ -131,8 +134,8 @@ var vCrudGridController = (function () {
     vCrudGridController.prototype.getAllItems = function () {
         var _this = this;
         this.loading = true;
-        this.resource.getList().success(function (organizations) {
-            _this.allItems = organizations;
+        this.resource.getList().success(function (data) {
+            _this.allItems = data;
         }).finally(function () {
             _this.loading = false;
         }).catch(function () {

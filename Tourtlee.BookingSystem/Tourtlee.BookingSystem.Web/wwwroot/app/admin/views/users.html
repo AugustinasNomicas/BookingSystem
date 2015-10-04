@@ -1,0 +1,24 @@
+<div ng-controller="usersCtrl as ctrl">
+    <div v-crud-grid resource="usersResource"
+         id-binding="IdUser"
+         id-default-value="00000000-0000-0000-0000-000000000000"
+         readonly="true"
+         columns-definition='[
+         {
+            "binding"       :"IdUser",
+            "type"          :"disabled",
+            "required"      :"true",
+            "hidden"        :"false"
+         },
+         {
+            "binding"       :"Email",
+            "type"          :"text",
+            "header"        :"Email",
+            "required"      :"true"
+         },         {
+            "binding"       :"OrganizationName",
+            "type"          :"text",
+            "header"        :"Organization",
+            "required"      :"true"
+         }]'></div>
+</div>

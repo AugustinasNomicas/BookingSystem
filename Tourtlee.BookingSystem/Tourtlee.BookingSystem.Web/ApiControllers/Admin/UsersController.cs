@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Mvc;
+using System.Collections.Generic;
 using Tourtlee.BookingSystem.Business.Dto.Accounts;
 using Tourtlee.BookingSystem.Business.Services;
 
@@ -15,7 +16,7 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
         }
 
         [HttpGet]
-        public UserListDto GetList()
+        public IList<UserListItemDto> GetList()
         {
             return _userService.GetList();
         }

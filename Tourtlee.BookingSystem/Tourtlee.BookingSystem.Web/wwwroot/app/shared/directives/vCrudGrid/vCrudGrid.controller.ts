@@ -18,6 +18,7 @@ class vCrudGridController {
     orderByColumn: string;  // The column used for ordering
     orderByReverse: boolean;
     filterText: string;
+    readonly: boolean;
 
     private resource: ICrudResource;
     private idBinding: string;
@@ -34,6 +35,7 @@ class vCrudGridController {
         this.resource = <organizationsResource>this.$injector.get(attrs["resource"]);
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
+        this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
         this.getAllItems();
     }
@@ -50,6 +52,9 @@ class vCrudGridController {
     }
 
     toggleEditMode(item: any) {
+        if (this.readonly)
+            return;
+
         item.editMode = !item.editMode;
 
         if (!item.editMode) {
@@ -163,8 +168,8 @@ class vCrudGridController {
     private getAllItems() {
         this.loading = true;
 
-        this.resource.getList().success(organizations => {
-            this.allItems = organizations;
+        this.resource.getList().success(data => {
+            this.allItems = data;
         }).finally(() => {
             this.loading = false;
         }).catch((): void => {

@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-'use strict';
+"use strict";
 var States = (function () {
     function States($stateProvider, $urlRouterProvider, $locationProvider) {
         this.$stateProvider = $stateProvider;
@@ -10,7 +10,8 @@ var States = (function () {
     States.prototype.init = function () {
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$urlRouterProvider.otherwise('/');
+        this.$stateProvider.state("users", States.users());
+        this.$urlRouterProvider.otherwise("/");
     };
     States.defaultState = function () {
         return {
@@ -22,6 +23,12 @@ var States = (function () {
         return {
             url: "/organizations",
             templateUrl: "/app/admin/views/organizations.html"
+        };
+    };
+    States.users = function () {
+        return {
+            url: "/users",
+            templateUrl: "/app/admin/views/users.html"
         };
     };
     return States;

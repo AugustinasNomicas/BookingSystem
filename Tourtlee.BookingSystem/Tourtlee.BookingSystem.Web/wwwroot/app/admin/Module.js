@@ -1,5 +1,4 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-var OrganizationCtrl = require("admin/controllers/organizationCtrl");
 var States = require("admin/states");
 var vSample = require("../shared/directives/vSample");
 var vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
@@ -7,7 +6,10 @@ var vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.edito
 var vAdminMenu = require("admin/directives/vAdminMenu");
 var modalWindowService = require("../shared/services/modalwindowservice");
 var notificationService = require("../shared/services/notificationService");
+var OrganizationCtrl = require("admin/controllers/organizationCtrl");
 var organizationResource = require("admin/resources/organizationsResource");
+var UsersCtrl = require("admin/controllers/UsersCtrl");
+var UsersResource = require("admin/resources/UsersResource");
 var Admin;
 (function (Admin) {
     "use strict";
@@ -21,8 +23,12 @@ var Admin;
         .directive("vAdminMenu", vAdminMenu.factory())
         .directive("vCrudGrid", vCrudGrid.factory())
         .directive("vCellEditor", vCellEditor.factory());
+    // organizations
     app.controller("organizationCtrl", OrganizationCtrl);
     app.service("organizationsResource", organizationResource);
+    // users
+    app.controller("usersCtrl", UsersCtrl);
+    app.service("usersResource", UsersResource);
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);
     app.config(function ($logProvider) {

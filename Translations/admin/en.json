@@ -14,5 +14,10 @@
 	  "save": "Save",
 	  "delete": "Delete",
 	  "loading": "Loading..."
+  },
+  "menu":{
+	  "main": "Main",
+	  "organizations": "Organizations",
+	  "users": "Users"
   }
 }

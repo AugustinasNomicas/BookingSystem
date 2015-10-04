@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-import OrganizationCtrl = require("admin/controllers/organizationCtrl");
+
 import States = require("admin/states");
 
 import vSample = require("../shared/directives/vSample");
@@ -12,8 +12,11 @@ import vAdminMenu = require("admin/directives/vAdminMenu");
 import modalWindowService = require("../shared/services/modalwindowservice");
 import notificationService = require("../shared/services/notificationService");
 
+import OrganizationCtrl = require("admin/controllers/organizationCtrl");
 import organizationResource = require("admin/resources/organizationsResource");
 
+import UsersCtrl = require("admin/controllers/UsersCtrl");
+import UsersResource = require("admin/resources/UsersResource");
 
 export module Admin {
     "use strict";
@@ -32,9 +35,13 @@ export module Admin {
         .directive("vCrudGrid", vCrudGrid.factory())
         .directive("vCellEditor", vCellEditor.factory());
 
+    // organizations
     app.controller("organizationCtrl", OrganizationCtrl);
-
     app.service("organizationsResource", organizationResource);
+
+    // users
+    app.controller("usersCtrl", UsersCtrl);
+    app.service("usersResource", UsersResource);
 
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);

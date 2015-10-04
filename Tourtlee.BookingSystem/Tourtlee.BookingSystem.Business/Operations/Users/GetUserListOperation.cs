@@ -12,7 +12,7 @@ using Tourtlee.BookingSystem.Model.Security;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Users
 {
-    public class GetUserListOperation : OperationBase<object, UserListDto>
+    public class GetUserListOperation : OperationBase<object, IList<UserListItemDto>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -21,13 +21,10 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
             _userManager = userManager;
         }
 
-        public override UserListDto Operate(object request)
+        public override IList<UserListItemDto> Operate(object request)
         {
             var users = _userManager.Users.Include(u => u.Organization).ToList();
-            return new UserListDto
-            {
-                UserList = Mapper.Map<List<UserListItemDto>>(users)
-            };
+            return Mapper.Map<List<UserListItemDto>>(users);
         }
     }
 }

@@ -20,19 +20,18 @@ namespace Tourtlee.BookingSystem.DataAccess
     {
         private const string SecuritySchameName = "Security";
         const string AdminRole = "Admin";
-        
+
 
         public DbSet<Organization> Organizations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            var model = builder.Model;
 
-            builder
-                .Entity<ApplicationUser>().Reference(typeof(Organization), "Organization")
-                .InverseCollection("Users")
-                .ForeignKey("IdOrganization");
+            // http://stackoverflow.com/questions/30290171/how-to-work-with-collections
+            builder.Entity<Organization>()
+                .Collection(o => o.Users).InverseReference(u => u.Organization)
+                .ForeignKey(u => u.IdOrganization);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)

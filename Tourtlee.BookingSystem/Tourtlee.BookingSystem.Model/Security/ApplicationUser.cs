@@ -11,6 +11,6 @@ namespace Tourtlee.BookingSystem.Model.Security
     public class ApplicationUser : IdentityUser
     {
         public Guid IdOrganization { get; set; }
-        public ICollection<Organization> Organization { get; set; }
+        public Organization Organization { get; set; }
     }
 }

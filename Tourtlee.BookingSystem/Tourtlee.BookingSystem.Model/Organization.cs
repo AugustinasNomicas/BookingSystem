@@ -20,6 +20,6 @@ namespace Tourtlee.BookingSystem.Model
 
         public string Name { get; set; }
 
-        public ICollection<ApplicationUser> Users { get; set; }
+        public ICollection<ApplicationUser> Users { get; } = new List<ApplicationUser>();
     }
 }

@@ -1,4 +1,8 @@
 <div ng-controller="usersCtrl as ctrl">
+    <p>
+        <a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.add</a>
+    </p>
+
     <div v-crud-grid resource="usersResource"
          id-binding="IdUser"
          id-default-value="00000000-0000-0000-0000-000000000000"
@@ -22,3 +26,4 @@
             "required"      :"true"
          }]'></div>
 </div>
+

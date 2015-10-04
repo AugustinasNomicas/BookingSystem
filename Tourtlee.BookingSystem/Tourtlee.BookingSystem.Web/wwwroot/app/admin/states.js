@@ -10,7 +10,19 @@ var States = (function () {
     States.prototype.init = function () {
         this.$stateProvider.state("main", States.defaultState());
         this.$stateProvider.state("organizations", States.organizations());
-        this.$stateProvider.state("users", States.users());
+        this.$stateProvider.state("users", {
+            url: "/users",
+            templateUrl: "/app/admin/views/users/users.html",
+            abstract: true
+        });
+        this.$stateProvider.state("users.list", {
+            url: "",
+            templateUrl: "/app/admin/views/users/list.html"
+        });
+        this.$stateProvider.state("users.add", {
+            url: "/add",
+            templateUrl: "/app/admin/views/users/add.html"
+        });
         this.$urlRouterProvider.otherwise("/");
     };
     States.defaultState = function () {
@@ -23,12 +35,6 @@ var States = (function () {
         return {
             url: "/organizations",
             templateUrl: "/app/admin/views/organizations.html"
-        };
-    };
-    States.users = function () {
-        return {
-            url: "/users",
-            templateUrl: "/app/admin/views/users.html"
         };
     };
     return States;

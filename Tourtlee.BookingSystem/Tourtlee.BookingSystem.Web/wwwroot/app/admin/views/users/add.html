@@ -1,0 +1,83 @@
+﻿<form class="form-horizontal">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Add user</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="email">Email</label>
+            <div class="col-md-6">
+                <input id="email" name="email" type="text" placeholder="example@domain.com" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="password">Password</label>
+            <div class="col-md-6">
+                <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="passwordrepeat">Repeat Password</label>
+            <div class="col-md-6">
+                <input id="passwordrepeat" name="passwordrepeat" type="password" placeholder="" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Multiple Radios -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="chooseOrganization">Organization</label>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label for="chooseOrganization-0">
+                        <input type="radio" name="chooseOrganization" id="chooseOrganization-0" value="1" checked="checked">
+                        Create new
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="chooseOrganization-1">
+                        <input type="radio" name="chooseOrganization" id="chooseOrganization-1" value="2">
+                        Choose from existing
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="SelectOrganization">Organization</label>
+            <div class="col-md-6">
+                <select id="SelectOrganization" name="SelectOrganization" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="NewOrganizationName">Organization Name</label>
+            <div class="col-md-6">
+                <input id="NewOrganizationName" name="NewOrganizationName" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="create"></label>
+            <div class="col-md-8">
+                <button id="create" name="create" class="btn btn-success">Create</button>
+                <button id="Cancel" name="Cancel" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

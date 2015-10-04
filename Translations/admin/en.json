@@ -19,5 +19,8 @@
 	  "main": "Main",
 	  "organizations": "Organizations",
 	  "users": "Users"
+  },
+  "users":{
+	  "add": "Add new user"
   }
 }

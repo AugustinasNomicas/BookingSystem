@@ -76,7 +76,8 @@ namespace Tourtlee.BookingSystem.DataAccess
                 user = new ApplicationUser
                 {
                     UserName = options.DefaultUsername,
-                    IdOrganization = ownerOrganization.IdOrganization
+                    IdOrganization = ownerOrganization.IdOrganization,
+                    LockoutEnabled = false
                 };
 
                 var userCreationResult = await userMgr.CreateAsync(user, options.DefaultPassword);

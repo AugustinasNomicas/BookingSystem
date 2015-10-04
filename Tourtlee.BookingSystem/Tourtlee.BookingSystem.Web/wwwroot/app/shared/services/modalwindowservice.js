@@ -20,13 +20,11 @@ var modalWindowService = (function () {
         var modalInstance = this.$modal.open(modalSettings);
         modalInstance.result.then(
         // if any, execute confirm callback
-        // if any, execute confirm callback
         function () {
             if (confirmCallback != undefined) {
                 confirmCallback();
             }
         }, 
-        // if any, execute cancel callback
         // if any, execute cancel callback
         function () {
             if (cancelCallback != undefined) {

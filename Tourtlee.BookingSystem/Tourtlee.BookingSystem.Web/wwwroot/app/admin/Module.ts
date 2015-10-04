@@ -19,7 +19,7 @@ export module Admin {
     "use strict";
     var moduleName = "admin";
 
-    var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "ngAnimate", "toastr",
+    var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
         "ui.bootstrap", "pascalprecht.translate"])
         .config(($stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider,

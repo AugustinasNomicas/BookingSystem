@@ -127,8 +127,8 @@ class vCrudGridController {
 
     deleteItemWithConfirmation(item) {
         this.$translate(["common.deleteConfirmTitle", "common.deleteConfirmContent"]).then((t) => {
-            const title = t.common.deleteConfirmTitle;
-            const msg = t.common.deleteConfirmContent;
+            const title = t["common.deleteConfirmTitle"];
+            const msg = t["common.deleteConfirmContent"];
             this.modalWindowService.show(title, msg, () => { this.deleteItem(item); }, () => { });
         });
     }

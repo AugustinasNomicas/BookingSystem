@@ -98,8 +98,8 @@ var vCrudGridController = (function () {
     vCrudGridController.prototype.deleteItemWithConfirmation = function (item) {
         var _this = this;
         this.$translate(["common.deleteConfirmTitle", "common.deleteConfirmContent"]).then(function (t) {
-            var title = t.common.deleteConfirmTitle;
-            var msg = t.common.deleteConfirmContent;
+            var title = t["common.deleteConfirmTitle"];
+            var msg = t["common.deleteConfirmContent"];
             _this.modalWindowService.show(title, msg, function () { _this.deleteItem(item); }, function () { });
         });
     };

@@ -12,7 +12,7 @@ var Admin;
 (function (Admin) {
     "use strict";
     var moduleName = "admin";
-    var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "ngAnimate", "toastr",
+    var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
         "ui.bootstrap", "pascalprecht.translate"])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         return new States($stateProvider, $urlRouterProvider, $locationProvider);

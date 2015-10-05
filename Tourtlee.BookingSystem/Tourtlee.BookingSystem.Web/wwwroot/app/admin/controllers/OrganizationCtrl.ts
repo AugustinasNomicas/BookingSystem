@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 'use strict';
 
-import OrganizationsResource = require("admin/resources/organizationsResource");
+import OrganizationsResource = require("../resources/organizationsresource");
 
-class organizationCtrl {
+class OrganizationCtrl {
     static $inject: string[] = ['$scope', 'organizationsResource', 'toastr'];
 
     public organizations: organizationDto[]
@@ -22,4 +22,4 @@ class organizationCtrl {
 
 }
 
-export = organizationCtrl;
+export = OrganizationCtrl;

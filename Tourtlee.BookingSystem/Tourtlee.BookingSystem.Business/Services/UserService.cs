@@ -9,6 +9,7 @@ namespace Tourtlee.BookingSystem.Business.Services
     public interface IUserService
     {
         IList<UserListItemDto> GetList();
+        void CreateUserOperation(CreateUserDto createUserDto);
     }
 
     public class UserService : IUserService
@@ -24,6 +25,12 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<GetUserListOperation>();
             return operation.Operate(null);
+        }
+
+        public void CreateUserOperation(CreateUserDto createUserDto)
+        {
+            var operation = _serviceProvider.GetRequiredService<CreateUserOperation>();
+            operation.Operate(createUserDto);
         }
     }
 }

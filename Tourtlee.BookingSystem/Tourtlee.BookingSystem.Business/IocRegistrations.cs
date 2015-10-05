@@ -20,7 +20,7 @@ namespace Tourtlee.BookingSystem.Business
             services.AddTransient<UpdateOrganizationOperation>();
 
             services.AddTransient<GetUserListOperation>();
-
+            services.AddTransient<CreateUserOperation>();
         }
     }
 }

@@ -1,12 +1,17 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="../dto/createuserdto.ts" />
 "use strict";
 var UsersCtrl = (function () {
-    function UsersCtrl($scope, usersResource, toastr) {
+    function UsersCtrl($scope, usersService) {
         this.$scope = $scope;
-        this.usersResource = usersResource;
-        this.toastr = toastr;
+        this.usersService = usersService;
+        this.organizationMode = 1;
     }
-    UsersCtrl.$inject = ["$scope", "usersResource", "toastr"];
+    UsersCtrl.prototype.CreateUser = function () {
+        alert("Creating user");
+        console.log(this.createUserDto);
+    };
+    UsersCtrl.$inject = ["$scope", "usersService", "toastr"];
     return UsersCtrl;
 })();
 module.exports = UsersCtrl;

@@ -1,16 +1,26 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="../dto/createuserdto.ts" />
+
 "use strict";
 
-import UsersResource = require("../resources/UsersResource");
+import UsersService = require("../services/usersservice");
 
 class UsersCtrl {
-    static $inject: string[] = ["$scope", "usersResource", "toastr"];
+    static $inject: string[] = ["$scope", "usersService", "toastr"];
+
+    createUserDto: CreateUserDto;
+    organizationMode: number;
 
     constructor(public $scope: angular.IScope,
-        public usersResource: UsersResource,
-        public toastr: any) {
+        private usersService: UsersService) {
+
+        this.organizationMode = 1
     }
 
+    CreateUser(): void {
+        alert("Creating user");
+        console.log(this.createUserDto);
+    }
 }
 
 export = UsersCtrl;

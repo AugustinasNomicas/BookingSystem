@@ -6,10 +6,11 @@ var vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.edito
 var vAdminMenu = require("admin/directives/vAdminMenu");
 var modalWindowService = require("../shared/services/modalwindowservice");
 var notificationService = require("../shared/services/notificationService");
-var OrganizationCtrl = require("admin/controllers/organizationCtrl");
+var OrganizationCtrl = require("admin/controllers/OrganizationCtrl");
 var organizationResource = require("admin/resources/organizationsResource");
 var UsersCtrl = require("admin/controllers/UsersCtrl");
 var UsersResource = require("admin/resources/UsersResource");
+var UsersService = require("admin/services/UsersService");
 var Admin;
 (function (Admin) {
     "use strict";
@@ -29,6 +30,7 @@ var Admin;
     // users
     app.controller("usersCtrl", UsersCtrl);
     app.service("usersResource", UsersResource);
+    app.service("usersService", UsersService);
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);
     app.config(function ($logProvider) {

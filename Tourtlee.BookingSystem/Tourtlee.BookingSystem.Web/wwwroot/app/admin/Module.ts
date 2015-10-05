@@ -12,11 +12,12 @@ import vAdminMenu = require("admin/directives/vAdminMenu");
 import modalWindowService = require("../shared/services/modalwindowservice");
 import notificationService = require("../shared/services/notificationService");
 
-import OrganizationCtrl = require("admin/controllers/organizationCtrl");
+import OrganizationCtrl = require("admin/controllers/OrganizationCtrl");
 import organizationResource = require("admin/resources/organizationsResource");
 
 import UsersCtrl = require("admin/controllers/UsersCtrl");
 import UsersResource = require("admin/resources/UsersResource");
+import UsersService = require("admin/services/UsersService");
 
 export module Admin {
     "use strict";
@@ -42,7 +43,8 @@ export module Admin {
     // users
     app.controller("usersCtrl", UsersCtrl);
     app.service("usersResource", UsersResource);
-
+    app.service("usersService", UsersService);
+    
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);
 

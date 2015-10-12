@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="services/organizationsservice.ts" />
 
 import States = require("admin/states");
 
@@ -12,8 +13,9 @@ import vAdminMenu = require("admin/directives/vAdminMenu");
 import modalWindowService = require("../shared/services/modalwindowservice");
 import notificationService = require("../shared/services/notificationService");
 
-import OrganizationCtrl = require("admin/controllers/OrganizationCtrl");
-import organizationResource = require("admin/resources/organizationsResource");
+import OrganizationsCtrl = require("admin/controllers/OrganizationCtrl");
+import organizationsResource = require("admin/resources/organizationsResource");
+import OrganizationsService = require("admin/services/OrganizationsService");
 
 import UsersCtrl = require("admin/controllers/UsersCtrl");
 import UsersResource = require("admin/resources/UsersResource");
@@ -25,11 +27,12 @@ export module Admin {
 
     var app = angular.module(moduleName, ["ui.router", "mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
         "ui.bootstrap", "pascalprecht.translate"])
-        .config(($stateProvider: ng.ui.IStateProvider,
-            $urlRouterProvider: ng.ui.IUrlRouterProvider,
-            $locationProvider: angular.ILocationProvider) => {
-            return new States($stateProvider, $urlRouterProvider, $locationProvider);
-        });
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+            ($stateProvider: ng.ui.IStateProvider,
+                $urlRouterProvider: ng.ui.IUrlRouterProvider,
+                $locationProvider: angular.ILocationProvider) => {
+                return new States($stateProvider, $urlRouterProvider, $locationProvider);
+            }]);
 
     app.directive("vSample", vSample.factory())
         .directive("vAdminMenu", vAdminMenu.factory())
@@ -37,20 +40,22 @@ export module Admin {
         .directive("vCellEditor", vCellEditor.factory());
 
     // organizations
-    app.controller("organizationCtrl", OrganizationCtrl);
-    app.service("organizationsResource", organizationResource);
+    app.controller("organizationCtrl", OrganizationsCtrl);
+    app.service("organizationsResource", organizationsResource);
+    app.service("organizationsService", OrganizationsService);
+    
 
     // users
     app.controller("usersCtrl", UsersCtrl);
     app.service("usersResource", UsersResource);
     app.service("usersService", UsersService);
-    
+
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);
 
-    app.config($logProvider => {
+    app.config(['$logProvider', $logProvider => {
         $logProvider.debugEnabled(true);
-    });
+    }]);
 
     app.config(["$translateProvider", $translateProvider => {
         $translateProvider
@@ -62,7 +67,7 @@ export module Admin {
             .preferredLanguage("en");
     }]);
 
-    app.config(toastrConfig => {
+    app.config(['toastrConfig', toastrConfig => {
         angular.extend(toastrConfig, {
             "showDuration": "100",
             "hideDuration": "100",
@@ -70,8 +75,10 @@ export module Admin {
             "positionClass": "toast-bottom-right",
             "extendedTimeOut": "5000"
         });
+    }]);
+
+
+    angular.bootstrap(document, ["admin"], {
+        strictDi: true
     });
-
-
-    angular.bootstrap(document, ["admin"]);
 }

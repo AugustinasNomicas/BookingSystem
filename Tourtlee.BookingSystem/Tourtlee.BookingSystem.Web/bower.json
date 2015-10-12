@@ -2,7 +2,7 @@
 	"name": "ASP.NET",
 	"private": true,
   "dependencies": {
-    "angular": "1.4.*",
+    "angular": "1.4.7",
     "angular-ui-router": "*",
     "angular-bootstrap": "*",
     "angular-strap": "*",
@@ -11,6 +11,7 @@
     "angular-translate-loader-url": "*",
     "angular-translate-loader-static-files": "*",
     "angular-loading-bar": "*",
+    "angular-hint": "*",
     "bootstrap-css-only": "*",
     "system.js": "*",
     "angular-toastr": "*"

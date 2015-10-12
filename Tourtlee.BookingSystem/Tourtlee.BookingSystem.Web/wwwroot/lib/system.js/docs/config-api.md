@@ -25,7 +25,7 @@ For this reason it is usually advisable to use `System.config` instead of settin
 * [defaultJSExtensions](#defaultjsextensions)
 * [depCache](#depcache)
 * [map](#map)
-* [meta](#meta)
+* [meta](#modules)
 * [packages](#packages)
 * [paths](#paths)
 * [traceurOptions](#traceuroptions)
@@ -222,8 +222,8 @@ System.config({
         // import '/local/package/custom-import' should route to '/local/package/local/import/file.js'
         './custom-import': './local/import/file.js'
       }
-      meta: {
-        // set meta for loading the local vendor files
+      modules: {
+        // sets meta for modules within the package
         'vendor/*': {
           'format': 'global'
         }
@@ -239,7 +239,7 @@ System.config({
   Takes preference over defaultJSExtensions. Any filename containing a `.` is considered to have an extension.
   Can be set to `defaultExtension: false` to optionally opt-out of extension-adding when `defaultJSExtensions` is enabled.
 * `map`: Local and relative map configurations scoped to the package. Apply for subpaths as well.
-* `meta`: Package-scoped meta configuration with wildcard support. Meta paths are subpaths within the package path.
+* `modules`: Package-scoped meta configuration with wildcard support. Modules are subpaths within the package path.
 
 #### paths
 Type: `Object`

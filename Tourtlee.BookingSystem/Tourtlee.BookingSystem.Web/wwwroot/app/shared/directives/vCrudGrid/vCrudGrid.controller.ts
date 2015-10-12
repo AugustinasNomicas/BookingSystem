@@ -1,9 +1,8 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-/// <reference path="../../interfaces/icrudresource.ts" />
+/// <reference path="../../interfaces/icrudservice.ts" />
 
 "use strict";
 
-import organizationsResource = require("../../../admin/resources/organizationsResource");
 import modalWindowService = require("../../services/modalWindowService");
 import notificationService = require("../../services/notificationService");
 
@@ -20,7 +19,7 @@ class vCrudGridController {
     filterText: string;
     readonly: boolean;
 
-    private resource: ICrudResource;
+    private crudService: ICrudService<Object>;
     private idBinding: string;
     private idDefaultValue: string;
 
@@ -32,11 +31,14 @@ class vCrudGridController {
     }
 
     link(attrs: angular.IAttributes) {
-        this.resource = <organizationsResource>this.$injector.get(attrs["resource"]);
+        this.allItems = attrs["items"];
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
         this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
+        //this.crudService = attrs["crudService"]; // cra
+        this.crudService = <ICrudService<Object>>this.$injector.get(attrs["crudService"]);
+
         this.getAllItems();
     }
 
@@ -104,7 +106,7 @@ class vCrudGridController {
 
             // Only update if there are changes
             if (this.isDirty(item)) {
-                this.resource.put(item).success((r) => {
+                this.crudService.put(item).success((r) => {
                     //    // Refresh item with server values
                     this.copyItem(r, item);
                     this.notificationService.successUpdate();
@@ -120,7 +122,7 @@ class vCrudGridController {
 
     createItem(item) {
         if (this.isValid(item)) {
-            this.resource.post(item).success((createdItem) => {
+            this.crudService.post(item).success((createdItem) => {
                 this.allItems.unshift(createdItem);
                 this.addMode = false;
                 this.notificationService.successUpdate();
@@ -156,25 +158,11 @@ class vCrudGridController {
     }
 
     private deleteItem(item) {
-        this.resource.delete(item[this.idBinding]).success(() => {
-            var index = this.allItems.indexOf(item);
-            this.allItems.splice(index, 1);
-            this.notificationService.successUpdate();
-        }).error((e) => {
-            this.notificationService.errorUpdate(e);
-        });
+        this.crudService.delete(item[this.idBinding]);
     }
 
     private getAllItems() {
-        this.loading = true;
-
-        this.resource.getList().success(data => {
-            this.allItems = data;
-        }).finally(() => {
-            this.loading = false;
-        }).catch((): void => {
-            this.notificationService.error("Failed to get data");
-        });
+        this.allItems = this.crudService.getList();
     }
 
     private applyOrder() {

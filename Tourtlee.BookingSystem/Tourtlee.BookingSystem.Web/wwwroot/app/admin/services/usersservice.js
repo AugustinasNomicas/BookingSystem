@@ -3,29 +3,28 @@
 /// <reference path="../dto/userlistdto.ts" />
 "use strict";
 var UsersService = (function () {
-    function UsersService($scope, usersResource, notificationService) {
-        this.$scope = $scope;
+    function UsersService(usersResource, notificationService) {
         this.usersResource = usersResource;
         this.notificationService = notificationService;
     }
-    UsersService.prototype.Load = function () {
+    UsersService.prototype.load = function () {
         var _this = this;
         this.usersResource.getList().success(function (data) {
-            _this.UserList = data;
+            _this.userList = data;
         }).error(function () {
             _this.notificationService.error("Couldn't load users");
         });
     };
-    UsersService.prototype.Create = function (user) {
+    UsersService.prototype.create = function (user) {
         var _this = this;
         this.usersResource.post(user).success(function () {
             _this.notificationService.successUpdate();
         }).error(function () {
             _this.notificationService.errorUpdate("Failed to add user");
         });
-        this.Load();
+        this.load();
     };
-    UsersService.$inject = ["usersResource", "toastr"];
+    UsersService.$inject = ["usersResource", "notificationService"];
     return UsersService;
 })();
 module.exports = UsersService;

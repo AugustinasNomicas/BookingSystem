@@ -1,20 +1,20 @@
 {
   "name": "angular-translate-loader-static-files",
   "description": "A plugin for Angular Translate",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "main": "./angular-translate-loader-static-files.js",
   "ignore": [],
   "author": "Pascal Precht",
   "license": "MIT",
   "dependencies": {
-    "angular-translate": "~2.8.0"
+    "angular-translate": "~2.8.1"
   },
   "homepage": "https://github.com/PascalPrecht/bower-angular-translate-loader-static-files",
-  "_release": "2.8.0",
+  "_release": "2.8.1",
   "_resolution": {
     "type": "version",
-    "tag": "2.8.0",
-    "commit": "a0b91ce9a3a9ea681d92122c6ef17ac338319c2a"
+    "tag": "2.8.1",
+    "commit": "e4cea4871fcf1cae5766808890a15775cb0eb439"
   },
   "_source": "git://github.com/PascalPrecht/bower-angular-translate-loader-static-files.git",
   "_target": "*",

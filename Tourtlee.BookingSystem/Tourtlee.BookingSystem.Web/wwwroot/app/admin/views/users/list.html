@@ -3,7 +3,8 @@
         <a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>
     </p>
 
-    <div v-crud-grid resource="usersResource"
+    <div v-crud-grid 
+         crud-service="usersService"
          id-binding="IdUser"
          id-default-value="00000000-0000-0000-0000-000000000000"
          readonly="true"

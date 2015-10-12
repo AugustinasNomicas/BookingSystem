@@ -4,7 +4,7 @@ SystemJS
 [![Build Status][travis-image]][travis-url]
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/systemjs/systemjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
-_For upgrading to SystemJS 0.17 / 0.18, see the [SystemJS 0.17 release upgrade notes for more information](https://github.com/systemjs/systemjs/releases/tag/0.17.0), or read the updated [SystemJS Overview](docs/overview.md) guide._
+_For upgrading to SystemJS 0.17-0.19, see the [SystemJS 0.17 release upgrade notes for more information](https://github.com/systemjs/systemjs/releases/tag/0.17.0), or read the updated [SystemJS Overview](docs/overview.md) guide._
 
 Universal dynamic module loader - loads ES6 modules, AMD, CommonJS and global scripts in the browser and NodeJS. Works with both Traceur and Babel.
 
@@ -15,7 +15,7 @@ Universal dynamic module loader - loads ES6 modules, AMD, CommonJS and global sc
 
 Built on top of the [ES6 Module Loader polyfill](https://github.com/ModuleLoader/es6-module-loader).
 
-~14KB minified and gzipped, runs in IE8+ and NodeJS.
+~15KB minified and gzipped, runs in IE8+ and NodeJS.
 
 For discussion, [see the Google Group](https://groups.google.com/group/systemjs).
 
@@ -57,7 +57,7 @@ in the baseURL path, then set the transpiler:
 <script>
   System.config({
     // or 'traceur' or 'typescript'
-    transpiler: 'babel'
+    transpiler: 'babel',
     // or traceurOptions or typescriptOptions
     babelOptions: {
 
@@ -113,6 +113,16 @@ System.import('./app').then(function(m) {
 
 If using TypeScript, set `global.ts = require('typescript')` before importing to ensure it is loaded correctly.
 
+If you are using jspm as a package manager you will also need to load the generated `config.js`. The best way to do this in node is to get your `System` instance through jspm, which wil automatically load your config correctly for you:
+
+```js
+var System = require('jspm').Loader();
+
+System.import('lodash').then(function (_) {
+ console.log(_);
+});
+```
+
 ### Plugins
 
 Supported loader plugins:
@@ -134,6 +144,7 @@ Additional Plugins:
 * [Ember Handlebars](https://github.com/n-fuse/plugin-ember-hbs) `System.import('template.hbs!')`
 * [raw](https://github.com/matthewbauer/plugin-raw) `System.import('file.bin!raw').then(function(data) {})`
 * [jst](https://github.com/podio/plugin-jst) Underscore templates
+* [SASS](https://github.com/screendriver/plugin-sass) `System.import('style.scss!')`
 
 [Read about using plugins here](docs/overview.md#plugin-loaders)
 [Read the guide here on creating plugins](docs/creating-plugins.md).

@@ -1,11 +1,11 @@
-interface ICrudResource {
+interface ICrudResource<T> {
     delete(id: string): angular.IHttpPromise<void>;
 
-    get(id: string): angular.IHttpPromise<organizationDto>;
+    get(id: string): angular.IHttpPromise<T>;
 
-    getList(): angular.IHttpPromise<organizationDto[]>;
+    getList(): angular.IHttpPromise<T[]>;
 
-    post(item: organizationDto): angular.IHttpPromise<organizationDto>;
+    post(item: OrganizationDto): angular.IHttpPromise<T>;
 
-    put(item: organizationDto): angular.IHttpPromise<organizationDto>;
+    put(item: OrganizationDto): angular.IHttpPromise<T>;
 }

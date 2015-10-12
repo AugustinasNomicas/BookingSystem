@@ -7,32 +7,31 @@
 import UsersResource = require("../resources/UsersResource");
 import notificationService = require("../../shared/services/notificationservice");
 
-class UsersService {
-    static $inject: string[] = ["usersResource", "toastr"];
+class UsersService implements ICrudService<UserListItemDto>  {
+    static $inject: string[] = ["usersResource", "notificationService"];
 
-    UserList: UserListItemDto[];
+    userList: UserListItemDto[];
 
-    constructor(public $scope: angular.IScope,
-        public usersResource: UsersResource,
+    constructor(private usersResource: UsersResource,
         private notificationService: notificationService) {
     }
 
-    Load() {
+    load() {
         this.usersResource.getList().success((data) => {
-            this.UserList = data;
+            this.userList = data;
         }).error(() => {
             this.notificationService.error("Couldn't load users");
         });
     }
 
-    Create(user: CreateUserDto) {
+    create(user: CreateUserDto) {
         this.usersResource.post(user).success(() => {
             this.notificationService.successUpdate();
         }).error(() => {
             this.notificationService.errorUpdate("Failed to add user");
         });
 
-        this.Load();
+        this.load();
     }
 }
 

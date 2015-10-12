@@ -1,4 +1,4 @@
-class organizationDto {
-    public idOrganization: string;
-    public name: string;
+class OrganizationDto {
+    idOrganization: string;
+    name: string;
 }

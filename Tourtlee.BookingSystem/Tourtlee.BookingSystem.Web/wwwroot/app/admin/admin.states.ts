@@ -16,18 +16,18 @@ class States {
 
         this.$stateProvider.state("users", {
             url: "/users",
-            templateUrl: "/app/admin/views/users/users.html",
+            templateUrl: "/app/admin/users/users.html",
             abstract: true
         });
 
         this.$stateProvider.state("users.list", {
             url: "",
-            templateUrl: "/app/admin/views/users/list.html"
+            templateUrl: "/app/admin/users/users.list.html"
         });
 
         this.$stateProvider.state("users.add", {
             url: "/add",
-            templateUrl: "/app/admin/views/users/add.html"
+            templateUrl: "/app/admin/users/users.add.html"
         });
 
         this.$urlRouterProvider.otherwise("/");
@@ -36,14 +36,14 @@ class States {
     private static defaultState(): ng.ui.IState {
         return {
             url: "/",
-            templateUrl: "/app/admin/views/main.html"
+            templateUrl: "/app/admin/main.html"
         }
     }
 
     private static organizations(): ng.ui.IState {
         return {
             url: "/organizations",
-            templateUrl: "/app/admin/views/organizations.html"
+            templateUrl: "/app/admin/organizations/organizations.list.html"
         }
     }
 

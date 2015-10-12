@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/createuserdto.ts" />
-/// <reference path="../dto/userlistdto.ts" />
+/// <reference path="dto/userlistitemdto.ts" />
+/// <reference path="dto/createuserdto.ts" />
 
 "use strict";
 
-import usersResource = require("../resources/users.resource");
+import usersResource = require("./users.resource");
 import notificationService = require("../../shared/services/notificationservice");
 
 class usersService  {

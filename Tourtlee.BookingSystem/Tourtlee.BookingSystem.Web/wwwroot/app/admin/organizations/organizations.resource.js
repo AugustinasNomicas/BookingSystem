@@ -1,5 +1,5 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/organizationdto.ts" />
+/// <reference path="dto/organizationdto.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
 "use strict";
 var organizationsResource = (function () {

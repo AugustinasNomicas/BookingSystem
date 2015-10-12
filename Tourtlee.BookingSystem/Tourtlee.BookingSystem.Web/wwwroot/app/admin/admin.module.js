@@ -2,15 +2,15 @@
 var States = require("./admin.states");
 var vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 var vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
-var adminMenu = require("./directives/adminMenu.directive");
+var adminMenu = require("./components/adminMenu.directive");
 var modalWindowService = require("../shared/services/modalwindowservice");
 var notificationService = require("../shared/services/notificationService");
-var OrganizationsController = require("./controllers/organizations.controller");
-var organizationsResource = require("./resources/organizations.resource");
-var organizationsService = require("./services/organizations.service");
-var UsersController = require("./controllers/users.controller");
-var usersResource = require("./resources/users.resource");
-var usersService = require("./services/users.service");
+var OrganizationsController = require("./organizations/organizations.controller");
+var organizationsResource = require("./organizations/organizations.resource");
+var organizationsService = require("./organizations/organizations.service");
+var UsersController = require("./users/users.controller");
+var usersResource = require("./users/users.resource");
+var usersService = require("./users/users.service");
 var Admin;
 (function (Admin) {
     "use strict";

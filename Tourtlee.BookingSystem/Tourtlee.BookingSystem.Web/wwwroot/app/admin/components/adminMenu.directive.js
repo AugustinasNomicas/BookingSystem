@@ -3,7 +3,7 @@ var adminMenu = (function () {
     function adminMenu($location) {
         this.$location = $location;
         this.restrict = 'E';
-        this.templateUrl = 'app/admin/views/_menu.html';
+        this.templateUrl = 'app/admin/components/adminMenu.html';
         this.replace = true;
         this.link = function (scope, element, attrs, ctrl) {
         };

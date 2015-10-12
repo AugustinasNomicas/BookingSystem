@@ -2,7 +2,7 @@
 
 class adminMenu implements angular.IDirective {
     restrict = 'E';
-    templateUrl = 'app/admin/views/_menu.html';
+    templateUrl = 'app/admin/components/adminMenu.html';
     replace = true;
     private _scope;
 

@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/createuserdto.ts" />
-/// <reference path="../dto/userlistdto.ts" />
+/// <reference path="dto/userlistitemdto.ts" />
+/// <reference path="dto/createuserdto.ts" />
 "use strict";
 var usersService = (function () {
     function usersService(usersResource, notificationService) {

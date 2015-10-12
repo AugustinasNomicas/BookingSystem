@@ -1,9 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/createuserdto.ts" />
+/// <reference path="dto/createuserdto.ts" />
+
 
 "use strict";
 
-import UsersService = require("../services/usersservice");
+import usersService = require("./users.service");
 
 class UsersController {
     static $inject: string[] = ["$scope", "usersService", "toastr"];
@@ -12,7 +13,7 @@ class UsersController {
     organizationMode: number;
 
     constructor(public $scope: angular.IScope,
-        private usersService: UsersService) {
+        private usersService: usersService) {
 
         this.organizationMode = 1
     }

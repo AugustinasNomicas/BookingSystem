@@ -5,18 +5,18 @@ import States = require("./admin.states");
 import vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 import vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 
-import adminMenu = require("./directives/adminMenu.directive");
+import adminMenu = require("./components/adminMenu.directive");
 
 import modalWindowService = require("../shared/services/modalwindowservice");
 import notificationService = require("../shared/services/notificationService");
 
-import OrganizationsController = require("./controllers/organizations.controller");
-import organizationsResource = require("./resources/organizations.resource");
-import organizationsService = require("./services/organizations.service");
+import OrganizationsController = require("./organizations/organizations.controller");
+import organizationsResource = require("./organizations/organizations.resource");
+import organizationsService = require("./organizations/organizations.service");
 
-import UsersController = require("./controllers/users.controller");
-import usersResource = require("./resources/users.resource");
-import usersService = require("./services/users.service");
+import UsersController = require("./users/users.controller");
+import usersResource = require("./users/users.resource");
+import usersService = require("./users/users.service");
 
 export module Admin {
     "use strict";

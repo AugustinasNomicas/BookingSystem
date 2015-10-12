@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="../../shared/interfaces/icrudservice.ts" />
-/// <reference path="../dto/organizationdto.ts" />
+/// <reference path="dto/organizationdto.ts" />
 "use strict";
 var organizationsService = (function () {
     function organizationsService(organizationsResource, notificationService) {

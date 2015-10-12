@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="../../shared/interfaces/icrudservice.ts" />
-/// <reference path="../dto/organizationdto.ts" />
+/// <reference path="dto/organizationdto.ts" />
 
 "use strict";
 
-import organizationsResource = require("../resources/organizations.resource");
+import organizationsResource = require("./organizations.resource");
 import notificationService = require("../../shared/services/notificationService");
 
 class organizationsService implements ICrudService<OrganizationDto>  {

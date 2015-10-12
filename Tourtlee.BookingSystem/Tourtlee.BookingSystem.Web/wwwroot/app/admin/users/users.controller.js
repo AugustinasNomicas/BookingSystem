@@ -1,5 +1,5 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/createuserdto.ts" />
+/// <reference path="dto/createuserdto.ts" />
 "use strict";
 var UsersController = (function () {
     function UsersController($scope, usersService) {

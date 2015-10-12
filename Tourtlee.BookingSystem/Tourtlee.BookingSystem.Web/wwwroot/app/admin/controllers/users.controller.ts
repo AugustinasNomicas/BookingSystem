@@ -5,7 +5,7 @@
 
 import UsersService = require("../services/usersservice");
 
-class UsersCtrl {
+class UsersController {
     static $inject: string[] = ["$scope", "usersService", "toastr"];
 
     createUserDto: CreateUserDto;
@@ -23,4 +23,4 @@ class UsersCtrl {
     }
 }
 
-export = UsersCtrl;
+export = UsersController;

@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-var vAdminMenu = (function () {
-    function vAdminMenu($location) {
+var adminMenu = (function () {
+    function adminMenu($location) {
         this.$location = $location;
         this.restrict = 'E';
         this.templateUrl = 'app/admin/views/_menu.html';
@@ -8,11 +8,11 @@ var vAdminMenu = (function () {
         this.link = function (scope, element, attrs, ctrl) {
         };
     }
-    vAdminMenu.factory = function () {
-        var directive = function ($location) { return new vAdminMenu($location); };
+    adminMenu.factory = function () {
+        var directive = function ($location) { return new adminMenu($location); };
         directive.$inject = ['$location'];
         return directive;
     };
-    return vAdminMenu;
+    return adminMenu;
 })();
-module.exports = vAdminMenu;
+module.exports = adminMenu;

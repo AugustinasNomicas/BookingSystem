@@ -1,10 +1,8 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-'use strict';
 
-class vSample implements angular.IDirective {
+class adminMenu implements angular.IDirective {
     restrict = 'E';
-//    require = 'ngModel';
-//    templateUrl = 'directives/sample.html';
+    templateUrl = 'app/admin/views/_menu.html';
     replace = true;
     private _scope;
 
@@ -12,19 +10,15 @@ class vSample implements angular.IDirective {
     }
 
     link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrl: any) => {
-        console.log("hello from vSample");
-    }
 
-
-    private routeChangeStart(): void {
     }
 
     static factory(): angular.IDirectiveFactory {
-        const directive = ($location: angular.ILocationService) => new vSample($location);
+        const directive = ($location: angular.ILocationService) => new adminMenu($location);
         directive.$inject = ['$location'];
         return directive;
     }
 
 }
 
-export = vSample
+export = adminMenu

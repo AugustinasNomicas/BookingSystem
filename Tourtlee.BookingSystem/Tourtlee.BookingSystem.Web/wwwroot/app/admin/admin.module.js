@@ -1,16 +1,15 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 /// <reference path="services/organizationsservice.ts" />
-var States = require("admin/states");
-var vSample = require("../shared/directives/vSample");
+var States = require("./admin.states");
 var vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 var vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
-var vAdminMenu = require("admin/directives/vAdminMenu");
+var adminMenu = require("./directives/adminMenu.directive");
 var modalWindowService = require("../shared/services/modalwindowservice");
 var notificationService = require("../shared/services/notificationService");
-var OrganizationsCtrl = require("admin/controllers/OrganizationCtrl");
+var OrganizationsController = require("admin/controllers/organizations.controller");
 var organizationsResource = require("admin/resources/organizationsResource");
 var OrganizationsService = require("admin/services/OrganizationsService");
-var UsersCtrl = require("admin/controllers/UsersCtrl");
+var UsersController = require("admin/controllers/users.controller");
 var UsersResource = require("admin/resources/UsersResource");
 var UsersService = require("admin/services/UsersService");
 var Admin;
@@ -23,16 +22,15 @@ var Admin;
         function ($stateProvider, $urlRouterProvider, $locationProvider) {
             return new States($stateProvider, $urlRouterProvider, $locationProvider);
         }]);
-    app.directive("vSample", vSample.factory())
-        .directive("vAdminMenu", vAdminMenu.factory())
+    app.directive("vAdminMenu", adminMenu.factory())
         .directive("vCrudGrid", vCrudGrid.factory())
         .directive("vCellEditor", vCellEditor.factory());
     // organizations
-    app.controller("organizationCtrl", OrganizationsCtrl);
+    app.controller("OrganizationsController", OrganizationsController);
     app.service("organizationsResource", organizationsResource);
     app.service("organizationsService", OrganizationsService);
     // users
-    app.controller("usersCtrl", UsersCtrl);
+    app.controller("UsersController", UsersController);
     app.service("usersResource", UsersResource);
     app.service("usersService", UsersService);
     app.service("modalWindowService", modalWindowService);

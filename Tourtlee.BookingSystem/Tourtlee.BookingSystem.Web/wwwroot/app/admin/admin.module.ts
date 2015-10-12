@@ -1,23 +1,23 @@
 /// <reference path="../../../typings/tsd.d.ts" />
 /// <reference path="services/organizationsservice.ts" />
 
-import States = require("admin/states");
+import States = require("./admin.states");
 
 import vSample = require("../shared/directives/vSample");
 
 import vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 import vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 
-import vAdminMenu = require("admin/directives/vAdminMenu");
+import adminMenu = require("./directives/adminMenu.directive");
 
 import modalWindowService = require("../shared/services/modalwindowservice");
 import notificationService = require("../shared/services/notificationService");
 
-import OrganizationsCtrl = require("admin/controllers/OrganizationCtrl");
+import OrganizationsController = require("admin/controllers/organizations.controller");
 import organizationsResource = require("admin/resources/organizationsResource");
 import OrganizationsService = require("admin/services/OrganizationsService");
 
-import UsersCtrl = require("admin/controllers/UsersCtrl");
+import UsersController = require("admin/controllers/users.controller");
 import UsersResource = require("admin/resources/UsersResource");
 import UsersService = require("admin/services/UsersService");
 
@@ -34,19 +34,18 @@ export module Admin {
                 return new States($stateProvider, $urlRouterProvider, $locationProvider);
             }]);
 
-    app.directive("vSample", vSample.factory())
-        .directive("vAdminMenu", vAdminMenu.factory())
+    app.directive("vAdminMenu", adminMenu.factory())
         .directive("vCrudGrid", vCrudGrid.factory())
         .directive("vCellEditor", vCellEditor.factory());
 
     // organizations
-    app.controller("organizationCtrl", OrganizationsCtrl);
+    app.controller("OrganizationsController", OrganizationsController);
     app.service("organizationsResource", organizationsResource);
     app.service("organizationsService", OrganizationsService);
     
 
     // users
-    app.controller("usersCtrl", UsersCtrl);
+    app.controller("UsersController", UsersController);
     app.service("usersResource", UsersResource);
     app.service("usersService", UsersService);
 

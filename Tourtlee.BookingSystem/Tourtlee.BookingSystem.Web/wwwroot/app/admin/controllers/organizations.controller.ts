@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 "use strict";
 
-class OrganizationCtrl {
+class OrganizationsController {
     static $inject: string[] = ["$scope", "toastr"];
-
+    vm = this;
     constructor(public $scope: angular.IScope) {
     }
 
 }
 
-export = OrganizationCtrl;
+export = OrganizationsController;

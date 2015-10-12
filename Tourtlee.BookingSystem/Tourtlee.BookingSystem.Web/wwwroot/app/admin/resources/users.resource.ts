@@ -2,9 +2,8 @@
 /// <reference path="../dto/userlistitemdto.ts" />
 /// <reference path="../dto/createuserdto.ts" />
 
-
 "use strict";
-class UsersResource {
+class usersResource {
     static $inject: string[] = ["$http"];
 
     constructor(private $http: angular.IHttpService) {
@@ -19,5 +18,5 @@ class UsersResource {
     };
 }
 
-export = UsersResource;    
+export = usersResource;    
 

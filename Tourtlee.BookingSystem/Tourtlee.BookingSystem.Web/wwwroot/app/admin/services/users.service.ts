@@ -4,15 +4,15 @@
 
 "use strict";
 
-import UsersResource = require("../resources/UsersResource");
+import usersResource = require("../resources/users.resource");
 import notificationService = require("../../shared/services/notificationservice");
 
-class UsersService implements ICrudService<UserListItemDto>  {
+class usersService  {
     static $inject: string[] = ["usersResource", "notificationService"];
 
     userList: UserListItemDto[];
 
-    constructor(private usersResource: UsersResource,
+    constructor(private usersResource: usersResource,
         private notificationService: notificationService) {
     }
 
@@ -33,6 +33,27 @@ class UsersService implements ICrudService<UserListItemDto>  {
 
         this.load();
     }
+
+    delete(id: string): void {
+    }
+
+    get(id: string): UserListItemDto {
+        return null;
+    }
+
+    getList(): UserListItemDto[] {
+        return this.userList
+    }
+
+    post(item: CreateUserDto): void {
+        const promise = this.usersResource.post(item);
+        promise.error(() => {
+            this.notificationService.errorUpdate("Failed to update");
+        }).success(() => {
+            this.notificationService.successUpdate();
+        });
+    }
+
 }
 
-export = UsersService;
+export = usersService;

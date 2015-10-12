@@ -2,8 +2,8 @@
 /// <reference path="../dto/organizationdto.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
 "use strict";
-var OrganizationsResource = (function () {
-    function OrganizationsResource($http) {
+var organizationsResource = (function () {
+    function organizationsResource($http) {
         var _this = this;
         this.$http = $http;
         this.delete = function (id) {
@@ -22,7 +22,7 @@ var OrganizationsResource = (function () {
             return _this.$http({ url: "api/admin/organizations", method: "Put", data: item });
         };
     }
-    OrganizationsResource.$inject = ["$http"];
-    return OrganizationsResource;
+    organizationsResource.$inject = ["$http"];
+    return organizationsResource;
 })();
-module.exports = OrganizationsResource;
+module.exports = organizationsResource;

@@ -2,12 +2,12 @@
 /// <reference path="../../shared/interfaces/icrudservice.ts" />
 /// <reference path="../dto/organizationdto.ts" />
 "use strict";
-var OrganizationsService = (function () {
-    function OrganizationsService(organizationsResource, notificationService) {
+var organizationsService = (function () {
+    function organizationsService(organizationsResource, notificationService) {
         this.organizationsResource = organizationsResource;
         this.notificationService = notificationService;
     }
-    Object.defineProperty(OrganizationsService.prototype, "organizations", {
+    Object.defineProperty(organizationsService.prototype, "organizations", {
         get: function () {
             if (!this._organizations) {
                 this.load();
@@ -17,7 +17,7 @@ var OrganizationsService = (function () {
         enumerable: true,
         configurable: true
     });
-    OrganizationsService.prototype.load = function () {
+    organizationsService.prototype.load = function () {
         var _this = this;
         this.organizationsResource.getList().success(function (data) {
             _this._organizations = data;
@@ -25,7 +25,7 @@ var OrganizationsService = (function () {
             _this.notificationService.error("Couldn't load users");
         });
     };
-    OrganizationsService.prototype.delete = function (id) {
+    organizationsService.prototype.delete = function (id) {
         var _this = this;
         this.organizationsResource.delete(id).success(function () {
             var item = _this.get(id);
@@ -36,25 +36,25 @@ var OrganizationsService = (function () {
             _this.notificationService.errorUpdate("Failed to update");
         });
     };
-    OrganizationsService.prototype.get = function (id) {
+    organizationsService.prototype.get = function (id) {
         return this.organizations.filter(function (item) {
             return item.idOrganization === id;
         })[0];
     };
-    OrganizationsService.prototype.getList = function () {
+    organizationsService.prototype.getList = function () {
         return this.organizations;
     };
-    OrganizationsService.prototype.post = function (item) {
+    organizationsService.prototype.post = function (item) {
         var _this = this;
         var promise = this.organizationsResource.post(item);
-        this.organizationsResource.post(item).error(function () {
+        promise.post(item).error(function () {
             _this.notificationService.errorUpdate("Failed to update");
         }).success(function () {
             _this.notificationService.successUpdate();
         });
         return promise;
     };
-    OrganizationsService.prototype.put = function (item) {
+    organizationsService.prototype.put = function (item) {
         var _this = this;
         var promise = this.organizationsResource.put(item);
         promise.error(function () {
@@ -64,7 +64,7 @@ var OrganizationsService = (function () {
         });
         return promise;
     };
-    OrganizationsService.$inject = ["organizationsResource", "notificationService"];
-    return OrganizationsService;
+    organizationsService.$inject = ["organizationsResource", "notificationService"];
+    return organizationsService;
 })();
-module.exports = OrganizationsService;
+module.exports = organizationsService;

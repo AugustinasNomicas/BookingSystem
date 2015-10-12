@@ -3,7 +3,7 @@
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
 
 "use strict";
-class OrganizationsResource implements ICrudResource<OrganizationDto> { 
+class organizationsResource implements ICrudResource<OrganizationDto> { 
         static $inject: string[] = ["$http"];
 
         constructor(private $http: angular.IHttpService) {
@@ -30,5 +30,5 @@ class OrganizationsResource implements ICrudResource<OrganizationDto> {
         }; 
 }
 
-export = OrganizationsResource;    
+export = organizationsResource;    
 

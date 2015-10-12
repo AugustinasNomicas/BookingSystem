@@ -4,10 +4,10 @@
 
 "use strict";
 
-import OrganizationsResource = require("../resources/organizationsresource");
-import NotificationService = require("../../shared/services/notificationService");
+import organizationsResource = require("../resources/organizations.resource");
+import notificationService = require("../../shared/services/notificationService");
 
-class OrganizationsService implements ICrudService<OrganizationDto>  {
+class organizationsService implements ICrudService<OrganizationDto>  {
     static $inject: string[] = ["organizationsResource", "notificationService"];
 
     private _organizations: OrganizationDto[];
@@ -20,8 +20,8 @@ class OrganizationsService implements ICrudService<OrganizationDto>  {
         return this._organizations;
     }
 
-    constructor(private organizationsResource: OrganizationsResource,
-        private notificationService: NotificationService) {
+    constructor(private organizationsResource: organizationsResource,
+        private notificationService: notificationService) {
 
     }
 
@@ -57,7 +57,7 @@ class OrganizationsService implements ICrudService<OrganizationDto>  {
 
     post(item: OrganizationDto): angular.IHttpPromise<OrganizationDto> {
         const promise = this.organizationsResource.post(item);
-        this.organizationsResource.post(item).error(() => {
+        promise.post(item).error(() => {
             this.notificationService.errorUpdate("Failed to update");
         }).success(() => {
             this.notificationService.successUpdate();
@@ -77,4 +77,4 @@ class OrganizationsService implements ICrudService<OrganizationDto>  {
 }
 
 
-export = OrganizationsService;
+export = organizationsService;

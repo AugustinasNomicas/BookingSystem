@@ -2,8 +2,8 @@
 /// <reference path="../dto/userlistitemdto.ts" />
 /// <reference path="../dto/createuserdto.ts" />
 "use strict";
-var UsersResource = (function () {
-    function UsersResource($http) {
+var usersResource = (function () {
+    function usersResource($http) {
         var _this = this;
         this.$http = $http;
         this.getList = function () {
@@ -13,7 +13,7 @@ var UsersResource = (function () {
             return _this.$http({ url: "api/admin/users", method: "Post", data: item });
         };
     }
-    UsersResource.$inject = ["$http"];
-    return UsersResource;
+    usersResource.$inject = ["$http"];
+    return usersResource;
 })();
-module.exports = UsersResource;
+module.exports = usersResource;

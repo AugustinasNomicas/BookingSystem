@@ -1,17 +1,16 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="services/organizationsservice.ts" />
 var States = require("./admin.states");
 var vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 var vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 var adminMenu = require("./directives/adminMenu.directive");
 var modalWindowService = require("../shared/services/modalwindowservice");
 var notificationService = require("../shared/services/notificationService");
-var OrganizationsController = require("admin/controllers/organizations.controller");
-var organizationsResource = require("admin/resources/organizationsResource");
-var OrganizationsService = require("admin/services/OrganizationsService");
-var UsersController = require("admin/controllers/users.controller");
-var UsersResource = require("admin/resources/UsersResource");
-var UsersService = require("admin/services/UsersService");
+var OrganizationsController = require("./controllers/organizations.controller");
+var organizationsResource = require("./resources/organizations.resource");
+var organizationsService = require("./services/organizations.service");
+var UsersController = require("./controllers/users.controller");
+var usersResource = require("./resources/users.resource");
+var usersService = require("./services/users.service");
 var Admin;
 (function (Admin) {
     "use strict";
@@ -28,11 +27,11 @@ var Admin;
     // organizations
     app.controller("OrganizationsController", OrganizationsController);
     app.service("organizationsResource", organizationsResource);
-    app.service("organizationsService", OrganizationsService);
+    app.service("organizationsService", organizationsService);
     // users
     app.controller("UsersController", UsersController);
-    app.service("usersResource", UsersResource);
-    app.service("usersService", UsersService);
+    app.service("usersResource", usersResource);
+    app.service("usersService", usersService);
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);
     app.config(['$logProvider', function ($logProvider) {

@@ -1,9 +1,6 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="services/organizationsservice.ts" />
 
 import States = require("./admin.states");
-
-import vSample = require("../shared/directives/vSample");
 
 import vCrudGrid = require("../shared/directives/vCrudGrid/vCrudGrid.directive");
 import vCellEditor = require("../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
@@ -13,13 +10,13 @@ import adminMenu = require("./directives/adminMenu.directive");
 import modalWindowService = require("../shared/services/modalwindowservice");
 import notificationService = require("../shared/services/notificationService");
 
-import OrganizationsController = require("admin/controllers/organizations.controller");
-import organizationsResource = require("admin/resources/organizationsResource");
-import OrganizationsService = require("admin/services/OrganizationsService");
+import OrganizationsController = require("./controllers/organizations.controller");
+import organizationsResource = require("./resources/organizations.resource");
+import organizationsService = require("./services/organizations.service");
 
-import UsersController = require("admin/controllers/users.controller");
-import UsersResource = require("admin/resources/UsersResource");
-import UsersService = require("admin/services/UsersService");
+import UsersController = require("./controllers/users.controller");
+import usersResource = require("./resources/users.resource");
+import usersService = require("./services/users.service");
 
 export module Admin {
     "use strict";
@@ -41,13 +38,13 @@ export module Admin {
     // organizations
     app.controller("OrganizationsController", OrganizationsController);
     app.service("organizationsResource", organizationsResource);
-    app.service("organizationsService", OrganizationsService);
+    app.service("organizationsService", organizationsService);
     
 
     // users
     app.controller("UsersController", UsersController);
-    app.service("usersResource", UsersResource);
-    app.service("usersService", UsersService);
+    app.service("usersResource", usersResource);
+    app.service("usersService", usersService);
 
     app.service("modalWindowService", modalWindowService);
     app.service("notificationService", notificationService);

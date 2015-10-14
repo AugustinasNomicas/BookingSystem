@@ -59,10 +59,10 @@
 
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <menulink controller-name="Home" action-name="Index" menu-text="Home"></menulink>
-                        <menulink controller-name="Book" action-name="Index" menu-text="Book"></menulink>
-                        <menulink controller-name="CheckIn" action-name="Index" menu-text="CheckIn"></menulink>
-                        <menulink controller-name="Admin" action-name="Index" menu-text="Admin"></menulink>
+                        <menulink area-name="" controller-name="Home" action-name="Index" menu-text="Home"></menulink>
+                        <menulink area-name="" controller-name="Book" action-name="Index" menu-text="Book"></menulink>
+                        <menulink area-name="" controller-name="CheckIn" action-name="Index" menu-text="CheckIn"></menulink>
+                        <menulink area-name="Admin" controller-name="Home" action-name="Index" menu-text="Admin"></menulink>
                     </ul>
                     @if (User.IsSignedIn())
                     {

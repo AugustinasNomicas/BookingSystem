@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace Tourtlee.BookingSystem.Web.TagHelpers
 {
-    [TargetElement("menulink", Attributes = "controller-name, action-name, menu-text")]
+    [TargetElement("menulink", Attributes = "area-name, controller-name, action-name, menu-text")]
     public class MenuLinkTagHelper : TagHelper
     {
+        public string AreaName { get; set; }
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
         public string MenuText { get; set; }
+        
 
         [ViewContext]
         public ViewContext ViewContext { get; set; }
@@ -30,9 +32,9 @@ namespace Tourtlee.BookingSystem.Web.TagHelpers
         {
             StringBuilder sb = new StringBuilder();
 
-            string menuUrl = _UrlHelper.Action(ActionName, ControllerName);
-
-            if(string.IsNullOrEmpty(menuUrl))
+            string menuUrl = _UrlHelper.Action(ActionName, ControllerName, new { Area = AreaName });
+            
+            if (string.IsNullOrEmpty(menuUrl))
                 throw new InvalidOperationException(string.Format("Can not find URL for {0}.{1}", ControllerName, ActionName));
 
             output.TagName = "li";
@@ -45,9 +47,11 @@ namespace Tourtlee.BookingSystem.Web.TagHelpers
             var routeData = ViewContext.RouteData.Values;
             var currentController = routeData["controller"];
             var currentAction = routeData["action"];
+            var currentArea = routeData.ContainsKey("area") ? routeData["area"] : string.Empty;
 
-            if (String.Equals(ActionName, currentAction as string, StringComparison.OrdinalIgnoreCase)
-                && String.Equals(ControllerName, currentController as string, StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(ActionName, currentAction as string, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(ControllerName, currentController as string, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(AreaName, currentArea as string, StringComparison.OrdinalIgnoreCase))
             {
                 output.Attributes.Add("class", "active");
             }

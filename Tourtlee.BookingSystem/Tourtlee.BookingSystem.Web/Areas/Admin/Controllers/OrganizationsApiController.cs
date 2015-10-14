@@ -7,30 +7,24 @@ using Tourtlee.BookingSystem.Web.Infastructure;
 
 namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
 {
-    [Route("api/admin/[controller]")]
-    public class OrganizationsController : Controller, ICrudController<OrganizationDto>
+    [Area("Admin")]
+    public class OrganizationsApiController : Controller, ICrudApiController<OrganizationDto>
     {
         private readonly IOrganizationService _organizationService;
 
-        public OrganizationsController(IOrganizationService organizationService)
+        public OrganizationsApiController(IOrganizationService organizationService)
         {
             _organizationService = organizationService;
         }
 
-        [HttpGet("Show")]
-        public string Show()
-        {
-            return "Example";
-        }
-
-        [HttpGet("{id}")]
+        [HttpGet]
         public OrganizationDto Get(Guid id)
         {
             return _organizationService.Get(id);
         }
 
         [HttpGet]
-        public IEnumerable<OrganizationDto> GetList()
+        public IEnumerable<OrganizationDto> Index()
         {
             return _organizationService.GetList();
         }
@@ -58,7 +52,7 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
             return item;
         }
 
-        [HttpDelete("{id}")]
+        [HttpGet]
         public void Delete(Guid id)
         {
             _organizationService.Delete(id);

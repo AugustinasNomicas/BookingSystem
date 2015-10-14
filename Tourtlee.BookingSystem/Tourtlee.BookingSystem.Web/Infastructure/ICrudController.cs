@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Tourtlee.BookingSystem.Web.Infastructure
 {
-    interface ICrudController<T>
+    interface ICrudApiController<T>
     {
         // CREATE
         T Post(T item);
         // READ ALL
-        IEnumerable<T> GetList();
+        IEnumerable<T> Index();
         // READ By ID
         T Get(Guid id);
         // UPDATE

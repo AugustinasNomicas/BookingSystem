@@ -14,6 +14,7 @@ using Tourtlee.BookingSystem.DataAccess.Auth;
 using Tourtlee.BookingSystem.Model.Security;
 using Tourtlee.BookingSystem.Web.Configurations;
 using Tourtlee.BookingSystem.Web.Security;
+using Microsoft.AspNet.Mvc.Razor;
 
 namespace Tourtlee.BookingSystem.Web
 {
@@ -53,14 +54,12 @@ namespace Tourtlee.BookingSystem.Web
                 //options.Filters.Add(new AuthorizeAttribute());
             });
 
-
             // Configure Auth
             services.Configure<AuthorizationOptions>(options =>
             {
                 options.AddPolicy(AppPolicies.AccessAdminArea.ToString(), 
                     new AuthorizationPolicyBuilder().RequireClaim(AppPolicies.AccessAdminArea.ToString(), "Allowed").Build());
             });
-
 
             // TODO refactor IoC registration
             DataAccess.IocRegistrations.RegisterServices(services);

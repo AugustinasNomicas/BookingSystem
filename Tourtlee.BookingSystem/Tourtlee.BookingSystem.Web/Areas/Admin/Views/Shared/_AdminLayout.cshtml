@@ -1,0 +1,25 @@
+﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+@addTagHelper "*, Tourtlee.BookingSystem.Web"
+
+@{
+    Layout = "_Layout";
+}
+
+<script>
+    System.import('admin/admin.module.js');
+</script>
+
+<div class="container-full" data-framework="typescript" ng-hint>
+    <div class="row">
+        <div class="col-sm-2">
+            <ul class="nav nav-pills nav-stacked">
+                <menulink area-name="Admin" controller-name="Home" action-name="Index" menu-text="Main"></menulink>
+                <menulink area-name="Admin" controller-name="Organizations" action-name="Index" menu-text="Organizations"></menulink>
+                <menulink area-name="Admin" controller-name="Users" action-name="Index" menu-text="Users"></menulink>
+            </ul>
+        </div>
+        <div class="col-sm-10">
+            @RenderBody()
+        </div>
+    </div>
+</div>

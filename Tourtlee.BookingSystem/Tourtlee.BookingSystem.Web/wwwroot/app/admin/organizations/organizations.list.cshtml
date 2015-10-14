@@ -1,4 +1,11 @@
-﻿<div ng-controller="OrganizationsController as vm">
+﻿@{
+    var greeting = "Welcome to our site!";
+    var weekDay = DateTime.Now.DayOfWeek;
+    var greetingMessage = greeting + " Today is: " eekDay;
+}
+<p>The greeting is: @greetingMessage</p>
+
+<div ng-controller="OrganizationsController as vm">
     <div v-crud-grid crud-service="organizationsService" 
          id-binding="IdOrganization"
          id-default-value="00000000-0000-0000-0000-000000000000"

@@ -8,7 +8,7 @@ var organizationsResource = (function () {
         this.$http = $http;
         this.apiUrl = 'Admin/OrganizationsApi/';
         this.delete = function (id) {
-            return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });
+            return _this.$http({ url: _this.apiUrl + ("delete/" + id), method: "Get" });
         };
         this.get = function (id) {
             return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });

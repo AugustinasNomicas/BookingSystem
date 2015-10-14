@@ -12,7 +12,7 @@ class organizationsResource implements ICrudResource<OrganizationDto> {
         } 
 
         delete = (id: string) : angular.IHttpPromise<void> => {
-            return this.$http<void>({ url: this.apiUrl + `${id}`, method: "Get" });
+            return this.$http<void>({ url: this.apiUrl + `delete/${id}`, method: "Get" });
         };
 
         get = (id: string): angular.IHttpPromise<OrganizationDto> => {

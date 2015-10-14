@@ -8,7 +8,7 @@ var organizationsResource = (function () {
         this.$http = $http;
         this.apiUrl = 'Admin/OrganizationsApi/';
         this.delete = function (id) {
-            return _this.$http({ url: _this.apiUrl + ("" + id), method: "Delete" });
+            return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });
         };
         this.get = function (id) {
             return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });
@@ -16,11 +16,11 @@ var organizationsResource = (function () {
         this.getList = function () {
             return _this.$http({ url: _this.apiUrl, method: "Get" });
         };
-        this.post = function (item) {
-            return _this.$http({ url: _this.apiUrl, method: "Post", data: item });
+        this.create = function (item) {
+            return _this.$http({ url: _this.apiUrl + "create", method: "Post", data: item });
         };
-        this.put = function (item) {
-            return _this.$http({ url: _this.apiUrl, method: "Put", data: item });
+        this.update = function (item) {
+            return _this.$http({ url: _this.apiUrl + "update", method: "Put", data: item });
         };
     }
     organizationsResource.$inject = ["$http"];

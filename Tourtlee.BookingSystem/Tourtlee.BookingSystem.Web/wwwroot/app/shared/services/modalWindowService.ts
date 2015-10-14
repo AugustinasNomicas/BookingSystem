@@ -60,6 +60,7 @@ class modalWindowService {
             $modalInstance.dismiss();
         };
     };
+    
 }
 
 export = modalWindowService

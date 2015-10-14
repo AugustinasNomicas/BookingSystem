@@ -1,8 +1,7 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-/// <reference path="../../interfaces/icrudservice.ts" />
+/// <reference path="../../interfaces/icrudresource.ts" />
 
 "use strict";
-
 import modalWindowService = require("../../services/modalWindowService");
 import notificationService = require("../../services/notificationService");
 
@@ -19,7 +18,7 @@ class vCrudGridController {
     filterText: string;
     readonly: boolean;
 
-    private crudService: ICrudService<Object>;
+    private crudResource: ICrudResource<Object>;
     private idBinding: string;
     private idDefaultValue: string;
 
@@ -36,8 +35,7 @@ class vCrudGridController {
         this.idDefaultValue = attrs["idDefaultValue"];
         this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
-        //this.crudService = attrs["crudService"]; // cra
-        this.crudService = <ICrudService<Object>>this.$injector.get(attrs["crudService"]);
+        this.crudResource = <ICrudResource<Object>>this.$injector.get(attrs["crudResource"]);
 
         this.getAllItems();
     }
@@ -106,15 +104,17 @@ class vCrudGridController {
 
             // Only update if there are changes
             if (this.isDirty(item)) {
-                this.crudService.put(item).success((r) => {
-                    //    // Refresh item with server values
-                    this.copyItem(r, item);
-                    this.notificationService.successUpdate();
-                }).error((r) => {
+                const promise = this.crudResource.update(item);
+                promise.error((r) => {
                     this.notificationService.errorUpdate(r);
                     this.restoreServerValues(item);
                     item.editMode = true;
+                }).success((r) => {
+                    //    Refresh item with server values
+                    this.copyItem(r, item);
+                    this.notificationService.successUpdate();
                 });
+                return promise;
             }
         }
     }
@@ -122,13 +122,16 @@ class vCrudGridController {
 
     createItem(item) {
         if (this.isValid(item)) {
-            this.crudService.post(item).success((createdItem) => {
+            const promise = this.crudResource.create(item);
+            promise.error((r) => {
+                this.notificationService.errorUpdate(r);
+            }).success((createdItem) => {
+                this.notificationService.successUpdate();
                 this.allItems.unshift(createdItem);
                 this.addMode = false;
-                this.notificationService.successUpdate();
-            }).error((r) => {
-                this.notificationService.errorUpdate(r);
             });
+            return promise;
+
         }
     }
 
@@ -158,11 +161,22 @@ class vCrudGridController {
     }
 
     private deleteItem(item) {
-        this.crudService.delete(item[this.idBinding]);
+        var id = item[this.idBinding]
+        this.crudResource.delete(id).success(() => {
+            var index = this.allItems.indexOf(item);
+            this.allItems.splice(index, 1);
+            this.notificationService.successUpdate();
+        }).error(() => {
+            this.notificationService.errorUpdate("Failed to update");
+        });
     }
 
     private getAllItems() {
-        this.allItems = this.crudService.getList();
+        this.crudResource.getList().success((data) => {
+            this.allItems = data;
+        }).error(() => {
+            this.notificationService.error("Couldn't load users");
+        });
     }
 
     private applyOrder() {
@@ -212,7 +226,7 @@ class vCrudGridController {
 
         this.columnsDefinition.forEach(column => {
             if (!isDirty && // short circuit if item is dirty
-            (item[column.binding] !== serverItem[column.binding])) {
+                (item[column.binding] !== serverItem[column.binding])) {
                 isDirty = true;
             }
         });

@@ -17,20 +17,18 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
             _organizationService = organizationService;
         }
 
-        [HttpGet]
         public OrganizationDto Get(Guid id)
         {
             return _organizationService.Get(id);
         }
 
-        [HttpGet]
         public IEnumerable<OrganizationDto> Index()
         {
             return _organizationService.GetList();
         }
 
         [HttpPost]
-        public OrganizationDto Post([FromBody] OrganizationDto item)
+        public OrganizationDto Create([FromBody] OrganizationDto item)
         {
             if (item == null)
             {
@@ -42,7 +40,7 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
         }
 
         [HttpPut]
-        public OrganizationDto Put([FromBody] OrganizationDto item)
+        public OrganizationDto Update([FromBody] OrganizationDto item)
         {
             if (item.IdOrganization == Guid.Empty)
             {

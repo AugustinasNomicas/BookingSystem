@@ -6,7 +6,7 @@ interface ICrudResource<T> {
 
     getList(): angular.IHttpPromise<T[]>;
 
-    post(item: OrganizationDto): angular.IHttpPromise<T>;
+    create(item: OrganizationDto): angular.IHttpPromise<T>;
 
-    put(item: OrganizationDto): angular.IHttpPromise<T>;
+    update(item: OrganizationDto): angular.IHttpPromise<T>;
 }

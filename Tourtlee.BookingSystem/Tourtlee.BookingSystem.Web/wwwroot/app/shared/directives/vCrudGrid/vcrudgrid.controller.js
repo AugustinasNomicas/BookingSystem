@@ -1,5 +1,5 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-/// <reference path="../../interfaces/icrudservice.ts" />
+/// <reference path="../../interfaces/icrudresource.ts" />
 "use strict";
 var vCrudGridController = (function () {
     function vCrudGridController($injector, modalWindowService, notificationService, $translate) {
@@ -35,8 +35,7 @@ var vCrudGridController = (function () {
         this.idDefaultValue = attrs["idDefaultValue"];
         this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
-        //this.crudService = attrs["crudService"]; // cra
-        this.crudService = this.$injector.get(attrs["crudService"]);
+        this.crudResource = this.$injector.get(attrs["crudResource"]);
         this.getAllItems();
     };
     vCrudGridController.prototype.toggleAddMode = function () {
@@ -76,28 +75,32 @@ var vCrudGridController = (function () {
             item.editMode = false;
             // Only update if there are changes
             if (this.isDirty(item)) {
-                this.crudService.put(item).success(function (r) {
-                    //    // Refresh item with server values
-                    _this.copyItem(r, item);
-                    _this.notificationService.successUpdate();
-                }).error(function (r) {
+                var promise = this.crudResource.update(item);
+                promise.error(function (r) {
                     _this.notificationService.errorUpdate(r);
                     _this.restoreServerValues(item);
                     item.editMode = true;
+                }).success(function (r) {
+                    //    Refresh item with server values
+                    _this.copyItem(r, item);
+                    _this.notificationService.successUpdate();
                 });
+                return promise;
             }
         }
     };
     vCrudGridController.prototype.createItem = function (item) {
         var _this = this;
         if (this.isValid(item)) {
-            this.crudService.post(item).success(function (createdItem) {
+            var promise = this.crudResource.create(item);
+            promise.error(function (r) {
+                _this.notificationService.errorUpdate(r);
+            }).success(function (createdItem) {
+                _this.notificationService.successUpdate();
                 _this.allItems.unshift(createdItem);
                 _this.addMode = false;
-                _this.notificationService.successUpdate();
-            }).error(function (r) {
-                _this.notificationService.errorUpdate(r);
             });
+            return promise;
         }
     };
     vCrudGridController.prototype.deleteItemWithConfirmation = function (item) {
@@ -124,10 +127,23 @@ var vCrudGridController = (function () {
         this.applyOrder();
     };
     vCrudGridController.prototype.deleteItem = function (item) {
-        this.crudService.delete(item[this.idBinding]);
+        var _this = this;
+        var id = item[this.idBinding];
+        this.crudResource.delete(id).success(function () {
+            var index = _this.allItems.indexOf(item);
+            _this.allItems.splice(index, 1);
+            _this.notificationService.successUpdate();
+        }).error(function () {
+            _this.notificationService.errorUpdate("Failed to update");
+        });
     };
     vCrudGridController.prototype.getAllItems = function () {
-        this.allItems = this.crudService.getList();
+        var _this = this;
+        this.crudResource.getList().success(function (data) {
+            _this.allItems = data;
+        }).error(function () {
+            _this.notificationService.error("Couldn't load users");
+        });
     };
     vCrudGridController.prototype.applyOrder = function () {
         var _this = this;

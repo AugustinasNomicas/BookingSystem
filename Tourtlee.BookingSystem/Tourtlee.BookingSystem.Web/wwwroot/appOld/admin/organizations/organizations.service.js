@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/organizationdto.ts" />
-/// <reference path="../../shared/interfaces/icrudresource.ts" />
+/// <reference path="../../shared/interfaces/icrudservice.ts" />
+/// <reference path="dto/organizationdto.ts" />
 "use strict";
 var organizationsService = (function () {
     function organizationsService(organizationsResource, notificationService) {
@@ -47,7 +47,7 @@ var organizationsService = (function () {
     organizationsService.prototype.post = function (item) {
         var _this = this;
         var promise = this.organizationsResource.post(item);
-        promise.error(function () {
+        promise.post(item).error(function () {
             _this.notificationService.errorUpdate("Failed to update");
         }).success(function () {
             _this.notificationService.successUpdate();

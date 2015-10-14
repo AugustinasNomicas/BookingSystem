@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="../dto/organizationdto.ts" />
-/// <reference path="../../shared/interfaces/icrudresource.ts" />
+/// <reference path="../../shared/interfaces/icrudservice.ts" />
+/// <reference path="dto/organizationdto.ts" />
 
 "use strict";
 
@@ -57,7 +57,7 @@ class organizationsService implements ICrudService<OrganizationDto>  {
 
     post(item: OrganizationDto): angular.IHttpPromise<OrganizationDto> {
         const promise = this.organizationsResource.post(item);
-        promise.error(() => {
+        promise.post(item).error(() => {
             this.notificationService.errorUpdate("Failed to update");
         }).success(() => {
             this.notificationService.successUpdate();

@@ -2,7 +2,25 @@
     Layout = "_AdminLayout";
 }
 
-@{
-    var greeting = "Welcome to organizations list!";
-}
-<p>The greeting is: @greeting</p>
+<script>
+    System.import('admin/organizations/organizations.module.js');
+</script>
+
+<div ng-controller="OrganizationsController as vm">
+    <div v-crud-grid crud-service="organizationsService"
+         id-binding="IdOrganization"
+         id-default-value="00000000-0000-0000-0000-000000000000"
+         columns-definition='[
+         {
+            "binding"       :"IdOrganization",
+            "type"          :"disabled",
+            "required"      :"true",
+            "hidden"        :"false"
+         },
+         {
+            "binding"       :"Name",
+            "type"          :"text",
+            "header"        :"Organization",
+            "required"      :"true"
+         }]'></div>
+</div>

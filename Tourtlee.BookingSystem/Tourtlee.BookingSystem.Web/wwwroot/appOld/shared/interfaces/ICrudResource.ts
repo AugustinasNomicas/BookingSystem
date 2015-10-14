@@ -1,4 +1,3 @@
-
 interface ICrudResource<T> {
     delete(id: string): angular.IHttpPromise<void>;
 

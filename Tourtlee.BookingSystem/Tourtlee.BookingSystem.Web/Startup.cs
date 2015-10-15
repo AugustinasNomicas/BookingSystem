@@ -15,6 +15,7 @@ using Tourtlee.BookingSystem.Model.Security;
 using Tourtlee.BookingSystem.Web.Configurations;
 using Tourtlee.BookingSystem.Web.Security;
 using Microsoft.AspNet.Mvc.Razor;
+using Newtonsoft.Json.Serialization;
 
 namespace Tourtlee.BookingSystem.Web
 {
@@ -52,6 +53,10 @@ namespace Tourtlee.BookingSystem.Web
             services.Configure<MvcOptions>(options =>
             {
                 //options.Filters.Add(new AuthorizeAttribute());
+                var jsonOutputFormatter = new JsonOutputFormatter();
+                jsonOutputFormatter.SerializerSettings.ContractResolver =
+                    new CamelCasePropertyNamesContractResolver();
+                options.OutputFormatters.Insert(0, jsonOutputFormatter);
             });
 
             // Configure Auth

@@ -1197,7 +1197,10 @@
         }
       },
       "Tourtlee.BookingSystem.Core/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "AutoMapper": "4.0.4"
+        }
       },
       "Tourtlee.BookingSystem.DataAccess/1.0.0": {
         "type": "project",

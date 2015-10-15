@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
-using Tourtlee.BookingSystem.Business.Dto;
 using Tourtlee.BookingSystem.Business.Dto.Accounts;
-using Tourtlee.BookingSystem.Model;
 using Tourtlee.BookingSystem.Model.Security;
+using AutoMapperFramework;
+using System.Reflection;
 
 namespace Tourtlee.BookingSystem.Business
 {
@@ -11,7 +11,9 @@ namespace Tourtlee.BookingSystem.Business
     {
         public static void Configure()
         {
-            Mapper.CreateMap<Organization, OrganizationDto>().ReverseMap();
+            var mapLoader = new MapLoader(Mapper.Configuration);
+            mapLoader.LoadMappings(typeof(AutoMapperConfiguration).GetTypeInfo().Assembly
+                                    .GetExportedTypes());
 
             Mapper.CreateMap<ApplicationUser, UserListItemDto>()
                 .ForMember(dest => dest.IdUser, opt => opt.MapFrom(src => Guid.Parse(src.Id)))

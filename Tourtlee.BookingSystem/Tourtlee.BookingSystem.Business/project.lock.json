@@ -1143,7 +1143,10 @@
         }
       },
       "Tourtlee.BookingSystem.Core/1.0.0": {
-        "type": "project"
+        "type": "project",
+        "dependencies": {
+          "AutoMapper": "4.0.4"
+        }
       },
       "Tourtlee.BookingSystem.DataAccess/1.0.0": {
         "type": "project",
@@ -3434,6 +3437,7 @@
       "Tourtlee.BookingSystem.Core/1.0.0": {
         "type": "project",
         "dependencies": {
+          "AutoMapper": "4.0.4",
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
           "System.Linq": "4.0.1-beta-23225",

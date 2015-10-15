@@ -2,7 +2,37 @@
     Layout = "_AdminLayout";
 }
 
-@{
-    var greeting = "Welcome to users section!";
-}
-<p>The greeting is: @greeting</p>
+<script>
+    System.import('admin/organizations/users.module.js');
+</script>
+
+<div ng-controller="UsersController as vm">
+    <p>
+        <a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>
+    </p>
+
+    <div v-crud-grid
+         crud-resource="usersResource"
+         id-binding="IdUser"
+         id-default-value="00000000-0000-0000-0000-000000000000"
+         readonly="true"
+         columns-definition='[
+         {
+            "binding"       :"IdUser",
+            "type"          :"disabled",
+            "required"      :"true",
+            "hidden"        :"false"
+         },
+         {
+            "binding"       :"Email",
+            "type"          :"text",
+            "header"        :"Email",
+            "required"      :"true"
+         },         {
+            "binding"       :"OrganizationName",
+            "type"          :"text",
+            "header"        :"Organization",
+            "required"      :"true"
+         }]'></div>
+</div>
+

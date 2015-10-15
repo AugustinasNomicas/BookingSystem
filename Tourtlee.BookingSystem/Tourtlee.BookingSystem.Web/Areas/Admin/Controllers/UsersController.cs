@@ -16,5 +16,28 @@ namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            object p = null;
+            //Product.Models.Product p = new Models.Product();
+            //update DB
+            try
+            {
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                return View(p);
+            }
+
+        }
+
+        [HttpPost]
+        public void Create(object createUserDto)
+        {
+        }
     }
 }

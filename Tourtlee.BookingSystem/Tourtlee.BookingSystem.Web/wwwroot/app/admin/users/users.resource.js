@@ -1,12 +1,13 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="dto/organizationdto.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
+/// <reference path="dto/createuserdto.ts" />
+/// <reference path="dto/userlistitemdto.ts" />
 "use strict";
-var organizationsResource = (function () {
-    function organizationsResource($http) {
+var usersResource = (function () {
+    function usersResource($http) {
         var _this = this;
         this.$http = $http;
-        this.apiUrl = 'Admin/OrganizationsApi/';
+        this.apiUrl = 'Admin/UsersApi/';
         this.delete = function (id) {
             return _this.$http({ url: _this.apiUrl + ("delete/" + id), method: "Get" });
         };
@@ -23,7 +24,7 @@ var organizationsResource = (function () {
             return _this.$http({ url: _this.apiUrl + "update", method: "Put", data: item });
         };
     }
-    organizationsResource.$inject = ["$http"];
-    return organizationsResource;
+    usersResource.$inject = ["$http"];
+    return usersResource;
 })();
-module.exports = organizationsResource;
+module.exports = usersResource;

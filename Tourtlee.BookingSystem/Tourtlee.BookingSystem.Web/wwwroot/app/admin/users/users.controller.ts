@@ -1,7 +1,7 @@
-/// <reference path="../../../../typings/tsd.d.ts" />
+﻿/// <reference path="../../../../typings/tsd.d.ts" />
 "use strict";
 
-class organizationsController {
+class usersController {
     static $inject: string[] = ["$scope"];
     vm = this;
     constructor(public $scope: angular.IScope) {
@@ -9,4 +9,4 @@ class organizationsController {
 
 }
 
-export = organizationsController;
+export = usersController;

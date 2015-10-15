@@ -5,7 +5,7 @@ var organizationsController = (function () {
         this.$scope = $scope;
         this.vm = this;
     }
-    organizationsController.$inject = ["$scope", "toastr"];
+    organizationsController.$inject = ["$scope"];
     return organizationsController;
 })();
 module.exports = organizationsController;

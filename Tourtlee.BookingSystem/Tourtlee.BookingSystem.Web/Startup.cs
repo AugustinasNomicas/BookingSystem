@@ -16,6 +16,7 @@ using Tourtlee.BookingSystem.Web.Configurations;
 using Tourtlee.BookingSystem.Web.Security;
 using Microsoft.AspNet.Mvc.Razor;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNet.Mvc.Formatters;
 
 namespace Tourtlee.BookingSystem.Web
 {
@@ -43,11 +44,6 @@ namespace Tourtlee.BookingSystem.Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
                            .AddEntityFrameworkStores<BookingDbContext>()
                            .AddDefaultTokenProviders();
-
-            services.ConfigureCookieAuthentication(options =>
-            {
-                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
-            });
 
             services.AddMvc();
             services.Configure<MvcOptions>(options =>
@@ -77,7 +73,7 @@ namespace Tourtlee.BookingSystem.Web
 
         public Startup(IApplicationEnvironment appEnv)
         {
-            var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath);
+            var builder = new ConfigurationBuilder();
 
             builder
                 .AddJsonFile("config.json")
@@ -85,17 +81,14 @@ namespace Tourtlee.BookingSystem.Web
 
 
             Configuration = builder.Build();
-
         }
 
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
-            app.UseErrorPage();
+            app.UseIISPlatformHandler();
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvc(MvcRoutes.Configure);
-
-
 
             BookingDbContext.InitializeDatabaseAsync(app.ApplicationServices).Wait();
         }

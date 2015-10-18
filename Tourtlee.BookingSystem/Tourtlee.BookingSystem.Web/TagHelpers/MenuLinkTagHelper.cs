@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNet.Mvc.ViewFeatures;
 using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Tourtlee.BookingSystem.Web.TagHelpers
 {
-    [TargetElement("menulink", Attributes = "area-name, controller-name, action-name, menu-text")]
+    [HtmlTargetElement("menulink", Attributes = "area-name, controller-name, action-name, menu-text")]
     public class MenuLinkTagHelper : TagHelper
     {
         public string AreaName { get; set; }
@@ -22,7 +23,7 @@ namespace Tourtlee.BookingSystem.Web.TagHelpers
         public ViewContext ViewContext { get; set; }
 
         public IUrlHelper _UrlHelper { get; set; }
-
+        
         public MenuLinkTagHelper(IUrlHelper urlHelper)
         {
             _UrlHelper = urlHelper;
@@ -42,8 +43,8 @@ namespace Tourtlee.BookingSystem.Web.TagHelpers
             var a = new TagBuilder("a");
             a.MergeAttribute("href", $"{menuUrl}");
             a.MergeAttribute("title", MenuText);
-            a.SetInnerText(MenuText);
-
+            a.InnerHtml.AppendEncoded(MenuText);
+            
             var routeData = ViewContext.RouteData.Values;
             var currentController = routeData["controller"];
             var currentAction = routeData["action"];

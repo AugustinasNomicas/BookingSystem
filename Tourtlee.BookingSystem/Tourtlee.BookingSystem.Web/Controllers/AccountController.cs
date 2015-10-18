@@ -16,7 +16,8 @@ namespace Tourtlee.BookingSystem.Web.Controllers
         public UserManager<ApplicationUser> UserManager { get; private set; }
         public SignInManager<ApplicationUser> SignInManager { get; private set; }
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -88,7 +89,7 @@ namespace Tourtlee.BookingSystem.Web.Controllers
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await UserManager.FindByIdAsync(Context.User.GetUserId());
+            return await UserManager.FindByIdAsync(HttpContext.User.GetUserId());
         }
 
         private IActionResult RedirectToLocal(string returnUrl)

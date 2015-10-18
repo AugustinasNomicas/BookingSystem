@@ -29,9 +29,11 @@ namespace Tourtlee.BookingSystem.DataAccess
             base.OnModelCreating(builder);
 
             // http://stackoverflow.com/questions/30290171/how-to-work-with-collections
-            builder.Entity<Organization>()
-                .Collection(o => o.Users).InverseReference(u => u.Organization)
-                .ForeignKey(u => u.IdOrganization);
+            //builder.Entity<ApplicationUser>().HasKey(u => u.IdOrganization);
+            
+            //builder.Entity<Organization>().HasKey(o => o.IdOrganization);
+            //    .Collection(o => o.Users).InverseReference(u => u.Organization)
+            //    .ForeignKey(u => u.IdOrganization);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
@@ -52,7 +54,7 @@ namespace Tourtlee.BookingSystem.DataAccess
 
         private static async Task CreateAdminUser(BookingDbContext db, IServiceProvider serviceProvider)
         {
-            var options = serviceProvider.GetRequiredService<IOptions<AuthOptions>>().Options;
+            var options = serviceProvider.GetRequiredService<IOptions<AuthOptions>>().Value;
             var userMgr = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleMgr = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 

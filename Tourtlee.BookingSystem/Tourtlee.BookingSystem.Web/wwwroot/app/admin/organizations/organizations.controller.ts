@@ -2,9 +2,11 @@
 "use strict";
 
 class organizationsController {
-    static $inject: string[] = ["$scope"];
-    vm = this;
-    constructor(public $scope: angular.IScope) {
+    static $inject: string[] = ["$scope", "$window"];
+    public organizationsList: OrganizationDto[];
+    
+    constructor(public $scope: angular.IScope, private $window: angular.IWindowService) {
+        this.organizationsList = $window["organizationsList"];
     }
 
 }

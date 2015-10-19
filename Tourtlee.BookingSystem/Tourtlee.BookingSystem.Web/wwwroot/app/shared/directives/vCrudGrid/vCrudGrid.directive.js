@@ -7,14 +7,16 @@ var vCrudDirective = (function () {
         //	'C' - only matches class name
         this.restrict = 'A';
         // Don't replace the element that contains the attribute
-        this.replace = false;
+        //replace = false;
         // scope = false, parent scope
         // scope = true, get new scope
         // scope = {..}, isolated scope
         this.scope = {
             columnButtonClick: "&",
             initialized: "&",
-            serverUrl: "@serverUrl" // one way binding
+        };
+        this.bindToController = {
+            allItems: '=items'
         };
         // view
         this.templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';

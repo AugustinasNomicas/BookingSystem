@@ -30,13 +30,13 @@ var vCrudGridController = (function () {
         };
     }
     vCrudGridController.prototype.link = function (attrs) {
-        this.allItems = attrs["items"];
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
         this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
         this.crudResource = this.$injector.get(attrs["crudResource"]);
-        this.getAllItems();
+        if (!this.allItems)
+            this.getAllItems();
     };
     vCrudGridController.prototype.toggleAddMode = function () {
         this.addMode = !this.addMode;

@@ -1,11 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 "use strict";
 var organizationsController = (function () {
-    function organizationsController($scope) {
+    function organizationsController($scope, $window) {
         this.$scope = $scope;
-        this.vm = this;
+        this.$window = $window;
+        this.organizationsList = $window["organizationsList"];
     }
-    organizationsController.$inject = ["$scope"];
+    organizationsController.$inject = ["$scope", "$window"];
     return organizationsController;
 })();
 module.exports = organizationsController;

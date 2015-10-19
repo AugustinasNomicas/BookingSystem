@@ -9,15 +9,17 @@ class vCrudDirective implements angular.IDirective {
     //	'C' - only matches class name
     restrict = 'A';
     // Don't replace the element that contains the attribute
-    replace = false;
+    //replace = false;
     // scope = false, parent scope
     // scope = true, get new scope
     // scope = {..}, isolated scope
     scope = {
         columnButtonClick: "&",    // method binding
         initialized: "&", // method binding
-        serverUrl: "@serverUrl"  // one way binding
-    }
+    };
+    bindToController = {
+        allItems:  '=items'
+    };
     // view
     templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
     // controller

@@ -30,14 +30,14 @@ class vCrudGridController {
     }
 
     link(attrs: angular.IAttributes) {
-        this.allItems = attrs["items"];
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
         this.readonly = attrs["readonly"];
         this.columnsDefinition = angular.fromJson(attrs["columnsDefinition"]);
         this.crudResource = <ICrudResource<Object>>this.$injector.get(attrs["crudResource"]);
 
-        this.getAllItems();
+        if (!this.allItems)
+            this.getAllItems();
     }
 
     toggleAddMode() {

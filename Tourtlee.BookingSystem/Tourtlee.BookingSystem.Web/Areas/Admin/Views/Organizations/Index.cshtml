@@ -1,26 +1,31 @@
-﻿@{
+﻿@using Tourtlee.BookingSystem.Web.Helpers;
+@model IEnumerable<Tourtlee.BookingSystem.Business.Dto.OrganizationDto>
+@{
     Layout = "_AdminLayout";
 }
 
 <script>
     System.import('admin/organizations/organizations.module.js');
+    var organizationsList = @Html.JsonFor(Model);
 </script>
 
 <div ng-controller="OrganizationsController as vm">
-    <div v-crud-grid crud-resource="organizationsResource"
+    <div v-crud-grid 
+         crud-resource="organizationsResource"
+         items="vm.organizationsList"
          id-binding="IdOrganization"
          id-default-value="00000000-0000-0000-0000-000000000000"
          columns-definition='[
-         {
-            "binding"       :"idOrganization",
-            "type"          :"disabled",
-            "required"      :"true",
-            "hidden"        :"false"
-         },
-         {
-            "binding"       :"name",
-            "type"          :"text",
-            "header"        :"Organization",
-            "required"      :"true"
-         }]'></div>
+    {
+    "binding"       :"idOrganization",
+    "type"          :"disabled",
+    "required"      :"true",
+    "hidden"        :"false"
+    },
+    {
+    "binding"       :"name",
+    "type"          :"text",
+    "header"        :"Organization",
+    "required"      :"true"
+    }]'></div>
 </div>

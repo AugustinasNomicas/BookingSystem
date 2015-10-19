@@ -5,11 +5,12 @@
 
 "use strict";
 class usersResource {
-    static $inject: string[] = ["$http"];
+    static $inject: string[] = ["$http", "$window"];
 
     apiUrl: string = 'Admin/UsersApi/';
 
-    constructor(private $http: angular.IHttpService) {
+    constructor(private $http: angular.IHttpService, private $window: angular.IWindowService) {
+        
     }
 
     delete = (id: string): angular.IHttpPromise<void> => {

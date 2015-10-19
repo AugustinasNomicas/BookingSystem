@@ -6,7 +6,7 @@ class organizationsController {
     public organizationsList: OrganizationDto[];
     
     constructor(public $scope: angular.IScope, private $window: angular.IWindowService) {
-        this.organizationsList = $window["organizationsList"];
+        this.organizationsList = $window["organizationsConfig"]["organizationsList"];
     }
 
 }

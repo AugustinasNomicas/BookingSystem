@@ -4,7 +4,7 @@ var organizationsController = (function () {
     function organizationsController($scope, $window) {
         this.$scope = $scope;
         this.$window = $window;
-        this.organizationsList = $window["organizationsList"];
+        this.organizationsList = $window["organizationsConfig"]["organizationsList"];
     }
     organizationsController.$inject = ["$scope", "$window"];
     return organizationsController;

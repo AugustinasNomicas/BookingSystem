@@ -4,11 +4,12 @@
 
 "use strict";
 class organizationsResource implements ICrudResource<OrganizationDto> { 
-        static $inject: string[] = ["$http"];
+        static $inject: string[] = ["$http", "$window"];
 
-        apiUrl: string = 'Admin/OrganizationsApi/';
+        apiUrl: string;
 
-        constructor(private $http: angular.IHttpService) {
+        constructor(private $http: angular.IHttpService, private $window: angular.IWindowService) {
+            this.apiUrl = $window["organizationsConfig"]["apiUrl"] + '/';
         } 
 
         delete = (id: string) : angular.IHttpPromise<void> => {

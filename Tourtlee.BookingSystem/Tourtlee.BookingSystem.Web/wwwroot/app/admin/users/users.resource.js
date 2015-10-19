@@ -4,9 +4,10 @@
 /// <reference path="dto/userlistitemdto.ts" />
 "use strict";
 var usersResource = (function () {
-    function usersResource($http) {
+    function usersResource($http, $window) {
         var _this = this;
         this.$http = $http;
+        this.$window = $window;
         this.apiUrl = 'Admin/UsersApi/';
         this.delete = function (id) {
             return _this.$http({ url: _this.apiUrl + ("delete/" + id), method: "Get" });
@@ -24,7 +25,7 @@ var usersResource = (function () {
             return _this.$http({ url: _this.apiUrl + "update", method: "Put", data: item });
         };
     }
-    usersResource.$inject = ["$http"];
+    usersResource.$inject = ["$http", "$window"];
     return usersResource;
 })();
 module.exports = usersResource;

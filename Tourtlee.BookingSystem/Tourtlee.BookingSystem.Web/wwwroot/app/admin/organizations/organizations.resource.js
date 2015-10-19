@@ -3,10 +3,10 @@
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
 "use strict";
 var organizationsResource = (function () {
-    function organizationsResource($http) {
+    function organizationsResource($http, $window) {
         var _this = this;
         this.$http = $http;
-        this.apiUrl = 'Admin/OrganizationsApi/';
+        this.$window = $window;
         this.delete = function (id) {
             return _this.$http({ url: _this.apiUrl + ("delete/" + id), method: "Get" });
         };
@@ -22,8 +22,9 @@ var organizationsResource = (function () {
         this.update = function (item) {
             return _this.$http({ url: _this.apiUrl + "update", method: "Put", data: item });
         };
+        this.apiUrl = $window["organizationsConfig"]["apiUrl"] + '/';
     }
-    organizationsResource.$inject = ["$http"];
+    organizationsResource.$inject = ["$http", "$window"];
     return organizationsResource;
 })();
 module.exports = organizationsResource;

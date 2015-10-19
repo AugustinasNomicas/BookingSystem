@@ -6,11 +6,16 @@
 
 <script>
     System.import('admin/organizations/organizations.module.js');
-    var organizationsList = @Html.JsonFor(Model);
+
+    var organizationsConfig = {
+        organizationsList: @Html.JsonFor(Model),
+        apiUrl: '@Url.Action("Index", "OrganizationsApi", new { Area = "Admin" })'
+    };
+
 </script>
 
 <div ng-controller="OrganizationsController as vm">
-    <div v-crud-grid 
+    <div v-crud-grid
          crud-resource="organizationsResource"
          items="vm.organizationsList"
          id-binding="IdOrganization"

@@ -28,12 +28,10 @@ namespace Tourtlee.BookingSystem.DataAccess
         {
             base.OnModelCreating(builder);
 
-            // http://stackoverflow.com/questions/30290171/how-to-work-with-collections
-            //builder.Entity<ApplicationUser>().HasKey(u => u.IdOrganization);
-            
-            //builder.Entity<Organization>().HasKey(o => o.IdOrganization);
-            //    .Collection(o => o.Users).InverseReference(u => u.Organization)
-            //    .ForeignKey(u => u.IdOrganization);
+            builder.Entity<ApplicationUser>()
+                .HasOne(u => u.Organization)
+                .WithMany(o => o.Users)
+                .ForeignKey(u => u.IdOrganization);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)

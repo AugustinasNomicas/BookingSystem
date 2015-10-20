@@ -7,10 +7,10 @@
 class usersResource {
     static $inject: string[] = ["$http", "$window"];
 
-    apiUrl: string = 'Admin/UsersApi/';
+    apiUrl: string;
 
     constructor(private $http: angular.IHttpService, private $window: angular.IWindowService) {
-        
+        this.apiUrl = $window["usersConfig"]["apiUrl"] + '/';
     }
 
     delete = (id: string): angular.IHttpPromise<void> => {

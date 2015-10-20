@@ -1,22 +1,30 @@
-﻿@{
+﻿@using Tourtlee.BookingSystem.Web.Helpers;
+@{
     Layout = "_AdminLayout";
 }
+@model IEnumerable<Tourtlee.BookingSystem.Business.Dto.Accounts.UserListItemDto>
 
-<script>
-    System.import('admin/users/users.module.js');
-</script>
+    <script>
+        System.import('admin/users/users.module.js');
 
-<div ng-controller="UsersController as vm">
-    <p>
-        <a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>
-    </p>
+        var usersConfig = {
+            usersList: @Html.JsonFor(Model),
+            apiUrl: '@Url.Action("Index", "UsersApi", new { Area = "Admin" })'
+        };
+    </script>
 
-    <div v-crud-grid
-         crud-resource="usersResource"
-         id-binding="IdUser"
-         id-default-value="00000000-0000-0000-0000-000000000000"
-         readonly="true"
-         columns-definition='[
+    <div ng-controller="UsersController as vm">
+        <p>
+            <a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>
+        </p>
+
+        <div v-crud-grid
+             crud-resource="usersResource"
+             items="vm.usersList"
+             id-binding="IdUser"
+             id-default-value="00000000-0000-0000-0000-000000000000"
+             readonly="true"
+             columns-definition='[
          {
             "binding"       :"idUser",
             "type"          :"disabled",
@@ -34,5 +42,5 @@
             "header"        :"Organization",
             "required"      :"true"
          }]'></div>
-</div>
+    </div>
 

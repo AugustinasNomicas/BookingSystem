@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Html.Abstractions;
-using Microsoft.AspNet.Mvc.ViewFeatures;
+using Microsoft.AspNet.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,10 +9,10 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 {
 	public class AngularModelHelper<TModel>
 	{
-		protected readonly HtmlHelper Helper;
+		protected readonly IHtmlHelper Helper;
 		private readonly string _expressionPrefix;
 
-		public AngularModelHelper(HtmlHelper helper, string expressionPrefix)
+		public AngularModelHelper(IHtmlHelper helper, string expressionPrefix)
 		{
 			Helper = helper;
 			_expressionPrefix = expressionPrefix;

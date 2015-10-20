@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNet.Mvc.ViewFeatures;
+﻿using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNet.Mvc.ViewFeatures;
 
 namespace Tourtlee.BookingSystem.Web.Helpers
 {
 	public static class AngularHelperExtension
 	{
-		public static AngularHelper<TModel> Angular<TModel>(this HtmlHelper<TModel> helper)
+		public static AngularHelper<TModel> Angular<TModel>(this IHtmlHelper<TModel> helper)
 		{
 			return new AngularHelper<TModel>(helper);
 		}
@@ -12,9 +13,9 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 
 	public class AngularHelper<TModel>
 	{
-		private readonly HtmlHelper<TModel> _htmlHelper;
+		private readonly IHtmlHelper<TModel> _htmlHelper;
 
-		public AngularHelper(HtmlHelper<TModel> helper)
+		public AngularHelper(IHtmlHelper<TModel> helper)
 		{
 			_htmlHelper = helper;
 		}

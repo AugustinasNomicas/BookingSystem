@@ -6,7 +6,7 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 {
 	public class AngularNgRepeatHelper<TModel> : AngularModelHelper<TModel>, IDisposable
 	{
-		public AngularNgRepeatHelper(HtmlHelper helper,
+		public AngularNgRepeatHelper(IHtmlHelper helper,
 			string variableName, string propertyExpression)
 			: base(helper, variableName)
 		{

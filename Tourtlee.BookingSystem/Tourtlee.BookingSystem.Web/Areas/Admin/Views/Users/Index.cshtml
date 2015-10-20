@@ -1,8 +1,10 @@
 ﻿@using Tourtlee.BookingSystem.Web.Helpers;
+@model IEnumerable<Tourtlee.BookingSystem.Business.Dto.Accounts.UserListItemDto>
+
 @{
     Layout = "_AdminLayout";
+    var users = Html.Angular().ModelFor("vm.customer");
 }
-@model IEnumerable<Tourtlee.BookingSystem.Business.Dto.Accounts.UserListItemDto>
 
     <script>
         System.import('admin/users/users.module.js');

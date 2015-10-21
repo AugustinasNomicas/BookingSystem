@@ -3,6 +3,7 @@ var vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive")
 var vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 var angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 var usersController = require("./users.controller");
+var usersCreateController = require("./users.create.controller");
 var usersResource = require("./users.resource");
 var Users;
 (function (Users) {
@@ -13,6 +14,7 @@ var Users;
     app.directive("vCrudGrid", vCrudGrid.factory())
         .directive("vCellEditor", vCellEditor.factory());
     app.controller("UsersController", usersController);
+    app.controller("UsersCreateController", usersCreateController);
     app.service("usersResource", usersResource);
     angular.bootstrap(document, [moduleName], {
         strictDi: true

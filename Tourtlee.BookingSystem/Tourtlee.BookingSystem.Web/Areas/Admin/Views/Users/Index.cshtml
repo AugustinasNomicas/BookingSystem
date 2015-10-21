@@ -6,27 +6,29 @@
     var users = Html.Angular().ModelFor("vm.customer");
 }
 
-    <script>
-        System.import('admin/users/users.module.js');
+<script>
+    System.import('admin/users/users.module.js');
 
-        var usersConfig = {
-            usersList: @Html.JsonFor(Model),
-            apiUrl: '@Url.Action("Index", "UsersApi", new { Area = "Admin" })'
-        };
-    </script>
+    var usersConfig = {
+        usersList: @Html.JsonFor(Model),
+        apiUrl: '@Url.Action("Index", "UsersApi", new { Area = "Admin" })'
+    };
+</script>
 
-    <div ng-controller="UsersController as vm">
-        <p>
-            <a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>
-        </p>
+<div ng-controller="UsersController as vm">
+    <p>
+        @*<a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>*@
+        @Html.ActionLink("users.create", "Create", "Users", routeValues: new { Area = "Admin" },
+           htmlAttributes: new { title = "Admin", role = "button", @class = "btn btn-default" })
+    </p>
 
-        <div v-crud-grid
-             crud-resource="usersResource"
-             items="vm.usersList"
-             id-binding="IdUser"
-             id-default-value="00000000-0000-0000-0000-000000000000"
-             readonly="true"
-             columns-definition='[
+    <div v-crud-grid
+         crud-resource="usersResource"
+         items="vm.usersList"
+         id-binding="IdUser"
+         id-default-value="00000000-0000-0000-0000-000000000000"
+         readonly="true"
+         columns-definition='[
          {
             "binding"       :"idUser",
             "type"          :"disabled",
@@ -44,5 +46,4 @@
             "header"        :"Organization",
             "required"      :"true"
          }]'></div>
-    </div>
-
+</div>

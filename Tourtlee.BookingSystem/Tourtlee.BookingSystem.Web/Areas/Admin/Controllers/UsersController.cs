@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Services;
+using Tourtlee.BookingSystem.Business.Dto.Accounts;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,23 +29,13 @@ namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            object p = null;
-            //Product.Models.Product p = new Models.Product();
-            //update DB
-            try
-            {
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-
-                return View(p);
-            }
-
+            var createUser = new CreateUserDto();
+            createUser.Email = "new@user.com";
+            return View(createUser);
         }
 
         [HttpPost]
-        public void Create(object createUserDto)
+        public void Create([FromBody]CreateUserDto createUserDto)
         {
         }
     }

@@ -6,6 +6,7 @@ import vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell
 import angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 
 import usersController = require("./users.controller");
+import usersCreateController = require("./users.create.controller");
 import usersResource = require("./users.resource");
 
 export module Users {
@@ -19,6 +20,7 @@ export module Users {
         .directive("vCellEditor", vCellEditor.factory());
 
     app.controller("UsersController", usersController);
+    app.controller("UsersCreateController", usersCreateController);
     app.service("usersResource", usersResource);
 
     angular.bootstrap(document, [moduleName], {

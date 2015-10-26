@@ -1,4 +1,4 @@
-var controller = require("shared/directives/vCrudGrid/cell.editor/cell.editor.controller");
+var controller = require("./cell.editor.controller.ts");
 var vCellEditor = (function () {
     function vCellEditor() {
         //	'A' - only matches attribute name

@@ -1,7 +1,6 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 
-import vCrudGridController = require("shared/directives/vCrudGrid/vcrudgrid.controller");
-
+import vCrudGridController = require("./vcrudgrid.controller");
 
 class vCrudDirective implements angular.IDirective {
     //	'A' - only matches attribute name

@@ -1,4 +1,4 @@
-import controller = require("shared/directives/vCrudGrid/cell.editor/cell.editor.controller");
+import controller = require("./cell.editor.controller.ts");
 
 class vCellEditor implements angular.IDirective {
     //	'A' - only matches attribute name

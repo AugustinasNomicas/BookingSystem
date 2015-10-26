@@ -1,5 +1,5 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-var vCrudGridController = require("shared/directives/vCrudGrid/vcrudgrid.controller");
+var vCrudGridController = require("./vcrudgrid.controller");
 var vCrudDirective = (function () {
     function vCrudDirective() {
         //	'A' - only matches attribute name

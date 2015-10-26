@@ -13,10 +13,15 @@
         createUser: @Html.JsonFor(Model),
         apiUrl: '@Url.Action("Index", "UsersApi", new { Area = "Admin" })'
     };
+
+    var organizationsConfig = {
+        apiUrl: '@Url.Action("Index", "OrganizationsApi", new { Area = "Admin" })'
+    };
 </script>
 
-<form class="form-horizontal" data-ng-controller="UsersCreateController as vm" name="CreateUser"
-      data-ng-submit="ctrl.CreateUser()" novalidate>
+<form class="form-horizontal" data-ng-controller="UsersCreateController as vm" name="createUserForm"
+      data-ng-submit="vm.submit()" novalidate>
+
     <fieldset>
 
         <!-- Form Name -->
@@ -34,33 +39,36 @@
             <div class="col-md-4">
                 <div>
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-1"
-                           ng-model="@user.PropertyFor(u => u.OrganizationMode)" value="1" />
+                           ng-model="@user.PropertyFor(u => u.OrganizationMode)"
+                           ng-change="vm.onOrganizationModeChange()" value="0" />
 
-                    <label for="chooseOrganization-1" data-translate>users.organizationChoose</label>
+                    <label for="chooseOrganization-0" data-translate>users.organizationChoose</label>
 
                 </div>
                 <div>
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-0"
-                           value="0" checked="checked" ng-model="@user.PropertyFor(u => u.OrganizationMode)" />
+                           value="1" checked="checked" ng-model="@user.PropertyFor(u => u.OrganizationMode)" />
 
-                    <label for="chooseOrganization-0" data-translate>users.organizationCreateNew </label>
+                    <label for="chooseOrganization-1" data-translate>users.organizationCreateNew </label>
                 </div>
             </div>
         </div>
-
+        
         <!-- Select Basic -->
-        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1">
+        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
             <label class="col-md-4 control-label" for="SelectOrganization" data-translate></label>
             <div class="col-md-6">
-                <select id="SelectOrganization" name="SelectOrganization" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                </select>
+                <ui-select ng-model="@user.PropertyFor(u => u.OrganizationName)" theme="bootstrap">
+                    <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="organization in vm.organizations | filter: $select.search">
+                        <div ng-bind-html="organization.name"></div>
+                    </ui-select-choices>
+                </ui-select>
             </div>
         </div>
 
         <!-- Text input-->
-        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
+        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1">
             <label class="col-md-4 control-label" for="NewOrganizationName" data-translate>users.organizationCreateName</label>
             <div class="col-md-6">
                 <input id="NewOrganizationName" name="NewOrganizationName" type="text" placeholder=""

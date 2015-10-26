@@ -35,8 +35,16 @@ namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]CreateUserDto createUserDto)
+        public IActionResult Create([FromBody]CreateUserDto createUserDto)
         {
+            if (createUserDto == null)
+            {
+                throw new InvalidCastException("CreateUserDto is null");
+            }
+
+            _userService.CreateUser(createUserDto);
+
+            return RedirectToAction("Index");
         }
     }
 }

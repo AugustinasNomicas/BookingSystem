@@ -35,7 +35,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
                 throw new ValidationException("User with username already exsits");
             }
 
-            if (createUserDto.CreateOrganization)
+            if (createUserDto.OrganizationMode == CreateUserOrganizatioModes.Create)
             {
                 var organization = CreateOrganization(createUserDto.OrganizationName);
                 createUserDto.IdOrganization = organization.IdOrganization;

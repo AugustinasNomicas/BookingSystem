@@ -29,6 +29,7 @@
 	  "organization": "Organization",
 	  "organizationCreateNew": "Create new",
 	  "organizationChoose": "Choose from existing",
-	  "organizationCreateName": "Organization name"
+	  "organizationCreateName": "Organization name",
+	  "selectOrSearchOrganization": "Select or search a organization in the list..."
   }
 }

@@ -33,7 +33,7 @@ namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
                 throw new ArgumentException("Invalid new user");
             }
 
-            _userService.CreateUserOperation(item);
+            //_userService.CreateUser(item);
 
             return Ok();
         }

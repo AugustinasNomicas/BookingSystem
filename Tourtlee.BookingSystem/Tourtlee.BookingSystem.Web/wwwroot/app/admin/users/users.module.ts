@@ -9,6 +9,8 @@ import usersController = require("./users.controller");
 import usersCreateController = require("./users.create.controller");
 import usersResource = require("./users.resource");
 
+import organizationsResource = require("../organizations/organizations.resource");
+
 export module Users {
     "use strict";
     var moduleName = "users";
@@ -22,6 +24,8 @@ export module Users {
     app.controller("UsersController", usersController);
     app.controller("UsersCreateController", usersCreateController);
     app.service("usersResource", usersResource);
+
+    app.service("organizationsResource", organizationsResource);
 
     angular.bootstrap(document, [moduleName], {
         strictDi: true

@@ -1,9 +1,13 @@
 class CreateUserDto {
-    Email: string;
-    Password: string;
+    email: string;
+    password: string;
 
-    IdOrganization: string;
+    idOrganization: string;
+    organizationName: string;
+    organizationMode: CreateUserOrganizatioModes;
+}
 
-    CreateOrganization: boolean;
-    OrganizationName: string;
+enum CreateUserOrganizatioModes {
+    Existing = 0,
+    Create = 1
 }

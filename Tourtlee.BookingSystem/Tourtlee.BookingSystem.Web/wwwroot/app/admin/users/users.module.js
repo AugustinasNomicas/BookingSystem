@@ -5,6 +5,7 @@ var angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 var usersController = require("./users.controller");
 var usersCreateController = require("./users.create.controller");
 var usersResource = require("./users.resource");
+var organizationsResource = require("../organizations/organizations.resource");
 var Users;
 (function (Users) {
     "use strict";
@@ -16,6 +17,7 @@ var Users;
     app.controller("UsersController", usersController);
     app.controller("UsersCreateController", usersCreateController);
     app.service("usersResource", usersResource);
+    app.service("organizationsResource", organizationsResource);
     angular.bootstrap(document, [moduleName], {
         strictDi: true
     });

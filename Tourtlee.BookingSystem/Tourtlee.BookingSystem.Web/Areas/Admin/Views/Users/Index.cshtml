@@ -17,9 +17,8 @@
 
 <div ng-controller="UsersController as vm">
     <p>
-        @*<a class="btn btn-default" role="button" ui-sref="users.add" data-translate>users.create</a>*@
         @Html.ActionLink("users.create", "Create", "Users", routeValues: new { Area = "Admin" },
-           htmlAttributes: new { title = "Admin", role = "button", @class = "btn btn-default" })
+           htmlAttributes: new { title = "Admin", role = "button", @class = "btn btn-default", data_translate = "" })
     </p>
 
     <div v-crud-grid

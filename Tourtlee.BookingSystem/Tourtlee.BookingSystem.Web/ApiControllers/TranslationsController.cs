@@ -8,6 +8,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Dnx.Runtime;
 using Microsoft.Net.Http.Headers;
+using System.Text;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,7 +31,8 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers
         {
             var translationFile = string.Format(TranslationsFilePath, part, language);
             var translations = System.IO.File.ReadAllText(Path.Combine(_appEnvironment.ApplicationBasePath, translationFile));
-            return new HttpOkObjectResult(translations);
+            //return new HttpOkObjectResult(translations);
+            return base.PhysicalFile(Path.Combine(_appEnvironment.ApplicationBasePath, translationFile), "application/json");
         }
         
     }

@@ -43,6 +43,15 @@ namespace Tourtlee.BookingSystem.Web.Helpers
         }
 
         /// <summary>
+        /// Converts a lambda expression into a camel-cased AngularJS model property, ie:
+        /// vm.model.parentProperty.childProperty
+        /// </summary>
+        public IHtmlContent PropertyFor<TProp>(Expression<Func<TModel, TProp>> property)
+        {
+            return Helper.Raw(ExpressionForInternal(property));
+        }
+
+        /// <summary>
         /// Creates a div with an ng-repeat directive to enumerate the specified property,
         /// and returns a new helper you can use for strongly-typed bindings on the items
         /// in the enumerable property.

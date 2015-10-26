@@ -7,15 +7,16 @@
 }
 
 <script>
-        System.import('admin/users/users.module.js');
+    System.import('admin/users/users.module.js');
 
-        var usersConfig = {
-            createUser: @Html.JsonFor(Model),
-            apiUrl: '@Url.Action("Index", "UsersApi", new { Area = "Admin" })'
-        };
+    var usersConfig = {
+        createUser: @Html.JsonFor(Model),
+        apiUrl: '@Url.Action("Index", "UsersApi", new { Area = "Admin" })'
+    };
 </script>
 
-<form class="form-horizontal" data-ng-controller="UsersCreateController as vm">
+<form class="form-horizontal" data-ng-controller="UsersCreateController as vm" name="CreateUser"
+      data-ng-submit="ctrl.CreateUser()" novalidate>
     <fieldset>
 
         <!-- Form Name -->
@@ -23,34 +24,9 @@
 
         @user.FormGroupFor(u => u.Email)
 
-        <!-- Text input-->
-        @*<div class="form-group">
-            <label class="col-md-4 control-label" for="email" data-translate>users.email</label>
-            <div class="col-md-6">
-                <input id="email" name="email" type="text"
-                       data-ng-model="ctrl.createUserDto.Email"
-                       placeholder="example@domain.com" class="form-control input-md" required="">
+        @user.FormGroupFor(u => u.Password)
 
-            </div>
-        </div>*@
-
-        <!-- Password input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="password" data-translate>users.password</label>
-            <div class="col-md-6">
-                <input id="password" name="password" type="password" placeholder="" class="form-control input-md"
-                       data-ng-model="ctrl.createUserDto.Password">
-
-            </div>
-        </div>
-
-        <!-- Password input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="passwordrepeat" data-translate>users.repeatPassword</label>
-            <div class="col-md-6">
-                <input id="passwordrepeat" name="passwordrepeat" type="password" placeholder="" class="form-control input-md">
-            </div>
-        </div>
+        @user.FormGroupFor(u => u.PasswordRepeat)
 
         <!-- Multiple Radios -->
         <div class="form-group">
@@ -58,14 +34,14 @@
             <div class="col-md-4">
                 <div>
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-1"
-                           ng-model="ctrl.organizationMode" value="1" />
+                           ng-model="@user.PropertyFor(u => u.OrganizationMode)" value="1" />
 
                     <label for="chooseOrganization-1" data-translate>users.organizationChoose</label>
 
                 </div>
                 <div>
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-0"
-                           value="0" checked="checked" ng-model="ctrl.organizationMode" />
+                           value="0" checked="checked" ng-model="@user.PropertyFor(u => u.OrganizationMode)" />
 
                     <label for="chooseOrganization-0" data-translate>users.organizationCreateNew </label>
                 </div>
@@ -73,7 +49,7 @@
         </div>
 
         <!-- Select Basic -->
-        <div class="form-group" data-ng-show="ctrl.organizationMode == 1">
+        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1">
             <label class="col-md-4 control-label" for="SelectOrganization" data-translate></label>
             <div class="col-md-6">
                 <select id="SelectOrganization" name="SelectOrganization" class="form-control">
@@ -84,7 +60,7 @@
         </div>
 
         <!-- Text input-->
-        <div class="form-group" data-ng-show="ctrl.organizationMode == 0">
+        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
             <label class="col-md-4 control-label" for="NewOrganizationName" data-translate>users.organizationCreateName</label>
             <div class="col-md-6">
                 <input id="NewOrganizationName" name="NewOrganizationName" type="text" placeholder=""
@@ -95,10 +71,14 @@
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-6">
-                <button id="create" name="Create" class="btn btn-success" data-ng-click="ctrl.CreateUser()" data-translate>common.create</button>
-                <a class="btn btn-default" role="button" ui-sref="users.list" data-translate>common.cancel</a>
+                <input type="submit" id="create"
+                       name="Create" class="btn btn-success" data-ng-click="ctrl.CreateUser()"
+                       translate="yes"
+                       translate-attr-value="common.create"
+                       value="common.create" />
+                @Html.ActionLink("common.cancel", "Index", "Users", routeValues: new { Area = "Admin" },
+           htmlAttributes: new { title = "Cancel", role = "button", @class = "btn btn-default", data_translate = ""})
             </div>
         </div>
-
     </fieldset>
 </form>

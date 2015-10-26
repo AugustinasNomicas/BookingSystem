@@ -58,9 +58,9 @@
         <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
             <label class="col-md-4 control-label" for="SelectOrganization" data-translate></label>
             <div class="col-md-6">
-                <ui-select ng-model="@user.PropertyFor(u => u.OrganizationName)" theme="bootstrap">
+                <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)" theme="bootstrap">
                     <ui-select-match>{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="organization in vm.organizations | filter: $select.search">
+                    <ui-select-choices repeat="organization.idOrganization as organization in vm.organizations | filter: $select.search">
                         <div ng-bind-html="organization.name"></div>
                     </ui-select-choices>
                 </ui-select>

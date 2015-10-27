@@ -22,6 +22,7 @@
 	  "users": "Users"
   },
   "users":{
+	  "createUserDto2": "Miau",
 	  "create": "Create new user",
 	  "email": "Email",
 	  "password": "Password",
@@ -32,5 +33,11 @@
 	  "organizationCreateName": "Organization name",
 	  "selectOrSearchOrganization": "Select or search a organization in the list...",
 	  "userCreated": "User successfully created"
-  }
+  },
+	  "createUserDto":{
+		"email": "Email",
+		 "password": "Password",
+		 "passwordRepeat": "Repeat password",
+		 "organizationName": "Organization name"
+	  }  
 }

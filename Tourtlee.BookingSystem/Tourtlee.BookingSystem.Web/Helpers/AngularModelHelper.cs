@@ -92,12 +92,13 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             var formGroup = new TagBuilder("div");
             formGroup.AddCssClass("form-group");
 
-            var labelText = metadata.DisplayName ?? name;//.Humanize(LetterCasing.Title);
+            var labelText = metadata.DisplayName ?? string.Format("{0}.{1}", typeof(TModel).Name.ToCamelCase(), name.ToCamelCase());//.Humanize(LetterCasing.Title);
 
             //Creates <label class="control-label" for="Name">Name</label>
             var label = new TagBuilder("label");
             label.AddCssClass("control-label");
             label.MergeAttribute("for", name);
+            label.MergeAttribute("data-translate", "");
             label.InnerHtml.AppendEncoded(labelText);
 
             var tagName = metadata.DataTypeName == "MultilineText"
@@ -114,7 +115,6 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             input.MergeAttribute("ng-model", expression);
             input.MergeAttribute("name", name);
             input.MergeAttribute("type", "text");
-            input.MergeAttribute("placeholder", placeholder);
 
             return formGroup.InnerHtml
                 .Append(label)

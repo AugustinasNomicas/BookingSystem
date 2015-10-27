@@ -38,13 +38,13 @@ namespace Tourtlee.BookingSystem.Web.Utilities
         private static string ConvertFullNameToCamelCase(string pascalCaseName)
         {
             var parts = pascalCaseName.Split('.')
-                .Select(ConvertToCamelCase);
+                .Select(p => p.ToCamelCase());
 
             return string.Join(".", parts);
         }
 
         //Borrowed from JSON.NET. Turns a single name into camel case.
-        private static string ConvertToCamelCase(string s)
+        public static string ToCamelCase(this string s)
         {
             if (string.IsNullOrEmpty(s))
                 return s;

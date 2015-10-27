@@ -97,6 +97,7 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             //Creates <label class="control-label" for="Name">Name</label>
             var label = new TagBuilder("label");
             label.AddCssClass("control-label");
+            label.AddCssClass("col-md-4");
             label.MergeAttribute("for", name);
             label.MergeAttribute("data-translate", "");
             label.InnerHtml.AppendEncoded(labelText);
@@ -116,9 +117,15 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             input.MergeAttribute("name", name);
             input.MergeAttribute("type", "text");
 
-            return formGroup.InnerHtml
+            var divForInput = new TagBuilder("div");
+            divForInput.AddCssClass("col-md-4");
+            divForInput.InnerHtml.Append(input);
+
+            formGroup.InnerHtml
                 .Append(label)
-                .Append(input);
+                .Append(divForInput);
+
+            return formGroup;
         }
     }
 }

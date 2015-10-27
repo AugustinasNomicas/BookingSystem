@@ -32,7 +32,7 @@
 
         @user.FormGroupFor(u => u.PasswordRepeat)
 
-        <!-- Multiple Radios -->
+        <!-- Radios for OrganizationMode -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="chooseOrganization" data-translate>users.organization</label>
             <div class="col-md-4">
@@ -40,35 +40,38 @@
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-1"
                            ng-model="@user.PropertyFor(u => u.OrganizationMode)"
                            ng-change="vm.onOrganizationModeChange()" value="0" />
-
                     <label for="chooseOrganization-0" data-translate>users.organizationChoose</label>
-
                 </div>
+
                 <div>
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-0"
                            value="1" checked="checked" ng-model="@user.PropertyFor(u => u.OrganizationMode)" />
-
                     <label for="chooseOrganization-1" data-translate>users.organizationCreateNew </label>
                 </div>
             </div>
         </div>
-        
-        <!-- Select Basic -->
-        <div class="form-group" data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
-            <label class="col-md-4 control-label" for="SelectOrganization" data-translate></label>
-            <div class="col-md-6">
-                <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)" theme="bootstrap">
-                    <ui-select-match>{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="organization.idOrganization as organization in vm.organizations | filter: $select.search">
-                        <div ng-bind-html="organization.name"></div>
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-        </div>
 
-        <!-- Text input-->
-        <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1">
-            @user.FormGroupFor(u => u.OrganizationName)
+        <div class="form-group">
+            <!-- UI Select for existing organization -->
+            <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
+                <label class="col-md-4 control-label" for="SelectOrganization" data-translate>users.organizationChoose</label>
+                <div class="col-md-4">
+                    <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)" theme="bootstrap">
+                        <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="organization.idOrganization as organization in vm.organizations | filter: $select.search">
+                            <div ng-bind-html="organization.name"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+
+            <!-- Input for new organzation name-->
+            <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1">
+                <label class="col-md-4 control-label" for="OrganizationName" data-translate>createUserDto.organizationName</label>
+                <div class="col-md-4">
+                    <input class="form-control" name="OrganizationName" ng-model="@user.PropertyFor(u => u.OrganizationName)" />
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
@@ -80,7 +83,7 @@
                        translate-attr-value="common.create"
                        value="common.create" />
                 @Html.ActionLink("common.cancel", "Index", "Users", routeValues: new { Area = "Admin" },
-           htmlAttributes: new { title = "Cancel", role = "button", @class = "btn btn-default", data_translate = ""})
+           htmlAttributes: new { title = "Cancel", role = "button", @class = "btn btn-default", data_translate = "" })
             </div>
         </div>
     </fieldset>

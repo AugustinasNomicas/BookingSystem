@@ -25,8 +25,8 @@ class usersResource {
         return this.$http<UserListItemDto[]>({ url: this.apiUrl, method: "Get" });
     };
 
-    create = (item: CreateUserDto): angular.IHttpPromise<UserListItemDto> => {
-        return this.$http<UserListItemDto>({ url: this.apiUrl + `create`, method: "Post", data: item });
+    create = (item: CreateUserDto): angular.IHttpPromise<CreateUserDto> => {
+        return this.$http<CreateUserDto>({ url: this.apiUrl + `create`, method: "Post", data: item });
     };
 
     update = (item: UserListItemDto): angular.IHttpPromise<UserListItemDto> => {

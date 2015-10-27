@@ -20,8 +20,15 @@ class notificationService {
         this.$translate(["notifications.successfullyUpdated"]).then((t) => {
             this.toastr.success(t["notifications.successfullyUpdated"]);
         });
-
     }
+
+    success(msg) {
+        this.$translate([msg]).then((t) => {
+            this.toastr.success(t[msg]);
+        });
+    }
+
+
 }
 
 

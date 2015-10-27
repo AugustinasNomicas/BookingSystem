@@ -7,6 +7,7 @@ using Tourtlee.BookingSystem.Business.Dto.Accounts;
 using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.Model.Security;
+using System.Linq;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Users
 {
@@ -23,7 +24,15 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
 
         public new void Operate(CreateUserDto createUserDto)
         {
-            OperateAsync(createUserDto).Wait();
+            Validate(createUserDto);
+            try
+            {
+                OperateAsync(createUserDto).Wait();
+            }
+            catch (AggregateException ex)
+            {
+                throw ex.InnerException;
+            }
         }
 
         private async Task OperateAsync(CreateUserDto createUserDto)
@@ -49,9 +58,10 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
             };
 
             var userCreationResult = await _userManager.CreateAsync(user, createUserDto.Password);
+
             if (!userCreationResult.Succeeded)
             {
-                throw new InvalidOperationException("Failed to create new user");
+                throw new InvalidOperationException(userCreationResult.Errors.First().Description);
             }
         }
 
@@ -64,6 +74,24 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
             };
             _organizationService.Create(organization);
             return organization;
+        }
+
+        private void Validate(CreateUserDto createUserDto)
+        {
+            if (createUserDto.Password != createUserDto.PasswordRepeat)
+                throw new ValidationException("Passwords doesn't match");
+
+            if (createUserDto.OrganizationMode == CreateUserOrganizatioModes.Existing
+                && createUserDto.IdOrganization == Guid.Empty)
+            {
+                throw new ValidationException("IdOrganization not speciefied");
+            }
+
+            if (createUserDto.OrganizationMode == CreateUserOrganizatioModes.Create
+                && string.IsNullOrWhiteSpace(createUserDto.OrganizationName))
+            {
+                throw new ValidationException("OrganizationName not speciefied");
+            }
         }
     }
 }

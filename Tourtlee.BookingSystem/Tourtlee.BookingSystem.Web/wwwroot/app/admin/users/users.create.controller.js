@@ -1,15 +1,24 @@
+/// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="dto/createuserdto.ts" />
 "use strict";
 var usersCreateController = (function () {
-    function usersCreateController($scope, $window, usersResource, organizationsResource) {
+    function usersCreateController($scope, $window, usersResource, organizationsResource, notificationService) {
         this.$scope = $scope;
         this.$window = $window;
         this.usersResource = usersResource;
         this.organizationsResource = organizationsResource;
+        this.notificationService = notificationService;
         this.vm = this;
         this.createUser = $window["usersConfig"]["createUser"];
     }
     usersCreateController.prototype.submit = function () {
-        this.usersResource.create(this.createUser);
+        var _this = this;
+        this.usersResource.create(this.createUser).then(function (result) {
+            _this.createUser = result.data;
+            _this.notificationService.success("userCreated");
+        }, function (error) {
+            _this.notificationService.error(error.data);
+        });
     };
     usersCreateController.prototype.onOrganizationModeChange = function () {
         if (this.createUser.organizationMode == 0
@@ -23,7 +32,7 @@ var usersCreateController = (function () {
             _this.organizations = result.data;
         });
     };
-    usersCreateController.$inject = ["$scope", "$window", "usersResource", "organizationsResource"];
+    usersCreateController.$inject = ["$scope", "$window", "usersResource", "organizationsResource", "notificationService"];
     return usersCreateController;
 })();
 module.exports = usersCreateController;

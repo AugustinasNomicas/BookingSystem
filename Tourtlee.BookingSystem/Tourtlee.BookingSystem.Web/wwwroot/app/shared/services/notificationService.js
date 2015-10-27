@@ -18,6 +18,12 @@ var notificationService = (function () {
             _this.toastr.success(t["notifications.successfullyUpdated"]);
         });
     };
+    notificationService.prototype.success = function (msg) {
+        var _this = this;
+        this.$translate([msg]).then(function (t) {
+            _this.toastr.success(t[msg]);
+        });
+    };
     notificationService.$inject = ["toastr", "$translate"];
     return notificationService;
 })();

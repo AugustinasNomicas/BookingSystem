@@ -1,4 +1,4 @@
-import controller = require("./cell.editor.controller.ts");
+import controller = require("./cell.editor.controller");
 
 class vCellEditor implements angular.IDirective {
     //	'A' - only matches attribute name

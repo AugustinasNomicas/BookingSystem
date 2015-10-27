@@ -1,4 +1,4 @@
-var controller = require("./cell.editor.controller.ts");
+var controller = require("./cell.editor.controller");
 var vCellEditor = (function () {
     function vCellEditor() {
         //	'A' - only matches attribute name

@@ -1,13 +1,14 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="dto/createuserdto.ts" />
+
 import usersResource = require("./users.resource");
 import organizationsResource = require("../organizations/organizations.resource");
-
+import notificationService = require("../../shared/services/notificationservice");
 
 "use strict";
 
 class usersCreateController {
-    static $inject: string[] = ["$scope", "$window", "usersResource", "organizationsResource"];
+    static $inject: string[] = ["$scope", "$window", "usersResource", "organizationsResource", "notificationService"];
     vm = this;
 
     organizations: OrganizationDto[];
@@ -16,13 +17,19 @@ class usersCreateController {
     constructor(public $scope: angular.IScope,
         private $window: angular.IWindowService,
         private usersResource: usersResource,
-        private organizationsResource: organizationsResource) {
+        private organizationsResource: organizationsResource,
+        private notificationService: notificationService) {
         this.createUser = $window["usersConfig"]["createUser"];
 
     }
 
     submit(): void {
-        this.usersResource.create(this.createUser)
+        this.usersResource.create(this.createUser).then((result) => {
+            this.createUser = result.data;
+            this.notificationService.success("userCreated");
+        }, (error) => {
+            this.notificationService.error(error.data);
+        });
     }
 
     onOrganizationModeChange(): void {

@@ -7,6 +7,10 @@ import notificationService = require("../../shared/services/notificationservice"
 
 "use strict";
 
+interface Scope {
+    createUserForm: any;
+}
+
 class usersCreateController {
     static $inject: string[] = ["$scope", "$window", "usersResource", "organizationsResource", "notificationService"];
     vm = this;
@@ -14,16 +18,18 @@ class usersCreateController {
     organizations: OrganizationDto[];
     createUser: CreateUserDto;
 
-    constructor(public $scope: angular.IScope,
+    constructor(public $scope: Scope,
         private $window: angular.IWindowService,
         private usersResource: usersResource,
         private organizationsResource: organizationsResource,
         private notificationService: notificationService) {
         this.createUser = $window["usersConfig"]["createUser"];
-
     }
 
     submit(): void {
+        if (!this.$scope.createUserForm.$valid)
+            return;
+
         this.usersResource.create(this.createUser).then((result) => {
             this.createUser = result.data;
             this.notificationService.success("userCreated");

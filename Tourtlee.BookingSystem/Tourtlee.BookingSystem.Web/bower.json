@@ -16,6 +16,7 @@
     "system.js": "*",
     "angular-toastr": "*",
     "angular-ui-select": "*",
-    "angular-sanitize": "*"
+    "angular-sanitize": "*",
+    "angular-ui-validate": "*"
   }
 }

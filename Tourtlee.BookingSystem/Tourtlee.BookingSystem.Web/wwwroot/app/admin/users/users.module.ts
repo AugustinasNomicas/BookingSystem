@@ -3,6 +3,8 @@
 import vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive");
 import vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 
+import formGroupValidationDirective = require("../../shared/directives/formgroupvalidation/formgroupvalidation.directive");
+
 import angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 
 import usersController = require("./users.controller");
@@ -18,8 +20,10 @@ export module Users {
 
     var app = angulaModuleFactory.factory(moduleName, translationsPart);
 
-    app.directive("vCrudGrid", vCrudGrid.factory())
-        .directive("vCellEditor", vCellEditor.factory());
+    app.directive("vCrudGrid", vCrudGrid.factory());
+    app.directive("vCellEditor", vCellEditor.factory());
+
+    app.directive("formGroupValidation", formGroupValidationDirective.factory());
 
     app.controller("UsersController", usersController);
     app.controller("UsersCreateController", usersCreateController);

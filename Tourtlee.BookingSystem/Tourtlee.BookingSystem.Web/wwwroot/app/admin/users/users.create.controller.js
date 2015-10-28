@@ -13,6 +13,8 @@ var usersCreateController = (function () {
     }
     usersCreateController.prototype.submit = function () {
         var _this = this;
+        if (!this.$scope.createUserForm.$valid)
+            return;
         this.usersResource.create(this.createUser).then(function (result) {
             _this.createUser = result.data;
             _this.notificationService.success("userCreated");

@@ -79,20 +79,20 @@ namespace Tourtlee.BookingSystem.Web.Helpers
         {
             //Turns x => x.SomeName into "SomeName"
             var name = ExpressionHelper.GetExpressionText(property);
-
-            //var metadata = ExpressionMetadataProvider.FromLambdaExpression(property, Helper.ViewData as ViewDataDictionary<TModel>
-            //    Helper.MetadataProvider);
-
             var metadata = Helper.MetadataProvider.GetMetadataForProperty(typeof(TModel), name);
+            name = name.ToCamelCase();
 
             //Turns x => x.SomeName into vm.model.someName
             var expression = ExpressionForInternal(property);
 
-            //Creates <div class="form-group">
+            //Creates <div class="form-group has-feedback"
+            //				form-group-validation="name">
             var formGroup = new TagBuilder("div");
             formGroup.AddCssClass("form-group");
+            formGroup.AddCssClass("has-feedback");
+            formGroup.MergeAttribute("form-group-validation", name);
 
-            var labelText = metadata.DisplayName ?? string.Format("{0}.{1}", typeof(TModel).Name.ToCamelCase(), name.ToCamelCase());//.Humanize(LetterCasing.Title);
+            var labelText = metadata.DisplayName ?? string.Format("{0}.{1}", typeof(TModel).Name.ToCamelCase(), name);//.Humanize(LetterCasing.Title);
 
             //Creates <label class="control-label" for="Name">Name</label>
             var label = new TagBuilder("label");
@@ -110,12 +110,14 @@ namespace Tourtlee.BookingSystem.Web.Helpers
                               (labelText + "...");
 
             //Creates <input ng-model="expression"
-            //		   class="form-control" name="Name" type="text" >
+            //		   class="form-control" name="name" type="text" >
             var input = new TagBuilder(tagName);
             input.AddCssClass("form-control");
             input.MergeAttribute("ng-model", expression);
             input.MergeAttribute("name", name);
             input.MergeAttribute("type", "text");
+
+            ApplyValidationToInput(input, metadata, expression);
 
             var divForInput = new TagBuilder("div");
             divForInput.AddCssClass("col-md-4");
@@ -124,8 +126,26 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             formGroup.InnerHtml
                 .Append(label)
                 .Append(divForInput);
-
+            
             return formGroup;
+        }
+
+        private void ApplyValidationToInput(TagBuilder input, ModelMetadata metadata, string ngModelExpression)
+        {
+            if (metadata.IsRequired)
+                input.MergeAttribute("required", "");
+
+            if (metadata.DataTypeName == "EmailAddress")
+                input.Attributes["type"] = "email";
+
+            if (metadata.DataTypeName == "PasswordRepeat")
+            {
+                input.MergeAttribute("ui-validate", "'$value==" + ngModelExpression + "'"); // how to decode ' symbols??
+                input.MergeAttribute("ui-validate-watch", string.Format("'{0}'", ngModelExpression));
+            }
+
+            if (metadata.DataTypeName == "PhoneNumber")
+                input.MergeAttribute("pattern", @"[\ 0-9()-]+");
         }
     }
 }

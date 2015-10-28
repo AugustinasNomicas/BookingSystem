@@ -25,13 +25,17 @@
     <fieldset>
         <!-- Form Name -->
         <legend data-translate>users.create</legend>
+        
+        <div class="alert alert-info">
+            Enter details for the new user below.
+        </div>
 
         @user.FormGroupFor(u => u.Email)
 
         @user.FormGroupFor(u => u.Password)
 
         @user.FormGroupFor(u => u.PasswordRepeat)
-
+        val: {{vm.createUser.passwordRepeat}}
         <!-- Radios for OrganizationMode -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="chooseOrganization" data-translate>users.organization</label>
@@ -56,7 +60,8 @@
             <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
                 <label class="col-md-4 control-label" for="SelectOrganization" data-translate>users.organizationChoose</label>
                 <div class="col-md-4">
-                    <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)" theme="bootstrap">
+                    <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)" theme="bootstrap"
+                               ng-required="@user.PropertyFor(u => u.OrganizationMode) == 0">
                         <ui-select-match>{{$select.selected.name}}</ui-select-match>
                         <ui-select-choices repeat="organization.idOrganization as organization in vm.organizations | filter: $select.search">
                             <div ng-bind-html="organization.name"></div>
@@ -66,10 +71,14 @@
             </div>
 
             <!-- Input for new organzation name-->
-            <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1">
+            <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 1"
+                 form-group-validation="organizationName">
                 <label class="col-md-4 control-label" for="OrganizationName" data-translate>createUserDto.organizationName</label>
                 <div class="col-md-4">
-                    <input class="form-control" name="OrganizationName" ng-model="@user.PropertyFor(u => u.OrganizationName)" />
+                    <input class="form-control" 
+                           ng-required="@user.PropertyFor(u => u.OrganizationMode) == 0"
+                           name="organizationName" 
+                           ng-model="@user.PropertyFor(u => u.OrganizationName)" />
                 </div>
             </div>
         </div>
@@ -78,6 +87,7 @@
             <label class="col-md-4 control-label"></label>
             <div class="col-md-6">
                 <input type="submit" id="create"
+
                        name="Create" class="btn btn-success" data-ng-click="ctrl.CreateUser()"
                        translate="yes"
                        translate-attr-value="common.create"

@@ -1,6 +1,7 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 var vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive");
 var vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
+var formGroupValidationDirective = require("../../shared/directives/formgroupvalidation/formgroupvalidation.directive");
 var angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 var usersController = require("./users.controller");
 var usersCreateController = require("./users.create.controller");
@@ -12,8 +13,9 @@ var Users;
     var moduleName = "users";
     var translationsPart = "admin";
     var app = angulaModuleFactory.factory(moduleName, translationsPart);
-    app.directive("vCrudGrid", vCrudGrid.factory())
-        .directive("vCellEditor", vCellEditor.factory());
+    app.directive("vCrudGrid", vCrudGrid.factory());
+    app.directive("vCellEditor", vCellEditor.factory());
+    app.directive("formGroupValidation", formGroupValidationDirective.factory());
     app.controller("UsersController", usersController);
     app.controller("UsersCreateController", usersCreateController);
     app.service("usersResource", usersResource);

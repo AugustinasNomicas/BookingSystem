@@ -30,7 +30,6 @@ namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
         public IActionResult Create()
         {
             var createUser = new CreateUserDto();
-            createUser.Email = "new@user.com";
             return View(createUser);
         }
 

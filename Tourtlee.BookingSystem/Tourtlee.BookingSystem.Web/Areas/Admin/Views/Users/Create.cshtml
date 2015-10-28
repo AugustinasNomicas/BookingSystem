@@ -25,7 +25,7 @@
     <fieldset>
         <!-- Form Name -->
         <legend data-translate>users.create</legend>
-        
+
         <div class="alert alert-info">
             Enter details for the new user below.
         </div>
@@ -34,8 +34,17 @@
 
         @user.FormGroupFor(u => u.Password)
 
-        @user.FormGroupFor(u => u.PasswordRepeat)
-        val: {{vm.createUser.passwordRepeat}}
+        <div class="has-feedback form-group" form-group-validation="passwordRepeat">
+            <label class="col-md-4 control-label" data-translate="" for="passwordRepeat">createUserDto.passwordRepeat</label>
+            <div class="col-md-4">
+                <input class="form-control" name="passwordRepeat"
+                       ng-model="@user.PropertyFor(u => u.PasswordRepeat)"
+                       required="" type="text"
+                       ui-validate=" '$value==vm.createUser.password' "
+                       ui-validate-watch=" 'vm.createUser.password' " />
+            </div>
+        </div>
+        
         <!-- Radios for OrganizationMode -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="chooseOrganization" data-translate>users.organization</label>
@@ -75,9 +84,9 @@
                  form-group-validation="organizationName">
                 <label class="col-md-4 control-label" for="OrganizationName" data-translate>createUserDto.organizationName</label>
                 <div class="col-md-4">
-                    <input class="form-control" 
+                    <input class="form-control"
                            ng-required="@user.PropertyFor(u => u.OrganizationMode) == 0"
-                           name="organizationName" 
+                           name="organizationName"
                            ng-model="@user.PropertyFor(u => u.OrganizationName)" />
                 </div>
             </div>
@@ -87,7 +96,6 @@
             <label class="col-md-4 control-label"></label>
             <div class="col-md-6">
                 <input type="submit" id="create"
-
                        name="Create" class="btn btn-success" data-ng-click="ctrl.CreateUser()"
                        translate="yes"
                        translate-attr-value="common.create"

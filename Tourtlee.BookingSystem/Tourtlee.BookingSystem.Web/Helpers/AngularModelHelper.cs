@@ -7,6 +7,7 @@ using Tourtlee.BookingSystem.Web.Utilities;
 using Microsoft.AspNet.Mvc.ModelBinding;
 using Microsoft.AspNet.Html.Abstractions;
 using Microsoft.AspNet.Mvc;
+using System.IO;
 
 namespace Tourtlee.BookingSystem.Web.Helpers
 {
@@ -126,7 +127,7 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             formGroup.InnerHtml
                 .Append(label)
                 .Append(divForInput);
-            
+
             return formGroup;
         }
 
@@ -138,11 +139,11 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             if (metadata.DataTypeName == "EmailAddress")
                 input.Attributes["type"] = "email";
 
-            if (metadata.DataTypeName == "PasswordRepeat")
-            {
-                input.MergeAttribute("ui-validate", "'$value==" + ngModelExpression + "'"); // how to decode ' symbols??
-                input.MergeAttribute("ui-validate-watch", string.Format("'{0}'", ngModelExpression));
-            }
+            //if (metadata.DataTypeName == "PasswordRepeat")
+            //{
+            //    input.MergeAttribute("ui-validate", "'$value==" + ngModelExpression + "'"); // how to decode ' symbols??
+            //    input.MergeAttribute("ui-validate-watch", string.Format("'{0}'", ngModelExpression));
+            //}
 
             if (metadata.DataTypeName == "PhoneNumber")
                 input.MergeAttribute("pattern", @"[\ 0-9()-]+");

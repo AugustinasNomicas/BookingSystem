@@ -3,8 +3,9 @@ var CreateUserDto = (function () {
     }
     return CreateUserDto;
 })();
-var CreateUserOrganizatioModes;
+exports.CreateUserDto = CreateUserDto;
 (function (CreateUserOrganizatioModes) {
     CreateUserOrganizatioModes[CreateUserOrganizatioModes["Existing"] = 0] = "Existing";
     CreateUserOrganizatioModes[CreateUserOrganizatioModes["Create"] = 1] = "Create";
-})(CreateUserOrganizatioModes || (CreateUserOrganizatioModes = {}));
+})(exports.CreateUserOrganizatioModes || (exports.CreateUserOrganizatioModes = {}));
+var CreateUserOrganizatioModes = exports.CreateUserOrganizatioModes;

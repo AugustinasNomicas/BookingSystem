@@ -4,6 +4,7 @@
 import usersResource = require("./users.resource");
 import organizationsResource = require("../organizations/organizations.resource");
 import notificationService = require("../../shared/services/notificationservice");
+import createUserDto = require("./dto/createUserDto");
 
 "use strict";
 
@@ -16,14 +17,17 @@ class usersCreateController {
     vm = this;
 
     organizations: OrganizationDto[];
-    createUser: CreateUserDto;
+    createUser: createUserDto.CreateUserDto;
 
     constructor(public $scope: Scope,
         private $window: angular.IWindowService,
         private usersResource: usersResource,
         private organizationsResource: organizationsResource,
         private notificationService: notificationService) {
+
         this.createUser = $window["usersConfig"]["createUser"];
+        this.createUser.organizationMode = createUserDto.CreateUserOrganizatioModes.Existing;
+        this.loadOrganizations();
     }
 
     submit(): void {
@@ -36,13 +40,6 @@ class usersCreateController {
         }, (error) => {
             this.notificationService.error(error.data);
         });
-    }
-
-    onOrganizationModeChange(): void {
-        if (this.createUser.organizationMode == 0
-            && !this.organizations) {
-            this.loadOrganizations();
-        }
     }
 
     private loadOrganizations(): void {

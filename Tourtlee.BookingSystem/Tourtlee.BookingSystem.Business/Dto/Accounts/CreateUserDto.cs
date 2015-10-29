@@ -12,10 +12,10 @@ namespace Tourtlee.BookingSystem.Business.Dto.Accounts
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required, DataType("PasswordRepeat")]
+        [Required]
         public string PasswordRepeat { get; set; }
 
-        public Guid IdOrganization { get; set; }
+        public Guid? IdOrganization { get; set; }
         public string OrganizationName { get; set; }
         
         public CreateUserOrganizatioModes OrganizationMode { get; set; }

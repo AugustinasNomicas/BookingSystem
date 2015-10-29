@@ -1,4 +1,4 @@
-class CreateUserDto {
+export class CreateUserDto {
     email: string;
     password: string;
     passwordRepeat: string;
@@ -8,7 +8,7 @@ class CreateUserDto {
     organizationMode: CreateUserOrganizatioModes;
 }
 
-enum CreateUserOrganizatioModes {
+export enum CreateUserOrganizatioModes {
     Existing = 0,
     Create = 1
 }

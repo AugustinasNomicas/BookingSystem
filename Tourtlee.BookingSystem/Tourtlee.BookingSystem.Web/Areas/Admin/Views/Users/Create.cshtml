@@ -31,6 +31,14 @@
         </div>
 
         @user.FormGroupFor(u => u.Email)
+        
+        <span id="@user.PropertyFor(u=>u.Email)-help" class="help-block" ng-show="createUserForm.$submitted 
+              || createUserForm.email.$touched">
+            <ng-messages for="createUserForm.email.$error">
+                <ng-message when="required">Field is required</ng-message>
+                <ng-message when="email">Email is not valid</ng-message>
+            </ng-messages>
+        </span>
 
         @user.FormGroupFor(u => u.Password)
 
@@ -44,7 +52,7 @@
                        ui-validate-watch=" 'vm.createUser.password' " />
             </div>
         </div>
-        
+
         <!-- Radios for OrganizationMode -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="chooseOrganization" data-translate>users.organization</label>
@@ -52,7 +60,7 @@
                 <div>
                     <input type="radio" name="chooseOrganization" id="chooseOrganization-1"
                            ng-model="@user.PropertyFor(u => u.OrganizationMode)"
-                           ng-change="vm.onOrganizationModeChange()" value="0" />
+                           value="0" />
                     <label for="chooseOrganization-0" data-translate>users.organizationChoose</label>
                 </div>
 
@@ -66,11 +74,13 @@
 
         <div class="form-group">
             <!-- UI Select for existing organization -->
-            <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0">
+            <div data-ng-show="@user.PropertyFor(u => u.OrganizationMode) == 0"
+                 ng-class="{ 'has-error': createUserForm.$submitted && createUserForm.idOrganization.$invalid }">
                 <label class="col-md-4 control-label" for="SelectOrganization" data-translate>users.organizationChoose</label>
                 <div class="col-md-4">
-                    <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)" theme="bootstrap"
-                               ng-required="@user.PropertyFor(u => u.OrganizationMode) == 0">
+                    <ui-select ng-model="@user.PropertyFor(u => u.IdOrganization)"
+                               name="idOrganization"
+                               ng-required="true">
                         <ui-select-match>{{$select.selected.name}}</ui-select-match>
                         <ui-select-choices repeat="organization.idOrganization as organization in vm.organizations | filter: $select.search">
                             <div ng-bind-html="organization.name"></div>
@@ -85,7 +95,7 @@
                 <label class="col-md-4 control-label" for="OrganizationName" data-translate>createUserDto.organizationName</label>
                 <div class="col-md-4">
                     <input class="form-control"
-                           ng-required="@user.PropertyFor(u => u.OrganizationMode) == 0"
+                           ng-required="@user.PropertyFor(u => u.OrganizationMode) == 1"
                            name="organizationName"
                            ng-model="@user.PropertyFor(u => u.OrganizationName)" />
                 </div>

@@ -91,7 +91,9 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             var formGroup = new TagBuilder("div");
             formGroup.AddCssClass("form-group");
             formGroup.AddCssClass("has-feedback");
+            formGroup.MergeAttribute("aria-describedby", string.Format("{0}-help", expression));
             formGroup.MergeAttribute("form-group-validation", name);
+
 
             var labelText = metadata.DisplayName ?? string.Format("{0}.{1}", typeof(TModel).Name.ToCamelCase(), name);//.Humanize(LetterCasing.Title);
 
@@ -138,12 +140,6 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 
             if (metadata.DataTypeName == "EmailAddress")
                 input.Attributes["type"] = "email";
-
-            //if (metadata.DataTypeName == "PasswordRepeat")
-            //{
-            //    input.MergeAttribute("ui-validate", "'$value==" + ngModelExpression + "'"); // how to decode ' symbols??
-            //    input.MergeAttribute("ui-validate-watch", string.Format("'{0}'", ngModelExpression));
-            //}
 
             if (metadata.DataTypeName == "PhoneNumber")
                 input.MergeAttribute("pattern", @"[\ 0-9()-]+");

@@ -17,6 +17,7 @@
     "angular-toastr": "*",
     "angular-ui-select": "*",
     "angular-sanitize": "*",
-    "angular-ui-validate": "*"
+    "angular-ui-validate": "*",
+    "angular-messages": "*"
   }
 }

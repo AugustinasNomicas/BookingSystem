@@ -1,5 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="dto/createuserdto.ts" />
+var createUserDto = require("./dto/createUserDto");
 "use strict";
 var usersCreateController = (function () {
     function usersCreateController($scope, $window, usersResource, organizationsResource, notificationService) {
@@ -10,6 +11,8 @@ var usersCreateController = (function () {
         this.notificationService = notificationService;
         this.vm = this;
         this.createUser = $window["usersConfig"]["createUser"];
+        this.createUser.organizationMode = createUserDto.CreateUserOrganizatioModes.Existing;
+        this.loadOrganizations();
     }
     usersCreateController.prototype.submit = function () {
         var _this = this;
@@ -21,12 +24,6 @@ var usersCreateController = (function () {
         }, function (error) {
             _this.notificationService.error(error.data);
         });
-    };
-    usersCreateController.prototype.onOrganizationModeChange = function () {
-        if (this.createUser.organizationMode == 0
-            && !this.organizations) {
-            this.loadOrganizations();
-        }
     };
     usersCreateController.prototype.loadOrganizations = function () {
         var _this = this;

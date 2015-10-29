@@ -54,7 +54,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
             {
                 UserName = createUserDto.Email,
                 Email = createUserDto.Email,
-                IdOrganization = createUserDto.IdOrganization,
+                IdOrganization = createUserDto.IdOrganization.Value,
             };
 
             var userCreationResult = await _userManager.CreateAsync(user, createUserDto.Password);
@@ -82,7 +82,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
                 throw new ValidationException("Passwords doesn't match");
 
             if (createUserDto.OrganizationMode == CreateUserOrganizatioModes.Existing
-                && createUserDto.IdOrganization == Guid.Empty)
+                && (createUserDto.IdOrganization == Guid.Empty || !createUserDto.IdOrganization.HasValue))
             {
                 throw new ValidationException("IdOrganization not speciefied");
             }

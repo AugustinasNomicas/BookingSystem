@@ -3,12 +3,13 @@
 var createUserDto = require("./dto/createUserDto");
 "use strict";
 var usersCreateController = (function () {
-    function usersCreateController($scope, $window, usersResource, organizationsResource, notificationService) {
+    function usersCreateController($scope, $window, usersResource, organizationsResource, notificationService, $templateCache) {
         this.$scope = $scope;
         this.$window = $window;
         this.usersResource = usersResource;
         this.organizationsResource = organizationsResource;
         this.notificationService = notificationService;
+        this.$templateCache = $templateCache;
         this.vm = this;
         this.createUser = $window["usersConfig"]["createUser"];
         this.createUser.organizationMode = createUserDto.CreateUserOrganizatioModes.Existing;
@@ -31,7 +32,8 @@ var usersCreateController = (function () {
             _this.organizations = result.data;
         });
     };
-    usersCreateController.$inject = ["$scope", "$window", "usersResource", "organizationsResource", "notificationService"];
+    usersCreateController.$inject = ["$scope", "$window", "usersResource", "organizationsResource",
+        "notificationService", "$templateCache"];
     return usersCreateController;
 })();
 module.exports = usersCreateController;

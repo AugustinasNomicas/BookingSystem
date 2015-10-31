@@ -11,9 +11,9 @@ namespace Tourtlee.BookingSystem.Web.Controllers
     public class TemplatesController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult ValidationMessages()
         {
-            return View(@"organizations.list");
+            return View();
         }
     }
 }

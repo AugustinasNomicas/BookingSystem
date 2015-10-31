@@ -20,9 +20,9 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 			_htmlHelper = helper;
 		}
 
-		public AngularModelHelper<TModel> ModelFor(string expressionPrefix)
+		public AngularModelHelper<TModel> ModelFor(string expressionPrefix, string angularFormName)
 		{
-			return new AngularModelHelper<TModel>(_htmlHelper, expressionPrefix);
+			return new AngularModelHelper<TModel>(_htmlHelper, expressionPrefix, angularFormName);
 		}
 	}
 }

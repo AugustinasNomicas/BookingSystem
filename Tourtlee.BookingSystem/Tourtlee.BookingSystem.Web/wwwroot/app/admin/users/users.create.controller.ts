@@ -13,7 +13,8 @@ interface Scope {
 }
 
 class usersCreateController {
-    static $inject: string[] = ["$scope", "$window", "usersResource", "organizationsResource", "notificationService"];
+    static $inject: string[] = ["$scope", "$window", "usersResource", "organizationsResource",
+        "notificationService", "$templateCache"];
     vm = this;
 
     organizations: OrganizationDto[];
@@ -23,7 +24,8 @@ class usersCreateController {
         private $window: angular.IWindowService,
         private usersResource: usersResource,
         private organizationsResource: organizationsResource,
-        private notificationService: notificationService) {
+        private notificationService: notificationService,
+        private $templateCache: any) {
 
         this.createUser = $window["usersConfig"]["createUser"];
         this.createUser.organizationMode = createUserDto.CreateUserOrganizatioModes.Existing;

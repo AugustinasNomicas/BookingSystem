@@ -3,7 +3,7 @@
 
 @{
     Layout = "_AdminLayout";
-    var user = Html.Angular().ModelFor("vm.createUser");
+    var user = Html.Angular().ModelFor("vm.createUser", "createUserForm");
 }
 
 <script>
@@ -31,26 +31,26 @@
         </div>
 
         @user.FormGroupFor(u => u.Email)
-        
-        <span id="@user.PropertyFor(u=>u.Email)-help" class="help-block" ng-show="createUserForm.$submitted 
-              || createUserForm.email.$touched">
-            <ng-messages for="createUserForm.email.$error">
-                <ng-message when="required">Field is required</ng-message>
-                <ng-message when="email">Email is not valid</ng-message>
-            </ng-messages>
-        </span>
 
         @user.FormGroupFor(u => u.Password)
 
-        <div class="has-feedback form-group" form-group-validation="passwordRepeat">
+        <div class="has-feedback form-group" form-group-validation="passwordRepeat"
+             aria-describedby="passwordRepeat-help">
             <label class="col-md-4 control-label" data-translate="" for="passwordRepeat">createUserDto.passwordRepeat</label>
             <div class="col-md-4">
                 <input class="form-control" name="passwordRepeat"
                        ng-model="@user.PropertyFor(u => u.PasswordRepeat)"
                        required="" type="text"
-                       ui-validate=" '$value==vm.createUser.password' "
+                       ui-validate="{ passwordRepeat:'$value==vm.createUser.password' }"
                        ui-validate-watch=" 'vm.createUser.password' " />
+
+                <span class="help-block" id="passwordRepeat-help" ng-show="createUserForm.$submitted || createUserForm.passwordRepeat.$touched">
+                    <ng-messages for="createUserForm.passwordRepeat.$error" role="alert">
+                        <div ng-messages-include="Templates/ValidationMessages"></div>
+                    </ng-messages>
+                </span>
             </div>
+
         </div>
 
         <!-- Radios for OrganizationMode -->

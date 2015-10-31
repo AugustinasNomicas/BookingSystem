@@ -16,11 +16,19 @@ namespace Tourtlee.BookingSystem.Web.Helpers
         protected readonly IHtmlHelper Helper;
 
         private readonly string _expressionPrefix;
+        private readonly string _angularFormName;
 
         public AngularModelHelper(IHtmlHelper helper, string expressionPrefix)
         {
             Helper = helper;
             _expressionPrefix = expressionPrefix;
+        }
+
+        public AngularModelHelper(IHtmlHelper helper, string expressionPrefix, string angularFormName)
+        {
+            Helper = helper;
+            _expressionPrefix = expressionPrefix;
+            _angularFormName = angularFormName;
         }
 
         /// <summary>
@@ -91,7 +99,7 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             var formGroup = new TagBuilder("div");
             formGroup.AddCssClass("form-group");
             formGroup.AddCssClass("has-feedback");
-            formGroup.MergeAttribute("aria-describedby", string.Format("{0}-help", expression));
+            formGroup.MergeAttribute("aria-describedby", string.Format("{0}-help", name));
             formGroup.MergeAttribute("form-group-validation", name);
 
 
@@ -130,6 +138,8 @@ namespace Tourtlee.BookingSystem.Web.Helpers
                 .Append(label)
                 .Append(divForInput);
 
+            ApplyValidationMessages(divForInput, name, _angularFormName);
+
             return formGroup;
         }
 
@@ -143,6 +153,25 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 
             if (metadata.DataTypeName == "PhoneNumber")
                 input.MergeAttribute("pattern", @"[\ 0-9()-]+");
+        }
+
+        private void ApplyValidationMessages(TagBuilder div, string propertyName, string angularFormName)
+        {
+            var span = new TagBuilder("span");
+            span.MergeAttribute("id", propertyName + "-help");
+            span.MergeAttribute("ng-show", string.Format("{0}.$submitted || {0}.email.$touched", angularFormName));
+            span.AddCssClass("help-block");
+
+            var ngMessages = new TagBuilder("ng-messages");
+            ngMessages.MergeAttribute("for", string.Format("{0}.{1}.$error", angularFormName, propertyName));
+
+            var ngIncludeMessages = new TagBuilder("ng-messages-include");
+            ngIncludeMessages.MergeAttribute("src", "Templates/ValidationMessages");
+
+            ngMessages.InnerHtml.Append(ngIncludeMessages);
+
+            span.InnerHtml.Append(ngMessages);
+            div.InnerHtml.Append(span);
         }
     }
 }

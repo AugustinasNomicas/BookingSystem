@@ -26,11 +26,7 @@
         <!-- Form Name -->
         <legend data-translate>users.create</legend>
 
-        <div class="alert alert-info">
-            Enter details for the new user below.
-        </div>
-
-        @user.FormGroupFor(u => u.Email)
+         @user.FormGroupFor(u => u.Email)
 
         @user.FormGroupFor(u => u.Password)
 

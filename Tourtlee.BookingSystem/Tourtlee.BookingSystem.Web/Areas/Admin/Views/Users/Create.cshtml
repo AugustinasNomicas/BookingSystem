@@ -44,12 +44,17 @@
                        ui-validate="{ passwordRepeat:'$value==vm.createUser.password' }"
                        ui-validate-watch=" 'vm.createUser.password' " />
 
-                <span class="help-block" id="passwordRepeat-help" ng-show="createUserForm.$submitted || createUserForm.passwordRepeat.$touched">
-                    <ng-messages for="createUserForm.passwordRepeat.$error" role="alert">
-                        <div ng-messages-include="Templates/ValidationMessages"></div>
-                    </ng-messages>
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="createUserForm.passwordRepeat.$valid"></span>
+                <span ng-show="createUserForm.$submitted || createUserForm.passwordRepeat.$touched">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-hide="createUserForm.passwordRepeat.$valid"></span>
+                    <span class="help-block" id="passwordRepeat-help">
+                        <ng-messages for="createUserForm.passwordRepeat.$error" role="alert">
+                            <div ng-messages-include="Templates/ValidationMessages"></div>
+                        </ng-messages>
+                    </span>
                 </span>
             </div>
+
 
         </div>
 
@@ -86,6 +91,12 @@
                             <div ng-bind-html="organization.name"></div>
                         </ui-select-choices>
                     </ui-select>
+
+                    <span class="help-block" ng-show="createUserForm.$submitted || createUserForm.idOrganization.$touched">
+                        <ng-messages for="createUserForm.idOrganization.$error" role="alert">
+                            <div ng-messages-include="Templates/ValidationMessages"></div>
+                        </ng-messages>
+                    </span>
                 </div>
             </div>
 
@@ -98,6 +109,17 @@
                            ng-required="@user.PropertyFor(u => u.OrganizationMode) == 1"
                            name="organizationName"
                            ng-model="@user.PropertyFor(u => u.OrganizationName)" />
+
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="createUserForm.organizationName.$valid"></span>
+                    <span ng-show="createUserForm.$submitted || createUserForm.organizationName.$touched">
+                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-hide="createUserForm.organizationName.$valid"></span>
+                        <span class="help-block" id="organizationName-help">
+                            <ng-messages for="createUserForm.organizationName.$error" role="alert">
+                                <div ng-messages-include="Templates/ValidationMessages"></div>
+                            </ng-messages>
+                        </span>
+                    </span>
+
                 </div>
             </div>
         </div>

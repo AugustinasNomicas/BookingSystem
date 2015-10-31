@@ -157,9 +157,12 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 
         private void ApplyValidationMessages(TagBuilder div, string propertyName, string angularFormName)
         {
+            var rootSpan = new TagBuilder("span");
+            rootSpan.MergeAttribute("ng-show", string.Format("{0}.$submitted || {0}.{1}.$touched", angularFormName, propertyName));
+
             var span = new TagBuilder("span");
             span.MergeAttribute("id", propertyName + "-help");
-            span.MergeAttribute("ng-show", string.Format("{0}.$submitted || {0}.email.$touched", angularFormName));
+
             span.AddCssClass("help-block");
 
             var ngMessages = new TagBuilder("ng-messages");
@@ -170,8 +173,25 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 
             ngMessages.InnerHtml.Append(ngIncludeMessages);
 
+            // icons
+            var okIconSpan = new TagBuilder("span");
+            okIconSpan.AddCssClass("glyphicon");
+            okIconSpan.AddCssClass("glyphicon-ok");
+            okIconSpan.AddCssClass("form-control-feedback");
+            okIconSpan.MergeAttribute("ng-show", string.Format("{0}.{1}.$valid", angularFormName, propertyName));
+            div.InnerHtml.Append(okIconSpan);
+
+            var removeIconSpan = new TagBuilder("span");
+            removeIconSpan.AddCssClass("glyphicon");
+            removeIconSpan.AddCssClass("glyphicon-remove");
+            removeIconSpan.AddCssClass("form-control-feedback");
+            removeIconSpan.MergeAttribute("ng-hide", string.Format("{0}.{1}.$valid", angularFormName, propertyName));
+
             span.InnerHtml.Append(ngMessages);
-            div.InnerHtml.Append(span);
+            rootSpan.InnerHtml.Append(removeIconSpan);
+            rootSpan.InnerHtml.Append(span);
+            
+            div.InnerHtml.Append(rootSpan);
         }
     }
 }

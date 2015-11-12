@@ -24,14 +24,14 @@
     <div v-crud-grid
          crud-resource="usersResource"
          items="vm.usersList"
-         id-binding="IdUser"
+         id-binding="idUser"
          id-default-value="00000000-0000-0000-0000-000000000000"
          readonly="true"
          columns-definition='[
          {
             "binding"       :"idUser",
             "type"          :"disabled",
-            "required"      :"true",
+            "required"      :"false",
             "hidden"        :"false"
          },
          {

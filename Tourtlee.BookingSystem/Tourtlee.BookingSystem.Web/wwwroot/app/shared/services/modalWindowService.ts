@@ -3,9 +3,9 @@
 import modalWindowController = require("./modalwindowcontroller");
 
 class modalWindowService {
-    static $inject: string[] = ['$modal'];
+    static $inject: string[] = ['$uibModal'];
 
-    constructor(private $modal: angular.ui.bootstrap.IModalService) {
+    constructor(private $uibModal: angular.ui.bootstrap.IModalService) {
 
     }
 
@@ -24,7 +24,7 @@ class modalWindowService {
             }
         };
 
-        var modalInstance = this.$modal.open(modalSettings);
+        var modalInstance = this.$uibModal.open(modalSettings);
         
         modalInstance.result.then(
             // if any, execute confirm callback

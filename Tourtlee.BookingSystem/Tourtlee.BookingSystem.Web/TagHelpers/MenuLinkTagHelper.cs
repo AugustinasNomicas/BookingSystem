@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Mvc.ViewFeatures;
-using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace Tourtlee.BookingSystem.Web.TagHelpers
 {
@@ -43,7 +40,7 @@ namespace Tourtlee.BookingSystem.Web.TagHelpers
             var a = new TagBuilder("a");
             a.MergeAttribute("href", $"{menuUrl}");
             a.MergeAttribute("title", MenuText);
-            a.InnerHtml.AppendEncoded(MenuText);
+            a.InnerHtml.Append(MenuText);
             
             var routeData = ViewContext.RouteData.Values;
             var currentController = routeData["controller"];

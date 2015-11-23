@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.OptionsModel;
 using Tourtlee.BookingSystem.DataAccess.Auth;
 using Tourtlee.BookingSystem.Model;
 using Tourtlee.BookingSystem.Model.Security;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
@@ -31,7 +27,7 @@ namespace Tourtlee.BookingSystem.DataAccess
             builder.Entity<ApplicationUser>()
                 .HasOne(u => u.Organization)
                 .WithMany(o => o.Users)
-                .ForeignKey(u => u.IdOrganization);
+                .HasForeignKey(u => u.IdOrganization);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
@@ -44,9 +40,6 @@ namespace Tourtlee.BookingSystem.DataAccess
                     await sqlDb.EnsureCreatedAsync();
                     await CreateAdminUser(db, serviceProvider);
                 }
-
-                var loggerFactory = db.GetService<ILoggerFactory>();
-                loggerFactory.AddProvider(new DbLoggerProvider());
             }
         }
 

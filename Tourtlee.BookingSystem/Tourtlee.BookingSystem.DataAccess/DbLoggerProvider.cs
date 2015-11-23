@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Framework.Logging;
-using NuGet;
-using ILogger = Microsoft.Framework.Logging.ILogger;
+﻿using Microsoft.Extensions.Logging;
+
 
 namespace Tourtlee.BookingSystem.DataAccess
 {

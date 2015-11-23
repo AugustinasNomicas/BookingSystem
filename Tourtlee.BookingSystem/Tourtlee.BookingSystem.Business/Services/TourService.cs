@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Framework.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Tours;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {

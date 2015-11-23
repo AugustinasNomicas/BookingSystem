@@ -111,7 +111,7 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             label.AddCssClass("col-md-4");
             label.MergeAttribute("for", name);
             label.MergeAttribute("data-translate", "");
-            label.InnerHtml.AppendEncoded(labelText);
+            label.InnerHtml.Append(labelText);
 
             var tagName = metadata.DataTypeName == "MultilineText"
                 ? "textarea"

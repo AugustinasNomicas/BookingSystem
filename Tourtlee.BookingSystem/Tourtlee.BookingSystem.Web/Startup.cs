@@ -6,8 +6,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.DataAccess;
 using Tourtlee.BookingSystem.DataAccess.Auth;
@@ -17,6 +15,9 @@ using Tourtlee.BookingSystem.Web.Security;
 using Microsoft.AspNet.Mvc.Razor;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.Mvc.Formatters;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Tourtlee.BookingSystem.Web
 {

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Dnx.Runtime;
 using Microsoft.Net.Http.Headers;
 using System.Text;
+using Microsoft.Extensions.PlatformAbstractions;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

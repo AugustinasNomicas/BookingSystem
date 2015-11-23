@@ -1,0 +1,19 @@
+﻿@using Tourtlee.BookingSystem.Web.Helpers;
+
+@{
+    Layout = "_ManageLayout";
+    var tour = Html.Angular().ModelFor("vm.editTour", "editTourForm");
+}
+
+<script>
+    System.import('manage/tours/tours.module.js');
+
+    var usersConfig = {
+        createUser: @Html.JsonFor(Model),
+        apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })'
+    };
+
+    @*var organizationsConfig = {
+        apiUrl: '@Url.Action("Index", "OrganizationsApi", new { Area = "Admin" })'
+    };*@
+</script>

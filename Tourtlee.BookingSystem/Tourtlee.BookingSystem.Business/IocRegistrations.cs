@@ -1,4 +1,4 @@
-﻿using Microsoft.Framework.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
 using Tourtlee.BookingSystem.Business.Operations.Users;
 using Tourtlee.BookingSystem.Business.Services;

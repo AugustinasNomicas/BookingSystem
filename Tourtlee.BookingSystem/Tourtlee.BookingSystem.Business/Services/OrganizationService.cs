@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
-using Microsoft.Framework.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
 using Tourtlee.BookingSystem.Core;

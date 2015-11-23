@@ -1,4 +1,4 @@
-﻿using Microsoft.Framework.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
 
 namespace Tourtlee.BookingSystem.DataAccess

@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.Framework.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Accounts;
 using Tourtlee.BookingSystem.Business.Operations.Users;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {

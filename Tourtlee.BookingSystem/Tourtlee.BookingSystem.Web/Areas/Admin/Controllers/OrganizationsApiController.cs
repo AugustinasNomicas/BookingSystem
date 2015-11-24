@@ -5,7 +5,7 @@ using Tourtlee.BookingSystem.Business.Dto;
 using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.Web.Infastructure;
 
-namespace Tourtlee.BookingSystem.Web.ApiControllers.Admin
+namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class OrganizationsApiController : Controller, ICrudApiController<OrganizationDto>

@@ -41,7 +41,6 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<GetOrganizationListOperation>();
             return operation.Operate(null);
-
         }
 
         public void Update(OrganizationDto item)

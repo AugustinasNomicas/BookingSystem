@@ -1,4 +1,5 @@
 ﻿@using Tourtlee.BookingSystem.Web.Helpers;
+@model Tourtlee.BookingSystem.Business.Dto.Tours.TourDto
 
 @{
     Layout = "_ManageLayout";
@@ -8,12 +9,33 @@
 <script>
     System.import('manage/tours/tours.module.js');
 
-    var usersConfig = {
-        createUser: @Html.JsonFor(Model),
+    var toursConfig = {
+        editUser: @Html.JsonFor(Model),
         apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })'
     };
-
-    @*var organizationsConfig = {
-        apiUrl: '@Url.Action("Index", "OrganizationsApi", new { Area = "Admin" })'
-    };*@
 </script>
+
+<form class="form-horizontal" data-ng-controller="ToursEditController as vm" name="editTourForm"
+      data-ng-submit="vm.submit()" novalidate>
+
+    <fieldset>
+        <!-- Form Name -->
+        <legend data-translate>tours.edit</legend>
+
+        @tour.FormGroupFor(t => t.Name)
+
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-6">
+                <input type="submit" id="create"
+                       name="Submit" class="btn btn-success"
+                       translate="yes"
+                       translate-attr-value="common.submit"
+                       value="common.submit" />
+                @Html.ActionLink("common.cancel", "Index", "Tours", routeValues: new { Area = "Manage" },
+           htmlAttributes: new { title = "Cancel", role = "button", @class = "btn btn-default", data_translate = "" })
+            </div>
+        </div>
+
+    </fieldset>
+</form>

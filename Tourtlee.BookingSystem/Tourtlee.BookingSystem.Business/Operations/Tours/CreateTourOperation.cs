@@ -6,7 +6,7 @@ using Tourtlee.BookingSystem.Model;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Tours
 {
-    public class CreateTourOperation : OperationBase<CreateTourDto>
+    public class CreateTourOperation : OperationBase<TourDto>
     {
         private readonly ITourRepository _tourRepository;
         public CreateTourOperation(ITourRepository tourRepository)
@@ -14,15 +14,15 @@ namespace Tourtlee.BookingSystem.Business.Operations.Tours
             _tourRepository = tourRepository;
         }
 
-        public new void Operate(CreateTourDto createTourDto)
+        public new void Operate(TourDto editTourDto)
         {
             var tour = new Tour()
             {
                 IdTour = Guid.NewGuid(),
-                Name = createTourDto.Name,
-                Description = createTourDto.Description,
-                DescriptionShort = createTourDto.DescriptionShort,
-                Availabilities = createTourDto.Availabilities
+                Name = editTourDto.Name,
+                Description = editTourDto.Description,
+                DescriptionShort = editTourDto.DescriptionShort,
+                Availabilities = editTourDto.Availabilities
             };
 
             _tourRepository.Create(tour);

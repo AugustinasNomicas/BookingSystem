@@ -16,8 +16,8 @@ var Tours;
     app.directive("vCellEditor", vCellEditor.factory());
     app.directive("formGroupValidation", formGroupValidationDirective.factory());
     app.controller("toursController", toursController);
-    app.controller("toursEditController", toursEditController);
-    app.service("toursResource", toursResource);
+    app.controller("ToursEditController", toursEditController);
+    app.service("ToursResource", toursResource);
     angular.bootstrap(document, [moduleName], {
         strictDi: true
     });

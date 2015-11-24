@@ -12,6 +12,7 @@ namespace Tourtlee.BookingSystem.Business
             // Create services
             services.AddScoped<IOrganizationService, OrganizationService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITourService, TourService>();
 
             // Create operations
             services.AddTransient<CreateOrganizationOperation>();

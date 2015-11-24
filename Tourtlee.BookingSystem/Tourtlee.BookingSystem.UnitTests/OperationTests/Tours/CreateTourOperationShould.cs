@@ -20,7 +20,7 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Tours
         public void CreateNewTour()
         {
             var cmd = new CreateTourOperation(_tourRepository);
-            cmd.Operate(new CreateTourDto
+            cmd.Operate(new TourDto
             {
                 Name = "Test org"
             });

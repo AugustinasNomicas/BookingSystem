@@ -1,3 +1,3 @@
-export class TourListItemDto {
+class TourListItemDto {
     name: string
 }

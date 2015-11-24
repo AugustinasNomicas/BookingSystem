@@ -21,17 +21,17 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Tours
         [Fact]
         public void DeleteTour()
         {
-            var TourToDelete = new Tour
+            var tourToDelete = new Tour
             {
                 IdTour = new Guid("4fdb9f33-55b2-4a64-8a12-b68068b82e3f")
             };
             _tourRepository.FindBy(Arg.Any<System.Linq.Expressions.Expression<Func<Tour, bool>>>())
-                .Returns((new List<Tour>() { TourToDelete }).AsQueryable());
+                .Returns((new List<Tour>() { tourToDelete }).AsQueryable());
 
             var cmd = new DeleteTourOperation(_tourRepository);
-            cmd.Operate(TourToDelete.IdTour);
+            cmd.Operate(tourToDelete.IdTour);
 
-            _tourRepository.Received().Delete(TourToDelete);
+            _tourRepository.Received().Delete(tourToDelete);
             _tourRepository.Received().Save();
         }
 

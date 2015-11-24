@@ -1,0 +1,3 @@
+﻿interface IEditTourScope {
+    editTourForm: any;
+}

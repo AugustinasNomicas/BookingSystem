@@ -3,4 +3,3 @@ var TourListItemDto = (function () {
     }
     return TourListItemDto;
 })();
-exports.TourListItemDto = TourListItemDto;

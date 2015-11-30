@@ -11,12 +11,12 @@ var ToursResource = (function () {
         this.delete = function (id) {
             return _this.$http({ url: _this.apiUrl + ("delete/" + id), method: "Get" });
         };
-        //get = (id: string): angular.IHttpPromise<tourListItemDto> => {
-        //    return this.$http<tourListItemDto>({ url: this.apiUrl + `${id}`, method: "Get" });
-        //};
-        //getList = (): angular.IHttpPromise<tourListItemDto[]> => {
-        //    return this.$http<tourListItemDto[]>({ url: this.apiUrl, method: "Get" });
-        //};
+        this.get = function (id) {
+            return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });
+        };
+        this.getList = function () {
+            return _this.$http({ url: _this.apiUrl, method: "Get" });
+        };
         this.create = function (item) {
             return _this.$http({ url: _this.apiUrl + "create", method: "Post", data: item });
         };

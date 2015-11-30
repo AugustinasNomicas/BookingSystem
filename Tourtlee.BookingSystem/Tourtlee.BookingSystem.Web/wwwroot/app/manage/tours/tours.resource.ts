@@ -16,13 +16,13 @@ class ToursResource {
         return this.$http<void>({ url: this.apiUrl + `delete/${id}`, method: "Get" });
     };
 
-    //get = (id: string): angular.IHttpPromise<tourListItemDto> => {
-    //    return this.$http<tourListItemDto>({ url: this.apiUrl + `${id}`, method: "Get" });
-    //};
+    get = (id: string): angular.IHttpPromise<TourDto> => {
+        return this.$http<TourDto>({ url: this.apiUrl + `${id}`, method: "Get" });
+    };
 
-    //getList = (): angular.IHttpPromise<tourListItemDto[]> => {
-    //    return this.$http<tourListItemDto[]>({ url: this.apiUrl, method: "Get" });
-    //};
+    getList = (): angular.IHttpPromise<TourDto[]> => {
+        return this.$http<TourDto[]>({ url: this.apiUrl, method: "Get" });
+    };
 
     create = (item: TourDto): angular.IHttpPromise<TourDto> => {
         return this.$http<TourDto>({ url: this.apiUrl + `create`, method: "Post", data: item });

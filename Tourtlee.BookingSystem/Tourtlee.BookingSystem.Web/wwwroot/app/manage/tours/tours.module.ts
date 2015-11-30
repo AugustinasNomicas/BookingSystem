@@ -11,8 +11,6 @@ import toursController = require("./tours.controller");
 import toursEditController = require("./tours.edit.controller");
 import toursResource = require("./tours.resource");
 
-import organizationsResource = require("../organizations/organizations.resource");
-
 export module Tours {
     "use strict";
     var moduleName = "tours";
@@ -25,7 +23,7 @@ export module Tours {
 
     app.directive("formGroupValidation", formGroupValidationDirective.factory());
 
-    app.controller("toursController", toursController);
+    app.controller("ToursController", toursController);
     app.controller("ToursEditController", toursEditController);
     app.service("ToursResource", toursResource);
 

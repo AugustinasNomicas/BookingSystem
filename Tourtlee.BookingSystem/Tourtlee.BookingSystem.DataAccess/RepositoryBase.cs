@@ -25,7 +25,6 @@ namespace Tourtlee.BookingSystem.DataAccess
 
         public virtual IQueryable<T> GetAll()
         {
-
             IQueryable<T> query = BookingDbContext.Set<T>();
             return query;
         }

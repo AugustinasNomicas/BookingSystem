@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
+using Tourtlee.BookingSystem.Business.Operations.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Users;
 using Tourtlee.BookingSystem.Business.Services;
 
@@ -19,6 +20,12 @@ namespace Tourtlee.BookingSystem.Business
             services.AddTransient<GetOrganizationListOperation>();
             services.AddTransient<DeleteOrganizationOperation>();
             services.AddTransient<UpdateOrganizationOperation>();
+
+            //Tour operations
+            services.AddTransient<UpdateTourOperation>();
+            services.AddTransient<DeleteTourOperation>();
+            services.AddTransient<GetTourListOperation>();
+            services.AddTransient<CreateTourOperation>();
 
             services.AddTransient<GetUserListOperation>();
             services.AddTransient<CreateUserOperation>();

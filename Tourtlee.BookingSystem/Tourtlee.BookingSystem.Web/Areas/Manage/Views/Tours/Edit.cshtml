@@ -10,10 +10,14 @@
     System.import('manage/tours/tours.module.js');
 
     var toursConfig = {
-        editUser: @Html.JsonFor(Model),
+        editTour: @Html.JsonFor(Model),
         apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })'
     };
 </script>
+
+<div data-ng-controller="ToursController as vm">
+    <pre>{{ vm.tours }}</pre>
+</div>
 
 <form class="form-horizontal" data-ng-controller="ToursEditController as vm" name="editTourForm"
       data-ng-submit="vm.submit()" novalidate>

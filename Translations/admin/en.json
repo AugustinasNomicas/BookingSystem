@@ -39,5 +39,14 @@
 		 "password": "Password",
 		 "passwordRepeat": "Repeat password",
 		 "organizationName": "Organization name"
-	  }  
+	  },
+   "tours":{
+	   "selectTour": "Select tour",
+	   "edit": "Edit",
+	   "create": "Create"
+   },
+   "tourDto": {
+	   "name": "Name",
+	   "availabilities": "Availabilities"
+   }
 }

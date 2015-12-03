@@ -17,8 +17,8 @@ namespace Tourtlee.BookingSystem.DataAccess
         private const string SecuritySchameName = "Security";
         const string AdminRole = "Admin";
 
-
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Tour> Tours { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,6 +28,11 @@ namespace Tourtlee.BookingSystem.DataAccess
                 .HasOne(u => u.Organization)
                 .WithMany(o => o.Users)
                 .HasForeignKey(u => u.IdOrganization);
+
+            builder.Entity<Tour>()
+                .HasOne(t => t.Organization)
+                .WithMany(t => t.Tours)
+                .HasForeignKey(t => t.IdOrganization);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
@@ -77,9 +82,40 @@ namespace Tourtlee.BookingSystem.DataAccess
                 if (userCreationResult.Succeeded)
                 {
                     await userMgr.AddClaimAsync(user, new Claim("AccessAdminArea", "Allowed"));
-                    await db.SaveChangesAsync();
+                    
                 }
+
+                CreateTours(ownerOrganization.IdOrganization, db);
             }
+
+            await db.SaveChangesAsync();
+        }
+
+        private static void CreateTours(Guid idOrganization, BookingDbContext db)
+        {
+            var tour = new Tour()
+            {
+                Availabilities = 100,
+                Description = "Test long tour",
+                DescriptionShort = "Test short",
+                IdTour = Guid.NewGuid(),
+                Name = "Test tour",
+                IdOrganization = idOrganization
+            };
+
+            db.Tours.Add(tour);
+
+            tour = new Tour()
+            {
+                Availabilities = 100,
+                Description = "Test long tour 2",
+                DescriptionShort = "Test short 2",
+                IdTour = Guid.NewGuid(),
+                Name = "Test tour 2",
+                IdOrganization = idOrganization
+            };
+
+            db.Tours.Add(tour);
         }
     }
 }

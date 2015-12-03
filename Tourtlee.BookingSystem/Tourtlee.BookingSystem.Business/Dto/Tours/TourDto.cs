@@ -10,6 +10,9 @@ namespace Tourtlee.BookingSystem.Business.Dto.Tours
         [Key]
         public Guid IdTour { get; set; }
 
+        public Guid IdOrganization { get; set; }
+        public Organization Organization { get; set; }
+
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }

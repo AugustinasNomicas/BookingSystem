@@ -21,5 +21,6 @@ namespace Tourtlee.BookingSystem.Model
         public string Name { get; set; }
 
         public ICollection<ApplicationUser> Users { get; } = new List<ApplicationUser>();
+        public ICollection<Tour> Tours { get; } = new List<Tour>(); 
     }
 }

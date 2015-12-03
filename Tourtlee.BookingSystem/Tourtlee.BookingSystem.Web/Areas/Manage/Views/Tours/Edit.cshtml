@@ -3,43 +3,86 @@
 
 @{
     Layout = "_ManageLayout";
-    var tour = Html.Angular().ModelFor("vm.editTour", "editTourForm");
+    var tour = Html.Angular().ModelFor("vm.tour", "editTourForm");
 }
 
 <script>
     System.import('manage/tours/tours.module.js');
 
     var toursConfig = {
-        editTour: @Html.JsonFor(Model),
         apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })'
     };
 </script>
 
-<div data-ng-controller="ToursController as vm">
-    <pre>{{ vm.tours }}</pre>
-</div>
-
-<form class="form-horizontal" data-ng-controller="ToursEditController as vm" name="editTourForm"
-      data-ng-submit="vm.submit()" novalidate>
-
-    <fieldset>
-        <!-- Form Name -->
-        <legend data-translate>tours.edit</legend>
-
-        @tour.FormGroupFor(t => t.Name)
-
+<div data-ng-controller="ToursEditController as vm">
+    <form class="form-horizontal" name="selectTourForm" novalidate>
         <div class="form-group">
-            <label class="col-md-4 control-label"></label>
-            <div class="col-md-6">
+            <label class="col-md-4 control-label" for="selectTour"
+                   data-translate>tours.selectTour</label>
+            <div class="col-md-4">
+                <ui-select ng-model="vm.tour"
+                           id="selectTour"
+                           ng-required="true">
+                    <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="tour in vm.tours | filter: $select.search">
+                        <div ng-bind-html="tour.name"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span data-translate>tours.create</span>
+                </button>
+                @*<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
                 <input type="submit" id="create"
-                       name="Submit" class="btn btn-success"
+                       name="Create new tour" class="btn btn-success"
                        translate="yes"
-                       translate-attr-value="common.submit"
-                       value="common.submit" />
-                @Html.ActionLink("common.cancel", "Index", "Tours", routeValues: new { Area = "Manage" },
-           htmlAttributes: new { title = "Cancel", role = "button", @class = "btn btn-default", data_translate = "" })
+                       translate-attr-value="tour.create"
+                       value="tour.create"/>*@
             </div>
         </div>
+    </form>
 
-    </fieldset>
-</form>
+    <form class="form-horizontal" name="editTourForm"
+          data-ng-submit="vm.submit()" novalidate>
+
+        <fieldset>
+            <!-- Form Name -->
+            <legend data-translate>tours.edit</legend>
+
+            @tour.FormGroupFor(t => t.Name)
+
+            @tour.FormGroupFor(t => t.Availabilities)
+
+            @tour.FormGroupFor(t => t.DescriptionShort)
+
+            @tour.FormGroupFor(t => t.Description)
+
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-6">
+                    @*<input type="submit" id="submit"
+                           name="Submit" class="btn btn-success"
+                           translate="yes"
+                           translate-attr-value="common.submit"
+                           value="common.submit"/>*@
+
+                    <button type="submit" class="btn btn-success">
+                        <i class="glyphicon glyphicon-ok"></i>
+                        <span data-translate>common.save</span>
+                    </button>
+
+                    <button type="submit" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        <span data-translate>common.delete</span>
+                    </button>
+
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>

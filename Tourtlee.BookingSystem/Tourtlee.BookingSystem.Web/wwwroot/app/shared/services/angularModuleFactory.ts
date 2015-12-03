@@ -8,7 +8,7 @@ class angulaModuleFactory {
 
         var module = angular.module(moduleName, defaultRequiredModules);
 
-        module.service("modalWindowService", modalWindowService);
+        module.service("ModalWindowService", modalWindowService);
         module.service("notificationService", notificationService);
 
 

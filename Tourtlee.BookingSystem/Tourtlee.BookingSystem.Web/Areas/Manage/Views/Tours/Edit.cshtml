@@ -22,6 +22,7 @@
             <div class="col-md-4">
                 <ui-select ng-model="vm.tour"
                            id="selectTour"
+                           data-on-select="vm.onTourSelect($item)"
                            ng-required="true">
                     <ui-select-match>{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="tour in vm.tours | filter: $select.search">
@@ -63,18 +64,12 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-6">
-                    @*<input type="submit" id="submit"
-                           name="Submit" class="btn btn-success"
-                           translate="yes"
-                           translate-attr-value="common.submit"
-                           value="common.submit"/>*@
-
                     <button type="submit" class="btn btn-success">
                         <i class="glyphicon glyphicon-ok"></i>
                         <span data-translate>common.save</span>
                     </button>
 
-                    <button type="submit" class="btn btn-danger">
+                    <button type="button" class="btn btn-danger" data-ng-click="vm.deleteTourWithConfirmation()">
                         <i class="glyphicon glyphicon-remove"></i>
                         <span data-translate>common.delete</span>
                     </button>

@@ -1,25 +1,27 @@
-﻿class modalWindowController {
-    static $inject: string[] = ['$scope', '$modalInstance'];
-    constructor($scope, $modalInstance, title, body) {
-        $scope.title = "";
-        $scope.body = "";
+﻿class ModalWindowController {
+    static $inject: string[] = ["$modalInstance", "title", "body", "$translate"];
 
+    title = "";
+    body = "";
+
+    constructor(private $modalInstance,
+        title, body, $translate) {
         // If specified, fill window title and message with parameters
-        if (title) {
-            $scope.title = title;
+        if (title && body) {
+            $translate([title, body]).then((t) => {
+                this.title = t[title];
+                this.body = t[body];
+            });
         }
-        if (body) {
-            $scope.body = body;
-        }
+    }
 
-        $scope.confirm = function () {
-            $modalInstance.close();
-        };
+    confirm = () => {
+        this.$modalInstance.close();
+    };
 
-        $scope.cancel = function () {
-            $modalInstance.dismiss();
-        };
+    cancel = () => {
+        this.$modalInstance.dismiss();
     };
 }
 
-export = modalWindowController;
+export = ModalWindowController;

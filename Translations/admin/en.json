@@ -43,7 +43,9 @@
    "tours":{
 	   "selectTour": "Select tour",
 	   "edit": "Edit",
-	   "create": "Create"
+	   "create": "Create",
+	   "cannotDeleteLastTourTitle": "Can not delete",
+	   "cannotDeleteLastTourMsg": "Can not delete last tour"
    },
    "tourDto": {
 	   "name": "Name",

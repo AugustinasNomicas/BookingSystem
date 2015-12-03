@@ -2,24 +2,25 @@
 
 import modalWindowController = require("./modalwindowcontroller");
 
-class modalWindowService {
+class ModalWindowService {
     static $inject: string[] = ['$uibModal'];
 
     constructor(private $uibModal: angular.ui.bootstrap.IModalService) {
 
     }
 
-    public show(title: string, msg: string, confirmCallback, cancelCallback) {
+    public show(title: string, body: string, confirmCallback, cancelCallback) {
         var modalSettings: angular.ui.bootstrap.IModalSettings = {
             templateUrl: '/app/shared/templates/modal-window.view.html',
             controller: modalWindowController,
+            controllerAs: 'vm',
             size: 'sm',
             resolve: {
                 title: () => {
                     return title;
                 },
-                body: function () {
-                    return msg;
+                body: () => {
+                    return body;
                 }
             }
         };
@@ -28,13 +29,13 @@ class modalWindowService {
         
         modalInstance.result.then(
             // if any, execute confirm callback
-            function () {
+            () => {
                 if (confirmCallback != undefined) {
                     confirmCallback();
                 }
             },
             // if any, execute cancel callback
-            function () {
+            () => {
                 if (cancelCallback != undefined) {
                     cancelCallback();
                 }
@@ -42,4 +43,4 @@ class modalWindowService {
     }
  }
 
-export = modalWindowService
+export = ModalWindowService

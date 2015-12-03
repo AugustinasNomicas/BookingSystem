@@ -1,20 +1,21 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 var modalWindowController = require("./modalwindowcontroller");
-var modalWindowService = (function () {
-    function modalWindowService($uibModal) {
+var ModalWindowService = (function () {
+    function ModalWindowService($uibModal) {
         this.$uibModal = $uibModal;
     }
-    modalWindowService.prototype.show = function (title, msg, confirmCallback, cancelCallback) {
+    ModalWindowService.prototype.show = function (title, body, confirmCallback, cancelCallback) {
         var modalSettings = {
             templateUrl: '/app/shared/templates/modal-window.view.html',
             controller: modalWindowController,
+            controllerAs: 'vm',
             size: 'sm',
             resolve: {
                 title: function () {
                     return title;
                 },
                 body: function () {
-                    return msg;
+                    return body;
                 }
             }
         };
@@ -33,7 +34,7 @@ var modalWindowService = (function () {
             }
         });
     };
-    modalWindowService.$inject = ['$uibModal'];
-    return modalWindowService;
+    ModalWindowService.$inject = ['$uibModal'];
+    return ModalWindowService;
 })();
-module.exports = modalWindowService;
+module.exports = ModalWindowService;

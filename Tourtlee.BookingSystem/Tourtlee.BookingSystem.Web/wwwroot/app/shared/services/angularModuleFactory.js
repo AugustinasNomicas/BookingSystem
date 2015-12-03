@@ -7,7 +7,7 @@ var angulaModuleFactory = (function () {
         var defaultRequiredModules = ["mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
             "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages'];
         var module = angular.module(moduleName, defaultRequiredModules);
-        module.service("modalWindowService", modalWindowService);
+        module.service("ModalWindowService", modalWindowService);
         module.service("notificationService", notificationService);
         module.config(['$logProvider', function ($logProvider) {
                 $logProvider.debugEnabled(true);

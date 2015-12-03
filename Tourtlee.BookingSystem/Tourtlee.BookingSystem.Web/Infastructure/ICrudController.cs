@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Tourtlee.BookingSystem.Web.Infastructure
 {
-    interface ICrudApiController<T>
+    public interface ICrudApiController<T>
     {
         // CREATE
         T Create(T item);

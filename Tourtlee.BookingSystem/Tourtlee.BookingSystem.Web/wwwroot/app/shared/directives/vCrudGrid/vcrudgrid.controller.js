@@ -105,11 +105,7 @@ var vCrudGridController = (function () {
     };
     vCrudGridController.prototype.deleteItemWithConfirmation = function (item) {
         var _this = this;
-        this.$translate(["common.deleteConfirmTitle", "common.deleteConfirmContent"]).then(function (t) {
-            var title = t["common.deleteConfirmTitle"];
-            var msg = t["common.deleteConfirmContent"];
-            _this.modalWindowService.show(title, msg, function () { _this.deleteItem(item); }, function () { });
-        });
+        this.modalWindowService.show("common.deleteConfirmTitle", "common.deleteConfirmContent", function () { _this.deleteItem(item); }, function () { });
     };
     vCrudGridController.prototype.clearFilter = function () {
         this.filterText = "";
@@ -201,7 +197,7 @@ var vCrudGridController = (function () {
             itemTarget[column.binding] = itemSource[column.binding];
         });
     };
-    vCrudGridController.$inject = ["$injector", "modalWindowService", "notificationService", "$translate"];
+    vCrudGridController.$inject = ["$injector", "ModalWindowService", "notificationService", "$translate"];
     return vCrudGridController;
 })();
 ;

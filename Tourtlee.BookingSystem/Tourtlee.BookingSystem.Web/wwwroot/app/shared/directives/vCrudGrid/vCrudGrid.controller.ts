@@ -6,7 +6,7 @@ import modalWindowService = require("../../services/modalWindowService");
 import notificationService = require("../../services/notificationService");
 
 class vCrudGridController {
-    static $inject: string[] = ["$injector", "modalWindowService", "notificationService", "$translate"];
+    static $inject: string[] = ["$injector", "ModalWindowService", "notificationService", "$translate"];
 
     columnsDefinition: any[]; // TODO: create type for column definition
     allItems: any[];
@@ -136,11 +136,8 @@ class vCrudGridController {
     }
 
     deleteItemWithConfirmation(item) {
-        this.$translate(["common.deleteConfirmTitle", "common.deleteConfirmContent"]).then((t) => {
-            const title = t["common.deleteConfirmTitle"];
-            const msg = t["common.deleteConfirmContent"];
-            this.modalWindowService.show(title, msg, () => { this.deleteItem(item); }, () => { });
-        });
+        this.modalWindowService.show("common.deleteConfirmTitle",
+            "common.deleteConfirmContent", () => { this.deleteItem(item); }, () => { });
     }
 
     clearFilter() {

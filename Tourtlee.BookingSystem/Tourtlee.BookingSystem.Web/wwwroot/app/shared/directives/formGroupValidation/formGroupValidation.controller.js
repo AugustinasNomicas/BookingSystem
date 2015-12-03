@@ -13,7 +13,8 @@ var formGroupValidationController = (function () {
         return 'has-error';
     };
     formGroupValidationController.prototype.canBeValidated = function () {
-        return (this.$scope.form[this.field].$touched || this.$scope.form.$submitted);
+        return (this.$scope.form[this.field].$touched || this.$scope.form.$submitted)
+            && !this.$scope.form.$pristine;
     };
     formGroupValidationController.prototype.isValid = function () {
         return this.$scope.form[this.field].$valid;

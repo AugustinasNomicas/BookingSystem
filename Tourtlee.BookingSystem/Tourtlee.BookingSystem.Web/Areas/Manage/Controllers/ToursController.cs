@@ -27,10 +27,5 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
         {
             return View("Edit", _tourService.GetDefault());
         }
-
-        public IActionResult Create()
-        {
-            return View("Edit", new TourDto());
-        }
     }
 }

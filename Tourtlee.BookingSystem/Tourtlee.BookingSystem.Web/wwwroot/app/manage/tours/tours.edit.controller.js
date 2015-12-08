@@ -1,6 +1,7 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="tours.types.ts" />
 "use strict";
+var tourDto_1 = require('./dto/tourDto');
 var ToursEditController = (function () {
     function ToursEditController($scope, $window, toursResource, notificationService, modalWindowService, $translate) {
         this.$scope = $scope;
@@ -18,10 +19,10 @@ var ToursEditController = (function () {
         if (!this.$scope.editTourForm.$valid)
             return;
         this.toursResource.update(this.tour).then(function (result) {
-            _this.tour = result.data;
-            _this.notificationService.success("editTour");
+            _this.notificationService.success("tours.updated");
             _this.$scope.editTourForm.$setPristine();
             _this.loadTours();
+            _this.tour = result.data;
         }, function (error) {
             _this.notificationService.error(error.data);
         });
@@ -29,8 +30,15 @@ var ToursEditController = (function () {
     ToursEditController.prototype.onTourSelect = function (item) {
         this.$scope.editTourForm.$setPristine();
     };
+    ToursEditController.prototype.createTour = function () {
+        var newTour = new tourDto_1.TourDto();
+        this.tour = newTour;
+        this.tours.unshift(newTour);
+    };
     ToursEditController.prototype.deleteTourWithConfirmation = function () {
         var _this = this;
+        if (!this.tour.idTour)
+            return;
         if (this.tours.length <= 1) {
             this.modalWindowService.show("tours.cannotDeleteLastTourTitle", "tours.cannotDeleteLastTourMsg", function () { }, function () { });
         }

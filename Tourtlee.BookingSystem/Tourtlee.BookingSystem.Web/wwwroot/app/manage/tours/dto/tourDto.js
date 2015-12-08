@@ -3,3 +3,4 @@ var TourDto = (function () {
     }
     return TourDto;
 })();
+exports.TourDto = TourDto;

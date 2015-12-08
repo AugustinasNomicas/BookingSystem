@@ -33,19 +33,10 @@
             </div>
 
             <div class="col-md-4">
-                @Html.ActionLink("tours.create", "Create", "Tours", routeValues: new { Area = "Manage" },
-           htmlAttributes: new { title = "Create", role = "button", @class = "btn btn-primary", data_translate = "" })
-
-                @*<button type="submit" class="btn btn-primary">
-                    <i class="glyphicon glyphicon-plus"></i>
+                <button type="button" class="btn btn-primary" data-ng-click="vm.createTour()">
+                    <i class="glyphicon glyphicon-add"></i>
                     <span data-translate>tours.create</span>
-                </button>*@
-                @*<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                <input type="submit" id="create"
-                       name="Create new tour" class="btn btn-success"
-                       translate="yes"
-                       translate-attr-value="tour.create"
-                       value="tour.create"/>*@
+                </button>
             </div>
         </div>
     </form>

@@ -143,10 +143,18 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             return formGroup;
         }
 
+        private bool IsNumeric(ModelMetadata metadata)
+        {
+            return metadata.ModelType == typeof(int);
+        }
+
         private void ApplyValidationToInput(TagBuilder input, ModelMetadata metadata, string ngModelExpression)
         {
             if (metadata.IsRequired)
                 input.MergeAttribute("required", "");
+
+            if (IsNumeric(metadata))
+                input.Attributes["type"] = "number";
 
             if (metadata.DataTypeName == "EmailAddress")
                 input.Attributes["type"] = "email";
@@ -157,13 +165,13 @@ namespace Tourtlee.BookingSystem.Web.Helpers
 
         private void ApplyValidationMessages(TagBuilder div, string propertyName, string angularFormName)
         {
-            var rootSpan = new TagBuilder("span");
-            rootSpan.MergeAttribute("ng-show", string.Format("{0}.$submitted || {0}.{1}.$touched", angularFormName, propertyName));
+            var validationSpan = new TagBuilder("span");
+            validationSpan.MergeAttribute("ng-show", string.Format("{0}.$submitted || {0}.{1}.$touched", angularFormName, propertyName));
 
-            var span = new TagBuilder("span");
-            span.MergeAttribute("id", propertyName + "-help");
-
-            span.AddCssClass("help-block");
+            var messagesSpan = new TagBuilder("span");
+            messagesSpan.MergeAttribute("id", propertyName + "-help");
+            messagesSpan.MergeAttribute("ng-hide", string.Format("{0}.{1}.$valid", angularFormName, propertyName));
+            messagesSpan.AddCssClass("help-block");
 
             var ngMessages = new TagBuilder("ng-messages");
             ngMessages.MergeAttribute("for", string.Format("{0}.{1}.$error", angularFormName, propertyName));
@@ -178,20 +186,20 @@ namespace Tourtlee.BookingSystem.Web.Helpers
             okIconSpan.AddCssClass("glyphicon");
             okIconSpan.AddCssClass("glyphicon-ok");
             okIconSpan.AddCssClass("form-control-feedback");
-            okIconSpan.MergeAttribute("ng-show", string.Format("{0}.{1}.$valid", angularFormName, propertyName));
+            okIconSpan.MergeAttribute("ng-show", string.Format("{0}.{1}.$valid && {0}.{1}.$dirty", angularFormName, propertyName));
             div.InnerHtml.Append(okIconSpan);
 
             var removeIconSpan = new TagBuilder("span");
             removeIconSpan.AddCssClass("glyphicon");
             removeIconSpan.AddCssClass("glyphicon-remove");
             removeIconSpan.AddCssClass("form-control-feedback");
-            removeIconSpan.MergeAttribute("ng-hide", string.Format("{0}.{1}.$valid", angularFormName, propertyName));
+            removeIconSpan.MergeAttribute("ng-show", string.Format("!{0}.{1}.$valid && {0}.{1}.$dirty", angularFormName, propertyName));
+            div.InnerHtml.Append(removeIconSpan);
 
-            span.InnerHtml.Append(ngMessages);
-            rootSpan.InnerHtml.Append(removeIconSpan);
-            rootSpan.InnerHtml.Append(span);
+            messagesSpan.InnerHtml.Append(ngMessages);
+            validationSpan.InnerHtml.Append(messagesSpan);
             
-            div.InnerHtml.Append(rootSpan);
+            div.InnerHtml.Append(validationSpan);
         }
     }
 }

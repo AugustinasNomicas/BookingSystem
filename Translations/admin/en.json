@@ -45,10 +45,13 @@
 	   "edit": "Edit",
 	   "create": "Create",
 	   "cannotDeleteLastTourTitle": "Can not delete",
-	   "cannotDeleteLastTourMsg": "Can not delete last tour"
+	   "cannotDeleteLastTourMsg": "Can not delete last tour",
+	   "updated": "Tour updated"
    },
    "tourDto": {
 	   "name": "Name",
-	   "availabilities": "Availabilities"
+	   "availabilities": "Availabilities",
+	   "descriptionShort": "Short description",
+	   "description": "Full description"
    }
 }

@@ -28,4 +28,4 @@ var ToursResource = (function () {
     ToursResource.$inject = ["$http", "$window"];
     return ToursResource;
 })();
-module.exports = ToursResource;
+exports.ToursResource = ToursResource;

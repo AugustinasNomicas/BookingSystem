@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="tours.types.ts" />
 "use strict";
-import toursResource = require("./tours.resource");
+import {ToursResource} from "./tours.resource";
 import notificationService = require("../../shared/services/notificationservice");
 import modalWindowService = require("../../shared/services/modalWindowService");
-
+import {TourDto} from './dto/tourDto';
 
 class ToursEditController {
     static $inject: string[] = ["$scope", "$window", "ToursResource",
@@ -17,7 +17,7 @@ class ToursEditController {
 
     constructor(private $scope: IEditTourScope,
         private $window: angular.IWindowService,
-        private toursResource: toursResource,
+        private toursResource: ToursResource,
         private notificationService: notificationService,
         private modalWindowService: modalWindowService,
         private $translate: any) {
@@ -30,10 +30,10 @@ class ToursEditController {
             return;
 
         this.toursResource.update(this.tour).then((result) => {
-            this.tour = result.data;
-            this.notificationService.success("editTour");
+            this.notificationService.success("tours.updated");
             this.$scope.editTourForm.$setPristine();
             this.loadTours();
+            this.tour = result.data;
         }, (error) => {
             this.notificationService.error(error.data);
         });
@@ -43,7 +43,16 @@ class ToursEditController {
         this.$scope.editTourForm.$setPristine();
     }
 
-    deleteTourWithConfirmation() {
+    createTour(): void {
+        var newTour = new TourDto();
+        this.tour = newTour;
+        this.tours.unshift(newTour);
+    }
+
+    deleteTourWithConfirmation(): void {
+        if (!this.tour.idTour) // can not delete new tour
+            return;
+
         if (this.tours.length <= 1) {
             this.modalWindowService.show("tours.cannotDeleteLastTourTitle",
                 "tours.cannotDeleteLastTourMsg", () => { }, () => { });
@@ -53,7 +62,7 @@ class ToursEditController {
         }
     }
 
-    private deleteTour() {
+    private deleteTour(): void {
         var id = this.tour.idTour;
         this.toursResource.delete(id).success(() => {
             var index = this.tours.indexOf(this.tour);
@@ -65,7 +74,7 @@ class ToursEditController {
         });
     }
 
-    private loadTours() {
+    private loadTours(): void {
         this.toursResource.getList().then(response => {
             this.tours = response.data;
         });

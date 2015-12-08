@@ -1,4 +1,4 @@
-class TourDto {
+export class TourDto {
     idTour: string;
     name: string;
     description: string;

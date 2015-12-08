@@ -4,7 +4,7 @@
 /// <reference path="dto/tourdto.ts" />
 
 "use strict";
-class ToursResource {
+export class ToursResource {
     static $inject: string[] = ["$http", "$window"];
     apiUrl: string;
 
@@ -33,5 +33,4 @@ class ToursResource {
     };
 }
 
-export = ToursResource;    
 

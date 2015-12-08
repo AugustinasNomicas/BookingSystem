@@ -18,7 +18,7 @@ class formGroupValidationController {
     }
 
     private canBeValidated() {
-        return (this.$scope.form[this.field].$touched || this.$scope.form.$submitted)
+        return (this.$scope.form[this.field].$dirty || this.$scope.form.$submitted)
             && !this.$scope.form.$pristine;
     }
 

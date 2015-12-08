@@ -10,7 +10,8 @@
     System.import('manage/tours/tours.module.js');
 
     var toursConfig = {
-        apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })'
+        apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })',
+        tour: @Html.JsonFor(Model)
     };
 </script>
 
@@ -32,10 +33,13 @@
             </div>
 
             <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">
+                @Html.ActionLink("tours.create", "Create", "Tours", routeValues: new { Area = "Manage" },
+           htmlAttributes: new { title = "Create", role = "button", @class = "btn btn-primary", data_translate = "" })
+
+                @*<button type="submit" class="btn btn-primary">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span data-translate>tours.create</span>
-                </button>
+                </button>*@
                 @*<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
                 <input type="submit" id="create"
                        name="Create new tour" class="btn btn-success"

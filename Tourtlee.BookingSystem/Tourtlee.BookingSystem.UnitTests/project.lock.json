@@ -1263,6 +1263,7 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "AutoMapper": "4.1.1",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0",
           "Tourtlee.BookingSystem.Core": "1.0.0",
           "Tourtlee.BookingSystem.DataAccess": "1.0.0"
         }
@@ -2663,6 +2664,7 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "AutoMapper": "4.1.1",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0",
           "Tourtlee.BookingSystem.Core": "1.0.0",
           "Tourtlee.BookingSystem.DataAccess": "1.0.0"
         }
@@ -4063,6 +4065,7 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "AutoMapper": "4.1.1",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0",
           "Tourtlee.BookingSystem.Core": "1.0.0",
           "Tourtlee.BookingSystem.DataAccess": "1.0.0"
         }

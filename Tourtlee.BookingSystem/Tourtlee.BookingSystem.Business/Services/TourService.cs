@@ -11,6 +11,7 @@ namespace Tourtlee.BookingSystem.Business.Services
 {
     public interface ITourService : ICrudService<TourDto>
     {
+        TourDto GetDefault();
     }
 
     public class TourService: ServiceBase, ITourService
@@ -36,13 +37,20 @@ namespace Tourtlee.BookingSystem.Business.Services
 
         public TourDto Get(Guid id)
         {
-            throw new NotImplementedException();
+            var operation = _serviceProvider.GetRequiredService<GetTourOperation>();
+            return operation.Operate(id);
         }
 
-        public void Update(TourDto item)
+        public TourDto GetDefault()
+        {
+            var operation = _serviceProvider.GetRequiredService<GetTourOperation>();
+            return operation.Operate(null);
+        }
+
+        public TourDto Update(TourDto item)
         {
             var operation = _serviceProvider.GetRequiredService<UpdateTourOperation>();
-            operation.Operate(item);
+            return operation.Operate(item);
         }
 
         public void Delete(Guid id)

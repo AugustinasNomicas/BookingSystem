@@ -18,6 +18,7 @@
     }
   },
   "dependencies": {
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-*",
     "Tourtlee.BookingSystem.Core": "1.0.0-*",
     "Tourtlee.BookingSystem.DataAccess": "1.0.0-*",
     "AutoMapper": "4.1.1"

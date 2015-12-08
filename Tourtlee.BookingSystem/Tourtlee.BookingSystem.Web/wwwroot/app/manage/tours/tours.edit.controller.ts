@@ -22,6 +22,7 @@ class ToursEditController {
         private modalWindowService: modalWindowService,
         private $translate: any) {
         this.loadTours();
+        this.tour = $window["toursConfig"]["tour"];
     }
 
     submit(): void {
@@ -32,6 +33,7 @@ class ToursEditController {
             this.tour = result.data;
             this.notificationService.success("editTour");
             this.$scope.editTourForm.$setPristine();
+            this.loadTours();
         }, (error) => {
             this.notificationService.error(error.data);
         });
@@ -66,7 +68,6 @@ class ToursEditController {
     private loadTours() {
         this.toursResource.getList().then(response => {
             this.tours = response.data;
-            this.tour = this.tours[0];
         });
     }
 

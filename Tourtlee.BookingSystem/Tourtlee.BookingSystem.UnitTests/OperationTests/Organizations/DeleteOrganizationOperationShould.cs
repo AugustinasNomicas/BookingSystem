@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using NSubstitute;
+using Tourtlee.BookingSystem.Business.Operations.Core;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
 using Tourtlee.BookingSystem.Model;
@@ -13,10 +14,12 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Organizations
     public class DeleteOrganizationOperationShould : OperationBaseTest
     {
         private readonly IOrganizationRepository _organizationRepository;
+        private readonly IOperationContext _operationContext;
 
         public DeleteOrganizationOperationShould()
         {
             _organizationRepository = Substitute.For<IOrganizationRepository>();
+            _operationContext = Substitute.For<IOperationContext>();
         }
 
         [Fact]
@@ -29,7 +32,7 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Organizations
             _organizationRepository.FindBy(Arg.Any<System.Linq.Expressions.Expression<Func<Organization, bool>>>())
                 .Returns((new List<Organization>() { organizationToDelete }).AsQueryable());
 
-            var cmd = new DeleteOrganizationOperation(_organizationRepository);
+            var cmd = new DeleteOrganizationOperation(_operationContext, _organizationRepository);
             cmd.Operate(organizationToDelete.IdOrganization);
 
             _organizationRepository.Received().Delete(organizationToDelete);
@@ -46,7 +49,7 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Organizations
             _organizationRepository.FindBy(Arg.Any<System.Linq.Expressions.Expression<Func<Organization, bool>>>())
                 .Returns((new List<Organization>() { organizationToDelete }).AsQueryable());
 
-            var cmd = new DeleteOrganizationOperation(_organizationRepository);
+            var cmd = new DeleteOrganizationOperation(_operationContext, _organizationRepository);
 
             Assert.Throws<ValidationException>(() => cmd.Operate(organizationToDelete.IdOrganization));
         }

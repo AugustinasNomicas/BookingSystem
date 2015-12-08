@@ -8,6 +8,7 @@ using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.Model.Security;
 using System.Linq;
+using Tourtlee.BookingSystem.Business.Operations.Core;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Users
 {
@@ -16,13 +17,14 @@ namespace Tourtlee.BookingSystem.Business.Operations.Users
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IOrganizationService _organizationService;
 
-        public CreateUserOperation(UserManager<ApplicationUser> userManager, IOrganizationService organizationService)
+        public CreateUserOperation(IOperationContext operationContext,
+            UserManager<ApplicationUser> userManager, IOrganizationService organizationService) : base(operationContext)
         {
             _userManager = userManager;
             _organizationService = organizationService;
         }
 
-        public new void Operate(CreateUserDto createUserDto)
+        protected override void OnOperate(CreateUserDto createUserDto)
         {
             Validate(createUserDto);
             try

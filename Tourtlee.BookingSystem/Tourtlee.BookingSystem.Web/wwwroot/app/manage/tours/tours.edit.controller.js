@@ -11,6 +11,7 @@ var ToursEditController = (function () {
         this.$translate = $translate;
         this.vm = this;
         this.loadTours();
+        this.tour = $window["toursConfig"]["tour"];
     }
     ToursEditController.prototype.submit = function () {
         var _this = this;
@@ -20,6 +21,7 @@ var ToursEditController = (function () {
             _this.tour = result.data;
             _this.notificationService.success("editTour");
             _this.$scope.editTourForm.$setPristine();
+            _this.loadTours();
         }, function (error) {
             _this.notificationService.error(error.data);
         });
@@ -52,7 +54,6 @@ var ToursEditController = (function () {
         var _this = this;
         this.toursResource.getList().then(function (response) {
             _this.tours = response.data;
-            _this.tour = _this.tours[0];
         });
     };
     ToursEditController.$inject = ["$scope", "$window", "ToursResource",

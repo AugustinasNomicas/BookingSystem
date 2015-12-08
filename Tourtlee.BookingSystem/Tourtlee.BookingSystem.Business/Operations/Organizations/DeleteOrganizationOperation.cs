@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Tourtlee.BookingSystem.Business.Operations.Core;
 using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.DataAccess;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
@@ -14,13 +15,14 @@ namespace Tourtlee.BookingSystem.Business.Operations.Organizations
     {
         private readonly IOrganizationRepository _organizationRepository;
 
-        public DeleteOrganizationOperation(IOrganizationRepository organizationRepository)
+        public DeleteOrganizationOperation(IOperationContext operationContext, 
+            IOrganizationRepository organizationRepository) : base(operationContext)
         {
             _organizationRepository = organizationRepository;
 
         }
 
-        public new void Operate(Guid request)
+        protected override void OnOperate(Guid request)
         {
             if (Organization.AdminIdOrganization == request)
                 throw new ValidationException("Can not delete owner organization");

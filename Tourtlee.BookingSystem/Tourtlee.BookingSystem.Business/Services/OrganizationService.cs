@@ -43,10 +43,10 @@ namespace Tourtlee.BookingSystem.Business.Services
             return operation.Operate(null);
         }
 
-        public void Update(OrganizationDto item)
+        public OrganizationDto Update(OrganizationDto item)
         {
             var operation = _serviceProvider.GetRequiredService<UpdateOrganizationOperation>();
-            operation.Operate(item);
+            return operation.Operate(item);
         }
     }
 }

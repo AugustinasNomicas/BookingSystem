@@ -43,11 +43,6 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
         [HttpPut]
         public TourDto Update([FromBody] TourDto item)
         {
-            if (item.IdTour == Guid.Empty)
-            {
-                throw new ArgumentException("Invalid IdTour");
-            }
-
             _tourService.Update(item);
             return item;
         }

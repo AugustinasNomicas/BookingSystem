@@ -14,7 +14,7 @@ namespace Tourtlee.BookingSystem.Core
         // READ By ID
         T Get(Guid id);
         // UPDATE
-        void Update(T item);
+        T Update(T item);
         // DELETE
         void Delete(Guid id);
     }

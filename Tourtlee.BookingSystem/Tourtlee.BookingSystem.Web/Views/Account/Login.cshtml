@@ -4,10 +4,12 @@
 @using Microsoft.AspNet.Http.Authentication
 
 @{
-    //TODO: Until we have a way to specify the layout page at application level.
-    Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Log in";
 }
+
+<script>
+    System.import('default.module.js');
+</script>
 
 <h2>@ViewBag.Title.</h2>
 <div class="row">

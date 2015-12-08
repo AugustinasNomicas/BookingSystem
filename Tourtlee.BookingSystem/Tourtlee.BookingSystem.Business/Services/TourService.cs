@@ -25,7 +25,8 @@ namespace Tourtlee.BookingSystem.Business.Services
 
         public void Create(TourDto tourDto)
         {
-            var operation = _serviceProvider.GetRequiredService<CreateTourOperation>();
+            // UpdateTourOperation also creates new tour if IdTour is empty
+            var operation = _serviceProvider.GetRequiredService<UpdateTourOperation>();
             operation.Operate(tourDto);
         }
 

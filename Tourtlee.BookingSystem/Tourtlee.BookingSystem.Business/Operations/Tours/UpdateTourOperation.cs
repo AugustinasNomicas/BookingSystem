@@ -28,6 +28,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Tours
             else
             {
                 tour.IdTour = Guid.NewGuid();
+                tour.IdOrganization = OperationContext.User.IdOrganization;
                 _tourRepository.Create(tour);
             }
             _tourRepository.Save();

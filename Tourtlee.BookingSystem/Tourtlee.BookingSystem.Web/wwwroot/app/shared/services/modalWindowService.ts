@@ -1,8 +1,7 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
+import {ModalWindowController} from "./modalWindowController";
 
-import modalWindowController = require("./modalwindowcontroller");
-
-class ModalWindowService {
+export class ModalWindowService {
     static $inject: string[] = ['$uibModal'];
 
     constructor(private $uibModal: angular.ui.bootstrap.IModalService) {
@@ -12,7 +11,7 @@ class ModalWindowService {
     public show(title: string, body: string, confirmCallback, cancelCallback) {
         var modalSettings: angular.ui.bootstrap.IModalSettings = {
             templateUrl: '/app/shared/templates/modal-window.view.html',
-            controller: modalWindowController,
+            controller: ModalWindowController,
             controllerAs: 'vm',
             size: 'sm',
             resolve: {
@@ -42,5 +41,3 @@ class ModalWindowService {
             });
     }
  }
-
-export = ModalWindowService

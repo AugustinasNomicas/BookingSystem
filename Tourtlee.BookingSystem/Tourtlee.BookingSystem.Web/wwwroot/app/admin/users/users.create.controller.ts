@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 "use strict";
 
-import notificationService = require("../../shared/services/notificationservice");
 import {CreateUserDto, CreateUserOrganizationModes} from "./dto/CreateUserDto";
 import {UsersResource} from "./users.resource";
 import {OrganizationsResource} from "../organizations/organizations.resource";
+import {NotificationService} from "../../shared/services/notificationService";
 
 export interface IScope {
     createUserForm: any;
@@ -21,7 +21,7 @@ export class UsersCreateController {
         private $window: angular.IWindowService,
         private usersResource: UsersResource,
         private organizationsResource: OrganizationsResource,
-        private notificationService: notificationService,
+        private notificationService: NotificationService,
         private $templateCache: any) {
 
         this.createUser = $window["usersConfig"]["createUser"];

@@ -1,4 +1,4 @@
-class notificationService {
+export class NotificationService {
     static $inject: string[] = ["toastr", "$translate"];
 
     constructor(private toastr: any, private $translate: any) {
@@ -27,9 +27,4 @@ class notificationService {
             this.toastr.success(t[msg]);
         });
     }
-
-
 }
-
-
-export = notificationService;

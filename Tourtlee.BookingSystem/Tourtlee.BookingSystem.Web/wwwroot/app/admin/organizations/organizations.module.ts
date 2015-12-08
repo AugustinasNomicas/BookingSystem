@@ -3,16 +3,16 @@
 import vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive");
 import vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 
-import angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 import {OrganizationsController} from "./organizations.controller";
 import {OrganizationsResource} from "./organizations.resource";
+import {AngularModuleFactory} from "../../shared/services/angularModuleFactory";
 
 export module Organizations {
     "use strict";
     var moduleName = "organizations";
     var translationsPart = "admin";
 
-    var app = angulaModuleFactory.factory(moduleName, translationsPart);
+    var app = AngularModuleFactory.factory(moduleName, translationsPart);
 
     app.directive("vCrudGrid", vCrudGrid.factory())
         .directive("vCellEditor", vCellEditor.factory());        

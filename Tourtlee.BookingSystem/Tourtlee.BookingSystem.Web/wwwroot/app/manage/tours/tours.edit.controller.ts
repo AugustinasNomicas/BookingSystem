@@ -2,9 +2,9 @@
 /// <reference path="tours.types.ts" />
 "use strict";
 import {ToursResource} from "./tours.resource";
-import notificationService = require("../../shared/services/notificationservice");
-import modalWindowService = require("../../shared/services/modalWindowService");
 import {TourDto} from './dto/tourDto';
+import {NotificationService} from "../../shared/services/notificationService";
+import {ModalWindowService} from "../../shared/services/modalWindowService";
 
 export class ToursEditController {
     static $inject: string[] = ["$scope", "$window", "ToursResource",
@@ -18,8 +18,8 @@ export class ToursEditController {
     constructor(private $scope: IEditTourScope,
         private $window: angular.IWindowService,
         private toursResource: ToursResource,
-        private notificationService: notificationService,
-        private modalWindowService: modalWindowService,
+        private notificationService: NotificationService,
+        private modalWindowService: ModalWindowService,
         private $translate: any) {
         this.loadTours();
         this.tour = $window["toursConfig"]["tour"];

@@ -1,14 +1,15 @@
-var modalWindowService = require("./modalwindowservice");
-var notificationService = require("./notificationService");
-var angulaModuleFactory = (function () {
-    function angulaModuleFactory() {
+"use strict";
+var modalWindowService_1 = require("./modalWindowService");
+var notificationService_1 = require("./notificationService");
+var AngularModuleFactory = (function () {
+    function AngularModuleFactory() {
     }
-    angulaModuleFactory.factory = function (moduleName, translationsPart) {
+    AngularModuleFactory.factory = function (moduleName, translationsPart) {
         var defaultRequiredModules = ["mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
             "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages'];
         var module = angular.module(moduleName, defaultRequiredModules);
-        module.service("ModalWindowService", modalWindowService);
-        module.service("notificationService", notificationService);
+        module.service("ModalWindowService", modalWindowService_1.ModalWindowService);
+        module.service("notificationService", notificationService_1.NotificationService);
         module.config(['$logProvider', function ($logProvider) {
                 $logProvider.debugEnabled(true);
             }]);
@@ -32,6 +33,6 @@ var angulaModuleFactory = (function () {
             }]);
         return module;
     };
-    return angulaModuleFactory;
+    return AngularModuleFactory;
 })();
-module.exports = angulaModuleFactory;
+exports.AngularModuleFactory = AngularModuleFactory;

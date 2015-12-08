@@ -1,4 +1,4 @@
-﻿class ModalWindowController {
+﻿export class ModalWindowController {
     static $inject: string[] = ["$modalInstance", "title", "body", "$translate"];
 
     title = "";
@@ -23,5 +23,3 @@
         this.$modalInstance.dismiss();
     };
 }
-
-export = ModalWindowController;

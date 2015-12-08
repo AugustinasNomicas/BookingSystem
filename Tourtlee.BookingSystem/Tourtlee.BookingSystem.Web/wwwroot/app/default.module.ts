@@ -1,12 +1,14 @@
 /// <reference path="../../typings/tsd.d.ts" />
-import angulaModuleFactory = require("./shared/services/angularmodulefactory");
+"use strict";
 
-export module Users {
+import {AngularModuleFactory} from "./shared/services/angularModuleFactory";
+
+export module Default {
     "use strict";
     var moduleName = "default";
     var translationsPart = "admin";
 
-    var app = angulaModuleFactory.factory(moduleName, translationsPart);
+    var app = AngularModuleFactory.factory(moduleName, translationsPart);
 
     angular.bootstrap(document, [moduleName], {
         strictDi: true

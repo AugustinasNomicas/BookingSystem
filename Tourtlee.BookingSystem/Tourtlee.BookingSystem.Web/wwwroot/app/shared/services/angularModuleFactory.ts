@@ -1,15 +1,17 @@
-﻿import modalWindowService = require("./modalwindowservice");
-import notificationService = require("./notificationService");
+﻿"use strict";
 
-class angulaModuleFactory {
+import {ModalWindowService} from "./modalWindowService";
+import {NotificationService} from "./notificationService";
+
+export class AngularModuleFactory {
     static factory(moduleName: string, translationsPart: string): angular.IModule {
         var defaultRequiredModules = ["mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
             "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages'];
 
         var module = angular.module(moduleName, defaultRequiredModules);
 
-        module.service("ModalWindowService", modalWindowService);
-        module.service("notificationService", notificationService);
+        module.service("ModalWindowService", ModalWindowService);
+        module.service("notificationService", NotificationService);
 
 
         module.config(['$logProvider', $logProvider => {
@@ -39,5 +41,3 @@ class angulaModuleFactory {
         return module;
     }
 }
-
-export = angulaModuleFactory

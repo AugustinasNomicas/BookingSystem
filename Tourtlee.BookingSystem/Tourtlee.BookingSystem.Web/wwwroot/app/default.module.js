@@ -1,12 +1,13 @@
 /// <reference path="../../typings/tsd.d.ts" />
-var angulaModuleFactory = require("./shared/services/angularmodulefactory");
-var Users;
-(function (Users) {
+"use strict";
+var angularModuleFactory_1 = require("./shared/services/angularModuleFactory");
+var Default;
+(function (Default) {
     "use strict";
     var moduleName = "default";
     var translationsPart = "admin";
-    var app = angulaModuleFactory.factory(moduleName, translationsPart);
+    var app = angularModuleFactory_1.AngularModuleFactory.factory(moduleName, translationsPart);
     angular.bootstrap(document, [moduleName], {
         strictDi: true
     });
-})(Users = exports.Users || (exports.Users = {}));
+})(Default = exports.Default || (exports.Default = {}));

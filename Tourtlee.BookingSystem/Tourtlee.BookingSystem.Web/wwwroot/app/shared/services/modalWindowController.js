@@ -21,4 +21,4 @@ var ModalWindowController = (function () {
     ModalWindowController.$inject = ["$modalInstance", "title", "body", "$translate"];
     return ModalWindowController;
 })();
-module.exports = ModalWindowController;
+exports.ModalWindowController = ModalWindowController;

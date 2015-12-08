@@ -1,9 +1,9 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 /// <reference path="../../interfaces/icrudresource.ts" />
-
 "use strict";
-import modalWindowService = require("../../services/modalWindowService");
-import notificationService = require("../../services/notificationService");
+
+import {ModalWindowService} from "../../services/modalWindowService";
+import {NotificationService} from "../../services/notificationService";
 
 class vCrudGridController {
     static $inject: string[] = ["$injector", "ModalWindowService", "notificationService", "$translate"];
@@ -23,8 +23,8 @@ class vCrudGridController {
     private idDefaultValue: string;
 
     constructor(private $injector: angular.auto.IInjectorService,
-        private modalWindowService: modalWindowService,
-        private notificationService: notificationService,
+        private modalWindowService: ModalWindowService,
+        private notificationService: NotificationService,
         private $translate: any) {
 
     }

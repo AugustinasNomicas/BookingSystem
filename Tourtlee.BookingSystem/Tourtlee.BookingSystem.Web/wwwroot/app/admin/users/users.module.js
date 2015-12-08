@@ -3,10 +3,10 @@ var vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive")
 var vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 var formGroupValidationDirective = require("../../shared/directives/formgroupvalidation/formgroupvalidation.directive");
 var angulaModuleFactory = require("../../shared/services/angularmodulefactory");
-var usersController = require("./users.controller");
-var usersCreateController = require("./users.create.controller");
-var usersResource = require("./users.resource");
-var organizationsResource = require("../organizations/organizations.resource");
+var users_controller_1 = require("./users.controller");
+var users_create_controller_1 = require("./users.create.controller");
+var users_resource_1 = require("./users.resource");
+var organizations_resource_1 = require("../organizations/organizations.resource");
 var Users;
 (function (Users) {
     "use strict";
@@ -16,10 +16,10 @@ var Users;
     app.directive("vCrudGrid", vCrudGrid.factory());
     app.directive("vCellEditor", vCellEditor.factory());
     app.directive("formGroupValidation", formGroupValidationDirective.factory());
-    app.controller("UsersController", usersController);
-    app.controller("UsersCreateController", usersCreateController);
-    app.service("usersResource", usersResource);
-    app.service("organizationsResource", organizationsResource);
+    app.controller("UsersController", users_controller_1.UsersController);
+    app.controller("UsersCreateController", users_create_controller_1.UsersCreateController);
+    app.service("UsersResource", users_resource_1.UsersResource);
+    app.service("OrganizationsResource", organizations_resource_1.OrganizationsResource);
     angular.bootstrap(document, [moduleName], {
         strictDi: true
     });

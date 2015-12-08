@@ -3,8 +3,8 @@ var vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive")
 var vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
 var formGroupValidationDirective = require("../../shared/directives/formgroupvalidation/formgroupvalidation.directive");
 var angulaModuleFactory = require("../../shared/services/angularmodulefactory");
-var toursEditController = require("./tours.edit.controller");
 var tours_resource_1 = require("./tours.resource");
+var tours_edit_controller_1 = require("./tours.edit.controller");
 var Tours;
 (function (Tours) {
     "use strict";
@@ -14,7 +14,7 @@ var Tours;
     app.directive("vCrudGrid", vCrudGrid.factory());
     app.directive("vCellEditor", vCellEditor.factory());
     app.directive("formGroupValidation", formGroupValidationDirective.factory());
-    app.controller("ToursEditController", toursEditController);
+    app.controller("ToursEditController", tours_edit_controller_1.ToursEditController);
     app.service("ToursResource", tours_resource_1.ToursResource);
     angular.bootstrap(document, [moduleName], {
         strictDi: true

@@ -1,6 +1,6 @@
-class UserListItemDto {
-    IdUser: string;
-    Email: string;
-    OrganizationName: string;
-    IdOrganization: string;
+export class UserListItemDto {
+    idUser: string;
+    email: string;
+    organizationName: string;
+    idOrganization: string;
 }

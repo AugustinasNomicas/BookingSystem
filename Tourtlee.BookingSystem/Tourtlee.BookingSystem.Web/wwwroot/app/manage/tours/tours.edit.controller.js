@@ -68,4 +68,4 @@ var ToursEditController = (function () {
         "notificationService", "ModalWindowService", "$translate"];
     return ToursEditController;
 })();
-module.exports = ToursEditController;
+exports.ToursEditController = ToursEditController;

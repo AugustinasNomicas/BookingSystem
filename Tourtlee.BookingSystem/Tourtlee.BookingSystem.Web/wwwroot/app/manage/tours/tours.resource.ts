@@ -1,9 +1,9 @@
 ﻿/// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
-/// <reference path="dto/tourlistitemdto.ts" />
-/// <reference path="dto/tourdto.ts" />
-
 "use strict";
+
+import {TourDto} from "./dto/tourDto";
+
 export class ToursResource {
     static $inject: string[] = ["$http", "$window"];
     apiUrl: string;

@@ -1,34 +1,31 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="dto/createuserdto.ts" />
-
-import usersResource = require("./users.resource");
-import organizationsResource = require("../organizations/organizations.resource");
-import notificationService = require("../../shared/services/notificationservice");
-import createUserDto = require("./dto/createUserDto");
-
 "use strict";
 
-interface Scope {
+import notificationService = require("../../shared/services/notificationservice");
+import {CreateUserDto, CreateUserOrganizationModes} from "./dto/CreateUserDto";
+import {UsersResource} from "./users.resource";
+import {OrganizationsResource} from "../organizations/organizations.resource";
+
+export interface IScope {
     createUserForm: any;
 }
 
-class usersCreateController {
-    static $inject: string[] = ["$scope", "$window", "usersResource", "organizationsResource",
+export class UsersCreateController {
+    static $inject: string[] = ["$scope", "$window", "UsersResource", "OrganizationsResource",
         "notificationService", "$templateCache"];
-    vm = this;
 
     organizations: OrganizationDto[];
-    createUser: createUserDto.CreateUserDto;
+    createUser: CreateUserDto;
 
-    constructor(public $scope: Scope,
+    constructor(private $scope: IScope,
         private $window: angular.IWindowService,
-        private usersResource: usersResource,
-        private organizationsResource: organizationsResource,
+        private usersResource: UsersResource,
+        private organizationsResource: OrganizationsResource,
         private notificationService: notificationService,
         private $templateCache: any) {
 
         this.createUser = $window["usersConfig"]["createUser"];
-        this.createUser.organizationMode = createUserDto.CreateUserOrganizatioModes.Existing;
+        this.createUser.organizationMode = CreateUserOrganizationModes.Existing;
         this.loadOrganizations();
     }
 
@@ -50,5 +47,3 @@ class usersCreateController {
         });
     }
 }
-
-export = usersCreateController;

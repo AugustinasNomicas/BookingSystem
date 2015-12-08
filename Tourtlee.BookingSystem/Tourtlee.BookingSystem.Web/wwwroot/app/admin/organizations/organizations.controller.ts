@@ -1,14 +1,12 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 "use strict";
 
-class organizationsController {
+export class OrganizationsController {
     static $inject: string[] = ["$scope", "$window"];
-    public organizationsList: OrganizationDto[];
+    organizationsList: OrganizationDto[];
     
     constructor(public $scope: angular.IScope, private $window: angular.IWindowService) {
         this.organizationsList = $window["organizationsConfig"]["organizationsList"];
     }
-
 }
 
-export = organizationsController;

@@ -2,8 +2,8 @@
 /// <reference path="dto/organizationdto.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
 "use strict";
-var organizationsResource = (function () {
-    function organizationsResource($http, $window) {
+var OrganizationsResource = (function () {
+    function OrganizationsResource($http, $window) {
         var _this = this;
         this.$http = $http;
         this.$window = $window;
@@ -24,7 +24,7 @@ var organizationsResource = (function () {
         };
         this.apiUrl = $window["organizationsConfig"]["apiUrl"] + '/';
     }
-    organizationsResource.$inject = ["$http", "$window"];
-    return organizationsResource;
+    OrganizationsResource.$inject = ["$http", "$window"];
+    return OrganizationsResource;
 })();
-module.exports = organizationsResource;
+exports.OrganizationsResource = OrganizationsResource;

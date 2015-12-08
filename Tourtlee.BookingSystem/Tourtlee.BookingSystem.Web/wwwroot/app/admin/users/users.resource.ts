@@ -1,10 +1,12 @@
 ﻿/// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
-/// <reference path="dto/createuserdto.ts" />
 /// <reference path="dto/userlistitemdto.ts" />
-
 "use strict";
-class usersResource {
+
+import {CreateUserDto} from "./dto/CreateUserDto";
+import {UserListItemDto} from "./dto/UserListItemDto";
+
+export class UsersResource {
     static $inject: string[] = ["$http", "$window"];
 
     apiUrl: string;
@@ -33,6 +35,4 @@ class usersResource {
         return this.$http<UserListItemDto>({ url: this.apiUrl + `update`, method: "Put", data: item });
     };
 }
-
-export = usersResource;    
 

@@ -2,14 +2,17 @@
 /// <reference path="dto/userlistitemdto.ts" />
 "use strict";
 
-class usersController {
+import {UserListItemDto} from "./dto/UserListItemDto";
+
+
+export class UsersController {
     static $inject: string[] = ["$scope", "$window", '$translate'];
     vm = this;
-    public usersList: UserListItemDto[];
+    usersList: UserListItemDto[];
 
-    constructor(public $scope: angular.IScope, private $window: angular.IWindowService, private $translate: any) {
+    constructor(public $scope: angular.IScope,
+        private $window: angular.IWindowService, private $translate: any) {
         this.usersList = $window["usersConfig"]["usersList"];
     }
 }
 
-export = usersController;

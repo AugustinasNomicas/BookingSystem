@@ -7,11 +7,10 @@ import formGroupValidationDirective = require("../../shared/directives/formgroup
 
 import angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 
-import usersController = require("./users.controller");
-import usersCreateController = require("./users.create.controller");
-import usersResource = require("./users.resource");
-
-import organizationsResource = require("../organizations/organizations.resource");
+import {UsersController} from "./users.controller";
+import {UsersCreateController} from "./users.create.controller";
+import {UsersResource} from "./users.resource";
+import {OrganizationsResource} from "../organizations/organizations.resource";
 
 export module Users {
     "use strict";
@@ -25,11 +24,11 @@ export module Users {
 
     app.directive("formGroupValidation", formGroupValidationDirective.factory());
 
-    app.controller("UsersController", usersController);
-    app.controller("UsersCreateController", usersCreateController);
-    app.service("usersResource", usersResource);
+    app.controller("UsersController", UsersController);
+    app.controller("UsersCreateController", UsersCreateController);
+    app.service("UsersResource", UsersResource);
 
-    app.service("organizationsResource", organizationsResource);
+    app.service("OrganizationsResource", OrganizationsResource);
 
     angular.bootstrap(document, [moduleName], {
         strictDi: true

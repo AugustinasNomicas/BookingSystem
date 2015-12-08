@@ -3,7 +3,7 @@
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
 
 "use strict";
-class organizationsResource implements ICrudResource<OrganizationDto> { 
+export class OrganizationsResource implements ICrudResource<OrganizationDto> { 
         static $inject: string[] = ["$http", "$window"];
 
         apiUrl: string;
@@ -32,6 +32,3 @@ class organizationsResource implements ICrudResource<OrganizationDto> {
             return this.$http<OrganizationDto>({ url: this.apiUrl + `update`, method: "Put", data: item });
         }; 
 }
-
-export = organizationsResource;    
-

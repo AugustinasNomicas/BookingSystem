@@ -1,10 +1,9 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 /// <reference path="../../shared/interfaces/icrudresource.ts" />
-/// <reference path="dto/createuserdto.ts" />
 /// <reference path="dto/userlistitemdto.ts" />
 "use strict";
-var usersResource = (function () {
-    function usersResource($http, $window) {
+var UsersResource = (function () {
+    function UsersResource($http, $window) {
         var _this = this;
         this.$http = $http;
         this.$window = $window;
@@ -25,7 +24,7 @@ var usersResource = (function () {
         };
         this.apiUrl = $window["usersConfig"]["apiUrl"] + '/';
     }
-    usersResource.$inject = ["$http", "$window"];
-    return usersResource;
+    UsersResource.$inject = ["$http", "$window"];
+    return UsersResource;
 })();
-module.exports = usersResource;
+exports.UsersResource = UsersResource;

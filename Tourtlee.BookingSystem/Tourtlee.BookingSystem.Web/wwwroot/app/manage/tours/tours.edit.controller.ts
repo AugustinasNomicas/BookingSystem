@@ -6,7 +6,7 @@ import notificationService = require("../../shared/services/notificationservice"
 import modalWindowService = require("../../shared/services/modalWindowService");
 import {TourDto} from './dto/tourDto';
 
-class ToursEditController {
+export class ToursEditController {
     static $inject: string[] = ["$scope", "$window", "ToursResource",
         "notificationService", "ModalWindowService", "$translate"];
     private vm = this;
@@ -81,5 +81,3 @@ class ToursEditController {
     }
 
 }
-
-export = ToursEditController;

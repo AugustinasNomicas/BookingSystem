@@ -3,3 +3,4 @@ var UserListItemDto = (function () {
     }
     return UserListItemDto;
 })();
+exports.UserListItemDto = UserListItemDto;

@@ -7,8 +7,8 @@ import formGroupValidationDirective = require("../../shared/directives/formgroup
 
 import angulaModuleFactory = require("../../shared/services/angularmodulefactory");
 
-import toursEditController = require("./tours.edit.controller");
 import {ToursResource} from "./tours.resource";
+import {ToursEditController} from "./tours.edit.controller";
 
 export module Tours {
     "use strict";
@@ -22,7 +22,7 @@ export module Tours {
 
     app.directive("formGroupValidation", formGroupValidationDirective.factory());
 
-    app.controller("ToursEditController", toursEditController);
+    app.controller("ToursEditController", ToursEditController);
     app.service("ToursResource", ToursResource);
 
     angular.bootstrap(document, [moduleName], {

@@ -5,10 +5,10 @@ export class CreateUserDto {
 
     idOrganization: string;
     organizationName: string;
-    organizationMode: CreateUserOrganizatioModes;
+    organizationMode: CreateUserOrganizationModes;
 }
 
-export enum CreateUserOrganizatioModes {
+export enum CreateUserOrganizationModes {
     Existing = 0,
     Create = 1
 }

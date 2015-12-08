@@ -1,21 +1,19 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
-/// <reference path="dto/createuserdto.ts" />
-var createUserDto = require("./dto/createUserDto");
 "use strict";
-var usersCreateController = (function () {
-    function usersCreateController($scope, $window, usersResource, organizationsResource, notificationService, $templateCache) {
+var CreateUserDto_1 = require("./dto/CreateUserDto");
+var UsersCreateController = (function () {
+    function UsersCreateController($scope, $window, usersResource, organizationsResource, notificationService, $templateCache) {
         this.$scope = $scope;
         this.$window = $window;
         this.usersResource = usersResource;
         this.organizationsResource = organizationsResource;
         this.notificationService = notificationService;
         this.$templateCache = $templateCache;
-        this.vm = this;
         this.createUser = $window["usersConfig"]["createUser"];
-        this.createUser.organizationMode = createUserDto.CreateUserOrganizatioModes.Existing;
+        this.createUser.organizationMode = CreateUserDto_1.CreateUserOrganizationModes.Existing;
         this.loadOrganizations();
     }
-    usersCreateController.prototype.submit = function () {
+    UsersCreateController.prototype.submit = function () {
         var _this = this;
         if (!this.$scope.createUserForm.$valid)
             return;
@@ -26,14 +24,14 @@ var usersCreateController = (function () {
             _this.notificationService.error(error.data);
         });
     };
-    usersCreateController.prototype.loadOrganizations = function () {
+    UsersCreateController.prototype.loadOrganizations = function () {
         var _this = this;
         this.organizationsResource.getList().then(function (result) {
             _this.organizations = result.data;
         });
     };
-    usersCreateController.$inject = ["$scope", "$window", "usersResource", "organizationsResource",
+    UsersCreateController.$inject = ["$scope", "$window", "UsersResource", "OrganizationsResource",
         "notificationService", "$templateCache"];
-    return usersCreateController;
+    return UsersCreateController;
 })();
-module.exports = usersCreateController;
+exports.UsersCreateController = UsersCreateController;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Dto.Tours;
 using Tourtlee.BookingSystem.Business.Services;
@@ -10,6 +11,7 @@ using Tourtlee.BookingSystem.Business.Services;
 
 namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
 {
+    [Authorize]
     [Area("Manage")]
     public class ToursController : Controller
     {

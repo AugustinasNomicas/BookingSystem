@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Dto;
 using Tourtlee.BookingSystem.Business.Services;
@@ -7,6 +8,7 @@ using Tourtlee.BookingSystem.Web.Infastructure;
 
 namespace Tourtlee.BookingSystem.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class OrganizationsApiController : Controller, ICrudApiController<OrganizationDto>
     {

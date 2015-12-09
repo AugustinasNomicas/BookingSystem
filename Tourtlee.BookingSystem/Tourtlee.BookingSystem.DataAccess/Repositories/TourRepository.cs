@@ -5,7 +5,6 @@ namespace Tourtlee.BookingSystem.DataAccess.Repositories
 {
     public interface ITourRepository : IRepositoryBase<Tour>
     {
-        Tour GetDefault();
     }
 
     public class TourRepository : RepositoryBase<Tour>, ITourRepository
@@ -13,11 +12,6 @@ namespace Tourtlee.BookingSystem.DataAccess.Repositories
         public TourRepository(BookingDbContext bookingDbContext) : base(bookingDbContext)
         {
             
-        }
-
-        public Tour GetDefault()
-        {
-            return BookingDbContext.Set<Tour>().FirstOrDefault();
         }
     }
 }

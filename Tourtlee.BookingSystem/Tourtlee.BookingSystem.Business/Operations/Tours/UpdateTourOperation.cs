@@ -2,7 +2,6 @@
 using AutoMapper;
 using Tourtlee.BookingSystem.Business.Dto.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Core;
-using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
 using Tourtlee.BookingSystem.Model;
 
@@ -28,7 +27,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Tours
             else
             {
                 tour.IdTour = Guid.NewGuid();
-                tour.IdOrganization = OperationContext.User.IdOrganization;
+                tour.IdOrganization = OperationContext.IdOrganization;
                 _tourRepository.Create(tour);
             }
             _tourRepository.Save();

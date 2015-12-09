@@ -21,10 +21,7 @@ namespace Tourtlee.BookingSystem.UnitTests.OperationTests.Tours
         {
             _tourRepository = Substitute.For<ITourRepository>();
             _operationContext = Substitute.For<IOperationContext>();
-            _operationContext.User.Returns(new ApplicationUser()
-            {
-                IdOrganization = _idOrganization
-            });
+            _operationContext.IdOrganization.Returns(_idOrganization);
         }
 
         [Fact]

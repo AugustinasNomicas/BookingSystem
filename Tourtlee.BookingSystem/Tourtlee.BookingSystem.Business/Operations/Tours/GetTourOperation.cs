@@ -22,9 +22,10 @@ namespace Tourtlee.BookingSystem.Business.Operations.Tours
 
         protected override TourDto OnOperate(Guid? idTour)
         {
-            var tourEntity = idTour.HasValue ? 
+            var tourEntity = idTour.HasValue ?
                 _tourRepository.FindBy(t => t.IdTour == idTour.Value).FirstOrDefault()
-                : _tourRepository.GetDefault();
+                : _tourRepository.FindBy(t => t.IdOrganization 
+                == OperationContext.IdOrganization).FirstOrDefault();
 
             var tour = Mapper.Map<TourDto>(tourEntity);
             return tour;

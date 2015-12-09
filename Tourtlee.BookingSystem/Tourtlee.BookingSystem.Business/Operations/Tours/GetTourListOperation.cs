@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using Tourtlee.BookingSystem.Business.Dto.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Core;
-using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Tours
@@ -19,7 +18,8 @@ namespace Tourtlee.BookingSystem.Business.Operations.Tours
 
         protected override List<TourDto> OnOperate(object request)
         {
-            var tour = Mapper.Map<List<TourDto>>(_tourRepository.GetAll().ToList());
+            var tour = Mapper.Map<List<TourDto>>(_tourRepository.FindBy(t => t.IdOrganization == 
+            OperationContext.IdOrganization).ToList());
             return tour;
         }
     }

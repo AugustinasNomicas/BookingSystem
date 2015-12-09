@@ -1,6 +1,7 @@
-var controller = require("./cell.editor.controller");
-var vCellEditor = (function () {
-    function vCellEditor() {
+'use strict';
+var cell_editor_controller_1 = require("./cell.editor.controller");
+var CellEditorDirective = (function () {
+    function CellEditorDirective() {
         //	'A' - only matches attribute name
         //	'E' - only matches element name
         //	'C' - only matches class name
@@ -13,18 +14,18 @@ var vCellEditor = (function () {
         this.scope = {
             column: "=",
             item: "=",
-            keyUpEvent: "&",
+            keyUpEvent: "&" // method binding
         };
         // view
         this.templateUrl = '/app/shared/directives/vCrudGrid/cell.editor/cell.editor.view.html';
         // controller
-        this.controller = controller;
+        this.controller = cell_editor_controller_1.CellEditorController;
         this.controllerAs = "cellEditorCtrl";
     }
-    vCellEditor.factory = function () {
-        var directive = function () { return new vCellEditor(); };
+    CellEditorDirective.factory = function () {
+        var directive = function () { return new CellEditorDirective(); };
         return directive;
     };
-    return vCellEditor;
+    return CellEditorDirective;
 })();
-module.exports = vCellEditor;
+exports.CellEditorDirective = CellEditorDirective;

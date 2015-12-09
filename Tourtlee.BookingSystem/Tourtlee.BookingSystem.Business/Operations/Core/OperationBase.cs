@@ -29,12 +29,11 @@
 
     public abstract class OperationBase
     {
-        protected IOperationContext OperationContext => _operationContext;
-        private readonly IOperationContext _operationContext;
+        protected IOperationContext OperationContext { get; }
 
         protected OperationBase(IOperationContext operationContext)
         {
-            _operationContext = operationContext;
+            OperationContext = operationContext;
         }
     }
 }

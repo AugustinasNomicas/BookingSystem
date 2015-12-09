@@ -1,11 +1,11 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-var formGroupValidationController = require("./formGroupValidation.controller");
 "use strict";
-var formGroupValidationDirective = (function () {
-    function formGroupValidationDirective() {
+var formGroupValidation_controller_1 = require("./formGroupValidation.controller");
+var FormGroupValidationDirective = (function () {
+    function FormGroupValidationDirective() {
         this.require = '^form';
         this.restrict = 'A';
-        this.controller = formGroupValidationController;
+        this.controller = formGroupValidation_controller_1.FormGroupValidationController;
         this.controllerAs = 'vm';
         this.template = '<div class="has-feedback" ng-class="vm.getValidationClass()">' +
             '<ng-transclude></ng-transclude></div>';
@@ -18,10 +18,10 @@ var formGroupValidationDirective = (function () {
             field: '@formGroupValidation'
         };
     }
-    formGroupValidationDirective.factory = function () {
-        var directive = function () { return new formGroupValidationDirective(); };
+    FormGroupValidationDirective.factory = function () {
+        var directive = function () { return new FormGroupValidationDirective(); };
         return directive;
     };
-    return formGroupValidationDirective;
+    return FormGroupValidationDirective;
 })();
-module.exports = formGroupValidationDirective;
+exports.FormGroupValidationDirective = FormGroupValidationDirective;

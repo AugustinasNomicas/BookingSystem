@@ -1,11 +1,10 @@
 ﻿/// <reference path="../../../../typings/tsd.d.ts" />
 
-import vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive");
-import vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
-
 import {OrganizationsController} from "./organizations.controller";
 import {OrganizationsResource} from "./organizations.resource";
 import {AngularModuleFactory} from "../../shared/services/angularModuleFactory";
+import {CrudGridDirective} from "../../shared/directives/vCrudGrid/CrudGrid.directive";
+import {CellEditorDirective} from "../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive";
 
 export module Organizations {
     "use strict";
@@ -14,8 +13,8 @@ export module Organizations {
 
     var app = AngularModuleFactory.factory(moduleName, translationsPart);
 
-    app.directive("vCrudGrid", vCrudGrid.factory())
-        .directive("vCellEditor", vCellEditor.factory());        
+    app.directive("crudGrid", CrudGridDirective.factory())
+        .directive("cellEditor", CellEditorDirective.factory());        
 
     app.controller("OrganizationsController", OrganizationsController);
     app.service("OrganizationsResource", OrganizationsResource);

@@ -1,6 +1,7 @@
-import controller = require("./cell.editor.controller");
+'use strict';
+import {CellEditorController} from "./cell.editor.controller";
 
-class vCellEditor implements angular.IDirective {
+export class CellEditorDirective implements angular.IDirective {
     //	'A' - only matches attribute name
     //	'E' - only matches element name
     //	'C' - only matches class name
@@ -13,18 +14,16 @@ class vCellEditor implements angular.IDirective {
     scope = {
             column: "=",        // object binding
             item: "=",          // object binding
-            keyUpEvent: "&",    // method binding
+            keyUpEvent: "&"    // method binding
     };
     // view
     templateUrl = '/app/shared/directives/vCrudGrid/cell.editor/cell.editor.view.html';
     // controller
-    controller = controller;
+    controller = CellEditorController;
     controllerAs = "cellEditorCtrl";
 
     static factory(): angular.IDirectiveFactory {
-        const directive = () => new vCellEditor();
+        const directive = () => new CellEditorDirective();
         return directive;
     }
 }
-
-export = vCellEditor;

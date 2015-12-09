@@ -1,13 +1,9 @@
 ﻿/// <reference path="../../../../typings/tsd.d.ts" />
 
-import vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive");
-import vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
-
-import formGroupValidationDirective = require("../../shared/directives/formgroupvalidation/formgroupvalidation.directive");
-
 import {ToursResource} from "./tours.resource";
 import {ToursEditController} from "./tours.edit.controller";
 import {AngularModuleFactory} from "../../shared/services/angularModuleFactory";
+import {FormGroupValidationDirective} from "../../shared/directives/formGroupValidation/formGroupValidation.directive";
 
 export module Tours {
     "use strict";
@@ -16,10 +12,7 @@ export module Tours {
 
     var app = AngularModuleFactory.factory(moduleName, translationsPart);
 
-    app.directive("vCrudGrid", vCrudGrid.factory());
-    app.directive("vCellEditor", vCellEditor.factory());
-
-    app.directive("formGroupValidation", formGroupValidationDirective.factory());
+    app.directive("formGroupValidation", FormGroupValidationDirective.factory());
 
     app.controller("ToursEditController", ToursEditController);
     app.service("ToursResource", ToursResource);

@@ -1,15 +1,13 @@
 ﻿/// <reference path="../../../../typings/tsd.d.ts" />
 
-import vCrudGrid = require("../../shared/directives/vCrudGrid/vCrudGrid.directive");
-import vCellEditor = require("../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive");
-
-import formGroupValidationDirective = require("../../shared/directives/formgroupvalidation/formgroupvalidation.directive");
-
 import {UsersController} from "./users.controller";
 import {UsersCreateController} from "./users.create.controller";
 import {UsersResource} from "./users.resource";
 import {OrganizationsResource} from "../organizations/organizations.resource";
 import {AngularModuleFactory} from "../../shared/services/angularModuleFactory";
+import {CrudGridDirective} from "../../shared/directives/vCrudGrid/CrudGrid.directive";
+import {CellEditorDirective} from "../../shared/directives/vCrudGrid/cell.editor/cell.editor.directive";
+import {FormGroupValidationDirective} from "../../shared/directives/formGroupValidation/formGroupValidation.directive";
 
 export module Users {
     "use strict";
@@ -18,10 +16,10 @@ export module Users {
 
     var app = AngularModuleFactory.factory(moduleName, translationsPart);
 
-    app.directive("vCrudGrid", vCrudGrid.factory());
-    app.directive("vCellEditor", vCellEditor.factory());
+    app.directive("crudGrid", CrudGridDirective.factory());
+    app.directive("cellEditor", CellEditorDirective.factory());
 
-    app.directive("formGroupValidation", formGroupValidationDirective.factory());
+    app.directive("formGroupValidation", FormGroupValidationDirective.factory());
 
     app.controller("UsersController", UsersController);
     app.controller("UsersCreateController", UsersCreateController);

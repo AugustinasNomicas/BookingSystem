@@ -5,7 +5,7 @@
 import {ModalWindowService} from "../../services/modalWindowService";
 import {NotificationService} from "../../services/notificationService";
 
-class vCrudGridController {
+export class CrudGridController {
     static $inject: string[] = ["$injector", "ModalWindowService", "notificationService", "$translate"];
 
     columnsDefinition: any[]; // TODO: create type for column definition
@@ -247,6 +247,3 @@ class vCrudGridController {
 
 
 };
-
-
-export = vCrudGridController

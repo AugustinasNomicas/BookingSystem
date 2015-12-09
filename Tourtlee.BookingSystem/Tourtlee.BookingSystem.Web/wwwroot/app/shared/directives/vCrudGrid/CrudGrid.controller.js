@@ -1,8 +1,8 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 /// <reference path="../../interfaces/icrudresource.ts" />
 "use strict";
-var vCrudGridController = (function () {
-    function vCrudGridController($injector, modalWindowService, notificationService, $translate) {
+var CrudGridController = (function () {
+    function CrudGridController($injector, modalWindowService, notificationService, $translate) {
         var _this = this;
         this.$injector = $injector;
         this.modalWindowService = modalWindowService;
@@ -29,7 +29,7 @@ var vCrudGridController = (function () {
             }
         };
     }
-    vCrudGridController.prototype.link = function (attrs) {
+    CrudGridController.prototype.link = function (attrs) {
         this.idBinding = attrs["idBinding"];
         this.idDefaultValue = attrs["idDefaultValue"];
         this.readonly = attrs["readonly"];
@@ -38,7 +38,7 @@ var vCrudGridController = (function () {
         if (!this.allItems)
             this.getAllItems();
     };
-    vCrudGridController.prototype.toggleAddMode = function () {
+    CrudGridController.prototype.toggleAddMode = function () {
         this.addMode = !this.addMode;
         // Empty new item
         this.newItem = {};
@@ -46,7 +46,7 @@ var vCrudGridController = (function () {
         this.newItem[this.idBinding] = this.idDefaultValue;
         this.newItem.hasErrors = !this.isValid(this.newItem);
     };
-    vCrudGridController.prototype.toggleEditMode = function (item) {
+    CrudGridController.prototype.toggleEditMode = function (item) {
         var _this = this;
         if (this.readonly)
             return;
@@ -69,7 +69,7 @@ var vCrudGridController = (function () {
             });
         }
     };
-    vCrudGridController.prototype.updateItem = function (item) {
+    CrudGridController.prototype.updateItem = function (item) {
         var _this = this;
         if (this.isValid(item)) {
             item.editMode = false;
@@ -89,7 +89,7 @@ var vCrudGridController = (function () {
             }
         }
     };
-    vCrudGridController.prototype.createItem = function (item) {
+    CrudGridController.prototype.createItem = function (item) {
         var _this = this;
         if (this.isValid(item)) {
             var promise = this.crudResource.create(item);
@@ -103,14 +103,14 @@ var vCrudGridController = (function () {
             return promise;
         }
     };
-    vCrudGridController.prototype.deleteItemWithConfirmation = function (item) {
+    CrudGridController.prototype.deleteItemWithConfirmation = function (item) {
         var _this = this;
         this.modalWindowService.show("common.deleteConfirmTitle", "common.deleteConfirmContent", function () { _this.deleteItem(item); }, function () { });
     };
-    vCrudGridController.prototype.clearFilter = function () {
+    CrudGridController.prototype.clearFilter = function () {
         this.filterText = "";
     };
-    vCrudGridController.prototype.setOrderByColumn = function (column) {
+    CrudGridController.prototype.setOrderByColumn = function (column) {
         if (this.orderByColumn === column) {
             // change order
             this.orderByReverse = !this.orderByReverse;
@@ -122,7 +122,7 @@ var vCrudGridController = (function () {
         }
         this.applyOrder();
     };
-    vCrudGridController.prototype.deleteItem = function (item) {
+    CrudGridController.prototype.deleteItem = function (item) {
         var _this = this;
         var id = item[this.idBinding];
         this.crudResource.delete(id).success(function () {
@@ -133,7 +133,7 @@ var vCrudGridController = (function () {
             _this.notificationService.errorUpdate("Failed to update");
         });
     };
-    vCrudGridController.prototype.getAllItems = function () {
+    CrudGridController.prototype.getAllItems = function () {
         var _this = this;
         this.crudResource.getList().success(function (data) {
             _this.allItems = data;
@@ -141,7 +141,7 @@ var vCrudGridController = (function () {
             _this.notificationService.error("Couldn't load users");
         });
     };
-    vCrudGridController.prototype.applyOrder = function () {
+    CrudGridController.prototype.applyOrder = function () {
         var _this = this;
         this.allItems.sort(function (a, b) {
             var comparisonResult = 0;
@@ -161,7 +161,7 @@ var vCrudGridController = (function () {
             return comparisonResult;
         });
     };
-    vCrudGridController.prototype.isValid = function (item) {
+    CrudGridController.prototype.isValid = function (item) {
         var isValid = true;
         // validate all columns
         this.columnsDefinition.forEach(function (column) {
@@ -174,7 +174,7 @@ var vCrudGridController = (function () {
         });
         return isValid;
     };
-    vCrudGridController.prototype.isDirty = function (item) {
+    CrudGridController.prototype.isDirty = function (item) {
         var serverItem = angular.fromJson(item.serverValues);
         var isDirty = false;
         this.columnsDefinition.forEach(function (column) {
@@ -185,20 +185,20 @@ var vCrudGridController = (function () {
         });
         return isDirty;
     };
-    vCrudGridController.prototype.restoreServerValues = function (item) {
+    CrudGridController.prototype.restoreServerValues = function (item) {
         var serverItem = angular.fromJson(item.serverValues);
         this.copyItem(serverItem, item);
         this.columnsDefinition.forEach(function (column) {
             item[column.binding] = serverItem[column.binding];
         });
     };
-    vCrudGridController.prototype.copyItem = function (itemSource, itemTarget) {
+    CrudGridController.prototype.copyItem = function (itemSource, itemTarget) {
         this.columnsDefinition.forEach(function (column) {
             itemTarget[column.binding] = itemSource[column.binding];
         });
     };
-    vCrudGridController.$inject = ["$injector", "ModalWindowService", "notificationService", "$translate"];
-    return vCrudGridController;
+    CrudGridController.$inject = ["$injector", "ModalWindowService", "notificationService", "$translate"];
+    return CrudGridController;
 })();
+exports.CrudGridController = CrudGridController;
 ;
-module.exports = vCrudGridController;

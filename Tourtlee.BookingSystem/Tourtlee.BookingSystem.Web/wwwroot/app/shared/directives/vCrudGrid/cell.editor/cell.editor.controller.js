@@ -1,17 +1,17 @@
 /// <reference path="../../../../../../typings/tsd.d.ts" />
 'use strict';
-var vCellEditorController = (function () {
-    function vCellEditorController($scope) {
+var CellEditorController = (function () {
+    function CellEditorController($scope) {
         this.$scope = $scope;
         this.item = $scope.item;
         this.column = $scope.column;
         this.keyUpEvent = $scope.keyUpEvent;
     }
-    vCellEditorController.prototype.fireKeyUpEvent = function (args, item) {
+    CellEditorController.prototype.fireKeyUpEvent = function (args, item) {
         this.keyUpEvent()(args, item);
     };
     ;
-    vCellEditorController.$inject = ['$scope'];
-    return vCellEditorController;
+    CellEditorController.$inject = ['$scope'];
+    return CellEditorController;
 })();
-module.exports = vCellEditorController;
+exports.CellEditorController = CellEditorController;

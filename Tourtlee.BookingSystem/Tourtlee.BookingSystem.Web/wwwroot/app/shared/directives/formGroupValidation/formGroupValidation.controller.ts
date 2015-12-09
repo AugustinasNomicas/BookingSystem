@@ -1,6 +1,6 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 "use strict";
-class formGroupValidationController {
+export class FormGroupValidationController {
     static $inject: string[] = ["$scope"];
 
     field = this.$scope.field;
@@ -25,8 +25,4 @@ class formGroupValidationController {
     private isValid() {
         return this.$scope.form[this.field].$valid;
     }
-
-
 }
-
-export = formGroupValidationController

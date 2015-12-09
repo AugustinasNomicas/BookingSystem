@@ -1,8 +1,8 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
 
-import vCrudGridController = require("./vcrudgrid.controller");
+import {CrudGridController} from "./CrudGrid.controller";
 
-class vCrudDirective implements angular.IDirective {
+export class CrudGridDirective implements angular.IDirective {
     //	'A' - only matches attribute name
     //	'E' - only matches element name
     //	'C' - only matches class name
@@ -14,25 +14,24 @@ class vCrudDirective implements angular.IDirective {
     // scope = {..}, isolated scope
     scope = {
         columnButtonClick: "&",    // method binding
-        initialized: "&", // method binding
+        initialized: "&" // method binding
     };
     bindToController = {
         allItems:  '=items'
     };
     // view
-    templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
+    templateUrl = '/app/shared/directives/vCrudGrid/CrudGrid.view.html';
     // controller
-    controller = vCrudGridController;
+    controller = CrudGridController;
     controllerAs = "itemsCtrl";
 
-    public link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrl: vCrudGridController) => {
+    public link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ctrl: CrudGridController) => {
         ctrl.link(attrs);
     }
 
     static factory(): angular.IDirectiveFactory {
-        const directive = () => new vCrudDirective();
+        const directive = () => new CrudGridDirective();
         return directive;
     }
 }
 
-export = vCrudDirective;

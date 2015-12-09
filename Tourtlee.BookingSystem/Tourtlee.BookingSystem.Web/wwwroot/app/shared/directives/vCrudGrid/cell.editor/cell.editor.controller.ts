@@ -1,12 +1,10 @@
 /// <reference path="../../../../../../typings/tsd.d.ts" />
 'use strict';
 
-
-
-class vCellEditorController {
-    public item: Object;
-    public column: Object;
-    public keyUpEvent: any;
+export class CellEditorController {
+    item: Object;
+    column: Object;
+    keyUpEvent: any;
 
     static $inject: string[] = ['$scope'];
 
@@ -21,4 +19,3 @@ class vCellEditorController {
     };
 }
 
-export = vCellEditorController

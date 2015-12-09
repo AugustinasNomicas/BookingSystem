@@ -1,19 +1,19 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-import formGroupValidationController = require("./formGroupValidation.controller");
-
 "use strict";
 
-interface Scope {
+import {FormGroupValidationController} from "./formGroupValidation.controller";
+
+export interface IScope {
     field: string;
     form?: Object;
 }
 
-class formGroupValidationDirective implements angular.IDirective {
+export class FormGroupValidationDirective implements angular.IDirective {
     require = '^form';
     restrict = 'A';
 
-    scope: Scope;
-    controller = formGroupValidationController;
+    scope: IScope;
+    controller = FormGroupValidationController;
     controllerAs = 'vm';
 
     template = '<div class="has-feedback" ng-class="vm.getValidationClass()">' +
@@ -27,15 +27,13 @@ class formGroupValidationDirective implements angular.IDirective {
         };
     }
 
-    public link = (scope: any, element: angular.IAugmentedJQuery, attrs: angular.IAttributes,
+    link = (scope: any, element: angular.IAugmentedJQuery, attrs: angular.IAttributes,
         formCtrl: any) => {
         scope.form = formCtrl;
     }
 
     static factory(): angular.IDirectiveFactory {
-        const directive = () => new formGroupValidationDirective();
+        const directive = () => new FormGroupValidationDirective();
         return directive;
     }
 }
-
-export = formGroupValidationDirective;

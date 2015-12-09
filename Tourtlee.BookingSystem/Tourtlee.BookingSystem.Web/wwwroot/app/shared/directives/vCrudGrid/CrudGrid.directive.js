@@ -1,7 +1,7 @@
 /// <reference path="../../../../../typings/tsd.d.ts" />
-var vCrudGridController = require("./vcrudgrid.controller");
-var vCrudDirective = (function () {
-    function vCrudDirective() {
+var CrudGrid_controller_1 = require("./CrudGrid.controller");
+var CrudGridDirective = (function () {
+    function CrudGridDirective() {
         //	'A' - only matches attribute name
         //	'E' - only matches element name
         //	'C' - only matches class name
@@ -13,24 +13,24 @@ var vCrudDirective = (function () {
         // scope = {..}, isolated scope
         this.scope = {
             columnButtonClick: "&",
-            initialized: "&",
+            initialized: "&" // method binding
         };
         this.bindToController = {
             allItems: '=items'
         };
         // view
-        this.templateUrl = '/app/shared/directives/vCrudGrid/vCrudGrid.view.html';
+        this.templateUrl = '/app/shared/directives/vCrudGrid/CrudGrid.view.html';
         // controller
-        this.controller = vCrudGridController;
+        this.controller = CrudGrid_controller_1.CrudGridController;
         this.controllerAs = "itemsCtrl";
         this.link = function (scope, element, attrs, ctrl) {
             ctrl.link(attrs);
         };
     }
-    vCrudDirective.factory = function () {
-        var directive = function () { return new vCrudDirective(); };
+    CrudGridDirective.factory = function () {
+        var directive = function () { return new CrudGridDirective(); };
         return directive;
     };
-    return vCrudDirective;
+    return CrudGridDirective;
 })();
-module.exports = vCrudDirective;
+exports.CrudGridDirective = CrudGridDirective;

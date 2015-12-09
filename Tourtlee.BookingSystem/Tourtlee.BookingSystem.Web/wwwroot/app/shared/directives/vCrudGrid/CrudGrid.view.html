@@ -63,7 +63,7 @@
                 <td ng-repeat="column in itemsCtrl.columnsDefinition" ng-hide="column.hidden" class="add-item">
 
                     <!--Show cell editor control for each column-->
-                    <div v-Cell-Editor
+                    <div cell-Editor
                          item="itemsCtrl.newItem"
                          column="column"
                          key-up-event="itemsCtrl.createModeKeyUp">

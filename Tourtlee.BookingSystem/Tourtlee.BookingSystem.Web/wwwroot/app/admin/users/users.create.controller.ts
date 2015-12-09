@@ -36,6 +36,8 @@ export class UsersCreateController {
         this.usersResource.create(this.createUser).then((result) => {
             this.createUser = result.data;
             this.notificationService.success("userCreated");
+            this.$scope.createUserForm.$setPristine();
+            this.$window.location.href = "/Admin/Users";
         }, (error) => {
             this.notificationService.error(error.data);
         });

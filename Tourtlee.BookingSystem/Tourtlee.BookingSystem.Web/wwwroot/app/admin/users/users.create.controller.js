@@ -20,6 +20,8 @@ var UsersCreateController = (function () {
         this.usersResource.create(this.createUser).then(function (result) {
             _this.createUser = result.data;
             _this.notificationService.success("userCreated");
+            _this.$scope.createUserForm.$setPristine();
+            _this.$window.location.href = "/Admin/Users";
         }, function (error) {
             _this.notificationService.error(error.data);
         });

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,6 +10,8 @@ using Tourtlee.BookingSystem.DataAccess.Auth;
 using Tourtlee.BookingSystem.Model;
 using Tourtlee.BookingSystem.Model.Security;
 using Microsoft.Extensions.DependencyInjection;
+using Tourtlee.BookingSystem.DataAccess.Helpers;
+using Tourtlee.BookingSystem.Model.Schedule;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
@@ -19,6 +22,7 @@ namespace Tourtlee.BookingSystem.DataAccess
 
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Tour> Tours { get; set; }
+        public DbSet<ScheduleJson> Schedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,6 +37,11 @@ namespace Tourtlee.BookingSystem.DataAccess
                 .HasOne(t => t.Organization)
                 .WithMany(t => t.Tours)
                 .HasForeignKey(t => t.IdOrganization);
+
+            builder.Entity<ScheduleJson>()
+                .HasOne(t => t.Tour)
+                .WithMany(t => t.Schedules)
+                .HasForeignKey(t => t.IdTour);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)
@@ -104,6 +113,26 @@ namespace Tourtlee.BookingSystem.DataAccess
             };
 
             db.Tours.Add(tour);
+
+            var schedule = new ScheduleJson()
+            {
+                IdTour = tour.IdTour,
+                IdScheduleJson = Guid.NewGuid(),
+                ScheduleJsonType = ScheduleJsonTypes.ByWeekday
+            };
+
+            var scheduleByWeekdayJson = new ScheduleByWeekdayJson()
+            {
+                PeriodStart = DateTime.MinValue,
+                PeriodEnd = DateTime.MaxValue,
+                ListOfDayOfWeeksAndTimes = new List<DayOfWeekWithTime>
+                {
+                    new DayOfWeekWithTime { DayOfWeek = DayOfWeek.Thursday, Time = new TimeSpan(12,30,0)}
+                }
+            };
+            schedule.Json = scheduleByWeekdayJson.Serialize();
+
+            db.Schedules.Add(schedule);
 
             tour = new Tour()
             {

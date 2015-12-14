@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Tourtlee.BookingSystem.Model.Schedule;
 
 namespace Tourtlee.BookingSystem.Model
 {
@@ -19,5 +20,7 @@ namespace Tourtlee.BookingSystem.Model
         public string Description { get; set; }
         public string DescriptionShort { get; set; }
         public int Availabilities { get; set; }
+
+        public ICollection<ScheduleJson> Schedules { get; } = new List<ScheduleJson>();
     }
 }

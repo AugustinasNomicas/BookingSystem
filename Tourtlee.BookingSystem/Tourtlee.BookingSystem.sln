@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Tourtlee.BookingSystem.Web", "Tourtlee.BookingSystem.Web\Tourtlee.BookingSystem.Web.xproj", "{9F10C4BB-9095-461F-908D-E4CBAB31FF8C}"
 EndProject

@@ -1,0 +1,15 @@
+﻿@using System.Threading.Tasks
+@using Tourtlee.BookingSystem.Web.Helpers
+@{
+    Layout = "_ManageLayout";
+}
+
+<script>
+    System.import('manage/schedule/schedule.module.js');
+
+    var scheduleConfig = {
+        apiUrl: '@Url.Action("Index", "ScheduleApi", new { Area = "Manage" })'
+    };
+</script>
+
+<h1>Hello from schedule</h1>

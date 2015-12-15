@@ -1,15 +1,61 @@
 ﻿@using System.Threading.Tasks
+@model Tourtlee.BookingSystem.Business.Dto.Schedule.ScheduleByWeekdayDto
 @using Tourtlee.BookingSystem.Web.Helpers
 @{
     Layout = "_ManageLayout";
+    var schedule = Html.Angular().ModelFor("vm.schedule", "scheduleForm");
 }
 
 <script>
     System.import('manage/schedule/schedule.module.js');
 
+
     var scheduleConfig = {
-        apiUrl: '@Url.Action("Index", "ScheduleApi", new { Area = "Manage" })'
-    };
+        apiUrl: '@Url.Action("Index", "ScheduleApi", new { Area = "Manage" })',
+        schedule: @Html.JsonFor(Model)
+        };
 </script>
 
-<h1>Hello from schedule</h1>
+<div data-ng-controller="ScheduleController as vm">
+
+    <form class="form-horizontal" name="scheduleForm" novalidate
+          data-ng-submit="vm.submit()">
+
+        <fieldset>
+            <legend data-translate>schedule.edit</legend>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Active</th>
+                        <th>Weekday</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <colgroup>
+                    <col class="col-xs-2">
+                    <col class="col-xs-2">
+                    <col class="col-xs-8">
+                </colgroup>
+                <tbody ng-repeat="weekday in vm.schedule.weekdays">
+    
+                    <tr data-ng-class="{active: weekday.isActive}">
+                        <td>
+                            <input type="checkbox" id="checkboxes-0"
+                                   data-ng-model="weekday.isActive">
+                        </td>
+                        <td><label for="checkboxes-0">{{weekday.dayOfWeek}}</label></td>
+                        <td>
+                            <uib-timepicker show-meridian="false" show-spinners="false"
+                                            data-ng-show="weekday.isActive"
+                                            data-ng-model="weekday.time" />
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </fieldset>
+
+    </form>
+</div>

@@ -4,6 +4,7 @@ import {ScheduleResource} from "./schedule.resource";
 
 import {AngularModuleFactory} from "../../shared/services/angularModuleFactory";
 import {FormGroupValidationDirective} from "../../shared/directives/formGroupValidation/formGroupValidation.directive";
+import {ScheduleController} from "./schedule.controller";
 
 export module Schedule {
     "use strict";
@@ -13,7 +14,7 @@ export module Schedule {
     var app = AngularModuleFactory.factory(moduleName, translationsPart);
 
     app.directive("formGroupValidation", FormGroupValidationDirective.factory());
-
+    app.controller("ScheduleController", ScheduleController);
     app.service("ScheduleResource", ScheduleResource);
 
     angular.bootstrap(document, [moduleName], {

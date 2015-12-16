@@ -53,5 +53,8 @@
 	   "availabilities": "Availabilities",
 	   "descriptionShort": "Short description",
 	   "description": "Full description"
+   },
+   "schedule": {
+	   "edit": "Edit schedule for tour by weekday"
    }
 }

@@ -14,6 +14,8 @@ export class ToursEditController {
     organizations: OrganizationDto[];
     tour: any;
     tours: TourDto[];
+    scheduleUrlTemplate: string;
+    scheduleUrl: string;
 
     constructor(private $scope: IEditTourScope,
         private $window: angular.IWindowService,
@@ -23,6 +25,8 @@ export class ToursEditController {
         private $translate: any) {
         this.loadTours();
         this.tour = $window["toursConfig"]["tour"];
+        this.scheduleUrlTemplate = $window["toursConfig"]["scheduleUrl"];
+        this.updateScheduleUrl();
     }
 
     submit(): void {
@@ -41,6 +45,7 @@ export class ToursEditController {
 
     onTourSelect(item): void {
         this.$scope.editTourForm.$setPristine();
+        this.updateScheduleUrl();
     }
 
     createTour(): void {
@@ -80,4 +85,7 @@ export class ToursEditController {
         });
     }
 
+    private updateScheduleUrl() {
+        this.scheduleUrl = this.scheduleUrlTemplate.replace("%24id", this.tour.idTour);
+    }
 }

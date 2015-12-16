@@ -8,6 +8,7 @@ namespace Tourtlee.BookingSystem.Business.Dto.Schedule
     public class ScheduleByWeekdayDto
     {
         public List<ScheduleByWeekdayItemDto> Weekdays { get; set; }
+        public Guid IdScheduleJson { get; set; }
     }
 
     public class ScheduleByWeekdayItemDto

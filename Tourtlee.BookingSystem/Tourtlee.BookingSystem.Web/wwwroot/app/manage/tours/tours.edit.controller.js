@@ -13,6 +13,8 @@ var ToursEditController = (function () {
         this.vm = this;
         this.loadTours();
         this.tour = $window["toursConfig"]["tour"];
+        this.scheduleUrlTemplate = $window["toursConfig"]["scheduleUrl"];
+        this.updateScheduleUrl();
     }
     ToursEditController.prototype.submit = function () {
         var _this = this;
@@ -29,6 +31,7 @@ var ToursEditController = (function () {
     };
     ToursEditController.prototype.onTourSelect = function (item) {
         this.$scope.editTourForm.$setPristine();
+        this.updateScheduleUrl();
     };
     ToursEditController.prototype.createTour = function () {
         var newTour = new tourDto_1.TourDto();
@@ -63,6 +66,9 @@ var ToursEditController = (function () {
         this.toursResource.getList().then(function (response) {
             _this.tours = response.data;
         });
+    };
+    ToursEditController.prototype.updateScheduleUrl = function () {
+        this.scheduleUrl = this.scheduleUrlTemplate.replace("%24id", this.tour.idTour);
     };
     ToursEditController.$inject = ["$scope", "$window", "ToursResource",
         "notificationService", "ModalWindowService", "$translate"];

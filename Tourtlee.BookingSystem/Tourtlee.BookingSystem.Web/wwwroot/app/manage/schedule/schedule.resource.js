@@ -5,8 +5,8 @@ var ScheduleResource = (function () {
         var _this = this;
         this.$http = $http;
         this.$window = $window;
-        this.get = function (id) {
-            return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });
+        this.get = function (idTour) {
+            return _this.$http({ url: _this.apiUrl + ("" + idTour), method: "Get" });
         };
         this.update = function (item) {
             return _this.$http({ url: _this.apiUrl + "update", method: "Put", data: item });

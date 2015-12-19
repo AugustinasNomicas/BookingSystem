@@ -11,6 +11,8 @@ using Tourtlee.BookingSystem.Business.Services;
 
 namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
 {
+    [Authorize]
+    [Area("Manage")]
     public class ScheduleController : Controller
     {
         private readonly IScheduleService _scheduleService;
@@ -20,8 +22,7 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
             _scheduleService = scheduleService;
         }
 
-        [Authorize]
-        [Area("Manage")]
+
         public IActionResult Index(Guid? id)
         {
             var schedule = _scheduleService.GetScheduleForTour(id);

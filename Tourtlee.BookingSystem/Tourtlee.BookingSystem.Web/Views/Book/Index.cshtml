@@ -1,3 +1,9 @@
-﻿<h1>
-    Book
+﻿<script>
+    System.import('book/book.module.js');
+</script>
+
+<div data-ng-controller="BookController as vm">
+<h1>
+    {{vm.greeting}}
 </h1>
+</div>

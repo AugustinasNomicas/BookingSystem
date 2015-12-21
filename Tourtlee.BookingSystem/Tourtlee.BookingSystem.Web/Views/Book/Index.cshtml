@@ -1,9 +1,35 @@
-﻿<script>
+﻿@using System.Threading.Tasks
+@using Tourtlee.BookingSystem.Web.Helpers
+@model Tourtlee.BookingSystem.Business.Dto.Book.InfoForNewBookingDto
+
+<script>
     System.import('book/book.module.js');
+
+    var bookConfig = {
+        apiUrl: '@Url.Action("Index", "ScheduleApi")',
+        infoForNewBooking: @Html.JsonFor(Model)
+        };
 </script>
 
 <div data-ng-controller="BookController as vm">
-<h1>
-    {{vm.greeting}}
-</h1>
+    <form name="bookForm" class="form-horizontal" novalidate>
+        <fieldset>
+            <legend data-translate>book.title</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="dateSelect" data-translate>book.dateSelect</label>
+                <div class="col-md-4">
+                    <select class="form-control" name="dateSelect" id="dateSelect"
+                            ng-model="vm.selectedDate">
+                        <option ng-repeat="date in vm.infoForNewBooking.datesList" value="{{date.dateTime}}">{{date.dateTime | date:'medium'}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <uib-pagination direction-links="false" total-items="vm.maxNumberOfPersons"
+                                 ng-model="vm.numberOfPersons" num-pages="smallnumPages"></uib-pagination>
+            </div>
+        </fieldset>
+        {{vm.selectedDate | date:'medium'}}
+    </form>
 </div>

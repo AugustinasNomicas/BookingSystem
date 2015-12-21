@@ -50,9 +50,10 @@ namespace Tourtlee.BookingSystem.Web
             services.Configure<MvcOptions>(options =>
             {
                 //options.Filters.Add(new AuthorizeAttribute());
-                var jsonOutputFormatter = new JsonOutputFormatter();
-                jsonOutputFormatter.SerializerSettings.ContractResolver =
-                    new CamelCasePropertyNamesContractResolver();
+                var jsonOutputFormatter = new JsonOutputFormatter
+                {
+                    SerializerSettings = {ContractResolver = new CamelCasePropertyNamesContractResolver()}
+                };
                 options.OutputFormatters.Insert(0, jsonOutputFormatter);
             });
 

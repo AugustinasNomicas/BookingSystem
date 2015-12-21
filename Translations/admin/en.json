@@ -56,5 +56,9 @@
    },
    "schedule": {
 	   "edit": "Edit schedule for tour by weekday"
+   },
+   "book": {
+     "title": "Book tour",
+     "dateSelect": "Select date"
    }
 }

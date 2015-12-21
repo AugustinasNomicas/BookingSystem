@@ -2,10 +2,19 @@
 "use strict";
 
 export class BookController {
-    private vm = this;
-    greeting: string;
+    static $inject: string[] = ["$window"];
 
-    constructor() {
-        this.greeting = "Hello";
+    private vm = this;
+    infoForNewBooking: any;
+    selectedDate: any;
+
+    numberOfPersons: number;
+    maxNumberOfPersons = 10;
+
+    constructor(private $window: angular.IWindowService) {
+        this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
+
+        this.maxNumberOfPersons = 10;
+        this.numberOfPersons =5;
     }
 }

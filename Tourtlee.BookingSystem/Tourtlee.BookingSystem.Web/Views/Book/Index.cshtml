@@ -6,13 +6,13 @@
     System.import('book/book.module.js');
 
     var bookConfig = {
-        apiUrl: '@Url.Action("Index", "ScheduleApi")',
+        apiUrl: '@Url.Action("Index", "BookApi")',
         infoForNewBooking: @Html.JsonFor(Model)
         };
 </script>
 
 <div data-ng-controller="BookController as vm">
-    <form name="bookForm" class="form-horizontal" novalidate>
+    <form name="bookForm" class="form-horizontal" novalidate data-ng-submit="vm.submit()">
         <fieldset>
             <legend data-translate>book.title</legend>
 
@@ -20,16 +20,53 @@
                 <label class="col-md-4 control-label" for="dateSelect" data-translate>book.dateSelect</label>
                 <div class="col-md-4">
                     <select class="form-control" name="dateSelect" id="dateSelect"
-                            ng-model="vm.selectedDate">
+                            ng-model="vm.bookingSet.date">
                         <option ng-repeat="date in vm.infoForNewBooking.datesList" value="{{date.dateTime}}">{{date.dateTime | date:'medium'}}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <uib-pagination direction-links="false" total-items="vm.maxNumberOfPersons"
-                                 ng-model="vm.numberOfPersons" num-pages="smallnumPages"></uib-pagination>
+                <label class="col-md-4 control-label" for="personsCount" data-translate>book.personsCount</label>
+                <div class="col-md-4">
+                    <input class="form-control" type="number" id="personsCount" name="personsCount" value="1" min="1" max="{{vm.maxNumberOfPersons}}"
+                           data-ng-model="vm.numberOfPersons" data-ng-change="vm.numberOfPersonsChange()"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th id="firstnameHeader" data-translate>book.firstname</th>
+                        <th id="lastnameHeader" data-translate>book.lastname</th>
+                        <th id="sexHeader" data-translate>book.gender</th>
+                        <th id="childHeader" data-translate>book.child</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="booking in vm.bookingSet.bookings">
+                        <td><input class="form-control" type="text" aria-labelledby="firstnameHeader" data-ng-model="booking.firstName"/></td>
+                        <td><input class="form-control" type="text" aria-labelledby="lastnameHeader" data-ng-model="booking.lastName"/></td>
+                        <td>
+                            <select class="form-control" aria-labelledby="sexHeader" data-ng-model="booking.gender">
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox" aria-labelledby="childHeader" data-ng-model="booking.child"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" id="book"
+                           name="book" class="btn btn-success"
+                           translate="yes"
+                           translate-attr-value="book.book"
+                           value="book.book" />
+                </div>
             </div>
         </fieldset>
-        {{vm.selectedDate | date:'medium'}}
     </form>
 </div>

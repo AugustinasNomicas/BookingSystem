@@ -45,6 +45,8 @@ namespace Tourtlee.BookingSystem.Business
 
             // Book operations
             services.AddTransient<GetInfoForNewBookingOperation>();
+            services.AddTransient<CreateBookingOperation>();
+            
         }
     }
 }

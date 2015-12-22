@@ -1,9 +1,11 @@
 ﻿using System;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Services;
 
 namespace Tourtlee.BookingSystem.Web.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly IBookService _bookService;

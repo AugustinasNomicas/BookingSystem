@@ -59,6 +59,12 @@
    },
    "book": {
      "title": "Book tour",
-     "dateSelect": "Select date"
+     "dateSelect": "Select date",
+     "personsCount": "Number of persons",
+     "firstname": "Firstname",
+     "lastname": "Lastname",
+     "gender": "Gender",
+     "child": "Child?",
+     "book": "Book"
    }
 }

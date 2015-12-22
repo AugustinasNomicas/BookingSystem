@@ -11,6 +11,7 @@ using Tourtlee.BookingSystem.Model;
 using Tourtlee.BookingSystem.Model.Security;
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.DataAccess.Helpers;
+using Tourtlee.BookingSystem.Model.Book;
 using Tourtlee.BookingSystem.Model.Schedule;
 
 namespace Tourtlee.BookingSystem.DataAccess
@@ -23,6 +24,7 @@ namespace Tourtlee.BookingSystem.DataAccess
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Tour> Tours { get; set; }
         public DbSet<ScheduleJson> Schedules { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -42,6 +44,8 @@ namespace Tourtlee.BookingSystem.DataAccess
                 .HasOne(t => t.Tour)
                 .WithMany(t => t.Schedules)
                 .HasForeignKey(t => t.IdTour);
+
+            builder.Entity<Booking>();
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)

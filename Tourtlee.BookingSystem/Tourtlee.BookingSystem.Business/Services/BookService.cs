@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Book;
 using Tourtlee.BookingSystem.Business.Operations.Book;
@@ -11,6 +8,7 @@ namespace Tourtlee.BookingSystem.Business.Services
     public interface IBookService
     {
         InfoForNewBookingDto GetInfoForNewBooking(Guid? idTour);
+        void CreateBooking(CreateBookingSetDto createBookingSetDto);
     }
 
     public class BookService : IBookService
@@ -26,6 +24,12 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<GetInfoForNewBookingOperation>();
             return operation.Operate(idTour);
+        }
+
+        public void CreateBooking(CreateBookingSetDto createBookingSetDto)
+        {
+            var operation = _serviceProvider.GetRequiredService<CreateBookingOperation>();
+            operation.Operate(createBookingSetDto);
         }
     }
 }

@@ -54,5 +54,11 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
         {
             _tourService.Delete(id);
         }
+
+        [HttpGet]
+        public List<TourSelectorItemDto> GetTourSelectorItems()
+        {
+            return _tourService.GetTourSelectorItems();
+        }
     }
 }

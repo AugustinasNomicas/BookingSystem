@@ -15,4 +15,10 @@ export class BookResource {
     create = (item: CreateBookingSetDto): angular.IHttpPromise<CreateBookingSetDto> => {
         return this.$http<CreateBookingSetDto>({ url: this.apiUrl + `create`, method: "Post", data: item });
     };
+
+    getInfoForNewBooking = (idTour: string): angular.IHttpPromise<any> => {
+        return this.$http<any>({ url: this.apiUrl + `getInfoForNewBooking/${idTour}`, method: "Get"});
+    };
+
+
 }

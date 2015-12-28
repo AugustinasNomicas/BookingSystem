@@ -23,7 +23,7 @@ namespace Tourtlee.BookingSystem.Web.Configurations
 
             routes.MapRoute(
             name: "defaultWithAction",
-            template: "{controller}/{action?}",
+            template: "{controller}/{action?}/{id?}",
             defaults: new { controller = "Home", action = "Index" });
 
             routes.MapRoute(

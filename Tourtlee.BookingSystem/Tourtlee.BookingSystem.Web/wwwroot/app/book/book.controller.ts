@@ -12,11 +12,10 @@ export class BookController {
 
     numberOfPersons: number;
     maxNumberOfPersons: number;
-
     bookingSet: BookingSetDto;
 
     constructor(private $window: angular.IWindowService,
-    private bookResource: BookResource) {
+        private bookResource: BookResource) {
         this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
 
         this.maxNumberOfPersons = 10;
@@ -39,8 +38,13 @@ export class BookController {
         this.createBookings();
     }
 
+    private tourChanged() {
+        this.bookResource.getInfoForNewBooking(this.bookingSet.idTour).then(data => {
+            this.infoForNewBooking = data.data;
+        });
+    }
+
     private createBookings() {
-        
         const diff = this.numberOfPersons - this.bookingSet.bookings.length;
         let i: number;
 

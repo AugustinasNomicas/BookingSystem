@@ -8,6 +8,9 @@ var BookResource = (function () {
         this.create = function (item) {
             return _this.$http({ url: _this.apiUrl + "create", method: "Post", data: item });
         };
+        this.getInfoForNewBooking = function (idTour) {
+            return _this.$http({ url: _this.apiUrl + ("getInfoForNewBooking/" + idTour), method: "Get" });
+        };
         this.apiUrl = $window["bookConfig"]["apiUrl"] + '/';
     }
     BookResource.$inject = ["$http", "$window"];

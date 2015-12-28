@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Authorization;
+﻿using System;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Dto.Book;
 using Tourtlee.BookingSystem.Business.Services;
@@ -17,7 +18,6 @@ namespace Tourtlee.BookingSystem.Web.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet]
         public void Index()
         {
             // empty for @Url.Action("Index", "BookApi") to work
@@ -27,6 +27,13 @@ namespace Tourtlee.BookingSystem.Web.Controllers
         public void Create([FromBody]CreateBookingSetDto request)
         {
             _bookService.CreateBooking(request);
+        }
+
+        [HttpGet]
+        public InfoForNewBookingDto GetInfoForNewBooking(Guid? id)
+        {
+            var model = _bookService.GetInfoForNewBooking(id);
+            return model;
         }
     }
 }

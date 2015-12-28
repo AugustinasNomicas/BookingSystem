@@ -3,6 +3,7 @@
 "use strict";
 
 import {TourDto} from "./dto/tourDto";
+import {TourSelectorItemDto} from "./dto/tourSelectorItemDto";
 
 export class ToursResource {
     static $inject: string[] = ["$http", "$window"];
@@ -23,6 +24,11 @@ export class ToursResource {
     getList = (): angular.IHttpPromise<TourDto[]> => {
         return this.$http<TourDto[]>({ url: this.apiUrl, method: "Get" });
     };
+
+    getTourSelectorItems = (): angular.IHttpPromise<TourSelectorItemDto[]> => {
+        return this.$http<TourSelectorItemDto[]>({ url: this.apiUrl + `getTourSelectorItems`, method: "Get" });
+    };
+
 
     create = (item: TourDto): angular.IHttpPromise<TourDto> => {
         return this.$http<TourDto>({ url: this.apiUrl + `create`, method: "Post", data: item });

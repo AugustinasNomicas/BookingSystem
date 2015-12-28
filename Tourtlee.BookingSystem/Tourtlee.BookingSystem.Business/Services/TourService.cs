@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Tourtlee.BookingSystem.Business.Dto.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Tours;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +10,7 @@ namespace Tourtlee.BookingSystem.Business.Services
     public interface ITourService : ICrudService<TourDto>
     {
         TourDto GetDefault();
+        List<TourSelectorItemDto> GetTourSelectorItems();
     }
 
     public class TourService: ServiceBase, ITourService
@@ -58,6 +57,12 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<DeleteTourOperation>();
             operation.Operate(id);
+        }
+
+        public List<TourSelectorItemDto> GetTourSelectorItems()
+        {
+            var operation = _serviceProvider.GetRequiredService<GetTourSelectorItemsOperation>();
+            return operation.Operate(null);
         }
     }
 }

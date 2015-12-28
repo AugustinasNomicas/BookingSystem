@@ -29,7 +29,8 @@ namespace Tourtlee.BookingSystem.Business
             services.AddTransient<GetTourOperation>();
             services.AddTransient<DeleteOrganizationOperation>();
             services.AddTransient<UpdateOrganizationOperation>();
-
+            services.AddTransient<GetTourSelectorItemsOperation>();
+            
             //Tour operations
             services.AddTransient<UpdateTourOperation>();
             services.AddTransient<DeleteTourOperation>();

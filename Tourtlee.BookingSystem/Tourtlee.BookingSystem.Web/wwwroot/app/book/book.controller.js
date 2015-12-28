@@ -22,6 +22,12 @@ var BookController = (function () {
     BookController.prototype.numberOfPersonsChange = function () {
         this.createBookings();
     };
+    BookController.prototype.tourChanged = function () {
+        var _this = this;
+        this.bookResource.getInfoForNewBooking(this.bookingSet.idTour).then(function (data) {
+            _this.infoForNewBooking = data.data;
+        });
+    };
     BookController.prototype.createBookings = function () {
         var diff = this.numberOfPersons - this.bookingSet.bookings.length;
         var i;

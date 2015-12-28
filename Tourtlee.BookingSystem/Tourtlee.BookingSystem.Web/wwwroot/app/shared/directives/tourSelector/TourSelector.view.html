@@ -1,0 +1,9 @@
+﻿<ui-select ng-model="tourSelectorCtrl.ngModel"
+           id="idTour"
+           data-on-select="tourSelectorCtrl.ngChange()"
+           ng-required="true">
+    <ui-select-match>{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="tour.idTour as tour in tourSelectorCtrl.tourSelectorItems | filter: $select.search">
+        <div ng-bind-html="tour.name | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>

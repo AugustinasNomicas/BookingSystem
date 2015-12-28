@@ -9,12 +9,23 @@
         apiUrl: '@Url.Action("Index", "BookApi")',
         infoForNewBooking: @Html.JsonFor(Model)
         };
+    var toursConfig = {
+        apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })' // needed for tour-selector
+    }
 </script>
 
 <div data-ng-controller="BookController as vm">
+
     <form name="bookForm" class="form-horizontal" novalidate data-ng-submit="vm.submit()">
         <fieldset>
             <legend data-translate>book.title</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="tourSelect" data-translate>tours.selectTour</label>
+                <div class="col-md-4">
+                    <div tour-selector-directive ng-model="vm.bookingSet.idTour" id="tourSelect" ng-change="vm.tourChanged()"></div>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="dateSelect" data-translate>book.dateSelect</label>
@@ -25,35 +36,36 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="col-md-4 control-label" for="personsCount" data-translate>book.personsCount</label>
                 <div class="col-md-4">
                     <input class="form-control" type="number" id="personsCount" name="personsCount" value="1" min="1" max="{{vm.maxNumberOfPersons}}"
-                           data-ng-model="vm.numberOfPersons" data-ng-change="vm.numberOfPersonsChange()"/>
+                           data-ng-model="vm.numberOfPersons" data-ng-change="vm.numberOfPersonsChange()" />
                 </div>
             </div>
             <div class="form-group">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th id="firstnameHeader" data-translate>book.firstname</th>
-                        <th id="lastnameHeader" data-translate>book.lastname</th>
-                        <th id="sexHeader" data-translate>book.gender</th>
-                        <th id="childHeader" data-translate>book.child</th>
-                    </tr>
+                        <tr>
+                            <th id="firstnameHeader" data-translate>book.firstname</th>
+                            <th id="lastnameHeader" data-translate>book.lastname</th>
+                            <th id="sexHeader" data-translate>book.gender</th>
+                            <th id="childHeader" data-translate>book.child</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="booking in vm.bookingSet.bookings">
-                        <td><input class="form-control" type="text" aria-labelledby="firstnameHeader" data-ng-model="booking.firstName"/></td>
-                        <td><input class="form-control" type="text" aria-labelledby="lastnameHeader" data-ng-model="booking.lastName"/></td>
-                        <td>
-                            <select class="form-control" aria-labelledby="sexHeader" data-ng-model="booking.gender">
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
-                        </td>
-                        <td><input type="checkbox" aria-labelledby="childHeader" data-ng-model="booking.child"/></td>
-                    </tr>
+                        <tr data-ng-repeat="booking in vm.bookingSet.bookings">
+                            <td><input class="form-control" type="text" aria-labelledby="firstnameHeader" data-ng-model="booking.firstName" /></td>
+                            <td><input class="form-control" type="text" aria-labelledby="lastnameHeader" data-ng-model="booking.lastName" /></td>
+                            <td>
+                                <select class="form-control" aria-labelledby="sexHeader" data-ng-model="booking.gender">
+                                    <option value="0">Male</option>
+                                    <option value="1">Female</option>
+                                </select>
+                            </td>
+                            <td><input type="checkbox" aria-labelledby="childHeader" data-ng-model="booking.child" /></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

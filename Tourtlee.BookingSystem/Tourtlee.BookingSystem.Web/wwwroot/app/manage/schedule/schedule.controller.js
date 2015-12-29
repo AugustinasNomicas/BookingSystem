@@ -1,7 +1,8 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 "use strict";
 var ScheduleController = (function () {
-    function ScheduleController($window, scheduleResource, notificationService) {
+    function ScheduleController($scope, $window, scheduleResource, notificationService) {
+        this.$scope = $scope;
         this.$window = $window;
         this.scheduleResource = scheduleResource;
         this.notificationService = notificationService;
@@ -16,7 +17,14 @@ var ScheduleController = (function () {
             _this.notificationService.error(error.data);
         });
     };
-    ScheduleController.$inject = ["$window", "ScheduleResource", "notificationService"];
+    ScheduleController.prototype.tourChanged = function () {
+        var _this = this;
+        this.scheduleResource.getScheduleForTour(this.schedule.idTour).then(function (data) {
+            _this.schedule = data.data;
+            _this.$scope.scheduleForm.$setPristine();
+        });
+    };
+    ScheduleController.$inject = ["$scope", "$window", "ScheduleResource", "notificationService"];
     return ScheduleController;
 })();
 exports.ScheduleController = ScheduleController;

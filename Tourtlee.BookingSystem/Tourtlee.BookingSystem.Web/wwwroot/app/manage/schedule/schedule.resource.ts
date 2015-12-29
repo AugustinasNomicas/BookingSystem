@@ -10,8 +10,8 @@ export class ScheduleResource {
         this.apiUrl = $window["scheduleConfig"]["apiUrl"] + '/';
     }
 
-    get = (idTour: string): angular.IHttpPromise<ScheduleDto> => {
-        return this.$http<ScheduleDto>({ url: this.apiUrl + `${idTour}`, method: "Get" });
+    getScheduleForTour = (idTour: string): angular.IHttpPromise<ScheduleDto> => {
+        return this.$http<ScheduleDto>({ url: this.apiUrl + `getScheduleForTour/${idTour}`, method: "Get" });
     };
     update = (item: ScheduleDto): angular.IHttpPromise<ScheduleDto> => {
         return this.$http<ScheduleDto>({ url: this.apiUrl + `update`, method: "Put", data: item });

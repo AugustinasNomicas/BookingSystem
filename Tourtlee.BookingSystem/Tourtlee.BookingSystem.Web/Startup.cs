@@ -18,6 +18,9 @@ using Microsoft.AspNet.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Tourtlee.BookingSystem.Web.Utilities;
 
 namespace Tourtlee.BookingSystem.Web
 {
@@ -52,7 +55,7 @@ namespace Tourtlee.BookingSystem.Web
                 //options.Filters.Add(new AuthorizeAttribute());
                 var jsonOutputFormatter = new JsonOutputFormatter
                 {
-                    SerializerSettings = {ContractResolver = new CamelCasePropertyNamesContractResolver()}
+                    SerializerSettings = JsonExtensions.JsonSerializerSettings()
                 };
                 options.OutputFormatters.Insert(0, jsonOutputFormatter);
             });
@@ -60,7 +63,7 @@ namespace Tourtlee.BookingSystem.Web
             // Configure Auth
             services.Configure<AuthorizationOptions>(options =>
             {
-                options.AddPolicy(AppPolicies.AccessAdminArea.ToString(), 
+                options.AddPolicy(AppPolicies.AccessAdminArea.ToString(),
                     new AuthorizationPolicyBuilder().RequireClaim(AppPolicies.AccessAdminArea.ToString(), "Allowed").Build());
             });
 

@@ -10,16 +10,19 @@ namespace Tourtlee.BookingSystem.Web.Utilities
 {
     public static class JsonExtensions
     {
-        public static string ToJson<T>(this T obj, bool includeNull = true)
+        public static JsonSerializerSettings JsonSerializerSettings(bool includeNull = true)
         {
-            var settings = new JsonSerializerSettings
+            return new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Converters = new JsonConverter[] { new StringEnumConverter() },
+                Converters = new JsonConverter[] { new StringEnumConverter(), new IsoDateTimeConverter() },
                 NullValueHandling = includeNull ? NullValueHandling.Include : NullValueHandling.Ignore
             };
+        }
 
-            return JsonConvert.SerializeObject(obj, settings);
+        public static string ToJson<T>(this T obj, bool includeNull = true)
+        {
+            return JsonConvert.SerializeObject(obj, JsonSerializerSettings(includeNull));
         }
 
         public static string ToCamelCaseName<TModel, TProp>(

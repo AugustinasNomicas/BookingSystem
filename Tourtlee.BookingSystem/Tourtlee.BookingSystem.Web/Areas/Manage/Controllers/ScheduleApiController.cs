@@ -25,9 +25,9 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get(Guid? idTour)
+        public ActionResult GetScheduleForTour(Guid? id)
         {
-            var schedule = _scheduleService.GetScheduleForTour(idTour);
+            var schedule = _scheduleService.GetScheduleForTour(id);
             return Ok(schedule);
         }
 

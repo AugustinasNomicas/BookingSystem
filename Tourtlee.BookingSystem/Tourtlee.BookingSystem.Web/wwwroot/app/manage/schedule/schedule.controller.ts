@@ -5,11 +5,13 @@ import {ScheduleResource} from "./schedule.resource";
 import {NotificationService} from "../../shared/services/notificationService";
 
 export class ScheduleController {
-    static $inject: string[] = ["$window", "ScheduleResource", "notificationService"];
+    static $inject: string[] = ["$scope", "$window", "ScheduleResource", "notificationService"];
     private vm = this;
     schedule: any;
+    
 
-    constructor(private $window: angular.IWindowService,
+    constructor(private $scope: any,
+        private $window: angular.IWindowService,
         private scheduleResource: ScheduleResource,
         private notificationService: NotificationService) {
         this.schedule = $window["scheduleConfig"]["schedule"];
@@ -22,4 +24,12 @@ export class ScheduleController {
             this.notificationService.error(error.data);
         });
     }
+
+    private tourChanged() {
+        this.scheduleResource.getScheduleForTour(this.schedule.idTour).then(data => {
+            this.schedule = data.data;
+            this.$scope.scheduleForm.$setPristine();
+        });
+    }
+
 }

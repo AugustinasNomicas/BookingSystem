@@ -38,7 +38,7 @@ export class BookController {
         this.createBookings();
     }
 
-    private tourChanged() {
+    tourChanged() {
         this.bookResource.getInfoForNewBooking(this.bookingSet.idTour).then(data => {
             this.infoForNewBooking = data.data;
         });

@@ -14,7 +14,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
         private readonly IScheduleService _scheduleService;
         private readonly ITourService _tourService;
 
-        public GetInfoForNewBookingOperation(IOperationContext operationContext, 
+        public GetInfoForNewBookingOperation(IOperationContext operationContext,
             IScheduleService scheduleService, ITourService tourService) : base(operationContext)
         {
             _scheduleService = scheduleService;
@@ -39,12 +39,13 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
         private List<DateTimeWithAvailabilitiesDto> GetDates(ScheduleByWeekdayDto schedule, TourDto tour)
         {
             var start = DateTime.Now;
-            var yearEnd = new DateTime(DateTime.Now.Year, 12, 31);
+            var yearEnd = DateTime.Now.AddDays(182); // add half a year
 
-           var dates = Enumerable.Range(0, 1 + yearEnd.Subtract(start).Days)
-          .Select(offset => start.AddDays(offset))
-          .Where(dt => schedule.Weekdays.Where(w => w.IsActive).FirstOrDefault(w => w.DayOfWeek == dt.DayOfWeek) != null)
-          .ToArray();
+            var dates = Enumerable.Range(0, 1 + yearEnd.Subtract(start).Days)
+           .Select(offset => start.AddDays(offset))
+           .Where(dt => schedule.Weekdays.Where(w => w.IsActive).FirstOrDefault(w => w.DayOfWeek == dt.DayOfWeek) != null);
+
+           dates = dates.Select(dt => schedule.Weekdays.First(w => w.DayOfWeek == dt.DayOfWeek).Time);
 
             return dates.Select(dt => new DateTimeWithAvailabilitiesDto
             {

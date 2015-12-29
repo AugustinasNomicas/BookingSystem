@@ -33,6 +33,8 @@ namespace Tourtlee.BookingSystem.Business.Operations.Schedule
 
             var dto = BuildDto(scheduleByWeekdayJson);
             dto.IdScheduleJson = schedule.IdScheduleJson;
+            dto.IdTour = schedule.IdTour;
+
             return dto;
         }
 

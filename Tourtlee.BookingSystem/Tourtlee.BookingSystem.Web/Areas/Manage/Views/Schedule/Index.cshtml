@@ -13,6 +13,9 @@
         apiUrl: '@Url.Action("Index", "ScheduleApi", new { Area = "Manage" })',
         schedule: @Html.JsonFor(Model)
         };
+    var toursConfig = {
+        apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })' // needed for tour-selector
+    }
 </script>
 
 <div data-ng-controller="ScheduleController as vm">
@@ -22,6 +25,14 @@
 
         <fieldset>
             <legend data-translate>schedule.edit</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="tourSelect" data-translate>tours.selectTour</label>
+                <div class="col-md-4">
+                    <div tour-selector-directive ng-model="vm.schedule.idTour" id="tourSelect" ng-change="vm.tourChanged()"></div>
+                </div>
+            </div>
+
 
             <table class="table">
                 <thead>

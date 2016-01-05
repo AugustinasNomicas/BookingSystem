@@ -4,6 +4,8 @@ using Tourtlee.BookingSystem.Business.Dto.Accounts;
 using Tourtlee.BookingSystem.Model.Security;
 using AutoMapperFramework;
 using System.Reflection;
+using Tourtlee.BookingSystem.Business.Dto.Bookings;
+using Tourtlee.BookingSystem.Model.Book;
 
 namespace Tourtlee.BookingSystem.Business
 {
@@ -19,6 +21,8 @@ namespace Tourtlee.BookingSystem.Business
                 .ForMember(dest => dest.IdUser, opt => opt.MapFrom(src => Guid.Parse(src.Id)))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.OrganizationName, opt => opt.MapFrom(src => src.Organization.Name));
+
+            Mapper.CreateMap<Booking, BookingDto>().ReverseMap();
         }
     }
 }

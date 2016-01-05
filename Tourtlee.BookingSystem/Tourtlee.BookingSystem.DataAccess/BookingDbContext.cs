@@ -41,11 +41,14 @@ namespace Tourtlee.BookingSystem.DataAccess
                 .HasForeignKey(t => t.IdOrganization);
 
             builder.Entity<ScheduleJson>()
-                .HasOne(t => t.Tour)
+                .HasOne(s => s.Tour)
                 .WithMany(t => t.Schedules)
-                .HasForeignKey(t => t.IdTour);
+                .HasForeignKey(s => s.IdTour);
 
-            builder.Entity<Booking>();
+            builder.Entity<Booking>()
+                .HasOne(b => b.Tour)
+                .WithMany(t => t.Bookings)
+                .HasForeignKey(b => b.IdTour);
         }
 
         public static async Task InitializeDatabaseAsync(IServiceProvider serviceProvider)

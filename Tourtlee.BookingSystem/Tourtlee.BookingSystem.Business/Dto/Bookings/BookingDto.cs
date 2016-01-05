@@ -1,17 +1,18 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace Tourtlee.BookingSystem.Model.Book
+namespace Tourtlee.BookingSystem.Business.Dto.Bookings
 {
-    public class Booking
+    public class BookingsListDto : PagedDto
     {
-        [Key]
+        public List<BookingDto> Bookings { get; set; } 
+    }
+
+    public class BookingDto
+    {
         public Guid IdBooking { get; set; }
         public Guid IdBookingSet { get; set; }
-
         public Guid IdTour { get; set; }
-        public Tour Tour { get; set; }
-
         public DateTime TourDate { get; set; }
         public DateTime BookDate { get; set; }
         public string Firstname { get; set; }

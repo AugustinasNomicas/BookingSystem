@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_ManageLayout";
+}
+
+<script>
+    System.import('manage/bookings/bookings.module.js');
+
+    var bookingsConfig = {
+        apiUrl: '@Url.Action("Get", "BookingsApi", new {Area = "Manage"})'
+    }
+    var toursConfig = {
+        apiUrl: '@Url.Action("Index", "ToursApi", new {Area = "Manage"})' // needed for tour-selector
+    }
+
+</script>
+
+<div data-ng-controller="BookingsController as vm">
+    <h1>Hello bookings</h1>
+</div>

@@ -6,7 +6,8 @@ import {NotificationService} from "./notificationService";
 export class AngularModuleFactory {
     static factory(moduleName: string, translationsPart: string): angular.IModule {
         var defaultRequiredModules = ["mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
-            "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages'];
+            "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages',
+        'smart-table'];
 
         var module = angular.module(moduleName, defaultRequiredModules);
 

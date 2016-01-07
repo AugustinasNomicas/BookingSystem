@@ -18,6 +18,7 @@
     "angular-ui-select": "*",
     "angular-sanitize": "*",
     "angular-ui-validate": "*",
-    "angular-messages": "*"
+    "angular-messages": "*",
+    "angular-smart-table": "*"
   }
 }

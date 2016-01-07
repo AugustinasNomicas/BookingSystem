@@ -13,6 +13,7 @@ namespace Tourtlee.BookingSystem.Business.Dto.Bookings
         public Guid IdBooking { get; set; }
         public Guid IdBookingSet { get; set; }
         public Guid IdTour { get; set; }
+        public string TourName { get; set; }
         public DateTime TourDate { get; set; }
         public DateTime BookDate { get; set; }
         public string Firstname { get; set; }

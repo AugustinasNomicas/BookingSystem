@@ -12,7 +12,7 @@ export class BookingsResource {
     }
 
     get = (filter: BookingsFilterDto): angular.IHttpPromise<BookingListDto> => {
-        return this.$http<BookingListDto>({ url: this.apiUrl, method: "Get", data: filter });
+        return this.$http<BookingListDto>({ url: this.apiUrl, method: "Get", params: filter });
     };
 
 }

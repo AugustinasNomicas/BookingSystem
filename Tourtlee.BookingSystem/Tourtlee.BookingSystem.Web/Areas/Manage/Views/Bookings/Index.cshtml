@@ -15,5 +15,30 @@
 </script>
 
 <div data-ng-controller="BookingsController as vm">
-    <h1>Hello bookings</h1>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="tourSelect" data-translate>tours.selectTour</label>
+        <div class="col-md-4">
+            <div tour-selector-directive ng-model="vm.idTour" id="tourSelect" ng-change="vm.tourChanged()"></div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Tour</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Tour date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr st-select-mode="multiple" ng-repeat="booking in vm.bookings.bookings">
+            <td>{{booking.firstname}}</td>
+            <td>{{booking.lastname}}</td>
+            <td>{{booking.tourName}}</td>
+            <td>{{booking.tourDate| date:'short'}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>

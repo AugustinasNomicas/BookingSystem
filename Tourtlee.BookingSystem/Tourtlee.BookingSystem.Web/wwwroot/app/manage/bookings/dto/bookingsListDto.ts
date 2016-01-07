@@ -9,6 +9,7 @@ export class BookingDto {
     idBooking: string;
     idBookingSet: string;
     idTour: string;
+    tourName: string;
     tourDate: Date;
     bookDate: Date;
     firstname: string;

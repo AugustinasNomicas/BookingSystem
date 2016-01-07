@@ -6,7 +6,7 @@ var BookingsResource = (function () {
         this.$http = $http;
         this.$window = $window;
         this.get = function (filter) {
-            return _this.$http({ url: _this.apiUrl, method: "Get", data: filter });
+            return _this.$http({ url: _this.apiUrl, method: "Get", params: filter });
         };
         this.apiUrl = $window["bookingsConfig"]["apiUrl"] + '/';
     }

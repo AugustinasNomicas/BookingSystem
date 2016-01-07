@@ -45,7 +45,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
            .Select(offset => start.AddDays(offset))
            .Where(dt => schedule.Weekdays.Where(w => w.IsActive).FirstOrDefault(w => w.DayOfWeek == dt.DayOfWeek) != null);
 
-           dates = dates.Select(dt => schedule.Weekdays.First(w => w.DayOfWeek == dt.DayOfWeek).Time);
+           dates = dates.Select(dt => dt + schedule.Weekdays.First(w => w.DayOfWeek == dt.DayOfWeek).Time.TimeOfDay);
 
             return dates.Select(dt => new DateTimeWithAvailabilitiesDto
             {

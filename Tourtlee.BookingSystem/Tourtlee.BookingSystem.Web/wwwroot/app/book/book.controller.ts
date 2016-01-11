@@ -19,7 +19,7 @@ export class BookController {
         this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
 
         this.maxNumberOfPersons = 10;
-        this.numberOfPersons = 5;
+        this.numberOfPersons = 1;
 
         this.bookingSet = new BookingSetDto();
         this.bookingSet.bookings = [];

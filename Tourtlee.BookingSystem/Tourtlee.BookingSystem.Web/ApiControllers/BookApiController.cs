@@ -6,7 +6,7 @@ using Tourtlee.BookingSystem.Business.Services;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Tourtlee.BookingSystem.Web.Controllers
+namespace Tourtlee.BookingSystem.Web.ApiControllers
 {
     [Authorize]
     public class BookApiController : Controller

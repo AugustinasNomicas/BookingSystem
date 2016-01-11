@@ -1,7 +1,60 @@
 ﻿<script>
-    System.import('default.module.js');
+    System.import('checkin/checkin.module.js');
+
+    var checkinConfig = {
+        apiUrl: '@Url.Action("Index", "CheckinApi")'
+    }
 </script>
 
-<h1>
-    Check-In
-</h1>
+<form class="form-horizontal" data-ng-controller="checkinController as vm"
+      data-ng-submit="vm.submit()">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Checkin</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Booking</label>
+            <div class="col-md-4">
+                <input id="textinput" name="textinput" type="text"
+                       ng-model="vm.searchText"
+                       placeholder="Id or search query" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="Search"></label>
+            <div class="col-md-4">
+                <button type="submit" id="Search" name="Search" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Book date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.checkinResult.resultItems">
+                    <td><button class="btn btn-success">Checkin</button></td>
+                    <td>{{item.firstname}}</td>
+                    <td>{{item.lastname}}</td>
+                    <td>{{item.bookDate| date:'short'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</form>
+
+

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Operations.Book;
 using Tourtlee.BookingSystem.Business.Operations.Bookings;
+using Tourtlee.BookingSystem.Business.Operations.Checkin;
 using Tourtlee.BookingSystem.Business.Operations.Core;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
 using Tourtlee.BookingSystem.Business.Operations.Schedule;
@@ -24,6 +25,7 @@ namespace Tourtlee.BookingSystem.Business
             services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IBookingsService, BookingsService>();
+            services.AddScoped<ICheckinService, CheckinService>();
 
             // Organization operations
             services.AddTransient<CreateOrganizationOperation>();
@@ -53,7 +55,8 @@ namespace Tourtlee.BookingSystem.Business
             // Bookings operations
             services.AddTransient<GetBookingsListOperation>();
 
-
+            // Checkin operations
+            services.AddTransient<CheckinOperation>();
         }
     }
 }

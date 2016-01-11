@@ -18,5 +18,7 @@ namespace Tourtlee.BookingSystem.Model.Book
         public string Lastname { get; set; }
         public byte Gender { get; set; }
         public bool IsChild { get; set; }
+
+        public bool CheckedIn { get; set; }
     }
 }

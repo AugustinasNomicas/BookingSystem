@@ -26,18 +26,18 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Tour</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Tour date</th>
+            <th>Tour</th>
         </tr>
         </thead>
         <tbody>
-        <tr st-select-mode="multiple" ng-repeat="booking in vm.bookings.bookings">
+        <tr ng-repeat="booking in vm.bookings.bookings">
             <td>{{booking.firstname}}</td>
             <td>{{booking.lastname}}</td>
-            <td>{{booking.tourName}}</td>
             <td>{{booking.tourDate| date:'short'}}</td>
+            <td>{{booking.tourName}}</td>
         </tr>
         </tbody>
     </table>

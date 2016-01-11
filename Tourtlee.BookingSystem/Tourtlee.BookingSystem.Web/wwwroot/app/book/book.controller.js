@@ -2,9 +2,10 @@
 "use strict";
 var bookDto_1 = require("./dto/bookDto");
 var BookController = (function () {
-    function BookController($window, bookResource) {
+    function BookController($window, bookResource, notificationService) {
         this.$window = $window;
         this.bookResource = bookResource;
+        this.notificationService = notificationService;
         this.vm = this;
         this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
         this.maxNumberOfPersons = 10;
@@ -15,8 +16,11 @@ var BookController = (function () {
         this.createBookings();
     }
     BookController.prototype.submit = function () {
+        var _this = this;
         this.bookResource.create(this.bookingSet).then(function (result) {
-            alert(result);
+            _this.notificationService.success("Tour Booked");
+            _this.bookingSet.bookings = new Array();
+            _this.createBookings();
         });
     };
     BookController.prototype.numberOfPersonsChange = function () {
@@ -42,7 +46,7 @@ var BookController = (function () {
             }
         }
     };
-    BookController.$inject = ["$window", "BookResource"];
+    BookController.$inject = ["$window", "BookResource", "notificationService"];
     return BookController;
 })();
 exports.BookController = BookController;

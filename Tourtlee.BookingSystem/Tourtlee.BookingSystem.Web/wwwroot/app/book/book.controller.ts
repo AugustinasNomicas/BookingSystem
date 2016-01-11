@@ -3,9 +3,10 @@
 
 import {CreateBookingSetDto as BookingSetDto, CreateBookingDto as BookingDto } from "./dto/bookDto";
 import {BookResource} from "./book.resource";
+import {NotificationService} from "../shared/services/notificationService";
 
 export class BookController {
-    static $inject: string[] = ["$window", "BookResource"];
+    static $inject: string[] = ["$window", "BookResource", "notificationService"];
 
     private vm = this;
     infoForNewBooking: any;
@@ -15,7 +16,7 @@ export class BookController {
     bookingSet: BookingSetDto;
 
     constructor(private $window: angular.IWindowService,
-        private bookResource: BookResource) {
+        private bookResource: BookResource, private notificationService: NotificationService) {
         this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
 
         this.maxNumberOfPersons = 10;
@@ -30,7 +31,9 @@ export class BookController {
 
     submit() {
         this.bookResource.create(this.bookingSet).then((result) => {
-            alert(result);
+            this.notificationService.success("Tour Booked");
+            this.bookingSet.bookings = new Array<BookingDto>();
+            this.createBookings();
         });
     }
 

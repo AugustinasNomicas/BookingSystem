@@ -14,6 +14,7 @@ namespace Tourtlee.BookingSystem.Model.Requests.Checkin
         public Guid IdBooking { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+        public bool CheckedIn { get; set; }
         public DateTime BookDate { get; set; }
     }
 }

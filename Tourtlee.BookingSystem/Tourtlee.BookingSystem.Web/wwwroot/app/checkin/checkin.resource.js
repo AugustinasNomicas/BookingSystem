@@ -8,6 +8,9 @@ var CheckinResource = (function () {
         this.checkin = function (item) {
             return _this.$http({ url: _this.apiUrl + "checkin", method: "Post", data: item });
         };
+        this.cancelCheckin = function (idBooking) {
+            return _this.$http({ url: _this.apiUrl + "cancelCheckin", method: "Post", data: { idBooking: idBooking } });
+        };
         this.apiUrl = $window["checkinConfig"]["apiUrl"] + '/';
     }
     CheckinResource.$inject = ["$http", "$window"];

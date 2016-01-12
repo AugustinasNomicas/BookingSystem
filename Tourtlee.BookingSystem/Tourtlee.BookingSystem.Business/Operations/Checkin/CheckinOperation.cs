@@ -23,19 +23,14 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
             var result = new CheckinResult();
             if (request.IdBooking.HasValue)
             {
-                CheckinBooking(request.IdBooking.Value);
+                var booking = CheckinBooking(request.IdBooking.Value);
                 result.Success = true;
+                result.ResultItems = new List<CheckinResultItem>() { MapBookingToCheckinResultItem(booking) };
                 return result;
             }
 
             var bookings = SearchForBookings(request.SearchText);
-            result.ResultItems = bookings.Select(b => new CheckinResultItem
-            {
-                IdBooking = b.IdBooking,
-                Firstname = b.Firstname,
-                Lastname = b.Lastname,
-                BookDate = b.BookDate
-            }).ToList();
+            result.ResultItems = bookings.Select(MapBookingToCheckinResultItem).ToList();
 
             return result;
         }
@@ -46,21 +41,35 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
             var result = new List<Booking>();
             foreach (var word in words)
             {
-               result.AddRange(_bookingRepository.FindBy(s => 
-               s.Firstname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase) 
-               || s.Lastname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase)));
+                result.AddRange(_bookingRepository.FindBy(s =>
+                s.Firstname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase)
+                || s.Lastname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase)));
             }
 
             return result.OrderBy(b => b.Firstname).ThenBy(b => b.Lastname).Take(100);
-        } 
+        }
 
-        private void CheckinBooking(Guid idBooking)
+        private CheckinResultItem MapBookingToCheckinResultItem(Booking booking)
+        {
+            return new CheckinResultItem
+            {
+                IdBooking = booking.IdBooking,
+                Firstname = booking.Firstname,
+                Lastname = booking.Lastname,
+                CheckedIn = booking.CheckedIn,
+                BookDate = booking.BookDate
+            };
+        }
+
+        private Booking CheckinBooking(Guid idBooking)
         {
             var booking = _bookingRepository.FindBy(b => b.IdBooking == idBooking).Single();
             booking.CheckedIn = true;
 
             _bookingRepository.Update(booking);
             _bookingRepository.Save();
+
+            return booking;
         }
     }
 }

@@ -4,7 +4,7 @@
     title = "";
     body = "";
 
-    constructor(private $modalInstance,
+    constructor(private $modalInstance: any,
         title, body, $translate) {
         // If specified, fill window title and message with parameters
         if (title && body) {

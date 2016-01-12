@@ -15,46 +15,51 @@
 
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Booking</label>
-            <div class="col-md-4">
+            <label class="col-sm-2 control-label" for="textinput">Booking</label>
+            <div class="col-sm-4">
                 <input id="textinput" name="textinput" type="text"
                        ng-model="vm.searchText"
                        placeholder="Id or search query" class="form-control input-md">
 
             </div>
-        </div>
-
-        <!-- Button -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="Search"></label>
-            <div class="col-md-4">
-                <button type="submit" id="Search" name="Search" class="btn btn-primary">Search</button>
+            <div class="col-sm-2">
+                <button type="submit" id="Search" name="Search" class="btn btn-primary"
+                        data-ng-enabled="!vm.checkinInProgress">Search</button>
             </div>
         </div>
-
     </fieldset>
 
-    <div>
+    <div data-ng-show="vm.checkinResult.success" class="alert alert-success" role="alert">
+        Checkin successful for {{vm.checkinResult.resultItems[0].firstname}} {{vm.checkinResult.resultItems[0].lastname}}!
+    </div>
+
+    <div data-ng-show="!vm.checkinResult.success">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th></th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Book date</th>
-                </tr>
+            <tr>
+                <th>Check in</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Book date</th>
+            </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in vm.checkinResult.resultItems">
-                    <td><button class="btn btn-success">Checkin</button></td>
-                    <td>{{item.firstname}}</td>
-                    <td>{{item.lastname}}</td>
-                    <td>{{item.bookDate| date:'short'}}</td>
-                </tr>
+            <tr ng-repeat="item in vm.checkinResult.resultItems">
+                <td>
+                    <button class="btn btn-success" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
+                            data-ng-show="!item.checkedIn"
+                            data-ng-enabled="!vm.checkinInProgress">Checkin</button>
+                    <button class="btn btn-danger" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
+                            data-ng-show="item.checkedIn"
+                            data-ng-enabled="!vm.checkinInProgress">Cancel</button>
+                </td>
+                <td>{{item.firstname}}</td>
+                <td>{{item.lastname}}</td>
+                <td>{{item.bookDate| date:'short'}}</td>
+            </tr>
             </tbody>
         </table>
     </div>
-
 </form>
 
 

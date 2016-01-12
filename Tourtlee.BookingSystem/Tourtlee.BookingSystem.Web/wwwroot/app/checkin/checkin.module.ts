@@ -11,7 +11,7 @@ import {ToursResource} from "../manage/tours/tours.resource";
 export module Checkin {
     "use strict";   
     var moduleName = "checkin";
-    var translationsPart = "admin";
+    var translationsPart = "checkin";
 
     var app = AngularModuleFactory.factory(moduleName, translationsPart);
 

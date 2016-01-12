@@ -13,6 +13,10 @@ export class CheckinResource {
     }
 
     checkin = (item: CheckinRequestDto): angular.IHttpPromise<CheckinResultDto> => {
-        return this.$http<CheckinResultDto>({ url: this.apiUrl + `checkin`, method: "Post", data: item });
+        return this.$http<CheckinResultDto>({ url: this.apiUrl + `checkin`, method: "Post", data: item});
+    };
+
+    cancelCheckin = (idBooking: string): angular.IHttpPromise<void> => {
+        return this.$http<void>({ url: this.apiUrl + `cancelCheckin`, method: "Post", data: { idBooking: idBooking } });
     };
 }

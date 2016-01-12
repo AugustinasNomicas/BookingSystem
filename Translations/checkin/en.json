@@ -1,0 +1,6 @@
+{
+	"checkin":{
+		"cancelConfirmTitle": "Cancel checkin?",
+		"cancelConfirmContent": "Press ok to cancel checkin"
+	}
+}

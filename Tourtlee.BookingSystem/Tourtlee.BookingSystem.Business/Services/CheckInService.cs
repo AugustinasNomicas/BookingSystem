@@ -8,6 +8,7 @@ namespace Tourtlee.BookingSystem.Business.Services
     public interface ICheckinService
     {
         CheckinResult Checkin(CheckinRequest request);
+        void CancelCheckin(Guid idBooking);
     }
 
     public class CheckinService : ICheckinService
@@ -23,6 +24,12 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<CheckinOperation>();
             return operation.Operate(request);
+        }
+
+        public void CancelCheckin(Guid idBooking)
+        {
+            var operation = _serviceProvider.GetRequiredService<CancelCheckinOperation>();
+            operation.Operate(idBooking);
         }
     }
 }

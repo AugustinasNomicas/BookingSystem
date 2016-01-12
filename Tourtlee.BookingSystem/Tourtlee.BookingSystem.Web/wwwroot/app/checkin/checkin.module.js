@@ -10,7 +10,7 @@ var Checkin;
 (function (Checkin) {
     "use strict";
     var moduleName = "checkin";
-    var translationsPart = "admin";
+    var translationsPart = "checkin";
     var app = angularModuleFactory_1.AngularModuleFactory.factory(moduleName, translationsPart);
     app.directive("formGroupValidation", formGroupValidation_directive_1.FormGroupValidationDirective.factory());
     app.directive("tourSelectorDirective", TourSelector_directive_1.TourSelectorDirective.factory());

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Authorization;
+﻿using System;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.Model.Requests.Checkin;
@@ -26,6 +27,12 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers
         public CheckinResult Checkin([FromBody]CheckinRequest request)
         {
             return _checkinService.Checkin(request);
+        }
+
+        [HttpPost]
+        public void CancelCheckin([FromBody]CancelCheckinRequest request)
+        {
+            _checkinService.CancelCheckin(request.IdBooking);
         }
 
     }

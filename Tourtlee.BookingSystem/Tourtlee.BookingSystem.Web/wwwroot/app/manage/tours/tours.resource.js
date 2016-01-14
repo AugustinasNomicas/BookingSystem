@@ -12,6 +12,9 @@ var ToursResource = (function () {
         this.get = function (id) {
             return _this.$http({ url: _this.apiUrl + ("" + id), method: "Get" });
         };
+        this.getDefault = function () {
+            return _this.$http({ url: _this.apiUrl, method: "Get" });
+        };
         this.getList = function () {
             return _this.$http({ url: _this.apiUrl, method: "Get" });
         };

@@ -4,62 +4,73 @@
     var checkinConfig = {
         apiUrl: '@Url.Action("Index", "CheckinApi")'
     }
+
+    var toursConfig = {
+        apiUrl: '@Url.Action("Index", "ToursApi", new { Area = "Manage" })' // needed for tour-selector
+    }
 </script>
 
-<form class="form-horizontal" data-ng-controller="checkinController as vm"
-      data-ng-submit="vm.submit()">
-    <fieldset>
+<legend>Checkin</legend>
 
-        <!-- Form Name -->
-        <legend>Checkin</legend>
+<div data-ng-controller="checkinController as vm">
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="textinput">Booking</label>
-            <div class="col-sm-4">
-                <input id="textinput" name="textinput" type="text"
-                       ng-model="vm.searchText"
-                       placeholder="Id or search query" class="form-control input-md">
+    @Html.Partial("_TourSelect")
 
+    <form class="form-horizontal" data-ng-submit="vm.submit()">
+        <fieldset>
+            <!-- Search input -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="textinput">Booking</label>
+                <div class="col-sm-4">
+                    <input id="textinput" name="textinput" type="text"
+                           ng-model="vm.searchText"
+                           placeholder="Id or search query" class="form-control input-md">
+
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" id="Search" name="Search" class="btn btn-primary"
+                            data-ng-enabled="!vm.checkinInProgress">
+                        Search
+                    </button>
+                </div>
             </div>
-            <div class="col-sm-2">
-                <button type="submit" id="Search" name="Search" class="btn btn-primary"
-                        data-ng-enabled="!vm.checkinInProgress">Search</button>
-            </div>
+        </fieldset>
+
+        <div data-ng-show="vm.checkinResult.success" class="alert alert-success" role="alert">
+            Checkin successful for {{vm.checkinResult.resultItems[0].firstname}} {{vm.checkinResult.resultItems[0].lastname}}!
         </div>
-    </fieldset>
 
-    <div data-ng-show="vm.checkinResult.success" class="alert alert-success" role="alert">
-        Checkin successful for {{vm.checkinResult.resultItems[0].firstname}} {{vm.checkinResult.resultItems[0].lastname}}!
-    </div>
-
-    <div data-ng-show="!vm.checkinResult.success">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Check in</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Book date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in vm.checkinResult.resultItems">
-                <td>
-                    <button class="btn btn-success" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
-                            data-ng-show="!item.checkedIn"
-                            data-ng-enabled="!vm.checkinInProgress">Checkin</button>
-                    <button class="btn btn-danger" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
-                            data-ng-show="item.checkedIn"
-                            data-ng-enabled="!vm.checkinInProgress">Cancel</button>
-                </td>
-                <td>{{item.firstname}}</td>
-                <td>{{item.lastname}}</td>
-                <td>{{item.bookDate| date:'short'}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</form>
-
+        <div data-ng-show="!vm.checkinResult.success && vm.checkinResult.resultItems.length > 0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Check in</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Book date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.checkinResult.resultItems">
+                        <td>
+                            <button class="btn btn-success" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
+                                    data-ng-show="!item.checkedIn"
+                                    data-ng-enabled="!vm.checkinInProgress">
+                                Checkin
+                            </button>
+                            <button class="btn btn-danger" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
+                                    data-ng-show="item.checkedIn"
+                                    data-ng-enabled="!vm.checkinInProgress">
+                                Cancel
+                            </button>
+                        </td>
+                        <td>{{item.firstname}}</td>
+                        <td>{{item.lastname}}</td>
+                        <td>{{item.bookDate| date:'short'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
 

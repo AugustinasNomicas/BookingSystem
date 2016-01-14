@@ -21,6 +21,10 @@ export class ToursResource {
         return this.$http<TourDto>({ url: this.apiUrl + `${id}`, method: "Get" });
     };
 
+    getDefault = (): angular.IHttpPromise<TourDto> => {
+        return this.$http<TourDto>({ url: this.apiUrl, method: "Get" });
+    };
+
     getList = (): angular.IHttpPromise<TourDto[]> => {
         return this.$http<TourDto[]>({ url: this.apiUrl, method: "Get" });
     };

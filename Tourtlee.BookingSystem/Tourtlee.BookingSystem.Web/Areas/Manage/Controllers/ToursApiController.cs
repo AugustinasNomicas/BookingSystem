@@ -42,6 +42,11 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
             return _tourService.Get(id);
         }
 
+        public TourDto Get()
+        {
+            return _tourService.GetDefault();
+        }
+
         [HttpPut]
         public TourDto Update([FromBody] TourDto item)
         {

@@ -1,0 +1,33 @@
+﻿<uib-accordion>
+    <uib-accordion-group is-open="vm.tourSelect.open">
+        <uib-accordion-heading>
+            9:00 Tour to Symi Island<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': vm.tourSelect.open, 'glyphicon-chevron-right': !vm.tourSelect.open}"></i>
+        </uib-accordion-heading>
+
+        <div class="alert alert-info" role="alert">Changing tour date will impact check-in process</div>
+
+        <form class="form-horizontal" data-ng-submit="vm.TourSelectSubmit()" name="tourSelectForm">
+            <!-- Tour select -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="tourSelect" data-translate>Tour</label>
+                <div class="col-sm-4">
+                    <div tour-selector-directive ng-model="vm.tourSelect.idTour" id="tourSelect" ng-change="vm.tourSelectTourChanged()"></div>
+                </div>
+            </div>
+
+            <!-- Date select -->
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="dateSelect" data-translate>Departure time</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="dateSelect" id="dateSelect"
+                            ng-model="vm.tourSelect.date">
+                        <option ng-repeat="date in vm.tourSelect.datesList"
+                                value="{{date.dateTime}}">
+                            {{date.dateTime | date:'medium'}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </uib-accordion-group>
+</uib-accordion>

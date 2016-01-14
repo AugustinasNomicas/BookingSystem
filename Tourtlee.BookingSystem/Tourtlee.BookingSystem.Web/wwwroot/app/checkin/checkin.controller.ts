@@ -5,9 +5,10 @@ import {CheckinResource} from "./checkin.resource";
 import {CheckinRequestDto} from "./dto/checkinRequestDto";
 import {CheckinResultDto, CheckinResultItemDto } from "./dto/checkinResultDto";
 import {ModalWindowService} from "../shared/services/modalWindowService";
+import {ToursResource} from "../manage/tours/tours.resource";
 
 export class CheckinController {
-    static $inject: string[] = ["$window", "checkinResource", "ModalWindowService"];
+    static $inject: string[] = ["$window", "checkinResource", "ModalWindowService", "ToursResource"];
 
     private vm = this;
 
@@ -15,9 +16,24 @@ export class CheckinController {
     checkinResult: CheckinResultDto;
     checkinInProgress: boolean;
 
+    tourSelect: {
+        open: boolean;
+        idTour: string;
+        date: Date;
+    }
+
     constructor(private $window: angular.IWindowService,
         private checkinResource: CheckinResource,
-        private modalWindowService: ModalWindowService) {
+        private modalWindowService: ModalWindowService,
+        private tourResource: ToursResource) {
+        this.loadTours();
+    }
+
+    private loadTours() {
+        
+        this.tourResource.getDefault().then((result) => {
+            this.tourSelect = result.data.idTour;
+        });
     }
 
     submit(idBooking: string) {
@@ -25,6 +41,9 @@ export class CheckinController {
 
         request.idBooking = idBooking;
         request.searchText = this.searchText;
+        request.idTour = this.tourSelect.idTour;
+        request.date = this.tourSelect.date;
+
         this.checkinInProgress = true;
         this.checkinResource.checkin(request).then((result) => {
             this.checkinResult = result.data;
@@ -47,4 +66,12 @@ export class CheckinController {
             this.submit(null);
         });
     }
+
+    private tourSelectTourChanged() {
+        //this.scheduleResource.getScheduleForTour(this.tourSelect.idTour).then(data => {
+        //    this.schedule = data.data;
+        //    this.$scope.scheduleForm.$setPristine();
+        //});
+    }
+
 }

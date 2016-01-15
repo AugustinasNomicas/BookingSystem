@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity.Storage;
 using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.Model.Requests.Checkin;
 
@@ -35,5 +37,10 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers
             _checkinService.CancelCheckin(request.IdBooking);
         }
 
+        [HttpGet]
+        public List<DateTime> GetDatesForTour(Guid id)
+        {
+            return _checkinService.GetDatesForTour(id);
+        }
     }
 }

@@ -45,13 +45,14 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
            .Select(offset => start.AddDays(offset))
            .Where(dt => schedule.Weekdays.Where(w => w.IsActive).FirstOrDefault(w => w.DayOfWeek == dt.DayOfWeek) != null);
 
-           dates = dates.Select(dt => dt + schedule.Weekdays.First(w => w.DayOfWeek == dt.DayOfWeek).Time.TimeOfDay);
+            dates = dates.Select(dt => new DateTime(dt.Year, dt.Month, dt.Day)
+            + schedule.Weekdays.First(w => w.DayOfWeek == dt.DayOfWeek).Time.TimeOfDay);
 
             return dates.Select(dt => new DateTimeWithAvailabilitiesDto
             {
                 DateTime = dt,
                 Availabilities = tour.Availabilities
-            }).ToList();
+            }).OrderBy(d => d.DateTime).ToList();
         }
     }
 }

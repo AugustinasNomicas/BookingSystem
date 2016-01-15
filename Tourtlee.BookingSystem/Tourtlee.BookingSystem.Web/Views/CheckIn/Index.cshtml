@@ -1,8 +1,11 @@
-﻿<script>
+﻿@using Tourtlee.BookingSystem.Web.Helpers
+@model Tourtlee.BookingSystem.Business.Dto.Checkin.CheckinInitialValuesDto
+<script>
     System.import('checkin/checkin.module.js');
 
     var checkinConfig = {
-        apiUrl: '@Url.Action("Index", "CheckinApi")'
+        apiUrl: '@Url.Action("Index", "CheckinApi")',
+        checkinInitialValues: @Html.JsonFor(Model)
     }
 
     var toursConfig = {

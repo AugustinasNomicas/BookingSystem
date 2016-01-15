@@ -13,8 +13,6 @@ export class AngularModuleFactory {
 
         module.service("ModalWindowService", ModalWindowService);
         module.service("notificationService", NotificationService);
-
-
         module.config(['$logProvider', $logProvider => {
             $logProvider.debugEnabled(true);
         }]);

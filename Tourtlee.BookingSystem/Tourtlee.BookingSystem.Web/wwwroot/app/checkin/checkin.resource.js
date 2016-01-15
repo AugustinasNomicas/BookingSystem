@@ -11,6 +11,9 @@ var CheckinResource = (function () {
         this.cancelCheckin = function (idBooking) {
             return _this.$http({ url: _this.apiUrl + "cancelCheckin", method: "Post", data: { idBooking: idBooking } });
         };
+        this.getDatesForTour = function (idTour) {
+            return _this.$http({ url: _this.apiUrl + ("getDatesForTour/" + idTour), method: "Get" });
+        };
         this.apiUrl = $window["checkinConfig"]["apiUrl"] + '/';
     }
     CheckinResource.$inject = ["$http", "$window"];

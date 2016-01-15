@@ -7,6 +7,7 @@ import {FormGroupValidationDirective} from "../../shared/directives/formGroupVal
 import {ScheduleController} from "./schedule.controller";
 import {TourSelectorDirective} from "../../shared/directives/tourSelector/TourSelector.directive";
 import {ToursResource} from "../tours/tours.resource";
+import {DatetimepickerNeutralTimezone} from "../../shared/directives/datetimepickerNeutralTimezone.directive";
 
 export module Schedule {
     "use strict";
@@ -17,6 +18,7 @@ export module Schedule {
 
     app.directive("formGroupValidation", FormGroupValidationDirective.factory());
     app.directive("tourSelectorDirective", TourSelectorDirective.factory());    
+    app.directive("datetimepickerNeutralTimezone", DatetimepickerNeutralTimezone.factory());
     app.controller("ScheduleController", ScheduleController);
     
     app.service("ScheduleResource", ScheduleResource);

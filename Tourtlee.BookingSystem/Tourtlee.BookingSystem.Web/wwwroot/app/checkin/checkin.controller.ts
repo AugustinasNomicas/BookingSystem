@@ -3,6 +3,7 @@
 
 import {CheckinResource} from "./checkin.resource";
 import {CheckinRequestDto} from "./dto/checkinRequestDto";
+import {CheckinInitialValuesDto} from "./dto/checkinInitialValuesDto";
 import {CheckinResultDto, CheckinResultItemDto } from "./dto/checkinResultDto";
 import {ModalWindowService} from "../shared/services/modalWindowService";
 import {ToursResource} from "../manage/tours/tours.resource";
@@ -15,27 +16,29 @@ export class CheckinController {
     searchText: string;
     checkinResult: CheckinResultDto;
     checkinInProgress: boolean;
+    checkinInitialValues: CheckinInitialValuesDto;
 
     tourSelect: {
         open: boolean;
         idTour: string;
         date: Date;
+        datesList: Date[];
     }
 
     constructor(private $window: angular.IWindowService,
         private checkinResource: CheckinResource,
         private modalWindowService: ModalWindowService,
         private tourResource: ToursResource) {
-        this.loadTours();
-    }
 
-    private loadTours() {
-        
-        this.tourResource.getDefault().then((result) => {
-            this.tourSelect = result.data.idTour;
-        });
+        this.checkinInitialValues = $window["checkinConfig"]["checkinInitialValues"];
+        this.tourSelect = {
+            idTour: this.checkinInitialValues.idTour,
+            date: this.checkinInitialValues.date,
+            datesList: this.checkinInitialValues.datesList,
+            open: false
+        }
     }
-
+    
     submit(idBooking: string) {
         var request = new CheckinRequestDto();
 
@@ -62,16 +65,19 @@ export class CheckinController {
 
     cancelCheckin(checkinResultItemDto: CheckinResultItemDto) {
         this.checkinInProgress = true;
-        this.checkinResource.cancelCheckin(checkinResultItemDto.idBooking).then((result) => {
+        this.checkinResource.cancelCheckin(checkinResultItemDto.idBooking).then(() => {
             this.submit(null);
         });
     }
 
-    private tourSelectTourChanged() {
-        //this.scheduleResource.getScheduleForTour(this.tourSelect.idTour).then(data => {
-        //    this.schedule = data.data;
-        //    this.$scope.scheduleForm.$setPristine();
-        //});
+    private tourChanged() {
+        this.checkinResource.getDatesForTour(this.tourSelect.idTour).then(result => {
+            this.tourSelect.datesList = result.data;
+            this.searchText = "";
+            if (this.tourSelect.datesList && this.tourSelect.datesList.length > 0) {
+                this.tourSelect.date = this.tourSelect.datesList[0];
+            }
+        });
     }
 
 }

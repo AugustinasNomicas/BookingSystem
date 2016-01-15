@@ -8,14 +8,14 @@ var CheckinController = (function () {
         this.modalWindowService = modalWindowService;
         this.tourResource = tourResource;
         this.vm = this;
-        this.loadTours();
+        this.checkinInitialValues = $window["checkinConfig"]["checkinInitialValues"];
+        this.tourSelect = {
+            idTour: this.checkinInitialValues.idTour,
+            date: this.checkinInitialValues.date,
+            datesList: this.checkinInitialValues.datesList,
+            open: false
+        };
     }
-    CheckinController.prototype.loadTours = function () {
-        var _this = this;
-        this.tourResource.getDefault().then(function (result) {
-            _this.tourSelect = result.data.idTour;
-        });
-    };
     CheckinController.prototype.submit = function (idBooking) {
         var _this = this;
         var request = new checkinRequestDto_1.CheckinRequestDto();
@@ -41,15 +41,19 @@ var CheckinController = (function () {
     CheckinController.prototype.cancelCheckin = function (checkinResultItemDto) {
         var _this = this;
         this.checkinInProgress = true;
-        this.checkinResource.cancelCheckin(checkinResultItemDto.idBooking).then(function (result) {
+        this.checkinResource.cancelCheckin(checkinResultItemDto.idBooking).then(function () {
             _this.submit(null);
         });
     };
-    CheckinController.prototype.tourSelectTourChanged = function () {
-        //this.scheduleResource.getScheduleForTour(this.tourSelect.idTour).then(data => {
-        //    this.schedule = data.data;
-        //    this.$scope.scheduleForm.$setPristine();
-        //});
+    CheckinController.prototype.tourChanged = function () {
+        var _this = this;
+        this.checkinResource.getDatesForTour(this.tourSelect.idTour).then(function (result) {
+            _this.tourSelect.datesList = result.data;
+            _this.searchText = "";
+            if (_this.tourSelect.datesList && _this.tourSelect.datesList.length > 0) {
+                _this.tourSelect.date = _this.tourSelect.datesList[0];
+            }
+        });
     };
     CheckinController.$inject = ["$window", "checkinResource", "ModalWindowService", "ToursResource"];
     return CheckinController;

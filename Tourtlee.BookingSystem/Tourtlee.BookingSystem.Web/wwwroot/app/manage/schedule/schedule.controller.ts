@@ -20,6 +20,7 @@ export class ScheduleController {
     submit(): void {
         this.scheduleResource.update(this.schedule).then(() => {
             this.notificationService.success("schedule.updated");
+            this.$scope.scheduleForm.$setPristine();
         }, (error) => {
             this.notificationService.error(error.data);
         });

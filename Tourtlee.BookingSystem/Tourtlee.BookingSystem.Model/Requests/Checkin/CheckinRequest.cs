@@ -9,5 +9,7 @@ namespace Tourtlee.BookingSystem.Model.Requests.Checkin
     {
         public string SearchText { get; set; }
         public Guid? IdBooking { get; set; }
+        public Guid IdTour { get; set; }
+        public DateTime Date { get; set; }
     }
 }

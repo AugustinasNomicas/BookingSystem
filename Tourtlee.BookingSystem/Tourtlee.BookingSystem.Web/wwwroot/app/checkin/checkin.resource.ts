@@ -19,4 +19,8 @@ export class CheckinResource {
     cancelCheckin = (idBooking: string): angular.IHttpPromise<void> => {
         return this.$http<void>({ url: this.apiUrl + `cancelCheckin`, method: "Post", data: { idBooking: idBooking } });
     };
+
+    getDatesForTour = (idTour: string): angular.IHttpPromise<any> => {
+        return this.$http<any>({ url: this.apiUrl + `getDatesForTour/${idTour}`, method: "Get" });
+    };
 }

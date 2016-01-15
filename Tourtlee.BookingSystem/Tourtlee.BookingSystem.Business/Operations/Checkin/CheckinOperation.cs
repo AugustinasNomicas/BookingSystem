@@ -29,19 +29,23 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
                 return result;
             }
 
-            var bookings = SearchForBookings(request.SearchText);
+            var bookings = SearchForBookings(request);
             result.ResultItems = bookings.Select(MapBookingToCheckinResultItem).ToList();
 
             return result;
         }
 
-        private IEnumerable<Booking> SearchForBookings(string text)
+        private IEnumerable<Booking> SearchForBookings(CheckinRequest request)
         {
-            var words = Regex.Split(text, @"\W");
+            var words = Regex.Split(request.SearchText, @"\W");
             var result = new List<Booking>();
+
+            var bookingsForTour = _bookingRepository.FindBy(b => b.IdTour == request.IdTour
+            && b.TourDate == request.Date);
+
             foreach (var word in words)
             {
-                result.AddRange(_bookingRepository.FindBy(s =>
+                result.AddRange(bookingsForTour.Where(s =>
                 s.Firstname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase)
                 || s.Lastname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase)));
             }

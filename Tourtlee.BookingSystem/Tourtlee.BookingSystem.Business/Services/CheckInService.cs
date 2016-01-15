@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using Tourtlee.BookingSystem.Business.Dto.Checkin;
 using Tourtlee.BookingSystem.Business.Operations.Checkin;
 using Tourtlee.BookingSystem.Model.Requests.Checkin;
 
@@ -9,6 +11,8 @@ namespace Tourtlee.BookingSystem.Business.Services
     {
         CheckinResult Checkin(CheckinRequest request);
         void CancelCheckin(Guid idBooking);
+        CheckinInitialValuesDto GetCheckinInitialValues();
+        List<DateTime> GetDatesForTour(Guid idTour);
     }
 
     public class CheckinService : ICheckinService
@@ -30,6 +34,18 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<CancelCheckinOperation>();
             operation.Operate(idBooking);
+        }
+
+        public CheckinInitialValuesDto GetCheckinInitialValues()
+        {
+            var operation = _serviceProvider.GetRequiredService<GetCheckinInitialValuesOperation>();
+            return operation.Operate(null);
+        }
+
+        public List<DateTime> GetDatesForTour(Guid idTour)
+        {
+            var operation = _serviceProvider.GetRequiredService<GetDatesForTourOperation>();
+            return operation.Operate(idTour);
         }
     }
 }

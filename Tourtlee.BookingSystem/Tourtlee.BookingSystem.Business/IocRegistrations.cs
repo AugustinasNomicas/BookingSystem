@@ -58,6 +58,8 @@ namespace Tourtlee.BookingSystem.Business
             // Checkin operations
             services.AddTransient<CheckinOperation>();
             services.AddTransient<CancelCheckinOperation>();
+            services.AddTransient<GetCheckinInitialValuesOperation>();
+            services.AddTransient<GetDatesForTourOperation>();
         }
     }
 }

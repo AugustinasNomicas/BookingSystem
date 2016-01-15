@@ -13,6 +13,7 @@ var ScheduleController = (function () {
         var _this = this;
         this.scheduleResource.update(this.schedule).then(function () {
             _this.notificationService.success("schedule.updated");
+            _this.$scope.scheduleForm.$setPristine();
         }, function (error) {
             _this.notificationService.error(error.data);
         });

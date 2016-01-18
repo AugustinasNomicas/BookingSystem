@@ -23,8 +23,7 @@ namespace Tourtlee.BookingSystem.Business
                 .ForMember(dest => dest.OrganizationName, opt => opt.MapFrom(src => src.Organization.Name));
 
             Mapper.CreateMap<Booking, BookingDto>()
-                .ForMember(dest => dest.TourName, o => o.MapFrom(src => src.Tour.Name))
-            .ReverseMap();
+                .ForMember(dest => dest.TourName, o => o.MapFrom(src => src.Tour.Name));
         }
     }
 }

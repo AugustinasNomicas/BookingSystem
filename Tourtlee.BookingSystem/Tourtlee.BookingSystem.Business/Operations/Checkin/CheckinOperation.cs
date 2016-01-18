@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Tourtlee.BookingSystem.Business.Operations.Core;
+using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
 using Tourtlee.BookingSystem.Model.Book;
 using Tourtlee.BookingSystem.Model.Requests.Checkin;
+using Tourtlee.BookingSystem.Model.Requests.UserSettings;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Checkin
 {
     public class CheckinOperation : OperationBase<CheckinRequest, CheckinResult>
     {
         private readonly IBookingRepository _bookingRepository;
+        private readonly IUserSettingsService _userSettingsService;
 
-        public CheckinOperation(IOperationContext operationContext, IBookingRepository bookingRepository) : base(operationContext)
+        public CheckinOperation(IOperationContext operationContext, 
+            IBookingRepository bookingRepository, IUserSettingsService userSettingsService) : base(operationContext)
         {
             _bookingRepository = bookingRepository;
+            _userSettingsService = userSettingsService;
         }
 
         protected override CheckinResult OnOperate(CheckinRequest request)
@@ -25,9 +30,15 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
             {
                 var booking = CheckinBooking(request.IdBooking.Value);
                 result.Success = true;
-                result.ResultItems = new List<CheckinResultItem>() { MapBookingToCheckinResultItem(booking) };
+                result.ResultItems = new List<CheckinResultItem> { MapBookingToCheckinResultItem(booking) };
                 return result;
             }
+
+            _userSettingsService.SetUserSetting(new SetUserSettingRequest
+            {
+                UserSettingName = UserSettingNames.DefaultTour,
+                Value = request.IdTour.ToString()
+            });
 
             var bookings = SearchForBookings(request);
             result.ResultItems = bookings.Select(MapBookingToCheckinResultItem).ToList();

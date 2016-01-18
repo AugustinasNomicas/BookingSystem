@@ -44,7 +44,7 @@
         </div>
 
         <div data-ng-show="!vm.checkinResult.success && vm.checkinResult.resultItems.length > 0">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Check in</th>
@@ -59,7 +59,7 @@
                             <button class="btn btn-success" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
                                     data-ng-show="!item.checkedIn"
                                     data-ng-enabled="!vm.checkinInProgress">
-                                Checkin
+                                Check in
                             </button>
                             <button class="btn btn-danger" data-ng-click="vm.checkinOrCancelWithConfirmation(item)"
                                     data-ng-show="item.checkedIn"

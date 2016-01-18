@@ -11,6 +11,7 @@ namespace Tourtlee.BookingSystem.DataAccess
             services.AddScoped<ITourRepository, TourRepository>();
             services.AddScoped<IScheduleRepository, ScheduleRepository>();
             services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IUserSettingsRepository, UserSettingsRepository>();
         }
     }
 }

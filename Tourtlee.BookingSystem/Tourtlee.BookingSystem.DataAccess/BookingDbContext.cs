@@ -35,6 +35,8 @@ namespace Tourtlee.BookingSystem.DataAccess
                 .WithMany(o => o.Users)
                 .HasForeignKey(u => u.IdOrganization);
 
+            builder.Entity<UserSetting>();
+                
             builder.Entity<Tour>()
                 .HasOne(t => t.Organization)
                 .WithMany(t => t.Tours)

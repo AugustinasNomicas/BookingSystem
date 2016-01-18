@@ -1,17 +1,22 @@
 ﻿using System;
 using Tourtlee.BookingSystem.Business.Dto.Book;
 using Tourtlee.BookingSystem.Business.Operations.Core;
+using Tourtlee.BookingSystem.Business.Services;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
 using Tourtlee.BookingSystem.Model.Book;
+using Tourtlee.BookingSystem.Model.Requests.UserSettings;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Book
 {
     public class CreateBookingOperation : OperationBase<CreateBookingSetDto>
     {
         private readonly IBookingRepository _bookingRepository;
-        public CreateBookingOperation(IOperationContext operationContext, IBookingRepository bookingRepository) : base(operationContext)
+        private readonly IUserSettingsService _userSettingsService;
+
+        public CreateBookingOperation(IOperationContext operationContext, IBookingRepository bookingRepository, IUserSettingsService userSettingsService) : base(operationContext)
         {
             _bookingRepository = bookingRepository;
+            _userSettingsService = userSettingsService;
         }
 
         protected override void OnOperate(CreateBookingSetDto request)
@@ -23,6 +28,12 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
                 var booking = CreateBooking(idBookingSet, request.IdTour, request.Date, createBookingDto);
                 _bookingRepository.Create(booking);
             }
+
+            _userSettingsService.SetUserSetting(new SetUserSettingRequest
+            {
+                UserSettingName = UserSettingNames.DefaultTour,
+                Value = request.IdTour.ToString()
+            });
 
             _bookingRepository.Save();
         }

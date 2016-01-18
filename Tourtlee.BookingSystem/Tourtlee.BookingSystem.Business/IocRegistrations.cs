@@ -7,6 +7,7 @@ using Tourtlee.BookingSystem.Business.Operations.Organizations;
 using Tourtlee.BookingSystem.Business.Operations.Schedule;
 using Tourtlee.BookingSystem.Business.Operations.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Users;
+using Tourtlee.BookingSystem.Business.Operations.UserSettings;
 using Tourtlee.BookingSystem.Business.Services;
 
 namespace Tourtlee.BookingSystem.Business
@@ -26,6 +27,7 @@ namespace Tourtlee.BookingSystem.Business
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IBookingsService, BookingsService>();
             services.AddScoped<ICheckinService, CheckinService>();
+            services.AddScoped<IUserSettingsService, UserSettingsService>();
 
             // Organization operations
             services.AddTransient<CreateOrganizationOperation>();
@@ -34,7 +36,7 @@ namespace Tourtlee.BookingSystem.Business
             services.AddTransient<DeleteOrganizationOperation>();
             services.AddTransient<UpdateOrganizationOperation>();
             services.AddTransient<GetTourSelectorItemsOperation>();
-            
+
             //Tour operations
             services.AddTransient<UpdateTourOperation>();
             services.AddTransient<DeleteTourOperation>();
@@ -60,6 +62,10 @@ namespace Tourtlee.BookingSystem.Business
             services.AddTransient<CancelCheckinOperation>();
             services.AddTransient<GetCheckinInitialValuesOperation>();
             services.AddTransient<GetDatesForTourOperation>();
+
+            // User settings operations
+            services.AddTransient<GetUserSettingOperation>();
+            services.AddTransient<SetUserSettingOperation>();
         }
     }
 }

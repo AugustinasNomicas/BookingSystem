@@ -34,6 +34,11 @@ namespace Tourtlee.BookingSystem.Business.Operations.Bookings
                 q = q.Where(s => Regex.Split(request.Text, @"\W").Any(w => s.Firstname.Contains(w)));
             }
 
+            if (request.IdBookingSet.HasValue)
+            {
+                q = q.Where(b => b.IdBookingSet == request.IdBookingSet.Value);
+            }
+
             var count = q.Count();
 
             // apply paging

@@ -1,0 +1,19 @@
+﻿@model Tourtlee.BookingSystem.Business.Dto.Bookings.BookingsListDto
+<script>
+    System.import('book/book.module.js');
+</script>
+
+<table class="table table-bordered">
+    <tbody>
+    @foreach (var booking in Model.Bookings)
+    {
+        <tr>
+            <td>
+                <h3>@booking.TourName</h3>
+                <strong>Departure: @booking.TourDate</strong><br />
+                <strong>@booking.Firstname @booking.Lastname</strong><br />
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -8,6 +8,7 @@ var BookingsController = (function () {
         this.bookingsResource = bookingsResource;
         this.notificationService = notificationService;
         this.vm = this;
+        this.showUrl = $window["bookingsConfig"]["showUrl"] + '/';
         this.filter = new bookingsFilterDto_1.BookingsFilterDto();
         this.loadData();
     }

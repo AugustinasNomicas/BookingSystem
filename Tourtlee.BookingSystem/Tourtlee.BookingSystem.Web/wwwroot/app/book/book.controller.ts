@@ -14,10 +14,12 @@ export class BookController {
     numberOfPersons: number;
     maxNumberOfPersons: number;
     bookingSet: BookingSetDto;
+    showUrl: string;
 
     constructor(private $window: angular.IWindowService,
         private bookResource: BookResource, private notificationService: NotificationService) {
         this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
+        this.showUrl = $window["bookConfig"]["showUrl"] + '/';
 
         this.maxNumberOfPersons = 10;
         this.numberOfPersons = 1;
@@ -32,8 +34,9 @@ export class BookController {
     submit() {
         this.bookResource.create(this.bookingSet).then((result) => {
             this.notificationService.success("Tour Booked");
-            this.bookingSet.bookings = new Array<BookingDto>();
-            this.createBookings();
+            this.$window.location.href = this.showUrl + result.data;
+            //this.bookingSet.bookings = new Array<BookingDto>();
+            //this.createBookings();
         });
     }
 

@@ -14,11 +14,14 @@ export class BookingsController {
     private idTour;
     private filter: BookingsFilterDto;
 
+    showUrl: string;
+
     constructor(private $scope: any,
         private $window: angular.IWindowService,
         private bookingsResource: BookingsResource,
         private notificationService: NotificationService) {
 
+        this.showUrl = $window["bookingsConfig"]["showUrl"] + '/';
         this.filter = new BookingsFilterDto();
         this.loadData();
     }

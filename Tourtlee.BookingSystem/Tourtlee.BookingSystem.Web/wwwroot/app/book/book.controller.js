@@ -8,6 +8,7 @@ var BookController = (function () {
         this.notificationService = notificationService;
         this.vm = this;
         this.infoForNewBooking = $window["bookConfig"]["infoForNewBooking"];
+        this.showUrl = $window["bookConfig"]["showUrl"] + '/';
         this.maxNumberOfPersons = 10;
         this.numberOfPersons = 1;
         this.bookingSet = new bookDto_1.CreateBookingSetDto();
@@ -19,8 +20,9 @@ var BookController = (function () {
         var _this = this;
         this.bookResource.create(this.bookingSet).then(function (result) {
             _this.notificationService.success("Tour Booked");
-            _this.bookingSet.bookings = new Array();
-            _this.createBookings();
+            _this.$window.location.href = _this.showUrl + result.data;
+            //this.bookingSet.bookings = new Array<BookingDto>();
+            //this.createBookings();
         });
     };
     BookController.prototype.numberOfPersonsChange = function () {

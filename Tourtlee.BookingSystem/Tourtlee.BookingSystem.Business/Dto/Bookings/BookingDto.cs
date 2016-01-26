@@ -20,5 +20,6 @@ namespace Tourtlee.BookingSystem.Business.Dto.Bookings
         public string Lastname { get; set; }
         public byte Gender { get; set; }
         public bool IsChild { get; set; }
+        public string BookingNumber { get; set; }
     }
 }

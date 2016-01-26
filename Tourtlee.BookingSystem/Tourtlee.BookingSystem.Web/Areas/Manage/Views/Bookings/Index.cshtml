@@ -6,7 +6,8 @@
     System.import('manage/bookings/bookings.module.js');
 
     var bookingsConfig = {
-        apiUrl: '@Url.Action("Get", "BookingsApi", new {Area = "Manage"})'
+        apiUrl: '@Url.Action("Get", "BookingsApi", new {Area = "Manage"})',
+        showUrl: '@Url.Action("Show", "Book")'
     }
     var toursConfig = {
         apiUrl: '@Url.Action("Index", "ToursApi", new {Area = "Manage"})' // needed for tour-selector
@@ -26,6 +27,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>Booking number</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Tour date</th>
@@ -34,6 +36,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="booking in vm.bookings.bookings">
+            <td><a href="{{vm.showUrl}}{{booking.idBookingSet}}">{{booking.bookingNumber}}</a></td>
             <td>{{booking.firstname}}</td>
             <td>{{booking.lastname}}</td>
             <td>{{booking.tourDate| date:'short'}}</td>

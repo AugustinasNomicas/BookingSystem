@@ -24,9 +24,9 @@ namespace Tourtlee.BookingSystem.Web.ApiControllers
         }
 
         [HttpPost]
-        public void Create([FromBody]CreateBookingSetDto request)
+        public Guid Create([FromBody]CreateBookingSetDto request)
         {
-            _bookService.CreateBooking(request);
+            return _bookService.CreateBooking(request);
         }
 
         [HttpGet]

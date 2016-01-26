@@ -8,7 +8,8 @@ namespace Tourtlee.BookingSystem.Business.Services
     public interface IBookService
     {
         InfoForNewBookingDto GetInfoForNewBooking(Guid? idTour);
-        void CreateBooking(CreateBookingSetDto createBookingSetDto);
+        Guid CreateBooking(CreateBookingSetDto createBookingSetDto);
+        string GenerateBookingNumber();
     }
 
     public class BookService : IBookService
@@ -26,10 +27,16 @@ namespace Tourtlee.BookingSystem.Business.Services
             return operation.Operate(idTour);
         }
 
-        public void CreateBooking(CreateBookingSetDto createBookingSetDto)
+        public Guid CreateBooking(CreateBookingSetDto createBookingSetDto)
         {
             var operation = _serviceProvider.GetRequiredService<CreateBookingOperation>();
-            operation.Operate(createBookingSetDto);
+            return operation.Operate(createBookingSetDto);
+        }
+
+        public string GenerateBookingNumber()
+        {
+            var operation = _serviceProvider.GetRequiredService<GenerateBookingNumberOperation>();
+            return operation.Operate(null);
         }
     }
 }

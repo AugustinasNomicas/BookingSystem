@@ -16,4 +16,5 @@ export class BookingDto {
     lastname: string;
     gender: number;
     isChild: boolean;
+    bookingNumber: string;
 }

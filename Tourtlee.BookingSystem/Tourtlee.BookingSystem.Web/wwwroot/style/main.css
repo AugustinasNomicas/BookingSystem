@@ -1,5 +1,12 @@
 ﻿.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
 
 body {
   padding-top: 70px;

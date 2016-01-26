@@ -18,7 +18,6 @@ namespace Tourtlee.BookingSystem.Web.Controllers
             _bookingsService = bookingsService;
         }
 
-        // GET: /<controller>/
         public IActionResult Index(Guid? idTour)
         {
             var model = _bookService.GetInfoForNewBooking(idTour);

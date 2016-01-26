@@ -8,18 +8,20 @@ using Tourtlee.BookingSystem.Model.Requests.UserSettings;
 
 namespace Tourtlee.BookingSystem.Business.Operations.Book
 {
-    public class CreateBookingOperation : OperationBase<CreateBookingSetDto>
+    public class CreateBookingOperation : OperationBase<CreateBookingSetDto, Guid>
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly IUserSettingsService _userSettingsService;
+        private readonly IBookService _bookService;
 
-        public CreateBookingOperation(IOperationContext operationContext, IBookingRepository bookingRepository, IUserSettingsService userSettingsService) : base(operationContext)
+        public CreateBookingOperation(IOperationContext operationContext, IBookingRepository bookingRepository, IUserSettingsService userSettingsService, IBookService bookService) : base(operationContext)
         {
             _bookingRepository = bookingRepository;
             _userSettingsService = userSettingsService;
+            _bookService = bookService;
         }
 
-        protected override void OnOperate(CreateBookingSetDto request)
+        protected override Guid OnOperate(CreateBookingSetDto request)
         {
             var idBookingSet = Guid.NewGuid();
 
@@ -36,10 +38,13 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
             });
 
             _bookingRepository.Save();
+            return idBookingSet;
         }
 
         private Booking CreateBooking(Guid idBookingSet, Guid idTour, DateTime tourDate, CreateBookingDto createBookingDto)
         {
+            var bookingNumber = _bookService.GenerateBookingNumber();
+
             return new Booking
             {
                 IdBooking = Guid.NewGuid(),
@@ -51,7 +56,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
                 Lastname = createBookingDto.LastName,
                 Gender = (byte)createBookingDto.Gender,
                 IsChild = createBookingDto.Child,
-
+                BookingNumber = bookingNumber,
             };
         }
 

@@ -16,6 +16,7 @@ namespace Tourtlee.BookingSystem.Business.Dto.Bookings
         public string TourName { get; set; }
         public DateTime TourDate { get; set; }
         public DateTime BookDate { get; set; }
+        public DateTime? CheckinDateTime { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public byte Gender { get; set; }

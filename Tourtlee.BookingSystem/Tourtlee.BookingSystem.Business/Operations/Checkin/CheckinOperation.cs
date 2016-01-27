@@ -16,7 +16,7 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
         private readonly IBookingRepository _bookingRepository;
         private readonly IUserSettingsService _userSettingsService;
 
-        public CheckinOperation(IOperationContext operationContext, 
+        public CheckinOperation(IOperationContext operationContext,
             IBookingRepository bookingRepository, IUserSettingsService userSettingsService) : base(operationContext)
         {
             _bookingRepository = bookingRepository;
@@ -25,29 +25,37 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
 
         protected override CheckinResult OnOperate(CheckinRequest request)
         {
-            var result = new CheckinResult();
-            if (request.IdBooking.HasValue)
-            {
-                var booking = CheckinBooking(request.IdBooking.Value);
-                result.Success = true;
-                result.ResultItems = new List<CheckinResultItem> { MapBookingToCheckinResultItem(booking) };
-                return result;
-            }
-
             _userSettingsService.SetUserSetting(new SetUserSettingRequest
             {
                 UserSettingName = UserSettingNames.DefaultTour,
                 Value = request.IdTour.ToString()
             });
 
-            var bookings = SearchForBookings(request);
-            result.ResultItems = bookings.Select(MapBookingToCheckinResultItem).ToList();
+            var result = new CheckinResult();
+            if (request.IdBooking.HasValue)
+            {
+                return CheckinByIdBooking(request.IdBooking.Value);
+            }
 
+            var bookings = SearchForBookings(request).ToList();
+
+            // checkin if got one hit and it is from BookingNumber
+            if (bookings.Count == 1
+                && string.Equals(bookings.Single().BookingNumber, request.SearchText,
+                StringComparison.CurrentCultureIgnoreCase))
+            {
+                return CheckinByBookingNumber(bookings.Single());
+            }
+
+            result.ResultItems = bookings.Select(MapBookingToCheckinResultItem).ToList();
             return result;
         }
 
         private IEnumerable<Booking> SearchForBookings(CheckinRequest request)
         {
+            if (string.IsNullOrWhiteSpace(request.SearchText))
+                return new Booking[0];
+
             var words = Regex.Split(request.SearchText, @"\W");
             var result = new List<Booking>();
 
@@ -61,6 +69,9 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
                 || s.Lastname.StartsWith(word, StringComparison.CurrentCultureIgnoreCase)));
             }
 
+            result.AddRange(bookingsForTour.Where(s =>
+            string.Equals(s.BookingNumber, request.SearchText, StringComparison.CurrentCultureIgnoreCase)));
+
             return result.OrderBy(b => b.Firstname).ThenBy(b => b.Lastname).Take(100);
         }
 
@@ -72,14 +83,50 @@ namespace Tourtlee.BookingSystem.Business.Operations.Checkin
                 Firstname = booking.Firstname,
                 Lastname = booking.Lastname,
                 CheckedIn = booking.CheckedIn,
-                BookDate = booking.BookDate
+                BookDate = booking.BookDate,
+                BookingNumber = booking.BookingNumber,
+                CheckinDateTime = booking.CheckinDateTime
             };
         }
 
-        private Booking CheckinBooking(Guid idBooking)
+        private CheckinResult CheckinByBookingNumber(Booking booking)
         {
-            var booking = _bookingRepository.FindBy(b => b.IdBooking == idBooking).Single();
+            var result = new CheckinResult
+            {
+                ResultItems = new List<CheckinResultItem> { MapBookingToCheckinResultItem(booking) }
+            };
+
+            if (booking.CheckedIn) return result;
+
+            booking = CheckinBooking(booking);
+            result.Success = booking.CheckedIn;
+
+            return result;
+        }
+
+        private CheckinResult CheckinByIdBooking(Guid idBooking)
+        {
+            var result = new CheckinResult() { ResultItems = new List<CheckinResultItem>() };
+            var booking = _bookingRepository.FindBy(b => b.IdBooking == idBooking).SingleOrDefault();
+
+            if (booking == null) // booking not found
+                return result;
+
+            result.ResultItems = new List<CheckinResultItem> { MapBookingToCheckinResultItem(booking) };
+
+            if (booking.CheckedIn) // booking already is checked in
+                return result;
+
+            CheckinBooking(booking);
+            result.Success = booking.CheckedIn;
+
+            return result;
+        }
+
+        private Booking CheckinBooking(Booking booking)
+        {
             booking.CheckedIn = true;
+            booking.CheckinDateTime = DateTime.Now;
 
             _bookingRepository.Update(booking);
             _bookingRepository.Save();

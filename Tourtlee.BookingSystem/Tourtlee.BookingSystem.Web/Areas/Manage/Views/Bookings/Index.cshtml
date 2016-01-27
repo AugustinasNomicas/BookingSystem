@@ -31,6 +31,8 @@
             <th>First name</th>
             <th>Last name</th>
             <th>Tour date</th>
+            <th>Book date</th>
+            <th>Checkin date</th>
             <th>Tour</th>
         </tr>
         </thead>
@@ -40,6 +42,8 @@
             <td>{{booking.firstname}}</td>
             <td>{{booking.lastname}}</td>
             <td>{{booking.tourDate| date:'short'}}</td>
+            <td>{{booking.bookDate| date:'short'}}</td>
+            <td>{{booking.checkinDateTime| date:'short'}}</td>
             <td>{{booking.tourName}}</td>
         </tr>
         </tbody>

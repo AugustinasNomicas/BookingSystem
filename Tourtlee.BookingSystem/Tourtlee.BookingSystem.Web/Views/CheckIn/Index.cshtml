@@ -51,6 +51,7 @@
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Book date</th>
+                        <th>Checkin date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,7 @@
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
                         <td>{{item.bookDate| date:'short'}}</td>
+                        <td>{{item.checkinDateTime| date:'short'}}</td>
                     </tr>
                 </tbody>
             </table>

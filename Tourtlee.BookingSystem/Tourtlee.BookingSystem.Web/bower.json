@@ -1,6 +1,6 @@
 {
-	"name": "ASP.NET",
-	"private": true,
+  "name": "ASP.NET",
+  "private": true,
   "dependencies": {
     "angular": "1.4.7",
     "angular-ui-router": "*",
@@ -19,6 +19,9 @@
     "angular-sanitize": "*",
     "angular-ui-validate": "*",
     "angular-messages": "*",
-    "angular-smart-table": "*"
+    "jsbarcode": "^1.6.1"
+  },
+  "resolutions": {
+    "angular": "^1.0.0"
   }
 }

@@ -6,8 +6,7 @@ var AngularModuleFactory = (function () {
     }
     AngularModuleFactory.factory = function (moduleName, translationsPart) {
         var defaultRequiredModules = ["mgcrea.ngStrap", "angular-loading-bar", "ngAnimate", "toastr",
-            "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages',
-            'smart-table'];
+            "ui.bootstrap", "pascalprecht.translate", 'ui.select', 'ngSanitize', 'ui.validate', 'ngMessages'];
         var module = angular.module(moduleName, defaultRequiredModules);
         module.service("ModalWindowService", modalWindowService_1.ModalWindowService);
         module.service("notificationService", notificationService_1.NotificationService);

@@ -5,10 +5,12 @@ namespace Tourtlee.BookingSystem.Business.Operations.Book
 {
     public class GenerateBookingNumberOperation : OperationBase<object, string>
     {
-        Random R = new Random();
+        private static Random R;
 
         public GenerateBookingNumberOperation(IOperationContext operationContext) : base(operationContext)
         {
+            if (R == null)
+                R = new Random(DateTime.Now.Millisecond);
         }
 
         protected override string OnOperate(object request)

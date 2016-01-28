@@ -13,6 +13,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         void CancelCheckin(Guid idBooking);
         CheckinInitialValuesDto GetCheckinInitialValues();
         List<DateTime> GetDatesForTour(Guid idTour);
+        CheckinProgressDto GetCheckinProgressOperation(CheckinProgressRequest request);
     }
 
     public class CheckinService : ICheckinService
@@ -46,6 +47,12 @@ namespace Tourtlee.BookingSystem.Business.Services
         {
             var operation = _serviceProvider.GetRequiredService<GetDatesForTourOperation>();
             return operation.Operate(idTour);
+        }
+
+        public CheckinProgressDto GetCheckinProgressOperation(CheckinProgressRequest request)
+        {
+            var operation = _serviceProvider.GetRequiredService<GetCheckinProgressOperation>();
+            return operation.Operate(request);
         }
     }
 }

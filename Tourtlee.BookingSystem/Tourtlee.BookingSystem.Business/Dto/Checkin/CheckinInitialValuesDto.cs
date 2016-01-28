@@ -8,5 +8,6 @@ namespace Tourtlee.BookingSystem.Business.Dto.Checkin
         public Guid IdTour {get;set;}
         public DateTime Date {get;set;}
         public List<DateTime> DatesList { get; set; }
+        public CheckinProgressDto CheckinProgress { get; set; }
     }
 }

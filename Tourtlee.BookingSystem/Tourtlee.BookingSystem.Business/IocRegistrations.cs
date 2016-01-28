@@ -63,6 +63,7 @@ namespace Tourtlee.BookingSystem.Business
             services.AddTransient<CancelCheckinOperation>();
             services.AddTransient<GetCheckinInitialValuesOperation>();
             services.AddTransient<GetDatesForTourOperation>();
+            services.AddTransient<GetCheckinProgressOperation>();
 
             // User settings operations
             services.AddTransient<GetUserSettingOperation>();

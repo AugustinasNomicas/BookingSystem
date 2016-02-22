@@ -7,7 +7,7 @@ import {BookingListDto, BookingDto } from "./dto/bookingsListDto";
 import {BookingsFilterDto} from "./dto/bookingsFilterDto";
 
 export class BookingsController {
-    static $inject: string[] = ["$scope", "$window", "BookingsResource", "notificationService"];
+    static $inject: string[] = ["$scope", "$window", "$httpParamSerializer", "BookingsResource", "notificationService"];
     private vm = this;
     private bookings: BookingListDto;
     private displayedBookings: BookingDto[];
@@ -18,6 +18,7 @@ export class BookingsController {
 
     constructor(private $scope: any,
         private $window: angular.IWindowService,
+        private $httpParamSerializer: any,
         private bookingsResource: BookingsResource,
         private notificationService: NotificationService) {
 
@@ -31,6 +32,7 @@ export class BookingsController {
             this.bookings = data.data;
         });
     }
+
 
     private tourChanged() {
         this.filter.idTour = this.idTour;

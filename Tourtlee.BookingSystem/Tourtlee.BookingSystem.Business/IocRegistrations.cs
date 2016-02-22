@@ -3,6 +3,7 @@ using Tourtlee.BookingSystem.Business.Operations.Book;
 using Tourtlee.BookingSystem.Business.Operations.Bookings;
 using Tourtlee.BookingSystem.Business.Operations.Checkin;
 using Tourtlee.BookingSystem.Business.Operations.Core;
+using Tourtlee.BookingSystem.Business.Operations.Export;
 using Tourtlee.BookingSystem.Business.Operations.Organizations;
 using Tourtlee.BookingSystem.Business.Operations.Schedule;
 using Tourtlee.BookingSystem.Business.Operations.Tours;
@@ -28,6 +29,7 @@ namespace Tourtlee.BookingSystem.Business
             services.AddScoped<IBookingsService, BookingsService>();
             services.AddScoped<ICheckinService, CheckinService>();
             services.AddScoped<IUserSettingsService, UserSettingsService>();
+            services.AddScoped<IExportService, ExportService>();
 
             // Organization operations
             services.AddTransient<CreateOrganizationOperation>();
@@ -57,7 +59,8 @@ namespace Tourtlee.BookingSystem.Business
             
             // Bookings operations
             services.AddTransient<GetBookingsListOperation>();
-
+            services.AddTransient<ExportBookingsListOperation>();
+            
             // Checkin operations
             services.AddTransient<CheckinOperation>();
             services.AddTransient<CancelCheckinOperation>();
@@ -68,6 +71,9 @@ namespace Tourtlee.BookingSystem.Business
             // User settings operations
             services.AddTransient<GetUserSettingOperation>();
             services.AddTransient<SetUserSettingOperation>();
+
+            // Export operations
+            services.AddTransient<ExportCsvTableOperation>();
         }
     }
 }

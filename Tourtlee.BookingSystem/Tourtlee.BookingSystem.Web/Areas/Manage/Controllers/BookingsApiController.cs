@@ -28,5 +28,15 @@ namespace Tourtlee.BookingSystem.Web.Areas.Manage.Controllers
 
             return _bookingsService.GetBookingsList(filter);
         }
+
+        [HttpGet]
+        public ActionResult Export(BookingsFilter filter)
+        {
+            if (filter == null)
+                filter = new BookingsFilter();
+
+            var memoryStream = _bookingsService.ExportBookingsList(filter);
+            return File(memoryStream.ToArray(), "text/csv", "bookings.csv");
+        }
     }
 }

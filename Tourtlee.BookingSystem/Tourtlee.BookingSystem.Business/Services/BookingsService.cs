@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Bookings;
 using Tourtlee.BookingSystem.Business.Operations.Bookings;
@@ -9,6 +10,7 @@ namespace Tourtlee.BookingSystem.Business.Services
     public interface IBookingsService
     {
         BookingsListDto GetBookingsList(BookingsFilter filter);
+        MemoryStream ExportBookingsList(BookingsFilter filter);
     }
 
     public class BookingsService : IBookingsService
@@ -23,6 +25,12 @@ namespace Tourtlee.BookingSystem.Business.Services
         public BookingsListDto GetBookingsList(BookingsFilter filter)
         {
             var operation = _serviceProvider.GetRequiredService<GetBookingsListOperation>();
+            return operation.Operate(filter);
+        }
+
+        public MemoryStream ExportBookingsList(BookingsFilter filter)
+        {
+            var operation = _serviceProvider.GetRequiredService<ExportBookingsListOperation>();
             return operation.Operate(filter);
         }
     }

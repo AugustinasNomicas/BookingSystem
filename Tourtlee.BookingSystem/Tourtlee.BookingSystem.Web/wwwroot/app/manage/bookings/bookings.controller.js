@@ -2,9 +2,10 @@
 "use strict";
 var bookingsFilterDto_1 = require("./dto/bookingsFilterDto");
 var BookingsController = (function () {
-    function BookingsController($scope, $window, bookingsResource, notificationService) {
+    function BookingsController($scope, $window, $httpParamSerializer, bookingsResource, notificationService) {
         this.$scope = $scope;
         this.$window = $window;
+        this.$httpParamSerializer = $httpParamSerializer;
         this.bookingsResource = bookingsResource;
         this.notificationService = notificationService;
         this.vm = this;
@@ -22,7 +23,7 @@ var BookingsController = (function () {
         this.filter.idTour = this.idTour;
         this.loadData();
     };
-    BookingsController.$inject = ["$scope", "$window", "BookingsResource", "notificationService"];
+    BookingsController.$inject = ["$scope", "$window", "$httpParamSerializer", "BookingsResource", "notificationService"];
     return BookingsController;
 })();
 exports.BookingsController = BookingsController;

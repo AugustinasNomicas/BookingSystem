@@ -37,12 +37,12 @@
 
         });
     </script>
-    <div class="container-full">
+    
         @Html.Partial("_Menu")
         <div class="container" ng-cloak>
             @RenderBody()
         </div>
-    </div>
+    
 
     <script src="~/lib/angular-sanitize/angular-sanitize.js"></script>
     <script src="~/lib/angular-messages/angular-messages.js"></script>
@@ -59,6 +59,18 @@
     <script src="~/lib/angular-strap/dist/angular-strap.js"></script>
     <script src="~/lib/angular-strap/dist/angular-strap.tpl.js"></script>
     <script src="~/lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    <script src="~/lib/angular-ui-select/dist/select.js"></script>
+<script src="~/lib/angular-ui-select/dist/select.js"></script>
+<script>
+    //var toggle = document.querySelectorAll('.dropdown-toggle');
+     var toggle = document.querySelectorAll('[uib-dropdown]');
+
+    for (var i = 0; i < toggle.length; i++) {
+
+        toggle[i].addEventListener('click', function (e) {
+            e.stopImmediatePropagation();
+        });
+    }
+
+</script>
 </body>
 </html>

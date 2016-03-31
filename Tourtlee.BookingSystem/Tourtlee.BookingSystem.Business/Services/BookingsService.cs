@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Bookings;
 using Tourtlee.BookingSystem.Business.Operations.Bookings;
+using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.Model.Requests.Bookings;
 
 namespace Tourtlee.BookingSystem.Business.Services
@@ -13,7 +14,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         MemoryStream ExportBookingsList(BookingsFilter filter);
     }
 
-    public class BookingsService : IBookingsService
+    public class BookingsService : ServiceBase, IBookingsService
     {
         private readonly IServiceProvider _serviceProvider;
 

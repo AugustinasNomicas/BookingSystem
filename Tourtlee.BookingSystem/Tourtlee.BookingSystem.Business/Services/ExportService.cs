@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using Tourtlee.BookingSystem.Business.Operations.Export;
+using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.Model.Export;
 
 namespace Tourtlee.BookingSystem.Business.Services
@@ -11,7 +12,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         MemoryStream ExportCsvTable(ExportTableRequest request);
     }
 
-    public class ExportService : IExportService
+    public class ExportService : ServiceBase, IExportService
     {
         private readonly IServiceProvider _serviceProvider;
 

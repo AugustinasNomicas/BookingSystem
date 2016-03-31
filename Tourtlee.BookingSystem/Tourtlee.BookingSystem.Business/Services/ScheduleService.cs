@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Schedule;
 using Tourtlee.BookingSystem.Business.Operations.Schedule;
+using Tourtlee.BookingSystem.Core;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {
@@ -11,7 +12,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         void UpdateScheduleForTour(ScheduleByWeekdayDto scheduleByWeekdayDto);
     }
 
-    public class ScheduleService : IScheduleService
+    public class ScheduleService : ServiceBase, IScheduleService
     {
         private readonly IServiceProvider _serviceProvider;
 

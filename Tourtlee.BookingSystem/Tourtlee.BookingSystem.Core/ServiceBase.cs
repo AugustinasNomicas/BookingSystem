@@ -1,7 +1,12 @@
 ﻿
 namespace Tourtlee.BookingSystem.Core
 {
-    public abstract class ServiceBase
+    public interface IService
+    {
+
+    }
+
+    public abstract class ServiceBase : IService
     {
 
     }

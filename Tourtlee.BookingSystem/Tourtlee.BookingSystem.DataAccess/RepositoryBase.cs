@@ -4,7 +4,12 @@ using Microsoft.Data.Entity;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
-    public interface IRepositoryBase<T> where T : class
+    public interface IRepositoryBase
+    {
+
+    }
+
+    public interface IRepositoryBase<T> : IRepositoryBase where T : class
     {
         IQueryable<T> GetAll();
         IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate);

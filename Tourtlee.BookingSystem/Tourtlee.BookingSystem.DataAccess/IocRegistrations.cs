@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.DataAccess.Repositories;
+using Scrutor;
 
 namespace Tourtlee.BookingSystem.DataAccess
 {
@@ -7,11 +8,11 @@ namespace Tourtlee.BookingSystem.DataAccess
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<IOrganizationRepository, OrganizationRepository>();
-            services.AddScoped<ITourRepository, TourRepository>();
-            services.AddScoped<IScheduleRepository, ScheduleRepository>();
-            services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<IUserSettingsRepository, UserSettingsRepository>();
+            services.Scan(scan => scan
+                .FromAssemblyOf<IRepositoryBase>()
+                    .AddClasses(classes => classes.AssignableTo<IRepositoryBase>())
+                        .AsImplementedInterfaces()
+                        .WithScopedLifetime());
         }
     }
 }

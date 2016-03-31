@@ -3,6 +3,7 @@ using Tourtlee.BookingSystem.Business.Dto.Accounts;
 using Tourtlee.BookingSystem.Business.Operations.Users;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using Tourtlee.BookingSystem.Core;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {
@@ -12,7 +13,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         void CreateUser(CreateUserDto createUserDto);
     }
 
-    public class UserService : IUserService
+    public class UserService : ServiceBase, IUserService
     {
         private readonly IServiceProvider _serviceProvider;
 

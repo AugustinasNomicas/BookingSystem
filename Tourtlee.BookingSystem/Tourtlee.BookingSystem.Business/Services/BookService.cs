@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Book;
 using Tourtlee.BookingSystem.Business.Operations.Book;
+using Tourtlee.BookingSystem.Core;
 
 namespace Tourtlee.BookingSystem.Business.Services
 {
@@ -12,7 +13,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         string GenerateBookingNumber();
     }
 
-    public class BookService : IBookService
+    public class BookService : ServiceBase, IBookService
     {
         private readonly IServiceProvider _serviceProvider;
 

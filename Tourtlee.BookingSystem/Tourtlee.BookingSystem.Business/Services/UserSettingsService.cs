@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tourtlee.BookingSystem.Business.Operations.UserSettings;
+using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.Model.Requests.UserSettings;
 
 namespace Tourtlee.BookingSystem.Business.Services
@@ -14,7 +15,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         void SetUserSetting(SetUserSettingRequest request);
     }
 
-    public class UserSettingsService : IUserSettingsService
+    public class UserSettingsService : ServiceBase, IUserSettingsService
     {
         private readonly IServiceProvider _serviceProvider;
 

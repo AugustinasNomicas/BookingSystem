@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Tourtlee.BookingSystem.Business.Dto.Checkin;
 using Tourtlee.BookingSystem.Business.Operations.Checkin;
+using Tourtlee.BookingSystem.Core;
 using Tourtlee.BookingSystem.Model.Requests.Checkin;
 
 namespace Tourtlee.BookingSystem.Business.Services
@@ -16,7 +17,7 @@ namespace Tourtlee.BookingSystem.Business.Services
         CheckinProgressDto GetCheckinProgressOperation(CheckinProgressRequest request);
     }
 
-    public class CheckinService : ICheckinService
+    public class CheckinService : ServiceBase, ICheckinService
     {
         private readonly IServiceProvider _serviceProvider;
 

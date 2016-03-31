@@ -10,6 +10,8 @@ using Tourtlee.BookingSystem.Business.Operations.Tours;
 using Tourtlee.BookingSystem.Business.Operations.Users;
 using Tourtlee.BookingSystem.Business.Operations.UserSettings;
 using Tourtlee.BookingSystem.Business.Services;
+using Tourtlee.BookingSystem.Core;
+using Scrutor;
 
 namespace Tourtlee.BookingSystem.Business
 {
@@ -21,59 +23,18 @@ namespace Tourtlee.BookingSystem.Business
             services.AddScoped<IOperationContext, OperationContext>();
 
             // Create services
-            services.AddScoped<IOrganizationService, OrganizationService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITourService, TourService>();
-            services.AddScoped<IScheduleService, ScheduleService>();
-            services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IBookingsService, BookingsService>();
-            services.AddScoped<ICheckinService, CheckinService>();
-            services.AddScoped<IUserSettingsService, UserSettingsService>();
-            services.AddScoped<IExportService, ExportService>();
+            services.Scan(scan => scan
+                .FromAssemblyOf<IBookingsService>()
+                    .AddClasses(classes => classes.AssignableTo<IService>())
+                        .AsImplementedInterfaces()
+                        .WithScopedLifetime());
 
-            // Organization operations
-            services.AddTransient<CreateOrganizationOperation>();
-            services.AddTransient<GetOrganizationListOperation>();
-            services.AddTransient<GetTourOperation>();
-            services.AddTransient<DeleteOrganizationOperation>();
-            services.AddTransient<UpdateOrganizationOperation>();
-            services.AddTransient<GetTourSelectorItemsOperation>();
-
-            //Tour operations
-            services.AddTransient<UpdateTourOperation>();
-            services.AddTransient<DeleteTourOperation>();
-            services.AddTransient<GetTourListOperation>();
-
-            // Schedule operations
-            services.AddTransient<GetScheduleForTourOperation>();
-            services.AddTransient<UpdateScheduleForTourOperation>();
-
-            // User operations
-            services.AddTransient<GetUserListOperation>();
-            services.AddTransient<CreateUserOperation>();
-
-            // Book operations
-            services.AddTransient<GetInfoForNewBookingOperation>();
-            services.AddTransient<CreateBookingOperation>();
-            services.AddTransient<GenerateBookingNumberOperation>();
-            
-            // Bookings operations
-            services.AddTransient<GetBookingsListOperation>();
-            services.AddTransient<ExportBookingsListOperation>();
-            
-            // Checkin operations
-            services.AddTransient<CheckinOperation>();
-            services.AddTransient<CancelCheckinOperation>();
-            services.AddTransient<GetCheckinInitialValuesOperation>();
-            services.AddTransient<GetDatesForTourOperation>();
-            services.AddTransient<GetCheckinProgressOperation>();
-
-            // User settings operations
-            services.AddTransient<GetUserSettingOperation>();
-            services.AddTransient<SetUserSettingOperation>();
-
-            // Export operations
-            services.AddTransient<ExportCsvTableOperation>();
+            // Create operations
+            services.Scan(scan => scan
+                .FromAssemblyOf<CreateBookingOperation>()
+                    .AddClasses(classes => classes.AssignableTo<OperationBase>())
+                        .AsSelf()
+                        .WithTransientLifetime());
         }
     }
 }
